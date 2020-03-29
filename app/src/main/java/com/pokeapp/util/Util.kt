@@ -1,9 +1,11 @@
-package com.empresas.util
+package com.pokeapp.util
 
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.pokeapp.data.remote.model.PokemonApi
+import com.pokeapp.presentation.model.Pokemon
 
 /**
  * Created by Filipi Andrade Rocha on 29/01/2020

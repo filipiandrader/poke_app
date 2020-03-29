@@ -1,4 +1,4 @@
-package com.empresas.util
+package com.pokeapp.util
 
 import okhttp3.ResponseBody
 import retrofit2.Converter

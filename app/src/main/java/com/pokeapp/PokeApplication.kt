@@ -1,7 +1,9 @@
 package com.pokeapp
 
 import android.app.Application
-import com.empresas.util.LogReportingTree
+import com.pokeapp.di.pokeModule
+import com.pokeapp.util.LogReportingTree
+import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 
 /**
@@ -12,6 +14,12 @@ class PokeApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Timber.plant(LogReportingTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(LogReportingTree())
+        }
+
+        startKoin(this, listOf(pokeModule))
     }
 }

@@ -1,4 +1,4 @@
-package com.empresas.util
+package com.pokeapp.util
 
 import timber.log.Timber
 
