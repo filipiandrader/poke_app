@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.pokeapp.R
+import com.pokeapp.ui.main.MainActivity
+import com.pokeapp.util.setVisible
 
 /**
  * A simple [Fragment] subclass.
@@ -18,5 +20,4 @@ class PokemonDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_pokemon_details, container, false)
     }
-
 }

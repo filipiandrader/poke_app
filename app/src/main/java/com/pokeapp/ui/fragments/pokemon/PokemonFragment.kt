@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.recyclical.datasource.dataSourceOf
@@ -119,7 +121,7 @@ class PokemonFragment : Fragment() {
                         this.itemPokemonTextView.putText(name)
                     }
                     onClick { index ->
-                        longToast("Clicked - $index")
+                        findNavController().navigate(PokemonFragmentDirections.actionPokemonFragmentToPokemonDetailsFragment())
                     }
                 }
             }
