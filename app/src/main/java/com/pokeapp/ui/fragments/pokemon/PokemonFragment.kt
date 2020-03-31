@@ -1,13 +1,17 @@
 package com.pokeapp.ui.fragments.pokemon
 
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.recyclical.datasource.dataSourceOf
@@ -20,6 +24,7 @@ import com.pokeapp.presentation.State
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.pokemon.PokemonViewModel
 import com.pokeapp.ui.fragments.PokemonViewHolder
+import com.pokeapp.util.PokemonColorUtil
 import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
@@ -55,6 +60,11 @@ class PokemonFragment : Fragment() {
         binding.executePendingBindings()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.window?.statusBarColor = PokemonColorUtil(view.context).convertColor(R.color.background)
     }
 
     override fun onStart() {
@@ -113,13 +123,40 @@ class PokemonFragment : Fragment() {
         mPokemon.addAll(mPokemon.size, pokemon)
         if (mPokemon.isNotEmpty()) {
             pokemonRecyclerView.setup {
+                withLayoutManager(GridLayoutManager(context, 2))
                 withDataSource(dataSourceOf(mPokemon))
                 withItem<Pokemon, PokemonViewHolder>(R.layout.item_pokemon) {
-                    onBind(::PokemonViewHolder) { index, item ->
-                        Picasso.get().load(item.photo).into(this.itemPokemonImageView)
-                        val name = "#${index + 1} - ${item.name}"
-                        this.itemPokemonTextView.putText(name)
+                    onBind(::PokemonViewHolder) { _, item ->
+                        Picasso.get().load(item.photo).placeholder(android.R.color.transparent).into(this.itemPokemonPhotoImageView)
+                        this.itemPokemonNameTextView.putText(item.name)
+                        val id = if (item.id in 1..9) {
+                            "#00${item.id}"
+                        } else if (item.id in 10..99) {
+                            "#0${item.id}"
+                        } else {
+                            "#${item.id}"
+                        }
+                        this.itemPokemonIDTextView.putText(id)
+
+                        val color = PokemonColorUtil(itemView.context).getPokemonColor(item.types)
+                        this.itemPokemonConstraintLayout.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+
+                        item.types.getOrNull(0).let { firstType ->
+                            this.itemPokemonType1TextView.text = firstType?.name
+                            this.itemPokemonType1TextView.setVisible(firstType != null)
+                        }
+
+                        item.types.getOrNull(1).let { secondType ->
+                            this.itemPokemonType2TextView.text = secondType?.name
+                            this.itemPokemonType2TextView.setVisible(secondType != null)
+                        }
+
+                        item.types.getOrNull(2).let { thirdType ->
+                            this.itemPokemonType3TextView.text = thirdType?.name
+                            this.itemPokemonType3TextView.setVisible(thirdType != null)
+                        }
                     }
+
                     onClick { index ->
                         val bundle = bundleOf("pokemon" to pokemon[index])
                         findNavController().navigate(R.id.action_pokemonFragment_to_pokemonDetailsFragment, bundle)

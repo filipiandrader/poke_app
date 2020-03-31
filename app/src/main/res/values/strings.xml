@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Poke App</string>
+    <string name="app_name">DexApp</string>
     <string name="bottom_navigation_home">Pokemons</string>
     <string name="bottom_navigation_favorite">Favoritos</string>
 

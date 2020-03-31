@@ -29,19 +29,14 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         when (destination.id) {
             R.id.homeFragment -> {
-                mainToolbar.title = "Pokemon"
                 mainBottomNavigationView.setVisible(true)
             }
             R.id.favoriteFragment -> {
-                mainToolbar.title = "Pokemon Favoritos"
                 mainBottomNavigationView.setVisible(true)
             }
             R.id.pokemonDetailsFragment -> {
-                mainToolbar.setVisible(false)
                 mainBottomNavigationView.setVisible(false)
             }
         }
-
-        setSupportActionBar(mainToolbar)
     }
 }

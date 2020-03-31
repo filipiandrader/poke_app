@@ -13,51 +13,95 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorIcons">
+
+        <ImageView
+            android:id="@+id/pokemonImageView"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="-80dp"
+            android:layout_marginEnd="-80dp"
+            android:alpha="0.10"
+            android:background="@drawable/pokeball"
+            android:contentDescription="@string/app_name"
+            android:tint="@color/colorIcons" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@android:color/transparent"
+            android:fitsSystemWindows="false"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="false"
+                app:collapsedTitleTextAppearance="@style/AppTheme.Title.Collapsed"
+                app:expandedTitleTextAppearance="@style/AppTheme.Title.Expanded"
+                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/pokemonToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="bottom|end"
+                    app:elevation="0dp"
+                    app:layout_collapseMode="pin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <ProgressBar
             android:id="@+id/pokemonProgressBar"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/pokemonMessageTextView"
             style="@style/PokeApp.TextAppearance.Label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Erro!" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pokemonRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="2dp"
-            android:scrollbars="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/pokemonPaginationProgressBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ProgressBar
-            android:id="@+id/pokemonPaginationProgressBar"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pokemonRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/colorIcons"
+                android:scrollbars="vertical"
+                android:visibility="gone"
+                app:layoutManager="GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/pokemonPaginationProgressBar"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ProgressBar
+                android:id="@+id/pokemonPaginationProgressBar"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
