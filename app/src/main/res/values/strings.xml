@@ -10,4 +10,15 @@
     <string name="pokemon_details_tab_2">Status Base</string>
     <string name="pokemon_details_tab_3">Evoluções</string>
     <string name="pokemon_details_tab_4">Golpes</string>
+    <string name="about_height_label">Altura</string>
+    <string name="about_weight_label">Peso</string>
+    <string name="about_training_label">Treinamento</string>
+    <string name="about_base_experience_label">XP Base</string>
+    <string name="base_stats_hp_label">HP</string>
+    <string name="base_stats_attack_label">Ataque</string>
+    <string name="base_stats_defense_label">Defense</string>
+    <string name="base_stats_special_attack_label">Ataque Esp.</string>
+    <string name="base_stats_special_defense_label">Defesa Esp.</string>
+    <string name="base_stats_speed_label">Velocidade</string>
+    <string name="base_stats_total_label">Total</string>
 </resources>

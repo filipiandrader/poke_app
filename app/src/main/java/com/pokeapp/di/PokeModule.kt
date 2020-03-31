@@ -7,6 +7,7 @@ import com.pokeapp.data.remote.repository.PokemonRepositoryImpl
 import com.pokeapp.data.remote.services.PokemonService
 import com.pokeapp.data.remote.services.createWebService
 import com.pokeapp.data.remote.services.getBaseUrl
+import com.pokeapp.data.remote.services.getOkHttpClient
 import com.pokeapp.domain.PokemonDataSource
 import com.pokeapp.domain.PokemonDataSourceImpl
 import com.pokeapp.presentation.pokemon.PokemonViewModel
@@ -21,6 +22,7 @@ val pokeModule = module {
     single { this }
 
     single { getBaseUrl() }
+    single { getOkHttpClient() }
     single { createWebService<PokemonService>(getBaseUrl()) }
 
     single { PokemonRoomImpl() as PokemonRoom }

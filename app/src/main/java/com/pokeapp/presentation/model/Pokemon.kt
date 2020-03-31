@@ -11,10 +11,14 @@ data class Pokemon(var id: Int = 0,
                    var name: String = "",
                    var photo: String = "",
                    var photo_shiny: String = "",
+                   var base_experience: Int = -1,
                    var height: Int = -1,
                    var weight: Int = -1,
                    var types: MutableList<Type> = mutableListOf(),
                    var abilities: MutableList<Ability> = mutableListOf(),
+                   var moves: MutableList<Move> = mutableListOf(),
+                   var stats: MutableList<Stats> = mutableListOf(),
+                   var evolves: MutableList<Species> = mutableListOf(),
                    var favorite: Boolean = false) : BaseObservable(), Serializable {
 
     var _id
@@ -49,6 +53,14 @@ data class Pokemon(var id: Int = 0,
             notifyChange()
         }
 
+    var _base_experience
+        @Bindable
+        get() = base_experience
+        set(value) {
+            base_experience = value
+            notifyChange()
+        }
+
     var _height
         @Bindable
         get() = height
@@ -78,6 +90,30 @@ data class Pokemon(var id: Int = 0,
         get() = abilities
         set(value) {
             abilities = value
+            notifyChange()
+        }
+
+    var _moves
+        @Bindable
+        get() = moves
+        set(value) {
+            moves = value
+            notifyChange()
+        }
+
+    var _stats
+        @Bindable
+        get() = stats
+        set(value) {
+            stats = value
+            notifyChange()
+        }
+
+    var _evolves
+        @Bindable
+        get() = evolves
+        set(value) {
+            evolves = value
             notifyChange()
         }
 

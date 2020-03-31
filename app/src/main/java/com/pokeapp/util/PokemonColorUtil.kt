@@ -15,7 +15,7 @@ class PokemonColorUtil(var context: Context) {
 
     @ColorInt
     fun getPokemonColor(typeOfPokemon: List<Type>): Int {
-        val type = typeOfPokemon.getOrNull(0)
+        val type = typeOfPokemon.getOrNull(typeOfPokemon.size - 1)
         val color = when (type?.name?.toLowerCase(Locale("pt", "BR"))) {
             "grass", "bug" -> R.color.lightTeal
             "fire" -> R.color.lightRed

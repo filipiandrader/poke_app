@@ -17,7 +17,11 @@ class PokemonLocal(@PrimaryKey
                    var photo: String = "",
                    var photo_shiny: String = "",
                    var height: Int = -1,
+                   var base_experience: Int = -1,
                    var weight: Int = -1,
                    var types: MutableList<Type> = mutableListOf(),
                    var abilities: MutableList<Ability> = mutableListOf(),
+                   var move: MutableList<Move> = mutableListOf(),
+                   var stats: MutableList<Stats> = mutableListOf(),
+                   var evolves: MutableList<Species> = mutableListOf(),
                    var favorite: Boolean = false)

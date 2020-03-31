@@ -87,7 +87,7 @@
         <item name="android:fontFamily">@font/circularstd_medium</item>
         <item name="android:textColor">@color/colorIcons</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:alpha">0.5</item>
+        <item name="android:alpha">0.7</item>
     </style>
 
     <style name="PokeApp.TextAppearance.Message" parent="TextAppearance.AppCompat">
@@ -100,25 +100,56 @@
     </style>
 
     <style name="PokeApp.Item.TextAppearance.Title" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
+        <item name="android:textColor">@color/colorIcons</item>
+    </style>
+
+    <style name="PokeApp.Item.TextAppearance.ID" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_marginTop">4dp</item>
-        <item name="android:layout_marginEnd">16dp</item>
-        <item name="android:fontFamily">@font/circularstd_book</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:alpha">0.25</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
     <style name="PokeApp.Item.TextAppearance.Subtitle" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:background">@drawable/background_item_pokemon_span</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
+        <item name="android:textColor">@color/colorIcons</item>
+    </style>
+
+    <style name="PokeApp.About.TextAppearance.Label" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/circularstd_book</item>
-        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="PokeApp.About.TextAppearance.Info" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginStart">64dp</item>
+        <item name="android:fontFamily">@font/circularstd_book</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

@@ -14,26 +14,14 @@
 
     <TextView
         android:id="@+id/itemPokemonNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/circularstd_medium"
-        android:textColor="@color/colorIcons"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/circularstd_medium"
+        style="@style/PokeApp.Item.TextAppearance.Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Titulo" />
 
     <TextView
         android:id="@+id/itemPokemonIDTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.25"
-        android:gravity="top"
-        android:text="#001"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        style="@style/PokeApp.Item.TextAppearance.ID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="#001" />
@@ -41,44 +29,27 @@
 
     <TextView
         android:id="@+id/itemPokemonType3TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/PokeApp.Item.TextAppearance.Subtitle"
         android:layout_marginBottom="2dp"
-        android:background="@drawable/background_item_pokemon_span"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="Grass"
-        android:textColor="@color/colorIcons"
-        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/itemPokemonType2TextView"
-        app:layout_constraintStart_toStartOf="@+id/itemPokemonNameTextView" />
+        app:layout_constraintStart_toStartOf="@+id/itemPokemonNameTextView"
+        tools:text="Grass" />
 
     <TextView
         android:id="@+id/itemPokemonType2TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/PokeApp.Item.TextAppearance.Subtitle"
         android:layout_marginBottom="2dp"
-        android:background="@drawable/background_item_pokemon_span"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="Grass"
-        android:textColor="@color/colorIcons"
-        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/itemPokemonType1TextView"
-        app:layout_constraintStart_toStartOf="@+id/itemPokemonType1TextView" />
+        app:layout_constraintStart_toStartOf="@+id/itemPokemonType3TextView"
+        tools:text="Grass" />
 
     <TextView
         android:id="@+id/itemPokemonType1TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_item_pokemon_span"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="Grass"
-        android:textColor="@color/colorIcons"
-        android:textSize="14sp"
+        style="@style/PokeApp.Item.TextAppearance.Subtitle"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/itemPokemonType2TextView" />
+        app:layout_constraintStart_toStartOf="@+id/itemPokemonType3TextView"
+        tools:text="Grass" />
 
     <LinearLayout
         android:id="@+id/itemPokemonLinearLayout"
@@ -88,8 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_marginEnd="-16dp"
             android:layout_marginBottom="-24dp"
             android:adjustViewBounds="true"
@@ -99,13 +70,20 @@
             android:tint="@color/colorIcons" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/itemPokemonPhotoImageView"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/poke001"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/itemPokemonPhotoImageView"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="-8dp"
+            android:layout_marginBottom="-6dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/poke001" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
