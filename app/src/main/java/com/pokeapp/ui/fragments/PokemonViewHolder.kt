@@ -1,4 +1,4 @@
-package com.pokeapp.ui.fragments.pokemon
+package com.pokeapp.ui.fragments
 
 import android.view.View
 import android.widget.ImageView

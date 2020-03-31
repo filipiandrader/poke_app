@@ -5,4 +5,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="pokemon_details_tab_1">Sobre</string>
+    <string name="pokemon_details_tab_2">Status Base</string>
+    <string name="pokemon_details_tab_3">Evoluções</string>
+    <string name="pokemon_details_tab_4">Golpes</string>
 </resources>

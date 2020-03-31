@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,11 +19,11 @@ import com.pokeapp.databinding.FragmentPokemonBinding
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.pokemon.PokemonViewModel
+import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
-import org.jetbrains.anko.support.v4.longToast
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -117,11 +117,12 @@ class PokemonFragment : Fragment() {
                 withItem<Pokemon, PokemonViewHolder>(R.layout.item_pokemon) {
                     onBind(::PokemonViewHolder) { index, item ->
                         Picasso.get().load(item.photo).into(this.itemPokemonImageView)
-                        val name = "#${index + 1} - ${item.name.capitalize()}"
+                        val name = "#${index + 1} - ${item.name}"
                         this.itemPokemonTextView.putText(name)
                     }
                     onClick { index ->
-                        findNavController().navigate(PokemonFragmentDirections.actionPokemonFragmentToPokemonDetailsFragment())
+                        val bundle = bundleOf("pokemon" to pokemon[index])
+                        findNavController().navigate(R.id.action_pokemonFragment_to_pokemonDetailsFragment, bundle)
                     }
                 }
             }

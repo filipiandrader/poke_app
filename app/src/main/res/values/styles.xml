@@ -6,7 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:fontFamily">@font/circularstd_book</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="PokeApp.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -15,23 +17,36 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
-<!--        <item name="android:windowBackground">@drawable/splash</item>-->
+        <!--        <item name="android:windowBackground">@drawable/splash</item>-->
     </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetModal</item>
+    </style>
+
+    <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="PokeApp.TextAppearance.Label" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:fontFamily">@font/circularstd_book</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
     <style name="PokeApp.Details.TextAppearance.Label" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:fontFamily">@font/segoe_ui</item>
-        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
+        <item name="android:textColor">@color/colorIcons</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="PokeApp.Details.TextAppearance.Info" parent="TextAppearance.AppCompat">
@@ -39,8 +54,32 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:fontFamily">@font/circularstd_book</item>
         <item name="android:textColor">@color/colorSecondaryText</item>
+    </style>
+
+    <style name="PokeApp.Details.TextAppearance.Label.ID" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
+        <item name="android:textColor">@color/colorIcons</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:alpha">0.5</item>
+    </style>
+
+    <style name="PokeApp.Details.TextAppearance.Label.Type" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:background">@drawable/background_item_pokemon_span</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
+        <item name="android:textColor">@color/colorIcons</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:alpha">0.5</item>
     </style>
 
     <style name="PokeApp.TextAppearance.Message" parent="TextAppearance.AppCompat">
@@ -48,7 +87,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:fontFamily">@font/circularstd_book</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
@@ -59,7 +98,7 @@
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:layout_marginEnd">16dp</item>
-        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:fontFamily">@font/circularstd_book</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
@@ -70,7 +109,7 @@
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginEnd">16dp</item>
-        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:fontFamily">@font/circularstd_book</item>
         <item name="android:textColor">@color/colorSecondaryText</item>
     </style>
 

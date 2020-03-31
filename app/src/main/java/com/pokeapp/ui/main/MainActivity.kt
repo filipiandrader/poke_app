@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 mainBottomNavigationView.setVisible(true)
             }
             R.id.pokemonDetailsFragment -> {
-                mainToolbar.title = "Detalhes do Pokemon"
+                mainToolbar.setVisible(false)
                 mainBottomNavigationView.setVisible(false)
             }
         }

@@ -1,14 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.details.PokemonDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/pokemonDetailsAppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/lightTeal"
+            android:elevation="0dp"
+            android:fitsSystemWindows="false"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/pokemonDetailsCollapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/lightBlue"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:titleEnabled="false"
+                app:toolbarId="@+id/pokemonDetailsToolbar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/pokemonDetailsNormalImageView"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="@string/app_name"
+                        app:layout_constraintEnd_toStartOf="@+id/pokemonDetailsShinyImageView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/pokemonDetailsShinyImageView"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="@string/app_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/pokemonDetailsNormalImageView"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/pokemonDetailsToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="136dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="0dp"
+                    android:fitsSystemWindows="false"
+                    android:gravity="top"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetStart="0dp"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/pokemonDetailsNameTextView"
+                            style="@style/PokeApp.Details.TextAppearance.Label"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Titulo" />
+
+                        <TextView
+                            android:id="@+id/pokemonDetailsIDTextView"
+                            style="@style/PokeApp.Details.TextAppearance.Label.ID"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="#001" />
+
+                        <TextView
+                            android:id="@+id/pokemonDetailsType1TextView"
+                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            app:layout_constraintStart_toStartOf="@+id/pokemonDetailsNameTextView"
+                            app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
+                            tools:text="Grass" />
+
+                        <TextView
+                            android:id="@+id/pokemonDetailsType2TextView"
+                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/pokemonDetailsType1TextView"
+                            app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType1TextView"
+                            app:layout_constraintTop_toTopOf="@+id/pokemonDetailsType1TextView"
+                            tools:text="Grass" />
+
+                        <TextView
+                            android:id="@+id/pokemonDetailsType3TextView"
+                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/pokemonDetailsType1TextView"
+                            app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType2TextView"
+                            app:layout_constraintTop_toTopOf="@+id/pokemonDetailsType1TextView"
+                            tools:text="Grass" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.Toolbar>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/pokemonDetailsConstraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="bottom">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/pokemonDetailsTabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@drawable/rounded_top_border"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tabGravity="fill"
+                        app:tabMode="fixed"
+                        app:tabSelectedTextColor="@color/red"
+                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                        app:tabTextColor="@color/black">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pokemon_details_tab_1" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pokemon_details_tab_2" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pokemon_details_tab_3" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pokemon_details_tab_4" />
+                    </com.google.android.material.tabs.TabLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pokemonDetailsViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/backgroundLight" />
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_pokemonFragment_to_pokemonDetailsFragment"
             app:destination="@id/pokemonDetailsFragment" />
+        <argument
+            android:name="pokemon"
+            app:argType="com.pokeapp.presentation.model.Pokemon" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -28,4 +31,24 @@
         android:name="com.pokeapp.ui.fragments.details.PokemonDetailsFragment"
         android:label="fragment_pokemon_details"
         tools:layout="@layout/fragment_pokemon_details" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.pokeapp.ui.fragments.details.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/baseStatsFragment"
+        android:name="com.pokeapp.ui.fragments.details.base_stats.BaseStatsFragment"
+        android:label="fragment_base_stats"
+        tools:layout="@layout/fragment_base_stats" />
+    <fragment
+        android:id="@+id/evolutionFragment"
+        android:name="com.pokeapp.ui.fragments.details.evolution.EvolutionFragment"
+        android:label="fragment_evolution"
+        tools:layout="@layout/fragment_evolution" />
+    <fragment
+        android:id="@+id/movesFragment"
+        android:name="com.pokeapp.ui.fragments.details.moves.MovesFragment"
+        android:label="fragment_moves"
+        tools:layout="@layout/fragment_moves" />
 </navigation>

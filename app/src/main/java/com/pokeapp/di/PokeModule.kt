@@ -1,5 +1,7 @@
 package com.pokeapp.di
 
+import com.pokeapp.data.cache.room.repository.PokemonRoom
+import com.pokeapp.data.cache.room.repository.PokemonRoomImpl
 import com.pokeapp.data.remote.repository.PokemonRepository
 import com.pokeapp.data.remote.repository.PokemonRepositoryImpl
 import com.pokeapp.data.remote.services.PokemonService
@@ -21,7 +23,9 @@ val pokeModule = module {
     single { getBaseUrl() }
     single { createWebService<PokemonService>(getBaseUrl()) }
 
-    single { PokemonRepositoryImpl(get()) as PokemonRepository }
+    single { PokemonRoomImpl() as PokemonRoom }
+
+    single { PokemonRepositoryImpl(get(), get()) as PokemonRepository }
     single { PokemonDataSourceImpl(get()) as PokemonDataSource }
     viewModel { PokemonViewModel(get()) }
 }
