@@ -21,4 +21,5 @@
     <string name="base_stats_special_defense_label">Defesa Esp.</string>
     <string name="base_stats_speed_label">Velocidade</string>
     <string name="base_stats_total_label">Total</string>
+    <string name="toolbar_favorite_title">FavoriDex</string>
 </resources>

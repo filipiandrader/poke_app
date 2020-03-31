@@ -20,11 +20,11 @@
 
         <ImageView
             android:id="@+id/pokemonImageView"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_gravity="end"
-            android:layout_marginTop="-80dp"
-            android:layout_marginEnd="-80dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginEnd="-50dp"
             android:alpha="0.10"
             android:background="@drawable/pokeball"
             android:contentDescription="@string/app_name"
@@ -32,7 +32,7 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="150dp"
             android:background="@android:color/transparent"
             android:fitsSystemWindows="false"
             app:elevation="0dp">
@@ -90,15 +90,16 @@
                 android:background="@color/colorIcons"
                 android:scrollbars="vertical"
                 android:visibility="gone"
-                app:layoutManager="GridLayoutManager"
                 app:layout_constraintBottom_toTopOf="@+id/pokemonPaginationProgressBar"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ProgressBar
                 android:id="@+id/pokemonPaginationProgressBar"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

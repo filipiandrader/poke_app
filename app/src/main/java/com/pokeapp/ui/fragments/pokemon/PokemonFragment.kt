@@ -119,7 +119,6 @@ class PokemonFragment : Fragment() {
     }
 
     private fun setupRecyclerView(pokemon: MutableList<Pokemon>) {
-        mPreviousSize = mPokemon.size
         mPokemon.addAll(mPokemon.size, pokemon)
         if (mPokemon.isNotEmpty()) {
             pokemonRecyclerView.setup {
@@ -158,7 +157,7 @@ class PokemonFragment : Fragment() {
                     }
 
                     onClick { index ->
-                        val bundle = bundleOf("pokemon" to pokemon[index])
+                        val bundle = bundleOf("pokemon" to mPokemon[index])
                         findNavController().navigate(R.id.action_pokemonFragment_to_pokemonDetailsFragment, bundle)
                     }
                 }
@@ -167,7 +166,7 @@ class PokemonFragment : Fragment() {
 
             if (isLoading) {
                 isLoading = false
-                pokemonRecyclerView.scrollToPosition(mPreviousSize - 1)
+                pokemonRecyclerView.scrollToPosition(mOffset - 1)
                 pokemonPaginationProgressBar.setVisible(false)
             }
         } else {

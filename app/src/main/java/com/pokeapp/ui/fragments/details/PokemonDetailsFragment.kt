@@ -17,6 +17,8 @@ import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.*
+import org.jetbrains.anko.backgroundColor
+import org.jetbrains.anko.support.v4.longToast
 
 /**
  * A simple [Fragment] subclass.
@@ -46,9 +48,9 @@ class PokemonDetailsFragment : Fragment() {
         pokemonDetailsIDTextView.putText(id)
 
         val color = PokemonColorUtil(view.context).getPokemonColor(mPokemon.types)
-        pokemonDetailsAppBarLayout.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+        pokemonDetailsAppBarLayout.backgroundColor = color
         pokemonDetailsCollapsingToolbarLayout.contentScrim?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-        activity?.window?.statusBarColor = PokemonColorUtil(view.context).getPokemonColor(mPokemon.types)
+        activity?.window?.statusBarColor = color
 
         Picasso.get().load(mPokemon.photo).into(pokemonDetailsNormalImageView)
         Picasso.get().load(mPokemon.photo_shiny).into(pokemonDetailsShinyImageView)
@@ -67,6 +69,8 @@ class PokemonDetailsFragment : Fragment() {
             pokemonDetailsType1TextView.putText(thirdType?.name ?: "")
             pokemonDetailsType1TextView.setVisible(thirdType != null)
         }
+
+        pokemonDetailsFavoriteImageView.setOnClickListener { longToast("Clicked") }
 
         pokemonDetailsViewPager.adapter = ViewPagerAdapter(requireFragmentManager(), requireContext(), mPokemon)
         pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
