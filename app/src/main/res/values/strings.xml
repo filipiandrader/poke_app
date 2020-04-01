@@ -22,4 +22,7 @@
     <string name="base_stats_speed_label">Velocidade</string>
     <string name="base_stats_total_label">Total</string>
     <string name="toolbar_favorite_title">FavoriDex</string>
+    <string name="home_pokedex_title">Pokedex</string>
+    <string name="home_favorite_title">Favoridex</string>
+    <string name="pokedex_title">Pokedex</string>
 </resources>

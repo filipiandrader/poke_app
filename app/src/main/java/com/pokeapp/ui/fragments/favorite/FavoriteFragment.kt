@@ -27,6 +27,7 @@ import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -132,6 +133,8 @@ class FavoriteFragment : Fragment() {
             }
             favoriteMessageTextView.setVisible(false)
             favoriteRecyclerView.setVisible(true)
+
+            favoriteRecyclerView.isNestedScrollingEnabled = pokemon.size > 6
         } else {
             favoriteMessageTextView.setVisible(true)
             favoriteMessageTextView.putText("Sem pokemons favoritados :(")

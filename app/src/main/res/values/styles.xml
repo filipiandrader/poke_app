@@ -40,6 +40,16 @@
         <item name="android:textSize">48sp</item>
     </style>
 
+    <style name="PokeApp.Home.TextAppearance.Title" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
+        <item name="android:textColor">@color/colorIcons</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+
     <style name="PokeApp.TextAppearance.Label" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

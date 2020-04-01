@@ -17,13 +17,23 @@ class PokemonColorUtil(var context: Context) {
     fun getPokemonColor(typeOfPokemon: List<Type>): Int {
         val type = typeOfPokemon.getOrNull(typeOfPokemon.size - 1)
         val color = when (type?.name?.toLowerCase(Locale("pt", "BR"))) {
-            "grass", "bug" -> R.color.lightTeal
+            "grass", "bug", "pokedex" -> R.color.lightTeal
             "fire" -> R.color.lightRed
-            "water", "fighting", "normal" -> R.color.lightBlue
+            "water", "fighting", "normal", "favoridex" -> R.color.lightBlue
             "electric", "psychic" -> R.color.lightYellow
             "poison", "ghost" -> R.color.lightPurple
             "ground", "rock" -> R.color.lightBrown
             "dark" -> R.color.black
+            else -> R.color.lightBlue
+        }
+        return convertColor(color)
+    }
+
+    @ColorInt
+    fun getCardViewColor(menuType: String): Int {
+        val color = when (menuType.toLowerCase(Locale("pt", "BR"))) {
+            "pokedex" -> R.color.lightTeal
+            "favoridex" -> R.color.lightBlue
             else -> R.color.lightBlue
         }
         return convertColor(color)

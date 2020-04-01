@@ -25,6 +25,7 @@ import org.koin.dsl.module.module
  */
 
 val pokeModule = module {
+
     single { this }
 
     single { getBaseUrl() }
@@ -33,13 +34,13 @@ val pokeModule = module {
 
     single { PokemonRoomImpl() as PokemonRoom }
 
-    single { PokemonRepositoryImpl(get(), get()) as PokemonRepository }
-    single { PokemonDataSourceImpl(get()) as PokemonDataSource }
-    viewModel { PokemonViewModel(get()) }
-
     single { FavoriteDataSourceImpl(get()) as FavoriteDataSource }
     viewModel { FavoriteViewModel(get()) }
 
     single { PokemonDetailsDataSourceImpl(get()) as PokemonDetailsDataSource }
     viewModel { PokemonDetailsViewModel(get()) }
+
+    single { PokemonRepositoryImpl(get(), get()) as PokemonRepository }
+    single { PokemonDataSourceImpl(get()) as PokemonDataSource }
+    viewModel { PokemonViewModel(get()) }
 }

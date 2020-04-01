@@ -17,7 +17,11 @@ class PokemonDetailsDataSourceImpl(private val pokemonRoom: PokemonRoom) : Pokem
 
     override fun doFavoritePokemon(pokemon: Pokemon, onSuccess: () -> Unit, onFailure: () -> Unit) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = pokemonRoom.insert(pokemon.convertPokemon())
+            val response = if (pokemon.favorite) {
+                pokemonRoom.insert(pokemon.convertPokemon())
+            } else {
+                pokemonRoom.delete(pokemon.convertPokemon())
+            }
 
             if (response) {
                 onSuccess()

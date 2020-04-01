@@ -28,6 +28,7 @@ import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -39,13 +40,14 @@ class PokemonFragment : Fragment() {
     private lateinit var mPokemon: MutableList<Pokemon>
 
     private var mOffset = 0
-    private var mPreviousSize = 0
 
     var isLoading = false
 
     var visibleItemCount = 0
     var totalItemCount = 0
     var firstVisibleItemPosition = 0
+
+    var isPaused = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -63,6 +65,18 @@ class PokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.window?.statusBarColor = PokemonColorUtil(view.context).convertColor(R.color.background)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        mViewModel.getAllPokemon(mOffset)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        isPaused = true
     }
 
     override fun onStart() {
@@ -83,12 +97,6 @@ class PokemonFragment : Fragment() {
                 }
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        mViewModel.getAllPokemon(mOffset)
     }
 
     private fun creatingObservers() {

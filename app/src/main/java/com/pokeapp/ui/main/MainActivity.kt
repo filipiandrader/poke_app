@@ -2,17 +2,17 @@ package com.pokeapp.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import android.view.MenuItem
+import androidx.navigation.*
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pokeapp.R
 import com.pokeapp.util.setVisible
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
-class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mNavController: NavController
 
@@ -20,23 +20,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mNavController = findNavController(R.id.mainNavHostFragment)
-        mainBottomNavigationView.setupWithNavController(mNavController)
-
-        mNavController.addOnDestinationChangedListener(this)
-    }
-
-    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        when (destination.id) {
-            R.id.homeFragment -> {
-                mainBottomNavigationView.setVisible(true)
-            }
-            R.id.favoriteFragment -> {
-                mainBottomNavigationView.setVisible(true)
-            }
-            R.id.pokemonDetailsFragment -> {
-                mainBottomNavigationView.setVisible(false)
-            }
-        }
+        mNavController = Navigation.findNavController(this, R.id.mainNavHostFragment)
     }
 }
