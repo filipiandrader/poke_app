@@ -1,10 +1,12 @@
 package com.pokeapp.util
 
+import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.pokeapp.R
 import com.pokeapp.data.cache.entities.*
 import com.pokeapp.presentation.model.*
 
@@ -59,9 +61,22 @@ fun String.getEvolutionChainID(): Int {
     return split[1].replace("/", "").toInt()
 }
 
-fun Int.convertToCentimeter(): String {
-    val cm = this / 10.0
-    return "$cm cm"
+fun String.formatNameStats(context: Context): String {
+    return when (this) {
+        "speed" -> context.resources.getString(R.string.base_stats_speed_label)
+        "special-defense" -> context.resources.getString(R.string.base_stats_special_defense_label)
+        "special-attack" -> context.resources.getString(R.string.base_stats_special_attack_label)
+        "defense" -> context.resources.getString(R.string.base_stats_defense_label)
+        "attack" -> context.resources.getString(R.string.base_stats_attack_label)
+        "hp" -> context.resources.getString(R.string.base_stats_hp_label)
+        "total" -> context.resources.getString(R.string.base_stats_total_label)
+        else -> ""
+    }
+}
+
+fun Int.convertToMeter(): String {
+    val meter = this / 10.0
+    return "$meter m"
 }
 
 fun Int.convertToKilos(): String {
@@ -135,3 +150,64 @@ fun MutableList<SpeciesLocal>.convertToSpeciesList(): MutableList<Species> {
 
 fun SpeciesLocal.convertSpecies(): Species =
         Species(name = name, photo = photo)
+
+fun Pokemon.convertPokemon(): PokemonLocal =
+        PokemonLocal(
+                id = id,
+                name = name,
+                photo = photo,
+                photo_shiny = photo_shiny,
+                base_experience = base_experience,
+                height = height,
+                weight = weight,
+                types = types.convertToTypeLocalList(),
+                abilities = abilities.convertToAbilityLocalList(),
+                moves = moves.convertToMovesLocalList(),
+                stats = stats.convertToStatsLocalList(),
+                evolves = evolves.convertToSpeciesLocalList(),
+                favorite = favorite)
+
+fun MutableList<Type>.convertToTypeLocalList(): MutableList<TypeLocal> {
+    val list = mutableListOf<TypeLocal>()
+    this.forEach { listApi -> list.add(listApi.convertType()) }
+    return list
+}
+
+fun Type.convertType(): TypeLocal =
+        TypeLocal(name = name)
+
+fun MutableList<Ability>.convertToAbilityLocalList(): MutableList<AbilityLocal> {
+    val list = mutableListOf<AbilityLocal>()
+    this.forEach { listApi -> list.add(listApi.convertAbility()) }
+    return list
+}
+
+fun Ability.convertAbility(): AbilityLocal =
+        AbilityLocal(name = name)
+
+fun MutableList<Move>.convertToMovesLocalList(): MutableList<MoveLocal> {
+    val list = mutableListOf<MoveLocal>()
+    this.forEach { listApi -> list.add(listApi.convertMove()) }
+    return list
+}
+
+fun Move.convertMove(): MoveLocal =
+        MoveLocal(name = name)
+
+fun MutableList<Stats>.convertToStatsLocalList(): MutableList<StatsLocal> {
+    val list = mutableListOf<StatsLocal>()
+    this.forEach { listApi -> list.add(listApi.convertStats()) }
+    return list
+}
+
+fun Stats.convertStats(): StatsLocal =
+        StatsLocal(name = name, base_state = base_state)
+
+fun MutableList<Species>.convertToSpeciesLocalList(): MutableList<SpeciesLocal> {
+    val list = mutableListOf<SpeciesLocal>()
+    this.forEach { listApi -> list.add(listApi.convertSpecies()) }
+    return list
+}
+
+fun Species.convertSpecies(): SpeciesLocal =
+        SpeciesLocal(name = name, photo = photo)

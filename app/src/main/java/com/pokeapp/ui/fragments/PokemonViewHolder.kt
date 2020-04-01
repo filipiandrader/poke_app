@@ -3,7 +3,7 @@ package com.pokeapp.ui.fragments
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.pokeapp.R
 
@@ -19,5 +19,5 @@ class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val itemPokemonType1TextView: TextView = itemView.findViewById(R.id.itemPokemonType1TextView)
     val itemPokemonType2TextView: TextView = itemView.findViewById(R.id.itemPokemonType2TextView)
     val itemPokemonType3TextView: TextView = itemView.findViewById(R.id.itemPokemonType3TextView)
-    val itemPokemonConstraintLayout: ConstraintLayout = itemView.findViewById(R.id.itemPokemonConstraintLayout)
+    val itemPokemonCardView: CardView = itemView.findViewById(R.id.itemPokemonCardView)
 }

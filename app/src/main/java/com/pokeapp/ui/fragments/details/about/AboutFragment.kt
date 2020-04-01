@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.util.convertToCentimeter
+import com.pokeapp.util.convertToMeter
 import com.pokeapp.util.convertToKilos
 import com.pokeapp.util.putText
 import kotlinx.android.synthetic.main.fragment_about.*
@@ -36,7 +36,7 @@ class AboutFragment : Fragment() {
 
         val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
         pokemon.let { p ->
-            aboutHeightTextView.putText(p.height.convertToCentimeter())
+            aboutHeightTextView.putText(p.height.convertToMeter())
             aboutWeightTextView.putText(p.weight.convertToKilos())
             aboutBaseExpTextView.putText("${p.base_experience}")
         }

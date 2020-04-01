@@ -60,6 +60,7 @@ class PokemonRepositoryImpl(private val api: PokemonService,
             p.moves = moves
 
             val stats = mutableListOf<Stats>()
+            var total = 0
             for (j in 0 until statsArr.length()) {
                 val obj = statsArr.getJSONObject(j)
                 val stat = obj.getJSONObject("stat")
@@ -69,7 +70,10 @@ class PokemonRepositoryImpl(private val api: PokemonService,
                 s.name = stat.getString("name")
 
                 stats.add(s)
+                total += s.base_state
             }
+            stats.reverse()
+            stats.add(Stats("total", total))
             p.stats = stats
 
             val responseSpeciesId = api.getPokemonSpecies(p.id).await()

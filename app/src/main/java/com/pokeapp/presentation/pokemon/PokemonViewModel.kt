@@ -37,7 +37,7 @@ class PokemonViewModel(private val dataSource: PokemonDataSource) : ViewModel() 
     fun getState(): LiveData<ViewState<MutableList<Pokemon>>> = mState
 
     override fun onCleared() {
-        dataSource.cancelJob()
         super.onCleared()
+        dataSource.cancelJob()
     }
 }

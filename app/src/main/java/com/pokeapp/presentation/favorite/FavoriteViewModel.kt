@@ -34,7 +34,7 @@ class FavoriteViewModel(private val dataSource: FavoriteDataSource) : ViewModel(
     fun getState(): LiveData<ViewState<MutableList<Pokemon>>> = mState
 
     override fun onCleared() {
-        dataSource.cancelJob()
         super.onCleared()
+        dataSource.cancelJob()
     }
 }

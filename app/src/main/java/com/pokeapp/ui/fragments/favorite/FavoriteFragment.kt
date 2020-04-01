@@ -10,6 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
@@ -78,7 +80,13 @@ class FavoriteFragment : Fragment() {
 
     private fun setupRecyclerView(pokemon: MutableList<Pokemon>) {
         if (pokemon.isNotEmpty()) {
+            val layoutManager = if (pokemon.size == 1) {
+                LinearLayoutManager(context)
+            } else {
+                GridLayoutManager(context, 2)
+            }
             favoriteRecyclerView.setup {
+                withLayoutManager(layoutManager)
                 withDataSource(dataSourceOf(pokemon))
                 withItem<Pokemon, PokemonViewHolder>(R.layout.item_pokemon) {
                     onBind(::PokemonViewHolder) { _, item ->
@@ -98,7 +106,7 @@ class FavoriteFragment : Fragment() {
                         this.itemPokemonIDTextView.putText(id)
 
                         val color = PokemonColorUtil(itemView.context).getPokemonColor(item.types)
-                        this.itemPokemonConstraintLayout.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+                        this.itemPokemonCardView.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
                         item.types.getOrNull(0).let { firstType ->
                             this.itemPokemonType1TextView.putText(firstType?.name ?: "")
@@ -118,7 +126,7 @@ class FavoriteFragment : Fragment() {
 
                     onClick { index ->
                         val bundle = bundleOf("pokemon" to pokemon[index])
-                        findNavController().navigate(R.id.action_pokemonFragment_to_pokemonDetailsFragment, bundle)
+                        findNavController().navigate(R.id.action_favoriteFragment_to_pokemonDetailsFragment, bundle)
                     }
                 }
             }

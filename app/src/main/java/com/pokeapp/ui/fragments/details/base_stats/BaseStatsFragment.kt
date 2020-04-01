@@ -5,10 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.afollestad.recyclical.datasource.dataSourceOf
+import com.afollestad.recyclical.setup
+import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.presentation.model.Stats
+import com.pokeapp.util.formatNameStats
 import com.pokeapp.util.putProgress
 import com.pokeapp.util.putText
+import com.pokeapp.util.setVisible
 import kotlinx.android.synthetic.main.fragment_base_stats.*
 
 /**
@@ -34,43 +40,29 @@ class BaseStatsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
-        pokemon.let { p ->
-            var total = 0
-            for (i in p.stats.indices) {
-                total += p.stats[i].base_state
-                when (p.stats[i].name) {
-                    "speed" -> {
-                        baseStatsSpeedTextView.putText("${p.stats[i].base_state}")
-                        baseStatsSpeedProgressBar.putProgress(p.stats[i].base_state)
-                    }
-                    "special-defense" -> {
-                        baseStatsSpDefTextView.putText("${p.stats[i].base_state}")
-                        baseStatsSpDefProgressBar.putProgress(p.stats[i].base_state)
-                    }
-                    "special-attack" -> {
-                        baseStatsSpAtkTextView.putText("${p.stats[i].base_state}")
-                        baseStatsSpAtkProgressBar.putProgress(p.stats[i].base_state)
-                    }
-                    "defense" -> {
-                        baseStatsDefTextView.putText("${p.stats[i].base_state}")
-                        baseStatsDefProgressBar.putProgress(p.stats[i].base_state)
-                    }
-                    "attack" -> {
-                        baseStatsAtkTextView.putText("${p.stats[i].base_state}")
-                        baseStatsAtkProgressBar.putProgress(p.stats[i].base_state)
-                    }
-                    "hp" -> {
-                        baseStatsHPTextView.putText("${p.stats[i].base_state}")
-                        baseStatsHPProgressBar.putProgress(p.stats[i].base_state)
-                    }
-                    else -> {
-                        // IGNORE
+        setupRecyclerView(pokemon.stats)
+    }
+
+    private fun setupRecyclerView(stats: MutableList<Stats>) {
+        if (stats.isNotEmpty()) {
+            baseStatsRecyclerView.setup {
+                withDataSource(dataSourceOf(stats))
+                withItem<Stats, BaseStatsViewHolder>(R.layout.item_base_stats) {
+                    onBind(::BaseStatsViewHolder) { _, item ->
+                        this.baseStatsLabelTextView.putText(item.name.formatNameStats(context!!))
+                        this.baseStatsTextView.putText("${item.base_state}")
+                        if (item.name == "total") {
+                            this.baseStatsTotalProgressBar.putProgress(item.base_state)
+                            this.baseStatsTotalProgressBar.setVisible(true)
+                            this.baseStatsProgressBar.setVisible(false)
+                        } else {
+                            this.baseStatsProgressBar.putProgress(item.base_state)
+                            this.baseStatsProgressBar.setVisible(true)
+                            this.baseStatsTotalProgressBar.setVisible(false)
+                        }
                     }
                 }
             }
-
-            baseStatsTotalTextView.putText("$total")
-            baseStatsTotalProgressBar.putProgress(total)
         }
     }
 

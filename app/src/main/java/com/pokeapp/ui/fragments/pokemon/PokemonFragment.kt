@@ -3,12 +3,11 @@ package com.pokeapp.ui.fragments.pokemon
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
-
 import com.pokeapp.R
 import com.pokeapp.databinding.FragmentPokemonBinding
 import com.pokeapp.presentation.State
@@ -142,7 +140,7 @@ class PokemonFragment : Fragment() {
                         this.itemPokemonIDTextView.putText(id)
 
                         val color = PokemonColorUtil(itemView.context).getPokemonColor(item.types)
-                        this.itemPokemonConstraintLayout.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+                        this.itemPokemonCardView.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
                         item.types.getOrNull(0).let { firstType ->
                             this.itemPokemonType1TextView.putText(firstType?.name ?: "")
