@@ -1,4 +1,4 @@
-package com.pokeapp.domain.favorite
+package com.pokeapp.domain.favourite
 
 import com.pokeapp.data.cache.room.repository.PokemonRoom
 import com.pokeapp.presentation.model.Pokemon
@@ -11,11 +11,11 @@ import kotlinx.coroutines.launch
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-class FavoriteDataSourceImpl(private val pokemonRoom: PokemonRoom) : FavoriteDataSource {
+class FavouriteDataSourceImpl(private val pokemonRoom: PokemonRoom) : FavouriteDataSource {
 
     private var job: Job = Job()
 
-    override fun getFavoritePokemon(onSuccess: (MutableList<Pokemon>) -> Unit, onFailure: () -> Unit) {
+    override fun getFavouritePokemon(onSuccess: (MutableList<Pokemon>) -> Unit, onFailure: () -> Unit) {
         job = CoroutineScope(Dispatchers.IO).launch {
             val response = pokemonRoom.getAll()
 

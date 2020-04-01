@@ -119,11 +119,11 @@
                             tools:text="Titulo" />
 
                         <ImageView
-                            android:id="@+id/pokemonDetailsFavoriteImageView"
+                            android:id="@+id/pokemonDetailsFavouriteImageView"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/ic_not_favorite"
+                            android:src="@drawable/ic_not_favourite"
                             app:layout_constraintEnd_toEndOf="@+id/pokemonDetailsIDTextView"
                             app:layout_constraintStart_toStartOf="@+id/pokemonDetailsIDTextView"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -133,7 +133,7 @@
                             style="@style/PokeApp.Details.TextAppearance.Label.ID"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsFavoriteImageView"
+                            app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsFavouriteImageView"
                             tools:text="#001" />
 
                         <TextView

@@ -18,8 +18,8 @@ class PokemonDetailsViewModel(private val dataSource: PokemonDetailsDataSource) 
         mState.value = ViewState.initializing()
     }
 
-    fun doFavoritePokemon(pokemon: Pokemon) {
-        dataSource.doFavoritePokemon(pokemon,
+    fun doFavouritePokemon(pokemon: Pokemon) {
+        dataSource.doFavouritePokemon(pokemon,
                 onSuccess = {
                     mState.postValue(ViewState.success())
                 },

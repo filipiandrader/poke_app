@@ -1,13 +1,13 @@
-package com.pokeapp.domain.favorite
+package com.pokeapp.domain.favourite
 
 import com.pokeapp.presentation.model.Pokemon
 
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-interface FavoriteDataSource {
+interface FavouriteDataSource {
 
-    fun getFavoritePokemon(onSuccess: (MutableList<Pokemon>) -> Unit,
+    fun getFavouritePokemon(onSuccess: (MutableList<Pokemon>) -> Unit,
                            onFailure: () -> Unit)
 
     fun cancelJob()

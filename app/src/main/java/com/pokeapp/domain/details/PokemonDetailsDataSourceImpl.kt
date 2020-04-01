@@ -15,9 +15,9 @@ class PokemonDetailsDataSourceImpl(private val pokemonRoom: PokemonRoom) : Pokem
 
     private var job: Job = Job()
 
-    override fun doFavoritePokemon(pokemon: Pokemon, onSuccess: () -> Unit, onFailure: () -> Unit) {
+    override fun doFavouritePokemon(pokemon: Pokemon, onSuccess: () -> Unit, onFailure: () -> Unit) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = if (pokemon.favorite) {
+            val response = if (pokemon.favourite) {
                 pokemonRoom.insert(pokemon.convertPokemon())
             } else {
                 pokemonRoom.delete(pokemon.convertPokemon())

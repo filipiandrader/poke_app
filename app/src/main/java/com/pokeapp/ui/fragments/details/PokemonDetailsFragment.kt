@@ -56,13 +56,13 @@ class PokemonDetailsFragment : Fragment() {
     }
 
     private fun showToast() {
-        if (mPokemon.favorite) {
+        if (mPokemon.favourite) {
             longToast("${mPokemon.name} foi favoritado :)")
         } else {
             longToast("${mPokemon.name} foi desfavoritado :(")
         }
 
-        setFavoriteIconCorrectly()
+        setFavouriteIconCorrectly()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,23 +107,23 @@ class PokemonDetailsFragment : Fragment() {
             pokemonDetailsType1TextView.setVisible(thirdType != null)
         }
 
-        setFavoriteIconCorrectly()
-        pokemonDetailsFavoriteImageView.setOnClickListener { doFavoritePokemon() }
+        setFavouriteIconCorrectly()
+        pokemonDetailsFavouriteImageView.setOnClickListener { doFavouritePokemon() }
 
         pokemonDetailsViewPager.adapter = ViewPagerAdapter(requireFragmentManager(), requireContext(), mPokemon)
         pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
     }
 
-    private fun setFavoriteIconCorrectly() {
-        if (mPokemon.favorite) {
-            pokemonDetailsFavoriteImageView.setImageDrawable(context!!.resources.getDrawable(R.drawable.ic_favorite))
+    private fun setFavouriteIconCorrectly() {
+        if (mPokemon.favourite) {
+            pokemonDetailsFavouriteImageView.setImageDrawable(context!!.resources.getDrawable(R.drawable.ic_favourite))
         } else {
-            pokemonDetailsFavoriteImageView.setImageDrawable(context!!.resources.getDrawable(R.drawable.ic_not_favorite))
+            pokemonDetailsFavouriteImageView.setImageDrawable(context!!.resources.getDrawable(R.drawable.ic_not_favourite))
         }
     }
 
-    private fun doFavoritePokemon() {
-        mPokemon.favorite = !mPokemon.favorite
-        mViewModel.doFavoritePokemon(mPokemon)
+    private fun doFavouritePokemon() {
+        mPokemon.favourite = !mPokemon.favourite
+        mViewModel.doFavouritePokemon(mPokemon)
     }
 }

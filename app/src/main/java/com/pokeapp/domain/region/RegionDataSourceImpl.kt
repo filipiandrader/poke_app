@@ -1,22 +1,22 @@
-package com.pokeapp.domain.pokemon
+package com.pokeapp.domain.region
 
-import com.pokeapp.data.remote.repository.pokemon.PokemonRepository
-import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.data.remote.repository.region.RegionRepository
+import com.pokeapp.presentation.model.Region
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
- * Created by Filipi Andrade on 29/03/2020
+ * Created by Filipi Andrade on 01/04/2020
  */
-class PokemonDataSourceImpl(private val repository: PokemonRepository) : PokemonDataSource {
+class RegionDataSourceImpl(private val repository: RegionRepository) : RegionDataSource {
 
     private var job: Job = Job()
 
-    override fun getAllPokemons(offset: Int, onSuccess: (MutableList<Pokemon>) -> Unit, onFailure: (t: Throwable) -> Unit) {
+    override fun getRegion(onSuccess: (MutableList<Region>) -> Unit, onFailure: (t: Throwable) -> Unit) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.getAllPokemon(offset)
+            val response = repository.getRegion()
 
             if (response.throwable != null || response.data == null) {
                 response.throwable?.printStackTrace()

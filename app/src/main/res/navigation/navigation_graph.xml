@@ -11,11 +11,14 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            android:id="@+id/action_homeFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
         <action
             android:id="@+id/action_homeFragment_to_pokedexFragment"
             app:destination="@id/pokedexFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_regionFragment"
+            app:destination="@id/regionFragment" />
     </fragment>
 
     <fragment
@@ -32,12 +35,12 @@
             app:argType="com.pokeapp.presentation.model.Pokemon" />
     </fragment>
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.pokeapp.ui.fragments.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite">
+        android:id="@+id/favouriteFragment"
+        android:name="com.pokeapp.ui.fragments.favourite.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite">
         <action
-            android:id="@+id/action_favoriteFragment_to_pokemonDetailsFragment"
+            android:id="@+id/action_favouriteFragment_to_pokemonDetailsFragment"
             app:destination="@id/pokemonDetailsFragment" />
         <argument
             android:name="pokemon"
@@ -68,4 +71,21 @@
         android:name="com.pokeapp.ui.fragments.details.moves.MovesFragment"
         android:label="fragment_moves"
         tools:layout="@layout/fragment_moves" />
+    <fragment
+        android:id="@+id/regionFragment"
+        android:name="com.pokeapp.ui.fragments.region.RegionFragment"
+        android:label="fragment_region"
+        tools:layout="@layout/fragment_region" >
+        <action
+            android:id="@+id/action_regionFragment_to_regionDetailsFragment"
+            app:destination="@id/regionDetailsFragment" />
+        <argument
+            android:name="region"
+            app:argType="com.pokeapp.presentation.model.Region" />
+    </fragment>
+    <fragment
+        android:id="@+id/regionDetailsFragment"
+        android:name="com.pokeapp.ui.fragments.region_details.RegionDetailsFragment"
+        android:label="fragment_region_details"
+        tools:layout="@layout/fragment_region_details" />
 </navigation>

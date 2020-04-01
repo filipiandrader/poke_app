@@ -1,4 +1,4 @@
-package com.pokeapp.data.remote.repository
+package com.pokeapp.data.remote.repository.pokemon
 
 import com.pokeapp.data.ResultRequest
 import com.pokeapp.data.cache.room.repository.PokemonRoom
@@ -106,7 +106,7 @@ class PokemonRepositoryImpl(private val api: PokemonService,
 
             val pokemonLocal = pokemonRoom.getById(p.id)
             if (pokemonLocal != null) {
-                p.favorite = pokemonLocal.favorite
+                p.favourite = pokemonLocal.favourite
             }
 
             listPokemon.add(p)

@@ -47,8 +47,6 @@ class PokemonFragment : Fragment() {
     var totalItemCount = 0
     var firstVisibleItemPosition = 0
 
-    var isPaused = false
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val binding: FragmentPokemonBinding = FragmentPokemonBinding.inflate(inflater, container, false)
@@ -71,12 +69,6 @@ class PokemonFragment : Fragment() {
         super.onResume()
 
         mViewModel.getAllPokemon(mOffset)
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        isPaused = true
     }
 
     override fun onStart() {
@@ -102,7 +94,10 @@ class PokemonFragment : Fragment() {
     private fun creatingObservers() {
         mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
-                State.LOADING -> pokemonProgressBar.setVisible(true)
+                State.LOADING -> {
+                    pokemonProgressBar.setVisible(true)
+                    pokemonRecyclerView.setVisible(false)
+                }
                 State.SUCCESS -> {
                     pokemonMessageTextView.setVisible(false)
                     pokemonProgressBar.setVisible(false)
@@ -172,7 +167,6 @@ class PokemonFragment : Fragment() {
                     }
                 }
             }
-            pokemonRecyclerView.setVisible(true)
 
             if (isLoading) {
                 isLoading = false
@@ -183,5 +177,6 @@ class PokemonFragment : Fragment() {
             pokemonMessageTextView.setVisible(true)
             pokemonMessageTextView.putText("Sem pokemons cadastrados :(")
         }
+        pokemonRecyclerView.setVisible(mPokemon.isNotEmpty())
     }
 }

@@ -25,8 +25,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         activity?.window?.statusBarColor = PokemonColorUtil(view.context).convertColor(R.color.red)
+
         val colorPokedex = PokemonColorUtil(view.context).getCardViewColor("pokedex")
         homePokedexConstraintLayout.background.colorFilter = PorterDuffColorFilter(colorPokedex, PorterDuff.Mode.SRC_ATOP)
         homePokedexConstraintLayout.setOnClickListener {
@@ -34,9 +34,15 @@ class HomeFragment : Fragment() {
         }
 
         val colorFavoridex = PokemonColorUtil(view.context).getCardViewColor("favoridex")
-        homeFavoriteConstraintLayout.background.colorFilter = PorterDuffColorFilter(colorFavoridex, PorterDuff.Mode.SRC_ATOP)
-        homeFavoriteConstraintLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+        homeFavouriteConstraintLayout.background.colorFilter = PorterDuffColorFilter(colorFavoridex, PorterDuff.Mode.SRC_ATOP)
+        homeFavouriteConstraintLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
+        }
+
+        val colorRegion = PokemonColorUtil(view.context).getCardViewColor("region")
+        homeRegionConstraintLayout.background.colorFilter = PorterDuffColorFilter(colorRegion, PorterDuff.Mode.SRC_ATOP)
+        homeRegionConstraintLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_regionFragment)
         }
     }
 }

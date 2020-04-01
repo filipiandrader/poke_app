@@ -24,4 +24,4 @@ class PokemonLocal(@PrimaryKey
                    var moves: MutableList<MoveLocal> = mutableListOf(),
                    var stats: MutableList<StatsLocal> = mutableListOf(),
                    var evolves: MutableList<SpeciesLocal> = mutableListOf(),
-                   var favorite: Boolean = false)
+                   var favourite: Boolean = false)

@@ -7,7 +7,7 @@ import com.pokeapp.presentation.model.Pokemon
  */
 interface PokemonDetailsDataSource {
 
-    fun doFavoritePokemon(pokemon: Pokemon,
+    fun doFavouritePokemon(pokemon: Pokemon,
                           onSuccess: () -> Unit,
                           onFailure: () -> Unit)
 

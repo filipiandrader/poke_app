@@ -19,7 +19,7 @@ data class Pokemon(var id: Int = 0,
                    var moves: MutableList<Move> = mutableListOf(),
                    var stats: MutableList<Stats> = mutableListOf(),
                    var evolves: MutableList<Species> = mutableListOf(),
-                   var favorite: Boolean = false) : BaseObservable(), Serializable {
+                   var favourite: Boolean = false) : BaseObservable(), Serializable {
 
     var _id
         @Bindable
@@ -117,11 +117,11 @@ data class Pokemon(var id: Int = 0,
             notifyChange()
         }
 
-    var _favorite
+    var _favourite
         @Bindable
-        get() = favorite
+        get() = favourite
         set(value) {
-            favorite = value
+            favourite = value
             notifyChange()
         }
 }

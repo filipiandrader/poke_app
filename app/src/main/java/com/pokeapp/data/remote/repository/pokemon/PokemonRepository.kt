@@ -1,4 +1,4 @@
-package com.pokeapp.data.remote.repository
+package com.pokeapp.data.remote.repository.pokemon
 
 import com.pokeapp.data.ResultRequest
 import com.pokeapp.presentation.model.Pokemon

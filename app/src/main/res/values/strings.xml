@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DexApp</string>
     <string name="bottom_navigation_home">Pokemons</string>
-    <string name="bottom_navigation_favorite">Favoritos</string>
+    <string name="bottom_navigation_favourite">Favoritos</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -21,8 +21,10 @@
     <string name="base_stats_special_defense_label">Defesa Esp.</string>
     <string name="base_stats_speed_label">Velocidade</string>
     <string name="base_stats_total_label">Total</string>
-    <string name="toolbar_favorite_title">FavoriDex</string>
+    <string name="toolbar_favourite_title">FavoriDex</string>
     <string name="home_pokedex_title">Pokedex</string>
-    <string name="home_favorite_title">Favoridex</string>
+    <string name="home_favourite_title">Favoridex</string>
     <string name="pokedex_title">Pokedex</string>
+    <string name="home_region_title">Regiões</string>
+    <string name="region_title">Regiões</string>
 </resources>

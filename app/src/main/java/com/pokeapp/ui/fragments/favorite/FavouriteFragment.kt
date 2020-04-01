@@ -1,4 +1,4 @@
-package com.pokeapp.ui.fragments.favorite
+package com.pokeapp.ui.fragments.favourite
 
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -16,29 +16,29 @@ import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
-import com.pokeapp.databinding.FragmentFavoriteBinding
+import com.pokeapp.databinding.FragmentFavouriteBinding
 import com.pokeapp.presentation.State
-import com.pokeapp.presentation.favorite.FavoriteViewModel
+import com.pokeapp.presentation.favourite.FavouriteViewModel
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.pokeapp.util.PokemonColorUtil
 import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_favorite.*
+import kotlinx.android.synthetic.main.fragment_favourite.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
  */
-class FavoriteFragment : Fragment() {
+class FavouriteFragment : Fragment() {
 
-    private val mViewModel: FavoriteViewModel by viewModel()
+    private val mViewModel: FavouriteViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val bindind: FragmentFavoriteBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        val bindind: FragmentFavouriteBinding = FragmentFavouriteBinding.inflate(inflater, container, false)
         bindind.viewModel = mViewModel
         creatingObservers()
         bindind.executePendingBindings()
@@ -48,7 +48,7 @@ class FavoriteFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        mViewModel.getFavoritePokemon()
+        mViewModel.getFavouritePokemon()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,18 +59,21 @@ class FavoriteFragment : Fragment() {
     private fun creatingObservers() {
         mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
-                State.LOADING -> favoriteProgressBar.setVisible(true)
+                State.LOADING -> {
+                    favouriteProgressBar.setVisible(true)
+                    favouriteRecyclerView.setVisible(false)
+                }
                 State.SUCCESS -> {
-                    favoriteProgressBar.setVisible(false)
+                    favouriteProgressBar.setVisible(false)
                     mViewModel.getState().value?.data?.let { pokemon ->
                         setupRecyclerView(pokemon)
                     }
                 }
                 State.FAILURE -> {
                     viewState.throwable?.message?.let {
-                        favoriteMessageTextView.setVisible(true)
-                        favoriteRecyclerView.setVisible(false)
-                        favoriteProgressBar.setVisible(false)
+                        favouriteMessageTextView.setVisible(true)
+                        favouriteRecyclerView.setVisible(false)
+                        favouriteProgressBar.setVisible(false)
                     }
                 }
                 else -> { /* ignore */
@@ -86,7 +89,7 @@ class FavoriteFragment : Fragment() {
             } else {
                 GridLayoutManager(context, 2)
             }
-            favoriteRecyclerView.setup {
+            favouriteRecyclerView.setup {
                 withLayoutManager(layoutManager)
                 withDataSource(dataSourceOf(pokemon))
                 withItem<Pokemon, PokemonViewHolder>(R.layout.item_pokemon) {
@@ -127,18 +130,19 @@ class FavoriteFragment : Fragment() {
 
                     onClick { index ->
                         val bundle = bundleOf("pokemon" to pokemon[index])
-                        findNavController().navigate(R.id.action_favoriteFragment_to_pokemonDetailsFragment, bundle)
+                        findNavController().navigate(R.id.action_favouriteFragment_to_pokemonDetailsFragment, bundle)
                     }
                 }
             }
-            favoriteMessageTextView.setVisible(false)
-            favoriteRecyclerView.setVisible(true)
+            favouriteMessageTextView.setVisible(false)
 
-            favoriteRecyclerView.isNestedScrollingEnabled = pokemon.size > 6
+            favouriteRecyclerView.isNestedScrollingEnabled = pokemon.size > 6
         } else {
-            favoriteMessageTextView.setVisible(true)
-            favoriteMessageTextView.putText("Sem pokemons favoritados :(")
+            favouriteMessageTextView.setVisible(true)
+            favouriteMessageTextView.putText("Sem pokemons favoritados :(")
         }
+
+        favouriteRecyclerView.setVisible(pokemon.isNotEmpty())
     }
 
 }

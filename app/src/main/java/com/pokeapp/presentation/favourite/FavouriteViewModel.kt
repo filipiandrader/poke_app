@@ -1,9 +1,9 @@
-package com.pokeapp.presentation.favorite
+package com.pokeapp.presentation.favourite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pokeapp.domain.favorite.FavoriteDataSource
+import com.pokeapp.domain.favourite.FavouriteDataSource
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.ViewState
 import com.pokeapp.presentation.model.Pokemon
@@ -11,7 +11,7 @@ import com.pokeapp.presentation.model.Pokemon
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-class FavoriteViewModel(private val dataSource: FavoriteDataSource) : ViewModel() {
+class FavouriteViewModel(private val dataSource: FavouriteDataSource) : ViewModel() {
 
     private var mState = MutableLiveData<ViewState<MutableList<Pokemon>>>()
 
@@ -19,9 +19,9 @@ class FavoriteViewModel(private val dataSource: FavoriteDataSource) : ViewModel(
         mState.value = ViewState(data = null, state = State.WAITING_DATA)
     }
 
-    fun getFavoritePokemon() {
+    fun getFavouritePokemon() {
         mState.postValue(ViewState.loading())
-        dataSource.getFavoritePokemon(
+        dataSource.getFavouritePokemon(
                 onSuccess = {
                     mState.postValue(ViewState.success(it))
                 },

@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.fragments.pokemon.PokemonFragment">
+    tools:context=".ui.fragments.favourite.FavouriteFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.pokeapp.presentation.pokemon.PokemonViewModel" />
+            type="com.pokeapp.presentation.favourite.FavouriteViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -19,7 +19,7 @@
         android:background="@color/backgroundLight">
 
         <ImageView
-            android:id="@+id/pokemonImageView"
+            android:id="@+id/favouriteImageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="end"
@@ -46,7 +46,7 @@
                 app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/pokemonToolbar"
+                    android:id="@+id/favouriteToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="bottom|end"
@@ -56,7 +56,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pokedex_title"
+                        android:text="@string/toolbar_favourite_title"
                         android:textColor="@color/black"
                         android:textSize="28sp"
                         android:textStyle="bold" />
@@ -65,14 +65,14 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <ProgressBar
-            android:id="@+id/pokemonProgressBar"
+            android:id="@+id/favouriteProgressBar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/pokemonMessageTextView"
+            android:id="@+id/favouriteMessageTextView"
             style="@style/PokeApp.TextAppearance.Label"
             android:layout_gravity="center"
             android:visibility="gone"
@@ -84,18 +84,18 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pokemonRecyclerView"
+                android:id="@+id/favouriteRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scrollbars="vertical"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/pokemonPaginationProgressBar"
+                app:layout_constraintBottom_toTopOf="@+id/favouritePaginationProgressBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ProgressBar
-                android:id="@+id/pokemonPaginationProgressBar"
+                android:id="@+id/favouritePaginationProgressBar"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:visibility="gone"

@@ -1,6 +1,8 @@
 package com.pokeapp.data.remote.services
 
 import com.pokeapp.data.remote.model.PokemonResponse
+import com.pokeapp.data.remote.model.RegionInfoResponse
+import com.pokeapp.data.remote.model.RegionResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,6 +14,7 @@ import retrofit2.http.Query
  */
 interface PokemonService {
 
+    // POKEMON
     @GET("pokemon")
     fun getAllPokemon(@Query("offset") offset: Int,
                       @Query("limit") limit: Int = 20) : Deferred<Response<PokemonResponse>>
@@ -24,4 +27,14 @@ interface PokemonService {
 
     @GET("pokemon-species/{id}")
     fun getPokemonSpecies(@Path("id") id: Int) : Deferred<Response<HashMap<String, Any>>>
+
+    // REGIÃO
+    @GET("region")
+    fun getRegion() : Deferred<Response<RegionResponse>>
+
+    @GET("region/{name}")
+    fun getRegionByName(@Path("name") name: String) : Deferred<Response<HashMap<String, Any>>>
+
+    @GET("pokedex/{name}")
+    fun getPokedexByRegion(@Path("name") name: String) : Deferred<Response<HashMap<String, Any>>>
 }

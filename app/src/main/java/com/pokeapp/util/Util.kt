@@ -8,7 +8,13 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.pokeapp.R
 import com.pokeapp.data.cache.entities.*
+import com.pokeapp.data.remote.model.GroupsApi
+import com.pokeapp.data.remote.model.LocationApi
+import com.pokeapp.data.remote.model.MainGenerationApi
+import com.pokeapp.data.remote.model.RegionInfoApi
 import com.pokeapp.presentation.model.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 /**
  * Created by Filipi Andrade Rocha on 29/01/2020
@@ -104,7 +110,8 @@ fun PokemonLocal.convertPokemon(): Pokemon =
                 moves = moves.convertToMovesList(),
                 stats = stats.convertToStatsList(),
                 evolves = evolves.convertToSpeciesList(),
-                favorite = favorite)
+                favourite = favourite
+        )
 
 fun MutableList<TypeLocal>.convertToTypeList(): MutableList<Type> {
     val list = mutableListOf<Type>()
@@ -112,8 +119,7 @@ fun MutableList<TypeLocal>.convertToTypeList(): MutableList<Type> {
     return list
 }
 
-fun TypeLocal.convertType(): Type =
-        Type(name = name)
+fun TypeLocal.convertType(): Type = Type(name = name)
 
 fun MutableList<AbilityLocal>.convertToAbilityList(): MutableList<Ability> {
     val list = mutableListOf<Ability>()
@@ -121,8 +127,7 @@ fun MutableList<AbilityLocal>.convertToAbilityList(): MutableList<Ability> {
     return list
 }
 
-fun AbilityLocal.convertAbility(): Ability =
-        Ability(name = name)
+fun AbilityLocal.convertAbility(): Ability = Ability(name = name)
 
 fun MutableList<MoveLocal>.convertToMovesList(): MutableList<Move> {
     val list = mutableListOf<Move>()
@@ -130,8 +135,7 @@ fun MutableList<MoveLocal>.convertToMovesList(): MutableList<Move> {
     return list
 }
 
-fun MoveLocal.convertMove(): Move =
-        Move(name = name)
+fun MoveLocal.convertMove(): Move = Move(name = name)
 
 fun MutableList<StatsLocal>.convertToStatsList(): MutableList<Stats> {
     val list = mutableListOf<Stats>()
@@ -139,8 +143,7 @@ fun MutableList<StatsLocal>.convertToStatsList(): MutableList<Stats> {
     return list
 }
 
-fun StatsLocal.convertStats(): Stats =
-        Stats(name = name, base_state = base_state)
+fun StatsLocal.convertStats(): Stats = Stats(name = name, base_state = base_state)
 
 fun MutableList<SpeciesLocal>.convertToSpeciesList(): MutableList<Species> {
     val list = mutableListOf<Species>()
@@ -148,8 +151,7 @@ fun MutableList<SpeciesLocal>.convertToSpeciesList(): MutableList<Species> {
     return list
 }
 
-fun SpeciesLocal.convertSpecies(): Species =
-        Species(name = name, photo = photo)
+fun SpeciesLocal.convertSpecies(): Species = Species(name = name, photo = photo)
 
 fun Pokemon.convertPokemon(): PokemonLocal =
         PokemonLocal(
@@ -165,7 +167,8 @@ fun Pokemon.convertPokemon(): PokemonLocal =
                 moves = moves.convertToMovesLocalList(),
                 stats = stats.convertToStatsLocalList(),
                 evolves = evolves.convertToSpeciesLocalList(),
-                favorite = favorite)
+                favourite = favourite
+        )
 
 fun MutableList<Type>.convertToTypeLocalList(): MutableList<TypeLocal> {
     val list = mutableListOf<TypeLocal>()
@@ -173,8 +176,7 @@ fun MutableList<Type>.convertToTypeLocalList(): MutableList<TypeLocal> {
     return list
 }
 
-fun Type.convertType(): TypeLocal =
-        TypeLocal(name = name)
+fun Type.convertType(): TypeLocal = TypeLocal(name = name)
 
 fun MutableList<Ability>.convertToAbilityLocalList(): MutableList<AbilityLocal> {
     val list = mutableListOf<AbilityLocal>()
@@ -182,8 +184,7 @@ fun MutableList<Ability>.convertToAbilityLocalList(): MutableList<AbilityLocal> 
     return list
 }
 
-fun Ability.convertAbility(): AbilityLocal =
-        AbilityLocal(name = name)
+fun Ability.convertAbility(): AbilityLocal = AbilityLocal(name = name)
 
 fun MutableList<Move>.convertToMovesLocalList(): MutableList<MoveLocal> {
     val list = mutableListOf<MoveLocal>()
@@ -191,8 +192,7 @@ fun MutableList<Move>.convertToMovesLocalList(): MutableList<MoveLocal> {
     return list
 }
 
-fun Move.convertMove(): MoveLocal =
-        MoveLocal(name = name)
+fun Move.convertMove(): MoveLocal = MoveLocal(name = name)
 
 fun MutableList<Stats>.convertToStatsLocalList(): MutableList<StatsLocal> {
     val list = mutableListOf<StatsLocal>()
@@ -200,8 +200,7 @@ fun MutableList<Stats>.convertToStatsLocalList(): MutableList<StatsLocal> {
     return list
 }
 
-fun Stats.convertStats(): StatsLocal =
-        StatsLocal(name = name, base_state = base_state)
+fun Stats.convertStats(): StatsLocal = StatsLocal(name = name, base_state = base_state)
 
 fun MutableList<Species>.convertToSpeciesLocalList(): MutableList<SpeciesLocal> {
     val list = mutableListOf<SpeciesLocal>()
@@ -209,5 +208,58 @@ fun MutableList<Species>.convertToSpeciesLocalList(): MutableList<SpeciesLocal> 
     return list
 }
 
-fun Species.convertSpecies(): SpeciesLocal =
-        SpeciesLocal(name = name, photo = photo)
+fun Species.convertSpecies(): SpeciesLocal = SpeciesLocal(name = name, photo = photo)
+
+fun MutableList<LocationApi>.convertToLocationList(): MutableList<Location> {
+    val list = mutableListOf<Location>()
+    this.forEach { listApi -> list.add(listApi.convertLocation()) }
+    return list
+}
+
+fun LocationApi.convertLocation(): Location = Location(name = name)
+
+fun MutableList<GroupsApi>.convertToGroupsList(): MutableList<Groups> {
+    val list = mutableListOf<Groups>()
+    this.forEach { listApi -> list.add(listApi.convertGroup()) }
+    return list
+}
+
+fun GroupsApi.convertGroup(): Groups = Groups(name = name)
+
+fun HashMap<String, Any>.convertToRegionInfoApi(): RegionInfoApi {
+    val jsonObj = JSONObject(this as Map<*, *>)
+    val regionInfoApi = RegionInfoApi()
+
+    val jsonMainGeneration = jsonObj.getJSONObject("main_generation")
+    regionInfoApi.main_generation = jsonMainGeneration.convertMainGeneration()
+
+    val jsonLocation = jsonObj.getJSONArray("locations")
+    regionInfoApi.locations = jsonLocation.convertToLocationList()
+
+    val jsonGroup = jsonObj.getJSONArray("version_groups")
+    regionInfoApi.version_groups = jsonGroup.convertToGroupList()
+
+    return regionInfoApi
+}
+
+fun JSONObject.convertMainGeneration(): MainGenerationApi = MainGenerationApi(name = this.getString("name"))
+
+fun JSONArray.convertToLocationList(): MutableList<LocationApi> {
+    val list = mutableListOf<LocationApi>()
+    for (i in 0 until this.length()) {
+        list.add(this.getJSONObject(i).convertLocation())
+    }
+    return list
+}
+
+fun JSONObject.convertLocation(): LocationApi = LocationApi(name = this.getString("name"))
+
+fun JSONArray.convertToGroupList(): MutableList<GroupsApi> {
+    val list = mutableListOf<GroupsApi>()
+    for (i in 0 until this.length()) {
+        list.add(this.getJSONObject(i).convertGroup())
+    }
+    return list
+}
+
+fun JSONObject.convertGroup(): GroupsApi = GroupsApi(name = this.getString("name"))

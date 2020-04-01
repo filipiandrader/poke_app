@@ -10,14 +10,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="210dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:background="@color/red">
 
         <ImageView
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
@@ -39,7 +39,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="210dp"
         android:background="@android:color/transparent"
         app:elevation="0dp">
 
@@ -65,8 +65,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="@string/app_name"
-                    android:textColor="@color/colorIcons"
-                    android:textSize="32sp"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -94,8 +94,7 @@
             android:layout_margin="16dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/homeFavoriteCardView"
+            app:layout_constraintEnd_toStartOf="@+id/homeFavouriteCardView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -134,19 +133,19 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/homeFavoriteCardView"
+            android:id="@+id/homeFavouriteCardView"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_marginEnd="16dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/homePokedexCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/homePokedexCardView"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/homePokedexCardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/homeFavoriteConstraintLayout"
+                android:id="@+id/homeFavouriteConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/backgroundLight"
@@ -154,7 +153,54 @@
 
                 <TextView
                     style="@style/PokeApp.Home.TextAppearance.Title"
-                    android:text="@string/home_favorite_title"
+                    android:text="@string/home_favourite_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_marginEnd="-32dp"
+                        android:layout_marginBottom="-16dp"
+                        android:adjustViewBounds="true"
+                        android:alpha="0.25"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/pokeball"
+                        android:tint="@color/colorIcons" />
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/homeRegionCardView"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/homePokedexCardView"
+            app:layout_constraintStart_toStartOf="@+id/homePokedexCardView"
+            app:layout_constraintTop_toBottomOf="@+id/homePokedexCardView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeRegionConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundLight"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <TextView
+                    style="@style/PokeApp.Home.TextAppearance.Title"
+                    android:text="@string/home_region_title"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

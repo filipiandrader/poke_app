@@ -32,8 +32,13 @@ class PokemonColorUtil(var context: Context) {
     @ColorInt
     fun getCardViewColor(menuType: String): Int {
         val color = when (menuType.toLowerCase(Locale("pt", "BR"))) {
-            "pokedex" -> R.color.lightTeal
-            "favoridex" -> R.color.lightBlue
+            "pokedex", "kanto" -> R.color.lightTeal
+            "favoridex", "johto" -> R.color.lightBlue
+            "region", "hoenn" -> R.color.lightRed
+            "sinnoh" -> R.color.lightYellow
+            "unova" -> R.color.lightPurple
+            "kalos" -> R.color.lightBrown
+            "alola" -> R.color.black
             else -> R.color.lightBlue
         }
         return convertColor(color)
