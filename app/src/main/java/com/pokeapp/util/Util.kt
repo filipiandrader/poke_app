@@ -80,6 +80,19 @@ fun String.formatNameStats(context: Context): String {
     }
 }
 
+fun String.formatGenerationName() : String {
+    return when (this) {
+        "generation-i" -> "1° Geração"
+        "generation-ii" -> "2° Geração"
+        "generation-iii" -> "3° Geração"
+        "generation-iv" -> "4° Geração"
+        "generation-v" -> "5° Geração"
+        "generation-vi" -> "6° Geração"
+        "generation-vii" -> "7° Geração"
+        else -> ""
+    }
+}
+
 fun Int.convertToMeter(): String {
     val meter = this / 10.0
     return "$meter m"

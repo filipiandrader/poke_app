@@ -1,14 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.region_details.RegionDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/backgroundLight">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/pokemonDetailsAppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/lightTeal"
+            android:elevation="0dp"
+            android:fitsSystemWindows="false"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/pokemonDetailsCollapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/lightTeal"
+                app:layout_scrollFlags="noScroll"
+                app:titleEnabled="false"
+                app:toolbarId="@+id/pokemonDetailsToolbar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/pokemonDetailsToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="24dp"
+                    android:elevation="0dp"
+                    android:fitsSystemWindows="false"
+                    android:gravity="top"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetStart="0dp"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/regionDetailsNameTextView"
+                            style="@style/PokeApp.Details.TextAppearance.Label"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Titulo" />
+
+                        <TextView
+                            android:id="@+id/regionDetailsGenerationTextView"
+                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/regionDetailsNameTextView"
+                            tools:text="1° Geração" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.Toolbar>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/regionDetailsConstraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="bottom">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/regionDetailsTabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@drawable/rounded_top_border"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tabGravity="fill"
+                        app:tabIndicatorColor="@color/backgroundLight"
+                        app:tabMode="fixed"
+                        app:tabSelectedTextColor="@color/red"
+                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                        app:tabTextColor="@color/black">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pokemon_details_tab_1" />
+                    </com.google.android.material.tabs.TabLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </FrameLayout>
