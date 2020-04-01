@@ -8,8 +8,11 @@ import com.pokeapp.data.remote.services.PokemonService
 import com.pokeapp.data.remote.services.createWebService
 import com.pokeapp.data.remote.services.getBaseUrl
 import com.pokeapp.data.remote.services.getOkHttpClient
-import com.pokeapp.domain.PokemonDataSource
-import com.pokeapp.domain.PokemonDataSourceImpl
+import com.pokeapp.domain.favorite.FavoriteDataSource
+import com.pokeapp.domain.favorite.FavoriteDataSourceImpl
+import com.pokeapp.domain.pokemon.PokemonDataSource
+import com.pokeapp.domain.pokemon.PokemonDataSourceImpl
+import com.pokeapp.presentation.favorite.FavoriteViewModel
 import com.pokeapp.presentation.pokemon.PokemonViewModel
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -30,4 +33,7 @@ val pokeModule = module {
     single { PokemonRepositoryImpl(get(), get()) as PokemonRepository }
     single { PokemonDataSourceImpl(get()) as PokemonDataSource }
     viewModel { PokemonViewModel(get()) }
+
+    single { FavoriteDataSourceImpl(get()) as FavoriteDataSource }
+    viewModel { FavoriteViewModel(get()) }
 }

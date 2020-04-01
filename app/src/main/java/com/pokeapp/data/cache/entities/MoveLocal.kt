@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
  */
 
 @Entity(tableName = "move")
-data class Move(@PrimaryKey
+data class MoveLocal(@PrimaryKey
                 var name: String = "")

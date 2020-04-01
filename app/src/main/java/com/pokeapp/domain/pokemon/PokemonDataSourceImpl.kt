@@ -1,6 +1,7 @@
-package com.pokeapp.domain
+package com.pokeapp.domain.pokemon
 
 import com.pokeapp.data.remote.repository.PokemonRepository
+import com.pokeapp.domain.pokemon.PokemonDataSource
 import com.pokeapp.presentation.model.Pokemon
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

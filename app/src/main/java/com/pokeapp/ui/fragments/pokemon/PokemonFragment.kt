@@ -96,6 +96,7 @@ class PokemonFragment : Fragment() {
     private fun creatingObservers() {
         mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
+                State.LOADING -> pokemonProgressBar.setVisible(true)
                 State.SUCCESS -> {
                     pokemonMessageTextView.setVisible(false)
                     pokemonProgressBar.setVisible(false)
@@ -103,7 +104,6 @@ class PokemonFragment : Fragment() {
                         setupRecyclerView(pokemon)
                     }
                 }
-                State.LOADING -> pokemonProgressBar.setVisible(true)
                 State.FAILURE -> {
                     viewState.throwable?.message?.let {
                         pokemonMessageTextView.setVisible(true)
@@ -128,12 +128,16 @@ class PokemonFragment : Fragment() {
                     onBind(::PokemonViewHolder) { _, item ->
                         Picasso.get().load(item.photo).placeholder(android.R.color.transparent).into(this.itemPokemonPhotoImageView)
                         this.itemPokemonNameTextView.putText(item.name)
-                        val id = if (item.id in 1..9) {
-                            "#00${item.id}"
-                        } else if (item.id in 10..99) {
-                            "#0${item.id}"
-                        } else {
-                            "#${item.id}"
+                        val id = when (item.id) {
+                            in 1..9 -> {
+                                "#00${item.id}"
+                            }
+                            in 10..99 -> {
+                                "#0${item.id}"
+                            }
+                            else -> {
+                                "#${item.id}"
+                            }
                         }
                         this.itemPokemonIDTextView.putText(id)
 

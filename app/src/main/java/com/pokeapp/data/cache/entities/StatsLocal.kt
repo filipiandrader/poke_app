@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-@Entity(tableName = "specie")
-class Species(@PrimaryKey
-              var name: String = "",
-              var photo: String = "")
+
+@Entity(tableName = "stats")
+class StatsLocal(@PrimaryKey
+            var name: String = "",
+                 var base_state: Int = 0)

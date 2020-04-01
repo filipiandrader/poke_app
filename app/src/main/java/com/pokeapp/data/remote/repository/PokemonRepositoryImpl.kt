@@ -5,11 +5,8 @@ import com.pokeapp.data.cache.room.repository.PokemonRoom
 import com.pokeapp.data.remote.services.PokemonService
 import com.pokeapp.presentation.model.*
 import com.pokeapp.util.formatNameMove
-import com.pokeapp.util.formatNameStats
 import com.pokeapp.util.getEvolutionChainID
 import org.json.JSONObject
-import timber.log.Timber
-import java.util.*
 
 /**
  * Created by Filipi Andrade on 29/03/2020

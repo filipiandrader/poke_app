@@ -1,4 +1,4 @@
-package com.pokeapp.domain
+package com.pokeapp.domain.pokemon
 
 import com.pokeapp.presentation.model.Pokemon
 

@@ -11,6 +11,8 @@ class ViewState<T>(val data: T? = null,
 
         fun <T> failure(t: Throwable) = ViewState<T>(state = State.FAILURE, throwable = t)
 
+        fun <T> failure() = ViewState<T>(state = State.FAILURE)
+
         fun <T> loading() = ViewState<T>(state = State.LOADING)
 
         fun <T> gettingData(t: T) = ViewState(data = t, state = State.GETTING_DATA)
