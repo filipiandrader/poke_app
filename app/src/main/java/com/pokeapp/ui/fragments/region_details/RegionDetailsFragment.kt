@@ -3,20 +3,17 @@ package com.pokeapp.ui.fragments.region_details
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Region
+import com.pokeapp.ui.fragments.RegionDetailsViewPagerAdapter
 import com.pokeapp.util.PokemonColorUtil
 import com.pokeapp.util.formatGenerationName
 import com.pokeapp.util.putText
-import kotlinx.android.synthetic.main.fragment_pokemon_details.*
 import kotlinx.android.synthetic.main.fragment_region_details.*
-import kotlinx.android.synthetic.main.fragment_region_details.pokemonDetailsAppBarLayout
-import kotlinx.android.synthetic.main.fragment_region_details.pokemonDetailsCollapsingToolbarLayout
 import org.jetbrains.anko.backgroundColor
 
 /**
@@ -44,5 +41,8 @@ class RegionDetailsFragment : Fragment() {
 
         regionDetailsNameTextView.putText(mRegion.name.capitalize())
         regionDetailsGenerationTextView.putText(mRegion.main_generation.formatGenerationName())
+
+        regionDetailsViewPager.adapter = RegionDetailsViewPagerAdapter(requireFragmentManager(), requireContext(), mRegion)
+        regionDetailsTabLayout.setupWithViewPager(regionDetailsViewPager)
     }
 }

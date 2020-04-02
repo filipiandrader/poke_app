@@ -14,8 +14,7 @@ import com.pokeapp.databinding.FragmentPokemonDetailsBinding
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.details.PokemonDetailsViewModel
 import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.ui.fragments.ViewPagerAdapter
-import com.pokeapp.ui.main.MainActivity
+import com.pokeapp.ui.fragments.PokemonDetailsViewPagerAdapter
 import com.pokeapp.util.PokemonColorUtil
 import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
@@ -110,7 +109,7 @@ class PokemonDetailsFragment : Fragment() {
         setFavouriteIconCorrectly()
         pokemonDetailsFavouriteImageView.setOnClickListener { doFavouritePokemon() }
 
-        pokemonDetailsViewPager.adapter = ViewPagerAdapter(requireFragmentManager(), requireContext(), mPokemon)
+        pokemonDetailsViewPager.adapter = PokemonDetailsViewPagerAdapter(requireFragmentManager(), requireContext(), mPokemon)
         pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
     }
 

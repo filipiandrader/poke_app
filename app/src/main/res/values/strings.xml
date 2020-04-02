@@ -27,4 +27,7 @@
     <string name="pokedex_title">Pokedex</string>
     <string name="home_region_title">Regiões</string>
     <string name="region_title">Regiões</string>
+    <string name="region_details_location">Cidades</string>
+    <string name="region_details_tab_1">Cidades</string>
+    <string name="region_details_tab_2">Jogos</string>
 </resources>

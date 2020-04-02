@@ -15,7 +15,7 @@ import com.pokeapp.ui.fragments.details.moves.MovesFragment
  * Created by Filipi Andrade on 30/03/2020
  */
 
-class ViewPagerAdapter(supportFragmentManager: FragmentManager, context: Context, private val pokemon: Pokemon) :
+class PokemonDetailsViewPagerAdapter(supportFragmentManager: FragmentManager, context: Context, private val pokemon: Pokemon) :
         FragmentStatePagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     data class Page(val title: String, val ctor: () -> Fragment)

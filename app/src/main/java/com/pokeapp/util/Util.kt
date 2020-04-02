@@ -62,6 +62,23 @@ fun String.formatNameMove(): String {
     return moveFormated
 }
 
+fun String.formatNameRegion(): String {
+    var formated = ""
+
+    if (this.contains("-")) {
+        val split = this.split("-")
+        formated = split[0].replace("-", "").capitalize()
+        if (split.size > 1) {
+            for (i in 1 until split.size) {
+                formated = "$formated ${split[i].capitalize()}"
+            }
+        }
+    } else {
+        formated = this.capitalize()
+    }
+    return formated
+}
+
 fun String.getEvolutionChainID(): Int {
     val split = this.split("chain/")
     return split[1].replace("/", "").toInt()
