@@ -225,4 +225,23 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="-50dp"
+            android:layout_marginBottom="-50dp"
+            android:adjustViewBounds="true"
+            android:alpha="0.05"
+            android:background="@drawable/pokeball"
+            android:contentDescription="@string/app_name"
+            android:tint="@color/colorIcons" />
+    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

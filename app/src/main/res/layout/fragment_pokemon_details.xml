@@ -23,23 +23,22 @@
             android:layout_height="300dp"
             android:background="@color/lightTeal"
             android:elevation="0dp"
-            android:fitsSystemWindows="false"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/pokemonDetailsCollapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
                 app:contentScrim="@color/lightTeal"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:layout_scrollFlags="noScroll"
                 app:titleEnabled="false"
                 app:toolbarId="@+id/pokemonDetailsToolbar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp">
 
                     <ImageView
                         android:id="@+id/evolutionImageView1"
@@ -95,11 +94,8 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/pokemonDetailsToolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="136dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_height="wrap_content"
                     android:elevation="0dp"
-                    android:fitsSystemWindows="false"
-                    android:gravity="top"
                     app:contentInsetLeft="0dp"
                     app:contentInsetStart="0dp"
                     app:layout_collapseMode="pin"
@@ -107,15 +103,26 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/navigationIconImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/ic_arrow_white"
+                            android:contentDescription="@string/app_name"
+                            android:foreground="?android:selectableItemBackground"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/pokemonDetailsNameTextView"
                             style="@style/PokeApp.Details.TextAppearance.Label"
                             android:layout_marginTop="4dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/navigationIconImageView"
                             tools:text="Titulo" />
 
                         <ImageView
@@ -124,14 +131,15 @@
                             android:layout_height="30dp"
                             android:contentDescription="@string/app_name"
                             android:src="@drawable/ic_not_favourite"
+                            app:layout_constraintBottom_toBottomOf="@+id/navigationIconImageView"
                             app:layout_constraintEnd_toEndOf="@+id/pokemonDetailsIDTextView"
                             app:layout_constraintStart_toStartOf="@+id/pokemonDetailsIDTextView"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="@+id/navigationIconImageView" />
 
                         <TextView
                             android:id="@+id/pokemonDetailsIDTextView"
                             style="@style/PokeApp.Details.TextAppearance.Label.ID"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/pokemonDetailsType3TextView"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsFavouriteImageView"
                             tools:text="#001" />

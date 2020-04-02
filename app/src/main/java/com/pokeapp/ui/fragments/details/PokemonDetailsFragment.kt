@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 
 import com.pokeapp.R
 import com.pokeapp.databinding.FragmentPokemonDetailsBinding
@@ -52,6 +53,13 @@ class PokemonDetailsFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // BACK BUTTON
+        navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
     }
 
     private fun showToast() {

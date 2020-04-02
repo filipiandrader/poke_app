@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
@@ -39,6 +40,7 @@ class MovesFragment : Fragment() {
 
         val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
         movesRecyclerView.setup {
+            withLayoutManager(GridLayoutManager(view.context, 2))
             withDataSource(dataSourceOf(pokemon.moves))
             withItem<Move, MovesViewHolder>(R.layout.item_moves) {
                 onBind(::MovesViewHolder) { _, item ->

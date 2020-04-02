@@ -24,7 +24,6 @@
     <fragment
         android:id="@+id/pokedexFragment"
         android:name="com.pokeapp.ui.fragments.pokemon.PokemonFragment"
-        android:label="fragment_pokemon"
         tools:layout="@layout/fragment_pokemon">
         <action
             android:id="@+id/action_pokemonFragment_to_pokemonDetailsFragment"

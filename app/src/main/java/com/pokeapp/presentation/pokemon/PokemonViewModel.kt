@@ -17,7 +17,7 @@ class PokemonViewModel(private val dataSource: PokemonDataSource) : ViewModel() 
     private var mState = MutableLiveData<ViewState<MutableList<Pokemon>>>()
 
     init {
-        mState.value = ViewState(data = null, state = State.WAITING_DATA)
+        mState.value = ViewState(data = null, state = State.LOADING)
     }
 
     fun getAllPokemon(offset: Int) {

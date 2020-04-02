@@ -45,8 +45,11 @@ class FavouriteFragment : Fragment() {
         return bindind.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+
+        // BACK BUTTON
+        navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
 
         mViewModel.getFavouritePokemon()
     }

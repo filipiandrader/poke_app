@@ -16,7 +16,7 @@ class RegionViewModel(private val dataSource: RegionDataSource) : ViewModel() {
     private var mState = MutableLiveData<ViewState<MutableList<Region>>>()
 
     init {
-        mState.value = ViewState(data = null, state = State.WAITING_DATA)
+        mState.value = ViewState(data = null, state = State.LOADING)
     }
 
     fun getRegion() {

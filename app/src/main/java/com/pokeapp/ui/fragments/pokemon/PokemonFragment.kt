@@ -4,12 +4,17 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +32,7 @@ import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
+import org.jetbrains.anko.findOptional
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -65,14 +71,13 @@ class PokemonFragment : Fragment() {
         activity?.window?.statusBarColor = PokemonColorUtil(view.context).convertColor(R.color.background)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        mViewModel.getAllPokemon(mOffset)
-    }
-
     override fun onStart() {
         super.onStart()
+
+        mViewModel.getAllPokemon(mOffset)
+
+        // BACK BUTTON
+        navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
 
         // PAGINATION
         pokemonRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

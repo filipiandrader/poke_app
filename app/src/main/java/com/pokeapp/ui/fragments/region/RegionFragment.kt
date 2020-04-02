@@ -51,6 +51,10 @@ class RegionFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        // BACK BUTTON
+        navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
+
         mViewModel.getRegion()
     }
 

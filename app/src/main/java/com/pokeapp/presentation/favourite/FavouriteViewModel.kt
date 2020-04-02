@@ -16,7 +16,7 @@ class FavouriteViewModel(private val dataSource: FavouriteDataSource) : ViewMode
     private var mState = MutableLiveData<ViewState<MutableList<Pokemon>>>()
 
     init {
-        mState.value = ViewState(data = null, state = State.WAITING_DATA)
+        mState.value = ViewState(data = null, state = State.LOADING)
     }
 
     fun getFavouritePokemon() {
