@@ -33,4 +33,5 @@
     <string name="pokemon_fam_filter_by">Filtrar...</string>
     <string name="pokemon_fab_by_generation">Por Geração</string>
     <string name="pokemon_fab_by_type">Por Tipo</string>
+    <string name="bottom_sheet_generation_label">Geração</string>
 </resources>

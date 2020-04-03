@@ -10,6 +10,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="md_corner_radius">16dp</item>
+        <item name="md_background_color">@color/backgroundLight</item>
     </style>
 
     <style name="PokeApp.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">

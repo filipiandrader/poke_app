@@ -4,13 +4,17 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Context
+import android.graphics.Point
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,22 +24,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.bottomsheets.setPeekHeight
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.databinding.FragmentPokemonBinding
 import com.pokeapp.presentation.State
+import com.pokeapp.presentation.model.Generation
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.pokemon.PokemonViewModel
+import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.pokeapp.util.PokemonColorUtil
 import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
+import org.jetbrains.anko.dialerFilter
 import org.jetbrains.anko.support.v4.longToast
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.math.roundToInt
 
 
 /**
@@ -102,7 +113,37 @@ class PokemonFragment : Fragment() {
 
     private fun showBottomSheetGeneration() {
         pokemonMenuFAM.close(true)
-        MaterialDialog(activity!!, BottomSheet()).show {  }
+        val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+        val peekHeight = display.height * 0.90
+
+        val dialog = MaterialDialog(activity!!, BottomSheet()).show {
+            setPeekHeight(literal = peekHeight.toInt())
+            customView(viewRes = R.layout.bottom_sheet_generation, scrollable = false)
+        }
+
+        val bottomSheetGenerationRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetGenerationRecyclerView)
+        val generations = mutableListOf<Generation>()
+        generations.add(Generation(name = "1° Geração", img = R.drawable.gen1))
+        generations.add(Generation(name = "2° Geração", img = R.drawable.gen2))
+        generations.add(Generation(name = "3° Geração", img = R.drawable.gen3))
+        generations.add(Generation(name = "4° Geração", img = R.drawable.gen4))
+        generations.add(Generation(name = "5° Geração", img = R.drawable.gen5))
+        generations.add(Generation(name = "6° Geração", img = R.drawable.gen6))
+        generations.add(Generation(name = "7° Geração", img = R.drawable.gen7))
+
+        bottomSheetGenerationRecyclerView.setup {
+            withLayoutManager(GridLayoutManager(context!!, 2))
+            withDataSource(dataSourceOf(generations))
+            withItem<Generation, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
+                onBind(::BottomSheetGenerationViewHolder) { _, item ->
+                    this.itemGenerationNameTextView.putText(item.name)
+                    this.itemGenerationPhotoImageView.setImageResource(item.img)
+                }
+
+                onClick { index -> longToast(generations[index].name) }
+            }
+        }
     }
 
     override fun onStart() {
