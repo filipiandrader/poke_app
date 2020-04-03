@@ -1,23 +1,25 @@
 package com.pokeapp.ui.fragments.pokemon
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import android.view.animation.OvershootInterpolator
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
@@ -32,9 +34,9 @@ import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
-import org.jetbrains.anko.findOptional
+import org.jetbrains.anko.support.v4.longToast
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
+
 
 /**
  * A simple [Fragment] subclass.
@@ -48,6 +50,7 @@ class PokemonFragment : Fragment() {
     private var mOffset = 0
 
     var isLoading = false
+    var isClicked = false
 
     var visibleItemCount = 0
     var totalItemCount = 0
@@ -71,10 +74,47 @@ class PokemonFragment : Fragment() {
         activity?.window?.statusBarColor = PokemonColorUtil(view.context).convertColor(R.color.background)
     }
 
+    private fun createCustomAnimation() {
+        val set = AnimatorSet()
+        val scaleOutX = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleX", 1.0f, 0.2f)
+        val scaleOutY = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleY", 1.0f, 0.2f)
+        val scaleInX = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleX", 0.2f, 1.0f)
+        val scaleInY = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleY", 0.2f, 1.0f)
+
+        scaleOutX.duration = 50
+        scaleOutY.duration = 50
+        scaleInX.duration = 150
+        scaleInY.duration = 150
+
+        scaleInX.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator) {
+                val img = if (pokemonMenuFAM.isOpened) context!!.getDrawable(R.drawable.ic_pokeball) else context!!.getDrawable(R.drawable.ic_close)
+                pokemonMenuFAM.menuIconView.setImageDrawable(img)
+            }
+        })
+
+        set.play(scaleOutX).with(scaleOutY)
+        set.play(scaleInX).with(scaleInY).after(scaleOutX)
+        set.interpolator = OvershootInterpolator(2f)
+
+        pokemonMenuFAM.iconToggleAnimatorSet = set
+    }
+
+    private fun showBottomSheetGeneration() {
+        pokemonMenuFAM.close(true)
+        MaterialDialog(activity!!, BottomSheet()).show {  }
+    }
+
     override fun onStart() {
         super.onStart()
 
         mViewModel.getAllPokemon(mOffset)
+
+        createCustomAnimation()
+
+        pokemonByGenFAB.setOnClickListener { showBottomSheetGeneration() }
+
+        pokemonByTypeFAB.setOnClickListener { longToast(pokemonByTypeFAB.labelText) }
 
         // BACK BUTTON
         navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
@@ -102,6 +142,7 @@ class PokemonFragment : Fragment() {
                 State.LOADING -> {
                     pokemonProgressBar.setVisible(true)
                     pokemonRecyclerView.setVisible(false)
+                    pokemonMenuFAM.setVisible(false)
                 }
                 State.SUCCESS -> {
                     pokemonMessageTextView.setVisible(false)
@@ -183,5 +224,6 @@ class PokemonFragment : Fragment() {
             pokemonMessageTextView.putText("Sem pokemons cadastrados :(")
         }
         pokemonRecyclerView.setVisible(mPokemon.isNotEmpty())
+        pokemonMenuFAM.setVisible(mPokemon.isNotEmpty())
     }
 }

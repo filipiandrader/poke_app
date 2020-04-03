@@ -30,4 +30,7 @@
     <string name="region_details_location">Cidades</string>
     <string name="region_details_tab_1">Cidades</string>
     <string name="region_details_tab_2">Jogos</string>
+    <string name="pokemon_fam_filter_by">Filtrar...</string>
+    <string name="pokemon_fab_by_generation">Por Geração</string>
+    <string name="pokemon_fab_by_type">Por Tipo</string>
 </resources>
