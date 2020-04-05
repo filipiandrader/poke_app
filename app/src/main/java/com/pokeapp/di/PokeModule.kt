@@ -2,6 +2,8 @@ package com.pokeapp.di
 
 import com.pokeapp.data.cache.room.repository.PokemonRoom
 import com.pokeapp.data.cache.room.repository.PokemonRoomImpl
+import com.pokeapp.data.remote.repository.details.PokemonDetailsRepository
+import com.pokeapp.data.remote.repository.details.PokemonDetailsRepositoryImpl
 import com.pokeapp.data.remote.repository.pokemon.PokemonRepository
 import com.pokeapp.data.remote.repository.pokemon.PokemonRepositoryImpl
 import com.pokeapp.data.remote.repository.region.RegionRepository
@@ -42,7 +44,8 @@ val pokeModule = module {
     single { FavouriteDataSourceImpl(get()) as FavouriteDataSource }
     viewModel { FavouriteViewModel(get()) }
 
-    single { PokemonDetailsDataSourceImpl(get()) as PokemonDetailsDataSource }
+    single { PokemonDetailsRepositoryImpl(get()) as PokemonDetailsRepository }
+    single { PokemonDetailsDataSourceImpl(get(), get()) as PokemonDetailsDataSource }
     viewModel { PokemonDetailsViewModel(get()) }
 
     single { PokemonRepositoryImpl(get(), get()) as PokemonRepository }

@@ -9,4 +9,6 @@ import com.pokeapp.presentation.model.Pokemon
 interface PokemonRepository {
 
     suspend fun getAllPokemon(offset: Int) : ResultRequest<MutableList<Pokemon>>
+
+    suspend fun getPokemonByGeneration(id: Int) : ResultRequest<MutableList<Pokemon>>
 }

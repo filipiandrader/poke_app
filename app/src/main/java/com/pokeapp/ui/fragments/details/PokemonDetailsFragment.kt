@@ -18,6 +18,7 @@ import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.ui.fragments.PokemonDetailsViewPagerAdapter
 import com.pokeapp.util.PokemonColorUtil
 import com.pokeapp.util.putText
+import com.pokeapp.util.setRefresh
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.*
@@ -44,6 +45,30 @@ class PokemonDetailsFragment : Fragment() {
     }
 
     private fun creatingObservers() {
+        mViewModel.getStateInfo().observe(viewLifecycleOwner, Observer { viewState ->
+            when (viewState?.state) {
+                State.LOADING -> {
+                    pokemonDetailsProgressBar.setVisible(true)
+                    pokemonDetailsViewPager.setVisible(false)
+                    pokemonDetailsErrorTextView.setVisible(false)
+                }
+                State.SUCCESS -> {
+                    pokemonDetailsSwipeRefreshLayout.setRefresh(false)
+                    mViewModel.getStateInfo().value?.data?.let {
+                        bindInfo(it)
+                    }
+                }
+                State.FAILURE -> {
+                    pokemonDetailsErrorTextView.putText("Ocorreu um erro ao obter informações sobre ${mPokemon.name} :(")
+                    pokemonDetailsErrorTextView.setVisible(true)
+                    pokemonDetailsProgressBar.setVisible(false)
+                }
+                else -> {
+                    // IGNORE
+                }
+            }
+        })
+
         mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.SUCCESS -> showToast()
@@ -62,6 +87,22 @@ class PokemonDetailsFragment : Fragment() {
         navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
     }
 
+    private fun bindInfo(pokemon: Pokemon) {
+        mPokemon.height = pokemon.height
+        mPokemon.weight = pokemon.weight
+        mPokemon.base_experience = pokemon.base_experience
+        mPokemon.abilities = pokemon.abilities
+        mPokemon.moves = pokemon.moves
+        mPokemon.stats = pokemon.stats
+        mPokemon.evolves = pokemon.evolves
+
+        pokemonDetailsViewPager.adapter = PokemonDetailsViewPagerAdapter(requireFragmentManager(), requireContext(), mPokemon)
+        pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
+
+        pokemonDetailsProgressBar.setVisible(false)
+        pokemonDetailsViewPager.setVisible(true)
+    }
+
     private fun showToast() {
         if (mPokemon.favourite) {
             longToast("${mPokemon.name} foi favoritado :)")
@@ -76,6 +117,7 @@ class PokemonDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mPokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        mViewModel.getPokemonInfo(mPokemon.id)
 
         pokemonDetailsNameTextView.putText(mPokemon.name)
         val id = when (mPokemon.id) {
@@ -117,8 +159,10 @@ class PokemonDetailsFragment : Fragment() {
         setFavouriteIconCorrectly()
         pokemonDetailsFavouriteImageView.setOnClickListener { doFavouritePokemon() }
 
-        pokemonDetailsViewPager.adapter = PokemonDetailsViewPagerAdapter(requireFragmentManager(), requireContext(), mPokemon)
-        pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
+        pokemonDetailsSwipeRefreshLayout.setOnRefreshListener {
+            pokemonDetailsSwipeRefreshLayout.setRefresh(true)
+            mViewModel.getPokemonInfo(mPokemon.id)
+        }
     }
 
     private fun setFavouriteIconCorrectly() {

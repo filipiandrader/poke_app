@@ -15,9 +15,11 @@ import com.pokeapp.presentation.model.Pokemon
 class PokemonViewModel(private val dataSource: PokemonDataSource) : ViewModel() {
 
     private var mState = MutableLiveData<ViewState<MutableList<Pokemon>>>()
+    private var mStateByGeneration = MutableLiveData<ViewState<MutableList<Pokemon>>>()
 
     init {
         mState.value = ViewState(data = null, state = State.LOADING)
+        mStateByGeneration.value = ViewState(data = null, state = State.LOADING)
     }
 
     fun getAllPokemon(offset: Int) {
@@ -34,7 +36,21 @@ class PokemonViewModel(private val dataSource: PokemonDataSource) : ViewModel() 
         )
     }
 
+    fun getPokemonByGenenration(id: Int) {
+        mStateByGeneration.postValue(ViewState.loading())
+        dataSource.getPokemonByGeneration(id,
+                onSuccess = {
+                    mStateByGeneration.postValue(ViewState.success(it))
+                },
+                onFailure = {
+                    mStateByGeneration.postValue(ViewState.failure(it))
+                }
+        )
+    }
+
     fun getState(): LiveData<ViewState<MutableList<Pokemon>>> = mState
+
+    fun getStateByGeneration(): LiveData<ViewState<MutableList<Pokemon>>> = mStateByGeneration
 
     override fun onCleared() {
         super.onCleared()

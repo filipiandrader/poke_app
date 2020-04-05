@@ -34,4 +34,5 @@
     <string name="pokemon_fab_by_generation">Por Geração</string>
     <string name="pokemon_fab_by_type">Por Tipo</string>
     <string name="bottom_sheet_generation_label">Geração</string>
+    <string name="pokemon_details_tab_5">Habilidades</string>
 </resources>

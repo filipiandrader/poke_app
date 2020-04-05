@@ -124,13 +124,13 @@ class PokemonFragment : Fragment() {
 
         val bottomSheetGenerationRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetGenerationRecyclerView)
         val generations = mutableListOf<Generation>()
-        generations.add(Generation(name = "1° Geração", img = R.drawable.gen1))
-        generations.add(Generation(name = "2° Geração", img = R.drawable.gen2))
-        generations.add(Generation(name = "3° Geração", img = R.drawable.gen3))
-        generations.add(Generation(name = "4° Geração", img = R.drawable.gen4))
-        generations.add(Generation(name = "5° Geração", img = R.drawable.gen5))
-        generations.add(Generation(name = "6° Geração", img = R.drawable.gen6))
-        generations.add(Generation(name = "7° Geração", img = R.drawable.gen7))
+        generations.add(Generation(id = 1, name = "1° Geração", img = R.drawable.gen1))
+        generations.add(Generation(id = 2, name = "2° Geração", img = R.drawable.gen2))
+        generations.add(Generation(id = 3, name = "3° Geração", img = R.drawable.gen3))
+        generations.add(Generation(id = 4, name = "4° Geração", img = R.drawable.gen4))
+        generations.add(Generation(id = 5, name = "5° Geração", img = R.drawable.gen5))
+        generations.add(Generation(id = 6, name = "6° Geração", img = R.drawable.gen6))
+        generations.add(Generation(id = 7, name = "7° Geração", img = R.drawable.gen7))
 
         bottomSheetGenerationRecyclerView.setup {
             withLayoutManager(GridLayoutManager(context!!, 2))
@@ -141,7 +141,10 @@ class PokemonFragment : Fragment() {
                     this.itemGenerationPhotoImageView.setImageResource(item.img)
                 }
 
-                onClick { index -> longToast(generations[index].name) }
+                onClick { index ->
+                    dialog.dismiss()
+                    mViewModel.getPokemonByGenenration(generations[index].id)
+                }
             }
         }
     }
@@ -181,6 +184,35 @@ class PokemonFragment : Fragment() {
         mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.LOADING -> {
+                    pokemonProgressBar.setVisible(true)
+                    pokemonRecyclerView.setVisible(false)
+                    pokemonMenuFAM.setVisible(false)
+                }
+                State.SUCCESS -> {
+                    pokemonMessageTextView.setVisible(false)
+                    pokemonProgressBar.setVisible(false)
+                    mViewModel.getState().value?.data?.let { pokemon ->
+                        setupRecyclerView(pokemon)
+                    }
+                }
+                State.FAILURE -> {
+                    viewState.throwable?.message?.let {
+                        pokemonMessageTextView.setVisible(true)
+                        pokemonRecyclerView.setVisible(false)
+                        pokemonProgressBar.setVisible(false)
+                        pokemonMessageTextView.putText(it)
+                    }
+                }
+                else -> { /* ignore */
+                }
+            }
+        })
+
+        mViewModel.getStateByGeneration().observe(viewLifecycleOwner, Observer { viewState ->
+            when (viewState?.state) {
+                State.LOADING -> {
+                    mPokemon.clear()
+                    mOffset = 0
                     pokemonProgressBar.setVisible(true)
                     pokemonRecyclerView.setVisible(false)
                     pokemonMenuFAM.setVisible(false)

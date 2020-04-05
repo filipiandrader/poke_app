@@ -4,14 +4,12 @@ import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.pokeapp.R
 import com.pokeapp.data.cache.entities.*
-import com.pokeapp.data.remote.model.GroupsApi
-import com.pokeapp.data.remote.model.LocationApi
-import com.pokeapp.data.remote.model.MainGenerationApi
-import com.pokeapp.data.remote.model.RegionInfoApi
+import com.pokeapp.data.remote.model.*
 import com.pokeapp.presentation.model.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -45,6 +43,10 @@ fun TextInputLayout.setErrorText(error: String) {
     this.error = error
 }
 
+fun SwipeRefreshLayout.setRefresh(refresh: Boolean) {
+    this.isRefreshing = refresh
+}
+
 fun String.formatNameMove(): String {
     var moveFormated = ""
 
@@ -59,7 +61,24 @@ fun String.formatNameMove(): String {
     } else {
         moveFormated = this.capitalize()
     }
-    return moveFormated
+    return moveFormated.replace("-", "")
+}
+
+fun String.formatNameAbility(): String {
+    var moveFormated = ""
+
+    if (this.contains("-")) {
+        val split = this.split("-")
+        moveFormated = split[0].capitalize()
+        if (split.size > 1) {
+            for (i in 1 until split.size) {
+                moveFormated = "$moveFormated ${split[i].capitalize()}"
+            }
+        }
+    } else {
+        moveFormated = this.capitalize()
+    }
+    return moveFormated.replace("-", "")
 }
 
 fun String.formatNameRegion(): String {
@@ -76,11 +95,17 @@ fun String.formatNameRegion(): String {
     } else {
         formated = this.capitalize()
     }
-    return formated
+    return formated.replace("-", "")
 }
 
-fun String.getEvolutionChainID(): Int {
-    val split = this.split("chain/")
+fun HashMap<String, Any>.getEvolutionChainID(): Int {
+    val obj = JSONObject(this as Map<*, *>).getJSONObject("evolution_chain")
+    val split = obj.getString("url").split("chain/")
+    return split[1].replace("/", "").toInt()
+}
+
+fun String.getPokemonID(): Int {
+    val split = this.split("species/")
     return split[1].replace("/", "").toInt()
 }
 
@@ -118,6 +143,99 @@ fun Int.convertToMeter(): String {
 fun Int.convertToKilos(): String {
     val kilos = this / 10.0
     return "$kilos kg"
+}
+
+fun HashMap<String, Any>.convertToPokemon() : Pokemon {
+    val obj = JSONObject(this as Map<*, *>)
+    val sprites = obj.getJSONObject("sprites")
+    val abilities = obj.getJSONArray("abilities")
+    val moves = obj.getJSONArray("moves")
+    val stats = obj.getJSONArray("stats")
+    val types = obj.getJSONArray("types")
+
+    return Pokemon(
+            id = obj.getInt("id"),
+            base_experience = obj.getInt("base_experience"),
+            height = obj.getInt("height"),
+            weight = obj.getInt("weight"),
+            photo = sprites.convertToSprite().photo,
+            photo_shiny = sprites.convertToSprite().photo_shiny,
+            types = types.convertToType(),
+            moves = moves.convertToMove(),
+            stats = stats.convertToStats(),
+            abilities = abilities.convertToAbility()
+    )
+}
+
+fun HashMap<String, Any>.convertToSpecie() : MutableList<Species> {
+    val chain = JSONObject(this as Map<*, *>).getJSONObject("chain")
+    val evolvesToArr = chain.getJSONArray("evolves_to")
+    val evolves = mutableListOf<Species>()
+
+    if (evolvesToArr.length() > 0) {
+        val firstEvolve = evolvesToArr.getJSONObject(0).getJSONObject("species")
+
+    }
+
+    return evolves
+}
+
+fun JSONObject.convertToSprite() : SpritesApi =
+        SpritesApi(
+                photo = this.getString("front_default"),
+                photo_shiny = this.getString("front_shiny")
+        )
+
+fun JSONArray.convertToType() : MutableList<Type> {
+    val list = mutableListOf<Type>()
+    for (i in 0 until this.length()) {
+        val obj = this.getJSONObject(i).getJSONObject("type")
+        val a = Type()
+        a.name = obj.getString("name")
+        list.add(a)
+    }
+
+    return list
+}
+
+fun JSONArray.convertToAbility() : MutableList<Ability> {
+    val list = mutableListOf<Ability>()
+    for (i in 0 until this.length()) {
+        val obj = this.getJSONObject(i).getJSONObject("ability")
+        val a = Ability()
+        a.name = obj.getString("name")
+        list.add(a)
+    }
+
+    return list
+}
+
+fun JSONArray.convertToMove() : MutableList<Move> {
+    val list = mutableListOf<Move>()
+    for (i in 0 until this.length()) {
+        val obj = this.getJSONObject(i).getJSONObject("move")
+        val a = Move()
+        a.name = obj.getString("name")
+        list.add(a)
+    }
+
+    return list
+}
+
+fun JSONArray.convertToStats() : MutableList<Stats> {
+    val list = mutableListOf<Stats>()
+    var total = 0
+    for (i in 0 until this.length()) {
+        val obj = this.getJSONObject(i)
+        val a = Stats()
+        a.base_state = obj.getInt("base_stat")
+        a.name = obj.getJSONObject("stat").getString("name")
+        list.add(a)
+        total += a.base_state
+    }
+    list.add(Stats(name = "total", base_state = total))
+
+    return list
 }
 
 fun MutableList<PokemonLocal>.convertToPokemonList(): MutableList<Pokemon> {

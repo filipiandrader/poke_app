@@ -1,7 +1,7 @@
 package com.pokeapp.data.remote.services
 
+import com.pokeapp.data.remote.model.GenerationResponse
 import com.pokeapp.data.remote.model.PokemonResponse
-import com.pokeapp.data.remote.model.RegionInfoResponse
 import com.pokeapp.data.remote.model.RegionResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -22,6 +22,9 @@ interface PokemonService {
     @GET("pokemon/{name}")
     fun getPokemon(@Path("name") name: String) : Deferred<Response<HashMap<String, Any>>>
 
+    @GET("pokemon/{id}")
+    fun getPokemonById(@Path("id") name: Int) : Deferred<Response<HashMap<String, Any>>>
+
     @GET("evolution-chain/{id}")
     fun getPokemonEvolutionChain(@Path("id") id: Int) : Deferred<Response<HashMap<String, Any>>>
 
@@ -37,4 +40,8 @@ interface PokemonService {
 
     @GET("pokedex/{name}")
     fun getPokedexByRegion(@Path("name") name: String) : Deferred<Response<HashMap<String, Any>>>
+
+    // GENERATION
+    @GET("generation/{id}")
+    fun getPokemomByGeneration(@Path("id") id: Int) : Deferred<Response<GenerationResponse>>
 }

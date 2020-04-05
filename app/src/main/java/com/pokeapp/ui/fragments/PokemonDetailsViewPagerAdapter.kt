@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.ui.fragments.details.abilities.AbilitiesFragment
 import com.pokeapp.ui.fragments.details.about.AboutFragment
 import com.pokeapp.ui.fragments.details.base_stats.BaseStatsFragment
 import com.pokeapp.ui.fragments.details.evolution.EvolutionFragment
@@ -25,7 +26,8 @@ class PokemonDetailsViewPagerAdapter(supportFragmentManager: FragmentManager, co
             Page(context.getString(R.string.pokemon_details_tab_1), { AboutFragment.newInstance(pokemon) }),
             Page(context.getString(R.string.pokemon_details_tab_2), { BaseStatsFragment.newInstance(pokemon) }),
             Page(context.getString(R.string.pokemon_details_tab_3), { EvolutionFragment.newInstance(pokemon) }),
-            Page(context.getString(R.string.pokemon_details_tab_4), { MovesFragment.newInstance(pokemon) })
+            Page(context.getString(R.string.pokemon_details_tab_4), { MovesFragment.newInstance(pokemon) }),
+            Page(context.getString(R.string.pokemon_details_tab_5), { AbilitiesFragment.newInstance(pokemon) })
     )
 
     override fun getItem(position: Int): Fragment {

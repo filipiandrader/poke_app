@@ -11,5 +11,9 @@ interface PokemonDataSource {
                        onSuccess: (MutableList<Pokemon>) -> Unit,
                        onFailure: (t: Throwable) -> Unit)
 
+    fun getPokemonByGeneration(id: Int,
+                               onSuccess: (MutableList<Pokemon>) -> Unit,
+                               onFailure: (t: Throwable) -> Unit)
+
     fun cancelJob()
 }
