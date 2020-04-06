@@ -13,6 +13,7 @@ import com.pokeapp.data.remote.model.*
 import com.pokeapp.presentation.model.*
 import org.json.JSONArray
 import org.json.JSONObject
+import retrofit2.Response
 
 /**
  * Created by Filipi Andrade Rocha on 29/01/2020
@@ -105,7 +106,16 @@ fun HashMap<String, Any>.getEvolutionChainID(): Int {
 }
 
 fun String.getPokemonID(): Int {
-    val split = this.split("species/")
+    if (this.contains("species")) {
+        val split = this.split("species/")
+        return split[1].replace("/", "").toInt()
+    }
+    val split = this.split("pokemon/")
+    return split[1].replace("/", "").toInt()
+}
+
+fun String.getTypeId(): Int {
+    val split = this.split("type/")
     return split[1].replace("/", "").toInt()
 }
 
@@ -122,7 +132,7 @@ fun String.formatNameStats(context: Context): String {
     }
 }
 
-fun String.formatGenerationName() : String {
+fun String.formatGenerationName(): String {
     return when (this) {
         "generation-i" -> "1° Geração"
         "generation-ii" -> "2° Geração"
@@ -145,7 +155,7 @@ fun Int.convertToKilos(): String {
     return "$kilos kg"
 }
 
-fun HashMap<String, Any>.convertToPokemon() : Pokemon {
+fun HashMap<String, Any>.convertToPokemon(): Pokemon {
     val obj = JSONObject(this as Map<*, *>)
     val sprites = obj.getJSONObject("sprites")
     val abilities = obj.getJSONArray("abilities")
@@ -167,7 +177,7 @@ fun HashMap<String, Any>.convertToPokemon() : Pokemon {
     )
 }
 
-fun HashMap<String, Any>.convertToSpecie() : MutableList<Species> {
+fun HashMap<String, Any>.convertToSpecie(): MutableList<Species> {
     val chain = JSONObject(this as Map<*, *>).getJSONObject("chain")
     val evolvesToArr = chain.getJSONArray("evolves_to")
     val evolves = mutableListOf<Species>()
@@ -180,13 +190,13 @@ fun HashMap<String, Any>.convertToSpecie() : MutableList<Species> {
     return evolves
 }
 
-fun JSONObject.convertToSprite() : SpritesApi =
+fun JSONObject.convertToSprite(): SpritesApi =
         SpritesApi(
                 photo = this.getString("front_default"),
                 photo_shiny = this.getString("front_shiny")
         )
 
-fun JSONArray.convertToType() : MutableList<Type> {
+fun JSONArray.convertToType(): MutableList<Type> {
     val list = mutableListOf<Type>()
     for (i in 0 until this.length()) {
         val obj = this.getJSONObject(i).getJSONObject("type")
@@ -198,7 +208,7 @@ fun JSONArray.convertToType() : MutableList<Type> {
     return list
 }
 
-fun JSONArray.convertToAbility() : MutableList<Ability> {
+fun JSONArray.convertToAbility(): MutableList<Ability> {
     val list = mutableListOf<Ability>()
     for (i in 0 until this.length()) {
         val obj = this.getJSONObject(i).getJSONObject("ability")
@@ -210,7 +220,7 @@ fun JSONArray.convertToAbility() : MutableList<Ability> {
     return list
 }
 
-fun JSONArray.convertToMove() : MutableList<Move> {
+fun JSONArray.convertToMove(): MutableList<Move> {
     val list = mutableListOf<Move>()
     for (i in 0 until this.length()) {
         val obj = this.getJSONObject(i).getJSONObject("move")
@@ -222,7 +232,7 @@ fun JSONArray.convertToMove() : MutableList<Move> {
     return list
 }
 
-fun JSONArray.convertToStats() : MutableList<Stats> {
+fun JSONArray.convertToStats(): MutableList<Stats> {
     val list = mutableListOf<Stats>()
     var total = 0
     for (i in 0 until this.length()) {
@@ -267,7 +277,7 @@ fun MutableList<TypeLocal>.convertToTypeList(): MutableList<Type> {
     return list
 }
 
-fun TypeLocal.convertType(): Type = Type(name = name)
+fun TypeLocal.convertType(): Type = Type(name = name, id = id)
 
 fun MutableList<AbilityLocal>.convertToAbilityList(): MutableList<Ability> {
     val list = mutableListOf<Ability>()
@@ -318,9 +328,33 @@ fun Pokemon.convertPokemon(): PokemonLocal =
                 favourite = favourite
         )
 
+fun MutableList<HashMap<String, Any>>.convertToPokemonList2() : MutableList<Pokemon> {
+    val list = mutableListOf<Pokemon>()
+    this.forEach { p ->
+        val obj = JSONObject(p as Map<*, *>)
+        val sprite = obj.getJSONObject("sprites").convertToSprite()
+        val types = obj.getJSONArray("types").convertToType()
+        list.add(Pokemon(
+                id = obj.getInt("id"),
+                name = obj.getString("name"),
+                favourite = obj.getBoolean("favorite"),
+                photo = sprite.photo,
+                photo_shiny = sprite.photo_shiny,
+                types = types
+        ))
+    }
+    return list
+}
+
 fun MutableList<Type>.convertToTypeLocalList(): MutableList<TypeLocal> {
     val list = mutableListOf<TypeLocal>()
     this.forEach { listApi -> list.add(listApi.convertType()) }
+    return list
+}
+
+fun TypeResponse.convertToTypeList3(): MutableList<Type> {
+    val list = mutableListOf<Type>()
+    this.results.forEach { listApi -> list.add(listApi.convertType()) }
     return list
 }
 
@@ -411,3 +445,22 @@ fun JSONArray.convertToGroupList(): MutableList<GroupsApi> {
 }
 
 fun JSONObject.convertGroup(): GroupsApi = GroupsApi(name = this.getString("name"))
+
+fun TypeResponse.convertToType(): MutableList<Type> {
+    val list = mutableListOf<Type>()
+    this.results.forEach { listApi -> list.add(listApi.convertType()) }
+    return list
+}
+
+fun TypeApi.convertType() = Type(id = url.getTypeId(), name = name)
+
+fun TypeApi.convertToTypeLocal() = TypeLocal(id = url.getTypeId(), name = name)
+
+fun Response<*>.verifyResponseResult(): Boolean {
+    if (!this.isSuccessful) {
+        return false
+    } else if (this.body() == null) {
+        return false
+    }
+    return true
+}

@@ -1,6 +1,6 @@
 package com.pokeapp.domain.favourite
 
-import com.pokeapp.data.cache.room.repository.PokemonRoom
+import com.pokeapp.data.cache.room.repository.pokemon.PokemonRoom
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.util.convertToPokemonList
 import kotlinx.coroutines.CoroutineScope

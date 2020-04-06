@@ -1,13 +1,15 @@
 package com.pokeapp.data.remote.repository.pokemon
 
 import com.pokeapp.data.ResultRequest
-import com.pokeapp.data.cache.room.repository.PokemonRoom
+import com.pokeapp.data.cache.room.repository.pokemon.PokemonRoom
+import com.pokeapp.data.remote.model.TypeResponse
 import com.pokeapp.data.remote.services.PokemonService
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Type
 import com.pokeapp.util.convertToPokemon
+import com.pokeapp.util.getPokemonID
+import com.pokeapp.util.verifyResponseResult
 import org.json.JSONObject
-import retrofit2.Response
 
 /**
  * Created by Filipi Andrade on 29/03/2020
@@ -55,7 +57,7 @@ class PokemonRepositoryImpl(private val api: PokemonService,
     override suspend fun getPokemonByGeneration(id: Int): ResultRequest<MutableList<Pokemon>> {
         val response = api.getPokemomByGeneration(id).await()
 
-        if (!verifyResponseResult(response)) {
+        if (!response.verifyResponseResult()) {
             return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
         }
 
@@ -65,7 +67,7 @@ class PokemonRepositoryImpl(private val api: PokemonService,
 
             val responseByName = api.getPokemon(obj.name).await()
 
-            if (!verifyResponseResult(responseByName)) {
+            if (!responseByName.verifyResponseResult()) {
                 return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
             }
 
@@ -90,12 +92,55 @@ class PokemonRepositoryImpl(private val api: PokemonService,
         return ResultRequest.success(pokemon)
     }
 
-    private fun verifyResponseResult(response: Response<*>) : Boolean {
-        if (!response.isSuccessful) {
-            return false
-        } else if (response.body() == null) {
-            return false
+    override suspend fun getAllTypes(): ResultRequest<TypeResponse> {
+        val response = api.getType().await()
+
+        if (!response.verifyResponseResult()) {
+            return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
         }
-        return true
+
+        return ResultRequest.success(response.body()!!)
+    }
+
+    override suspend fun getPokemonByType(id: Int): ResultRequest<MutableList<HashMap<String, Any>>> {
+        val response = api.getPokemonByType().await()
+
+        if (!response.verifyResponseResult()) {
+            return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
+        }
+
+        val pokemonArr = JSONObject(response.body() as Map<*, *>).getJSONArray("pokemon")
+        val result = mutableListOf<HashMap<String, Any>>()
+        for (i in 0 until pokemonArr.length()) {
+            val obj = pokemonArr.getJSONObject(i).getJSONObject("pokemon")
+            val pokemonId = obj.getString("url").getPokemonID()
+
+            val responseInfo = api.getPokemonById(pokemonId).await()
+
+            if (!responseInfo.verifyResponseResult()) {
+                return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
+            }
+
+            val objInfo = JSONObject(responseInfo.body() as Map<*, *>)
+            val name = objInfo.getString("name").capitalize()
+            val sprites = objInfo.getJSONObject("sprites")
+            val types = objInfo.getJSONArray("types")
+
+            val pokemonLocal = pokemonRoom.getById(pokemonId)
+            val favorite = pokemonLocal != null
+
+            val hashMapResult = hashMapOf(
+                    "id" to pokemonId,
+                    "name" to name,
+                    "sprites" to sprites,
+                    "types" to types,
+                    "favorite" to favorite
+            )
+
+            result.add(hashMapResult)
+        }
+
+        return ResultRequest.success(result)
+
     }
 }

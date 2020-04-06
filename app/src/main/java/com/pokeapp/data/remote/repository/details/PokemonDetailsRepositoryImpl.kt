@@ -1,7 +1,6 @@
 package com.pokeapp.data.remote.repository.details
 
 import com.pokeapp.data.ResultRequest
-import com.pokeapp.data.cache.room.repository.PokemonRoom
 import com.pokeapp.data.remote.services.PokemonService
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Species

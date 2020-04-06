@@ -35,6 +35,7 @@ import com.pokeapp.databinding.FragmentPokemonBinding
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.model.Generation
 import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.presentation.model.Type
 import com.pokeapp.presentation.pokemon.PokemonViewModel
 import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
@@ -57,6 +58,7 @@ class PokemonFragment : Fragment() {
     private val mViewModel: PokemonViewModel by viewModel()
 
     private lateinit var mPokemon: MutableList<Pokemon>
+    private lateinit var mTypes: MutableList<Type>
 
     private var mOffset = 0
 
@@ -149,16 +151,50 @@ class PokemonFragment : Fragment() {
         }
     }
 
+    private fun showBottomSheetType() {
+        pokemonMenuFAM.close(true)
+        val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+        val peekHeight = display.height * 0.90
+
+        val dialog = MaterialDialog(activity!!, BottomSheet()).show {
+            setPeekHeight(literal = peekHeight.toInt())
+            customView(viewRes = R.layout.bottom_sheet_generation, scrollable = false)
+        }
+
+        val bottomSheetGenerationRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetGenerationRecyclerView)
+
+        bottomSheetGenerationRecyclerView.setup {
+            withLayoutManager(GridLayoutManager(context!!, 2))
+            withDataSource(dataSourceOf(mTypes))
+            withItem<Type, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
+                onBind(::BottomSheetGenerationViewHolder) { _, item ->
+                    this.itemGenerationNameTextView.putText(item.name.capitalize())
+//                    this.itemGenerationPhotoImageView.setImageResource(item.img)
+                }
+
+                onClick { index ->
+                    longToast("${mTypes[index].id}")
+//                    dialog.dismiss()
+
+//                    mViewModel.getPokemonByGenenration(mTypes[index].id)
+                }
+            }
+        }
+
+    }
+
     override fun onStart() {
         super.onStart()
 
         mViewModel.getAllPokemon(mOffset)
+        mViewModel.getTypes()
 
         createCustomAnimation()
 
         pokemonByGenFAB.setOnClickListener { showBottomSheetGeneration() }
 
-        pokemonByTypeFAB.setOnClickListener { longToast(pokemonByTypeFAB.labelText) }
+        pokemonByTypeFAB.setOnClickListener { showBottomSheetType() }
 
         // BACK BUTTON
         navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
@@ -209,6 +245,49 @@ class PokemonFragment : Fragment() {
         })
 
         mViewModel.getStateByGeneration().observe(viewLifecycleOwner, Observer { viewState ->
+            when (viewState?.state) {
+                State.LOADING -> {
+                    mPokemon.clear()
+                    mOffset = 0
+                    pokemonProgressBar.setVisible(true)
+                    pokemonRecyclerView.setVisible(false)
+                    pokemonMenuFAM.setVisible(false)
+                }
+                State.SUCCESS -> {
+                    pokemonMessageTextView.setVisible(false)
+                    pokemonProgressBar.setVisible(false)
+                    mViewModel.getState().value?.data?.let { pokemon ->
+                        setupRecyclerView(pokemon)
+                    }
+                }
+                State.FAILURE -> {
+                    viewState.throwable?.message?.let {
+                        pokemonMessageTextView.setVisible(true)
+                        pokemonRecyclerView.setVisible(false)
+                        pokemonProgressBar.setVisible(false)
+                        pokemonMessageTextView.putText(it)
+                    }
+                }
+                else -> { /* ignore */
+                }
+            }
+        })
+
+        mViewModel.getStateTypes().observe(viewLifecycleOwner, Observer { viewState ->
+            when (viewState?.state) {
+                State.SUCCESS -> {
+                    mTypes = mutableListOf()
+                    mViewModel.getStateTypes().value?.data?.let {
+                        mTypes.addAll(it)
+                    }
+                }
+                else -> {
+                    // IGNORE
+                }
+            }
+        })
+
+        mViewModel.getStateByType().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.LOADING -> {
                     mPokemon.clear()

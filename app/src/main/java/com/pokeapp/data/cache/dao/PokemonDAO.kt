@@ -2,6 +2,7 @@ package com.pokeapp.data.cache.dao
 
 import androidx.room.*
 import com.pokeapp.data.cache.entities.PokemonLocal
+import com.pokeapp.data.cache.entities.TypeLocal
 
 /**
  * Created by Filipi Andrade on 30/03/2020
@@ -21,4 +22,10 @@ abstract class PokemonDAO {
 
     @Query("SELECT * FROM pokemon ORDER BY id")
     abstract fun getPokemons(): MutableList<PokemonLocal>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertType(vararg type: TypeLocal)
+
+    @Query("SELECT * FROM type")
+    abstract fun getTypes(): MutableList<TypeLocal>
 }
