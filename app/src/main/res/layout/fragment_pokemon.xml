@@ -137,13 +137,23 @@
                 app:menu_colorRipple="#99FFFFFF"
                 app:menu_fab_size="normal"
                 app:menu_icon="@drawable/ic_pokeball"
-                app:menu_fab_label="@string/pokemon_fam_filter_by"
                 app:menu_openDirection="up"
                 app:menu_shadowColor="#66000000"
                 app:menu_shadowRadius="4dp"
                 app:menu_shadowXOffset="1dp"
                 app:menu_shadowYOffset="3dp"
                 app:menu_showShadow="true">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/pokemonAllFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_pokeball_white"
+                    app:fab_colorNormal="@color/blue"
+                    app:fab_colorPressed="@color/lightBlue"
+                    app:fab_colorRipple="#99FFFFFF"
+                    app:fab_label="@string/pokemon_fab_all"
+                    app:fab_size="mini" />
 
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/pokemonByGenFAB"

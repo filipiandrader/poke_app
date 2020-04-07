@@ -24,7 +24,7 @@ interface PokemonService {
     fun getPokemon(@Path("name") name: String): Deferred<Response<HashMap<String, Any>>>
 
     @GET("pokemon/{id}")
-    fun getPokemonById(@Path("id") name: Int): Deferred<Response<HashMap<String, Any>>>
+    fun getPokemonById(@Path("id") id: Int): Deferred<Response<HashMap<String, Any>>>
 
     @GET("evolution-chain/{id}")
     fun getPokemonEvolutionChain(@Path("id") id: Int): Deferred<Response<HashMap<String, Any>>>
@@ -51,5 +51,5 @@ interface PokemonService {
     fun getType(): Deferred<Response<TypeResponse>>
 
     @GET("type/{id}")
-    fun getPokemonByType(): Deferred<Response<HashMap<String, Any>>>
+    fun getPokemonByType(@Path("id") id: Int): Deferred<Response<HashMap<String, Any>>>
 }

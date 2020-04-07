@@ -48,6 +48,24 @@ fun SwipeRefreshLayout.setRefresh(refresh: Boolean) {
     this.isRefreshing = refresh
 }
 
+fun String.formatNamePokemon(): String {
+    var nameFormated = ""
+
+    if (this.contains("-")) {
+        val split = this.split("-")
+        nameFormated = split[0].capitalize()
+        if (split.size > 1) {
+            for (i in 1 until split.size) {
+                nameFormated = "$nameFormated ${split[i].capitalize()}"
+            }
+        }
+    } else {
+        nameFormated = this.capitalize()
+    }
+
+    return nameFormated.replace("-", "")
+}
+
 fun String.formatNameMove(): String {
     var moveFormated = ""
 

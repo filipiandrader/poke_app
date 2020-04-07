@@ -110,19 +110,64 @@
                 android:layout_height="0dp"
                 android:scrollbars="vertical"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/favouritePaginationProgressBar"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ProgressBar
-                android:id="@+id/favouritePaginationProgressBar"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:visibility="gone"
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/favouriteMenuFAM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:menu_animationDelayPerItem="50"
+                app:menu_backgroundColor="@android:color/transparent"
+                app:menu_colorNormal="@color/red"
+                app:menu_colorPressed="@color/lightRed"
+                app:menu_colorRipple="#99FFFFFF"
+                app:menu_fab_size="normal"
+                app:menu_icon="@drawable/ic_pokeball"
+                app:menu_openDirection="up"
+                app:menu_shadowColor="#66000000"
+                app:menu_shadowRadius="4dp"
+                app:menu_shadowXOffset="1dp"
+                app:menu_shadowYOffset="3dp"
+                app:menu_showShadow="true">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/favouriteAllFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_pokeball_white"
+                    app:fab_colorNormal="@color/blue"
+                    app:fab_colorPressed="@color/lightBlue"
+                    app:fab_colorRipple="#99FFFFFF"
+                    app:fab_label="@string/pokemon_fab_all"
+                    app:fab_size="mini" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/favouriteByGenFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_by_generation"
+                    app:fab_colorNormal="@color/blue"
+                    app:fab_colorPressed="@color/lightBlue"
+                    app:fab_colorRipple="#99FFFFFF"
+                    app:fab_label="@string/pokemon_fab_by_generation"
+                    app:fab_size="mini" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/favouriteByTypeFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_by_type"
+                    app:fab_colorNormal="@color/blue"
+                    app:fab_colorPressed="@color/lightBlue"
+                    app:fab_colorRipple="#99FFFFFF"
+                    app:fab_label="@string/pokemon_fab_by_type"
+                    app:fab_size="mini" />
+            </com.github.clans.fab.FloatingActionMenu>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

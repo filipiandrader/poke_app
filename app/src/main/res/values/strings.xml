@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">DexApp</string>
-    <string name="bottom_navigation_home">Pokemons</string>
-    <string name="bottom_navigation_favourite">Favoritos</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -10,10 +8,16 @@
     <string name="pokemon_details_tab_2">Status Base</string>
     <string name="pokemon_details_tab_3">Evoluções</string>
     <string name="pokemon_details_tab_4">Golpes</string>
+    <string name="pokemon_details_tab_5">Habilidades</string>
+
+    <string name="region_details_tab_1">Cidades</string>
+    <string name="region_details_tab_2">Jogos</string>
+
     <string name="about_height_label">Altura</string>
     <string name="about_weight_label">Peso</string>
     <string name="about_training_label">Treinamento</string>
     <string name="about_base_experience_label">XP Base</string>
+
     <string name="base_stats_hp_label">HP</string>
     <string name="base_stats_attack_label">Ataque</string>
     <string name="base_stats_defense_label">Defense</string>
@@ -21,18 +25,23 @@
     <string name="base_stats_special_defense_label">Defesa Esp.</string>
     <string name="base_stats_speed_label">Velocidade</string>
     <string name="base_stats_total_label">Total</string>
+
     <string name="toolbar_favourite_title">FavoriDex</string>
+
     <string name="home_pokedex_title">Pokedex</string>
     <string name="home_favourite_title">Favoridex</string>
-    <string name="pokedex_title">Pokedex</string>
     <string name="home_region_title">Regiões</string>
+
+    <string name="pokedex_title">Pokedex</string>
     <string name="region_title">Regiões</string>
+
     <string name="region_details_location">Cidades</string>
-    <string name="region_details_tab_1">Cidades</string>
-    <string name="region_details_tab_2">Jogos</string>
+
     <string name="pokemon_fam_filter_by">Filtrar...</string>
-    <string name="pokemon_fab_by_generation">Por Geração</string>
-    <string name="pokemon_fab_by_type">Por Tipo</string>
+    <string name="pokemon_fab_all">Todos os Pokemons</string>
+    <string name="pokemon_fab_by_generation">Pokemons por Geração</string>
+    <string name="pokemon_fab_by_type">Pokemons por Tipo</string>
+
     <string name="bottom_sheet_generation_label">Geração</string>
-    <string name="pokemon_details_tab_5">Habilidades</string>
+    <string name="bottom_sheet_type_label">Tipos</string>
 </resources>

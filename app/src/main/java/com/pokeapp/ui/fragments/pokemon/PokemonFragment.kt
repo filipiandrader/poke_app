@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.Point
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
@@ -14,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +21,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.bottomsheets.setPeekHeight
@@ -38,16 +38,17 @@ import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Type
 import com.pokeapp.presentation.pokemon.PokemonViewModel
 import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
+import com.pokeapp.ui.fragments.BottomSheetTypeViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.pokeapp.util.PokemonColorUtil
+import com.pokeapp.util.formatNamePokemon
 import com.pokeapp.util.putText
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
-import org.jetbrains.anko.dialerFilter
 import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.textColor
 import org.koin.android.viewmodel.ext.android.viewModel
-import kotlin.math.roundToInt
 
 
 /**
@@ -117,14 +118,17 @@ class PokemonFragment : Fragment() {
         pokemonMenuFAM.close(true)
         val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
-        val peekHeight = display.height * 0.90
+        val peekHeight = display.height * 0.70
 
-        val dialog = MaterialDialog(activity!!, BottomSheet()).show {
+        val dialog = MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             setPeekHeight(literal = peekHeight.toInt())
-            customView(viewRes = R.layout.bottom_sheet_generation, scrollable = false)
+            customView(viewRes = R.layout.bottom_sheet_layout, scrollable = false, noVerticalPadding = true, horizontalPadding = false, dialogWrapContent = true)
         }
 
-        val bottomSheetGenerationRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetGenerationRecyclerView)
+        val itemFilterNameTextView = dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
+        itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_generation_label))
+
+        val bottomSheetRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
         val generations = mutableListOf<Generation>()
         generations.add(Generation(id = 1, name = "1° Geração", img = R.drawable.gen1))
         generations.add(Generation(id = 2, name = "2° Geração", img = R.drawable.gen2))
@@ -134,7 +138,7 @@ class PokemonFragment : Fragment() {
         generations.add(Generation(id = 6, name = "6° Geração", img = R.drawable.gen6))
         generations.add(Generation(id = 7, name = "7° Geração", img = R.drawable.gen7))
 
-        bottomSheetGenerationRecyclerView.setup {
+        bottomSheetRecyclerView.setup {
             withLayoutManager(GridLayoutManager(context!!, 2))
             withDataSource(dataSourceOf(generations))
             withItem<Generation, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
@@ -155,29 +159,32 @@ class PokemonFragment : Fragment() {
         pokemonMenuFAM.close(true)
         val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
-        val peekHeight = display.height * 0.90
+        val peekHeight = display.height * 0.70
 
-        val dialog = MaterialDialog(activity!!, BottomSheet()).show {
+        val dialog = MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             setPeekHeight(literal = peekHeight.toInt())
-            customView(viewRes = R.layout.bottom_sheet_generation, scrollable = false)
+            customView(viewRes = R.layout.bottom_sheet_layout, scrollable = false, noVerticalPadding = true, horizontalPadding = false, dialogWrapContent = true)
         }
 
-        val bottomSheetGenerationRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetGenerationRecyclerView)
+        val itemFilterNameTextView = dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
+        itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_type_label))
 
-        bottomSheetGenerationRecyclerView.setup {
+        val bottomSheetRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
+
+        bottomSheetRecyclerView.setup {
             withLayoutManager(GridLayoutManager(context!!, 2))
             withDataSource(dataSourceOf(mTypes))
-            withItem<Type, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
-                onBind(::BottomSheetGenerationViewHolder) { _, item ->
-                    this.itemGenerationNameTextView.putText(item.name.capitalize())
-//                    this.itemGenerationPhotoImageView.setImageResource(item.img)
+            withItem<Type, BottomSheetTypeViewHolder>(R.layout.item_type) {
+                onBind(::BottomSheetTypeViewHolder) { _, item ->
+                    this.itemTypeNameTextView.putText(item.name.capitalize())
+
+                    val color = PokemonColorUtil(itemView.context).getPokemonColor(item.name)
+                    this.itemTypeCardView.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
                 }
 
                 onClick { index ->
-                    longToast("${mTypes[index].id}")
-//                    dialog.dismiss()
-
-//                    mViewModel.getPokemonByGenenration(mTypes[index].id)
+                    dialog.dismiss()
+                    mViewModel.getPokemonByType(mTypes[index].id)
                 }
             }
         }
@@ -191,6 +198,12 @@ class PokemonFragment : Fragment() {
         mViewModel.getTypes()
 
         createCustomAnimation()
+
+        pokemonAllFAB.setOnClickListener {
+            mPokemon.clear()
+            mOffset = 0
+            mViewModel.getAllPokemon(mOffset)
+        }
 
         pokemonByGenFAB.setOnClickListener { showBottomSheetGeneration() }
 
@@ -222,6 +235,7 @@ class PokemonFragment : Fragment() {
                 State.LOADING -> {
                     pokemonProgressBar.setVisible(true)
                     pokemonRecyclerView.setVisible(false)
+                    pokemonMessageTextView.setVisible(false)
                     pokemonMenuFAM.setVisible(false)
                 }
                 State.SUCCESS -> {
@@ -251,12 +265,13 @@ class PokemonFragment : Fragment() {
                     mOffset = 0
                     pokemonProgressBar.setVisible(true)
                     pokemonRecyclerView.setVisible(false)
+                    pokemonMessageTextView.setVisible(false)
                     pokemonMenuFAM.setVisible(false)
                 }
                 State.SUCCESS -> {
                     pokemonMessageTextView.setVisible(false)
                     pokemonProgressBar.setVisible(false)
-                    mViewModel.getState().value?.data?.let { pokemon ->
+                    mViewModel.getStateByGeneration().value?.data?.let { pokemon ->
                         setupRecyclerView(pokemon)
                     }
                 }
@@ -295,11 +310,12 @@ class PokemonFragment : Fragment() {
                     pokemonProgressBar.setVisible(true)
                     pokemonRecyclerView.setVisible(false)
                     pokemonMenuFAM.setVisible(false)
+                    pokemonMessageTextView.setVisible(false)
                 }
                 State.SUCCESS -> {
                     pokemonMessageTextView.setVisible(false)
                     pokemonProgressBar.setVisible(false)
-                    mViewModel.getState().value?.data?.let { pokemon ->
+                    mViewModel.getStateByType().value?.data?.let { pokemon ->
                         setupRecyclerView(pokemon)
                     }
                 }
@@ -343,18 +359,31 @@ class PokemonFragment : Fragment() {
                         val color = PokemonColorUtil(itemView.context).getPokemonColor(item.types)
                         this.itemPokemonCardView.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
+                        if (item.types.size == 1) {
+                            if (item.types[0].name == "dark") {
+                                this.itemPokemonIDTextView.textColor = resources.getColor(R.color.colorIcons)
+                            }
+                        } else if (item.types.size == 2) {
+                            if (item.types[1].name == "dark") {
+                                this.itemPokemonIDTextView.textColor = resources.getColor(R.color.colorIcons)
+                            }
+                        }
+
                         item.types.getOrNull(0).let { firstType ->
-                            this.itemPokemonType1TextView.putText(firstType?.name ?: "")
+                            this.itemPokemonType1TextView.putText(firstType?.name?.capitalize()
+                                    ?: "")
                             this.itemPokemonType1TextView.setVisible(firstType != null)
                         }
 
                         item.types.getOrNull(1).let { secondType ->
-                            this.itemPokemonType2TextView.putText(secondType?.name ?: "")
+                            this.itemPokemonType2TextView.putText(secondType?.name?.capitalize()
+                                    ?: "")
                             this.itemPokemonType2TextView.setVisible(secondType != null)
                         }
 
                         item.types.getOrNull(2).let { thirdType ->
-                            this.itemPokemonType3TextView.putText(thirdType?.name ?: "")
+                            this.itemPokemonType3TextView.putText(thirdType?.name?.capitalize()
+                                    ?: "")
                             this.itemPokemonType3TextView.setVisible(thirdType != null)
                         }
                     }
@@ -376,6 +405,6 @@ class PokemonFragment : Fragment() {
             pokemonMessageTextView.putText("Sem pokemons cadastrados :(")
         }
         pokemonRecyclerView.setVisible(mPokemon.isNotEmpty())
-        pokemonMenuFAM.setVisible(mPokemon.isNotEmpty())
+        pokemonMenuFAM.setVisible(true)
     }
 }

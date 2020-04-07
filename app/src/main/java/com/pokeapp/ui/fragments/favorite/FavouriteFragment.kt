@@ -65,6 +65,7 @@ class FavouriteFragment : Fragment() {
                 State.LOADING -> {
                     favouriteProgressBar.setVisible(true)
                     favouriteRecyclerView.setVisible(false)
+                    favouriteMenuFAM.setVisible(false)
                 }
                 State.SUCCESS -> {
                     favouriteProgressBar.setVisible(false)
@@ -146,6 +147,7 @@ class FavouriteFragment : Fragment() {
         }
 
         favouriteRecyclerView.setVisible(pokemon.isNotEmpty())
+        favouriteMenuFAM.setVisible(pokemon.isNotEmpty())
     }
 
 }

@@ -1,5 +1,9 @@
 package com.pokeapp.ui.fragments.details.base_stats
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +15,15 @@ import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Stats
-import com.pokeapp.util.formatNameStats
-import com.pokeapp.util.putProgress
-import com.pokeapp.util.putText
-import com.pokeapp.util.setVisible
+import com.pokeapp.util.*
 import kotlinx.android.synthetic.main.fragment_base_stats.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class BaseStatsFragment : Fragment() {
+
+    private lateinit var mPokemon: Pokemon
 
     companion object {
         @JvmStatic
@@ -39,8 +42,8 @@ class BaseStatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
-        setupRecyclerView(pokemon.stats)
+        mPokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        setupRecyclerView(mPokemon.stats)
     }
 
     private fun setupRecyclerView(stats: MutableList<Stats>) {
@@ -55,6 +58,9 @@ class BaseStatsFragment : Fragment() {
                             this.baseStatsTotalProgressBar.putProgress(item.base_state)
                             this.baseStatsTotalProgressBar.setVisible(true)
                             this.baseStatsProgressBar.setVisible(false)
+
+                            val color = PokemonColorUtil(itemView.context).getPokemonColor(mPokemon.types)
+                            this.baseStatsTotalProgressBar.progressTintList = ColorStateList.valueOf(color)
                         } else {
                             this.baseStatsProgressBar.putProgress(item.base_state)
                             this.baseStatsProgressBar.setVisible(true)

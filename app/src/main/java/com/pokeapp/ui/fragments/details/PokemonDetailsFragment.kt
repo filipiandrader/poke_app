@@ -142,17 +142,17 @@ class PokemonDetailsFragment : Fragment() {
         Picasso.get().load(mPokemon.photo_shiny).into(pokemonDetailsShinyImageView)
 
         mPokemon.types.getOrNull(0).let { firstType ->
-            pokemonDetailsType3TextView.putText(firstType?.name ?: "")
+            pokemonDetailsType3TextView.putText(firstType?.name?.capitalize() ?: "")
             pokemonDetailsType3TextView.setVisible(firstType != null)
         }
 
         mPokemon.types.getOrNull(1).let { secondType ->
-            pokemonDetailsType2TextView.putText(secondType?.name ?: "")
+            pokemonDetailsType2TextView.putText(secondType?.name?.capitalize() ?: "")
             pokemonDetailsType2TextView.setVisible(secondType != null)
         }
 
         mPokemon.types.getOrNull(2).let { thirdType ->
-            pokemonDetailsType1TextView.putText(thirdType?.name ?: "")
+            pokemonDetailsType1TextView.putText(thirdType?.name?.capitalize() ?: "")
             pokemonDetailsType1TextView.setVisible(thirdType != null)
         }
 

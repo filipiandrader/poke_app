@@ -7,9 +7,11 @@ import com.pokeapp.data.remote.services.PokemonService
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Type
 import com.pokeapp.util.convertToPokemon
+import com.pokeapp.util.formatNamePokemon
 import com.pokeapp.util.getPokemonID
 import com.pokeapp.util.verifyResponseResult
 import org.json.JSONObject
+import timber.log.Timber
 
 /**
  * Created by Filipi Andrade on 29/03/2020
@@ -34,7 +36,7 @@ class PokemonRepositoryImpl(private val api: PokemonService,
 
             val p = Pokemon()
             p.id = jsonObject.getInt("id")
-            p.name = pokemons[i].name.capitalize()
+            p.name = pokemons[i].name.formatNamePokemon()
             p.photo = sprites.getString("front_default")
             p.photo_shiny = sprites.getString("front_shiny")
 
@@ -65,16 +67,16 @@ class PokemonRepositoryImpl(private val api: PokemonService,
         for (i in 0 until response.body()!!.pokemon_species.size) {
             val obj = response.body()!!.pokemon_species[i]
 
-            val responseByName = api.getPokemon(obj.name).await()
+            val responseByName = api.getPokemonById(obj.url.getPokemonID()).await()
 
             if (!responseByName.verifyResponseResult()) {
-                return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
+                return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.errorBody()}"))
             }
 
             val p = Pokemon()
 
             val objPkm = responseByName.body()!!.convertToPokemon()
-            p.name = obj.name.capitalize()
+            p.name = obj.name.formatNamePokemon()
             p.id = objPkm.id
             p.photo = objPkm.photo
             p.photo_shiny = objPkm.photo_shiny
@@ -103,7 +105,7 @@ class PokemonRepositoryImpl(private val api: PokemonService,
     }
 
     override suspend fun getPokemonByType(id: Int): ResultRequest<MutableList<HashMap<String, Any>>> {
-        val response = api.getPokemonByType().await()
+        val response = api.getPokemonByType(id).await()
 
         if (!response.verifyResponseResult()) {
             return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
@@ -122,7 +124,7 @@ class PokemonRepositoryImpl(private val api: PokemonService,
             }
 
             val objInfo = JSONObject(responseInfo.body() as Map<*, *>)
-            val name = objInfo.getString("name").capitalize()
+            val name = objInfo.getString("name").formatNamePokemon()
             val sprites = objInfo.getJSONObject("sprites")
             val types = objInfo.getJSONArray("types")
 

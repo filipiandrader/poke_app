@@ -30,6 +30,21 @@ class PokemonColorUtil(var context: Context) {
     }
 
     @ColorInt
+    fun getPokemonColor(typeOfPokemon: String): Int {
+        val color = when (typeOfPokemon.toLowerCase(Locale("pt", "BR"))) {
+            "grass", "bug" -> R.color.lightTeal
+            "fire" -> R.color.lightRed
+            "water", "fighting", "normal" -> R.color.lightBlue
+            "electric", "psychic" -> R.color.lightYellow
+            "poison", "ghost" -> R.color.lightPurple
+            "ground", "rock" -> R.color.lightBrown
+            "dark" -> R.color.black
+            else -> R.color.lightBlue
+        }
+        return convertColor(color)
+    }
+
+    @ColorInt
     fun getCardViewColor(menuType: String): Int {
         val color = when (menuType.toLowerCase(Locale("pt", "BR"))) {
             "pokedex", "kanto" -> R.color.lightTeal

@@ -154,6 +154,7 @@
                                 android:id="@+id/pokemonDetailsType1TextView"
                                 style="@style/PokeApp.Details.TextAppearance.Label.Type"
                                 app:layout_constraintStart_toStartOf="parent"
+                                android:layout_marginTop="2dp"
                                 app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
                                 tools:text="Grass" />
 
@@ -161,6 +162,7 @@
                                 android:id="@+id/pokemonDetailsType2TextView"
                                 style="@style/PokeApp.Details.TextAppearance.Label.Type"
                                 android:layout_marginStart="4dp"
+                                android:layout_marginTop="2dp"
                                 app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType1TextView"
                                 app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
                                 tools:text="Grass" />
@@ -169,6 +171,7 @@
                                 android:id="@+id/pokemonDetailsType3TextView"
                                 style="@style/PokeApp.Details.TextAppearance.Label.Type"
                                 android:layout_marginStart="4dp"
+                                android:layout_marginTop="2dp"
                                 app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType2TextView"
                                 app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
                                 tools:text="Grass" />

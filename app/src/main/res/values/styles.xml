@@ -11,6 +11,7 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="md_corner_radius">16dp</item>
         <item name="md_background_color">@color/backgroundLight</item>
+        <item name="md_font_title">@font/circularstd_book</item>
     </style>
 
     <style name="PokeApp.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -129,7 +130,7 @@
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:alpha">0.25</item>
+        <item name="android:alpha">0.4</item>
         <item name="android:fontFamily">@font/circularstd_medium</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
