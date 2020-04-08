@@ -7,6 +7,10 @@
 - Opção de **favoritar** um pokemon e assim criar um espaço no app para os pokemons favoritos;
 - Listar **regiões**.
 
+## Você pode baixar em...
+
+- [Google Play - Em breve...](#)
+
 ## Bibliotecas Usadas
 
 - [Retrofit](https://square.github.io/retrofit/)
