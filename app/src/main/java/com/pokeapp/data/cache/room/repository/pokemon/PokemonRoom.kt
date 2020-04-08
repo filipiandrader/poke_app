@@ -14,4 +14,8 @@ interface PokemonRoom {
     fun getById(id: Int): PokemonLocal?
 
     fun getAll(): MutableList<PokemonLocal>?
+
+    fun getPokemonByGeneration(region: String) : MutableList<PokemonLocal>?
+
+    fun getPokemonByType(type: String) : MutableList<PokemonLocal>?
 }

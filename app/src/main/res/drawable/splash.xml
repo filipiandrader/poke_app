@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--    <item android:drawable="@color/colorPrimaryText" />-->
+    <item android:drawable="@color/backgroundLight" />
+    <item
+        android:drawable="@drawable/ic_pokeball_splash"
+        android:gravity="center" />
 
-    <item>
+    <!--<item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/simple_pokeball" />
-    </item>
+            android:src="@drawable/ic_pokeball_splash" />
+    </item>-->
 </layer-list>

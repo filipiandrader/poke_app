@@ -11,6 +11,7 @@ data class Pokemon(var id: Int = 0,
                    var name: String = "",
                    var photo: String = "",
                    var photo_shiny: String = "",
+                   var generation: String = "",
                    var base_experience: Int = -1,
                    var height: Int = -1,
                    var weight: Int = -1,
@@ -50,6 +51,14 @@ data class Pokemon(var id: Int = 0,
         get() = photo_shiny
         set(value) {
             photo_shiny = value
+            notifyChange()
+        }
+
+    var _generation
+        @Bindable
+        get() = generation
+        set(value) {
+            generation = value
             notifyChange()
         }
 

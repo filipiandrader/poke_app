@@ -246,12 +246,9 @@ class PokemonFragment : Fragment() {
                     }
                 }
                 State.FAILURE -> {
-                    viewState.throwable?.message?.let {
-                        pokemonMessageTextView.setVisible(true)
-                        pokemonRecyclerView.setVisible(false)
-                        pokemonProgressBar.setVisible(false)
-                        pokemonMessageTextView.putText(it)
-                    }
+                    pokemonMessageTextView.setVisible(true)
+                    pokemonRecyclerView.setVisible(false)
+                    pokemonProgressBar.setVisible(false)
                 }
                 else -> { /* ignore */
                 }
@@ -269,19 +266,14 @@ class PokemonFragment : Fragment() {
                     pokemonMenuFAM.setVisible(false)
                 }
                 State.SUCCESS -> {
-                    pokemonMessageTextView.setVisible(false)
-                    pokemonProgressBar.setVisible(false)
                     mViewModel.getStateByGeneration().value?.data?.let { pokemon ->
                         setupRecyclerView(pokemon)
                     }
                 }
                 State.FAILURE -> {
-                    viewState.throwable?.message?.let {
-                        pokemonMessageTextView.setVisible(true)
-                        pokemonRecyclerView.setVisible(false)
-                        pokemonProgressBar.setVisible(false)
-                        pokemonMessageTextView.putText(it)
-                    }
+                    pokemonMessageTextView.setVisible(true)
+                    pokemonRecyclerView.setVisible(false)
+                    pokemonProgressBar.setVisible(false)
                 }
                 else -> { /* ignore */
                 }
@@ -320,12 +312,9 @@ class PokemonFragment : Fragment() {
                     }
                 }
                 State.FAILURE -> {
-                    viewState.throwable?.message?.let {
-                        pokemonMessageTextView.setVisible(true)
-                        pokemonRecyclerView.setVisible(false)
-                        pokemonProgressBar.setVisible(false)
-                        pokemonMessageTextView.putText(it)
-                    }
+                    pokemonMessageTextView.setVisible(true)
+                    pokemonRecyclerView.setVisible(false)
+                    pokemonProgressBar.setVisible(false)
                 }
                 else -> { /* ignore */
                 }
@@ -405,6 +394,7 @@ class PokemonFragment : Fragment() {
             pokemonMessageTextView.putText("Sem pokemons cadastrados :(")
         }
         pokemonRecyclerView.setVisible(mPokemon.isNotEmpty())
+        pokemonProgressBar.setVisible(false)
         pokemonMenuFAM.setVisible(true)
     }
 }

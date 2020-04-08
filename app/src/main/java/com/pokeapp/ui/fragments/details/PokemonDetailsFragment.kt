@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
@@ -48,6 +49,7 @@ class PokemonDetailsFragment : Fragment() {
         mViewModel.getStateInfo().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.LOADING -> {
+                    isClickableImageView(false)
                     pokemonDetailsProgressBar.setVisible(true)
                     pokemonDetailsViewPager.setVisible(false)
                     pokemonDetailsErrorTextView.setVisible(false)
@@ -87,9 +89,14 @@ class PokemonDetailsFragment : Fragment() {
         navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
     }
 
+    private fun isClickableImageView(isClickable: Boolean) {
+        pokemonDetailsFavouriteImageView.isClickable = isClickable
+    }
+
     private fun bindInfo(pokemon: Pokemon) {
         mPokemon.height = pokemon.height
         mPokemon.weight = pokemon.weight
+        mPokemon.generation = pokemon.generation
         mPokemon.base_experience = pokemon.base_experience
         mPokemon.abilities = pokemon.abilities
         mPokemon.moves = pokemon.moves
@@ -101,13 +108,14 @@ class PokemonDetailsFragment : Fragment() {
 
         pokemonDetailsProgressBar.setVisible(false)
         pokemonDetailsViewPager.setVisible(true)
+        isClickableImageView(true)
     }
 
     private fun showToast() {
         if (mPokemon.favourite) {
-            longToast("${mPokemon.name} foi favoritado :)")
+            longToast("${mPokemon.name} foi favoritado(a) :)")
         } else {
-            longToast("${mPokemon.name} foi desfavoritado :(")
+            longToast("${mPokemon.name} foi desfavoritado(a) :(")
         }
 
         setFavouriteIconCorrectly()

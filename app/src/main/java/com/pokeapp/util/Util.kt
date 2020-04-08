@@ -137,6 +137,32 @@ fun String.getTypeId(): Int {
     return split[1].replace("/", "").toInt()
 }
 
+fun Int.getPokemonGeneration() : String {
+    return when (this) {
+        in 1..151 -> "kanto"
+        in 152..251 -> "johto"
+        in 252..386 -> "hoenn"
+        in 387..493 -> "sinnoh"
+        in 494..649 -> "unova"
+        in 650..721 -> "kalos"
+        in 722..809 -> "alola"
+        else -> ""
+    }
+}
+
+fun Int.getGenerationName() : String {
+    return when (this) {
+        1 -> "kanto"
+        2 -> "johto"
+        3 -> "hoenn"
+        4 -> "sinnoh"
+        5 -> "unova"
+        6 -> "kalos"
+        7 -> "alola"
+        else -> ""
+    }
+}
+
 fun String.formatNameStats(context: Context): String {
     return when (this) {
         "speed" -> context.resources.getString(R.string.base_stats_speed_label)
@@ -278,6 +304,7 @@ fun PokemonLocal.convertPokemon(): Pokemon =
                 name = name,
                 photo = photo,
                 photo_shiny = photo_shiny,
+                generation = generation,
                 base_experience = base_experience,
                 height = height,
                 weight = weight,
@@ -335,6 +362,7 @@ fun Pokemon.convertPokemon(): PokemonLocal =
                 name = name,
                 photo = photo,
                 photo_shiny = photo_shiny,
+                generation = generation,
                 base_experience = base_experience,
                 height = height,
                 weight = weight,

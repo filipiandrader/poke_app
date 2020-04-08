@@ -6,8 +6,10 @@ import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Species
 import com.pokeapp.util.convertToPokemon
 import com.pokeapp.util.getEvolutionChainID
+import com.pokeapp.util.getPokemonGeneration
 import org.json.JSONObject
 import retrofit2.Response
+import timber.log.Timber
 
 /**
  * Created by Filipi Andrade on 04/04/2020
@@ -30,6 +32,7 @@ class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDe
         pokemon.abilities = objPkm.abilities
         pokemon.moves = objPkm.moves
         pokemon.stats = objPkm.stats
+        pokemon.generation = id.getPokemonGeneration()
 
         val responseSpecies = api.getPokemonSpecies(id).await()
 
