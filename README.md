@@ -33,3 +33,13 @@ Abaixo estão as versões atuais utilizadas nas ferramentas desse projeto.
 |Gradle Build Plugin  |  3.6.2|
 |Android API  |  29|
 |Support Library  |  androidX|
+
+## Screenshots
+
+<img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278836.png" alt="Image 01" height="480" width="270"> <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278837.png" alt="Image 02" height="480" width="270"> 
+<img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278905.png" alt="Image 03" height="480" width="270"> <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278909.png" alt="Image 04" height="480" width="270">
+<img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278917.png" alt="Image 05" height="480" width="270"> <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278927.png" alt="Image 06" height="480" width="270">
+<img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278936.png" alt="Image 07" height="480" width="270"> <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278939.png" alt="Image 08" height="480" width="270">
+<img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278941.png" alt="Image 09" height="480" width="270"> <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278943.png" alt="Image 10" height="480" width="270">
+<img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278946.png" alt="Image 11" height="480" width="270"> <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278958.png" alt="Image 12" height="480" width="270">
+<img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278970.png" alt="Image 13" height="480" width="270">
