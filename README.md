@@ -9,7 +9,7 @@
 
 ## Você pode baixar em...
 
-- [Google Play - Em breve...](#)
+- [APK Sample](https://github.com/filipiandrader/poke_app/blob/master/app/sample/dexapp.apk)
 
 ## Bibliotecas Usadas
 
