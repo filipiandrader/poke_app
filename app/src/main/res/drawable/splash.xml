@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/backgroundLight" />
     <item
-        android:drawable="@drawable/ic_pokeball_splash"
+        android:drawable="@drawable/splash_gradient_background"
         android:gravity="center" />
-
-    <!--<item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/ic_pokeball_splash" />
-    </item>-->
+    <item
+        android:drawable="@drawable/ic_splash"
+        android:gravity="center" />
 </layer-list>
