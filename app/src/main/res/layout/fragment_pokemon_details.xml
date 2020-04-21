@@ -42,14 +42,98 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="16dp">
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.Toolbar
+                            android:id="@+id/pokemonDetailsToolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="0dp"
+                            app:contentInsetLeft="0dp"
+                            app:contentInsetStart="0dp"
+                            app:layout_collapseMode="pin"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/navigationIconImageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:background="@drawable/ic_arrow_white"
+                                    android:contentDescription="@string/app_name"
+                                    android:foreground="?android:selectableItemBackground"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:ignore="UnusedAttribute" />
+
+                                <TextView
+                                    android:id="@+id/pokemonDetailsNameTextView"
+                                    style="@style/PokeApp.Details.TextAppearance.Label"
+                                    android:layout_marginTop="4dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/navigationIconImageView"
+                                    tools:text="Titulo" />
+
+                                <ImageView
+                                    android:id="@+id/pokemonDetailsFavouriteImageView"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:contentDescription="@string/app_name"
+                                    android:src="@drawable/ic_not_favourite"
+                                    app:layout_constraintBottom_toBottomOf="@+id/navigationIconImageView"
+                                    app:layout_constraintEnd_toEndOf="@+id/pokemonDetailsIDTextView"
+                                    app:layout_constraintStart_toStartOf="@+id/pokemonDetailsIDTextView"
+                                    app:layout_constraintTop_toTopOf="@+id/navigationIconImageView" />
+
+                                <TextView
+                                    android:id="@+id/pokemonDetailsIDTextView"
+                                    style="@style/PokeApp.Details.TextAppearance.Label.ID"
+                                    app:layout_constraintBottom_toBottomOf="@+id/pokemonDetailsType3TextView"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsFavouriteImageView"
+                                    tools:text="#001" />
+
+                                <TextView
+                                    android:id="@+id/pokemonDetailsType1TextView"
+                                    style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                                    android:layout_marginTop="2dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
+                                    tools:text="Grass" />
+
+                                <TextView
+                                    android:id="@+id/pokemonDetailsType2TextView"
+                                    style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginTop="2dp"
+                                    app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType1TextView"
+                                    app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
+                                    tools:text="Grass" />
+
+                                <TextView
+                                    android:id="@+id/pokemonDetailsType3TextView"
+                                    style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginTop="2dp"
+                                    app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType2TextView"
+                                    app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
+                                    tools:text="Grass" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.appcompat.widget.Toolbar>
 
                         <ImageView
                             android:id="@+id/evolutionImageView1"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
+                            android:layout_marginTop="8dp"
                             android:adjustViewBounds="true"
                             android:alpha="0.5"
                             android:contentDescription="@string/app_name"
@@ -57,7 +141,7 @@
                             android:tint="@color/colorDivider"
                             app:layout_constraintEnd_toStartOf="@+id/evolutionImageView2"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsToolbar" />
 
                         <ImageView
                             android:id="@+id/pokemonDetailsNormalImageView"
@@ -80,9 +164,10 @@
                             android:contentDescription="@string/app_name"
                             android:src="@drawable/pokeball"
                             android:tint="@color/colorDivider"
+                            app:layout_constraintBottom_toBottomOf="@+id/evolutionImageView1"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/evolutionImageView1"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="@+id/evolutionImageView1" />
 
                         <ImageView
                             android:id="@+id/pokemonDetailsShinyImageView"
@@ -96,88 +181,6 @@
                             app:layout_constraintStart_toStartOf="@+id/evolutionImageView2"
                             app:layout_constraintTop_toTopOf="@+id/evolutionImageView2" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/pokemonDetailsToolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elevation="0dp"
-                        app:contentInsetLeft="0dp"
-                        app:contentInsetStart="0dp"
-                        app:layout_collapseMode="pin"
-                        app:popupTheme="@style/AppTheme.PopupOverlay">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/navigationIconImageView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:background="@drawable/ic_arrow_white"
-                                android:contentDescription="@string/app_name"
-                                android:foreground="?android:selectableItemBackground"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:ignore="UnusedAttribute" />
-
-                            <TextView
-                                android:id="@+id/pokemonDetailsNameTextView"
-                                style="@style/PokeApp.Details.TextAppearance.Label"
-                                android:layout_marginTop="4dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/navigationIconImageView"
-                                tools:text="Titulo" />
-
-                            <ImageView
-                                android:id="@+id/pokemonDetailsFavouriteImageView"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/ic_not_favourite"
-                                app:layout_constraintBottom_toBottomOf="@+id/navigationIconImageView"
-                                app:layout_constraintEnd_toEndOf="@+id/pokemonDetailsIDTextView"
-                                app:layout_constraintStart_toStartOf="@+id/pokemonDetailsIDTextView"
-                                app:layout_constraintTop_toTopOf="@+id/navigationIconImageView" />
-
-                            <TextView
-                                android:id="@+id/pokemonDetailsIDTextView"
-                                style="@style/PokeApp.Details.TextAppearance.Label.ID"
-                                app:layout_constraintBottom_toBottomOf="@+id/pokemonDetailsType3TextView"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsFavouriteImageView"
-                                tools:text="#001" />
-
-                            <TextView
-                                android:id="@+id/pokemonDetailsType1TextView"
-                                style="@style/PokeApp.Details.TextAppearance.Label.Type"
-                                app:layout_constraintStart_toStartOf="parent"
-                                android:layout_marginTop="2dp"
-                                app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
-                                tools:text="Grass" />
-
-                            <TextView
-                                android:id="@+id/pokemonDetailsType2TextView"
-                                style="@style/PokeApp.Details.TextAppearance.Label.Type"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginTop="2dp"
-                                app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType1TextView"
-                                app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
-                                tools:text="Grass" />
-
-                            <TextView
-                                android:id="@+id/pokemonDetailsType3TextView"
-                                style="@style/PokeApp.Details.TextAppearance.Label.Type"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginTop="2dp"
-                                app:layout_constraintStart_toEndOf="@+id/pokemonDetailsType2TextView"
-                                app:layout_constraintTop_toBottomOf="@+id/pokemonDetailsNameTextView"
-                                tools:text="Grass" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </androidx.appcompat.widget.Toolbar>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/pokemonDetailsConstraintLayout"
