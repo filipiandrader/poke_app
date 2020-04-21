@@ -1,5 +1,6 @@
 package com.pokeapp.ui.fragments.region_details
 
+import android.annotation.SuppressLint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Region
 import com.pokeapp.ui.fragments.RegionDetailsViewPagerAdapter
@@ -29,6 +31,7 @@ class RegionDetailsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_region_details, container, false)
     }
 
+    @SuppressLint("DefaultLocale")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,7 +45,14 @@ class RegionDetailsFragment : Fragment() {
         regionDetailsNameTextView.putText(mRegion.name.capitalize())
         regionDetailsGenerationTextView.putText(mRegion.main_generation.formatGenerationName())
 
-        regionDetailsViewPager.adapter = RegionDetailsViewPagerAdapter(requireFragmentManager(), requireContext(), mRegion)
+        regionDetailsViewPager.adapter = RegionDetailsViewPagerAdapter(activity!!.supportFragmentManager, requireContext(), mRegion)
         regionDetailsTabLayout.setupWithViewPager(regionDetailsViewPager)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // BACK BUTTON
+        navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
     }
 }

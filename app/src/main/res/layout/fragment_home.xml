@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundLight"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragments.home.HomeFragment">
+    tools:context=".ui.fragments.home.HomeFragment"
+    tools:ignore="Overdraw">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -103,7 +104,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/backgroundLight"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:foreground="?android:attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute">
 
                 <TextView
                     style="@style/PokeApp.Home.TextAppearance.Title"
@@ -149,6 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/backgroundLight"
+                tools:ignore="UnusedAttribute"
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <TextView
@@ -179,7 +182,6 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/homeRegionCardView"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
@@ -196,7 +198,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/backgroundLight"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:foreground="?android:attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute">
 
                 <TextView
                     style="@style/PokeApp.Home.TextAppearance.Title"

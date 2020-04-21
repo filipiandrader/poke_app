@@ -1,3 +1,5 @@
+@file:Suppress("USELESS_CAST")
+
 package com.pokeapp.di
 
 import com.pokeapp.data.cache.room.repository.pokemon.PokemonRoom

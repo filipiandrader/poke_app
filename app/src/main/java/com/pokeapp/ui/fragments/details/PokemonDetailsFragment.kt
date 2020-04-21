@@ -3,24 +3,20 @@ package com.pokeapp.ui.fragments.details
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-
 import com.pokeapp.R
 import com.pokeapp.databinding.FragmentPokemonDetailsBinding
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.details.PokemonDetailsViewModel
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.ui.fragments.PokemonDetailsViewPagerAdapter
-import com.pokeapp.util.PokemonColorUtil
-import com.pokeapp.util.putText
-import com.pokeapp.util.setRefresh
-import com.pokeapp.util.setVisible
+import com.pokeapp.util.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.*
 import org.jetbrains.anko.backgroundColor
@@ -103,7 +99,7 @@ class PokemonDetailsFragment : Fragment() {
         mPokemon.stats = pokemon.stats
         mPokemon.evolves = pokemon.evolves
 
-        pokemonDetailsViewPager.adapter = PokemonDetailsViewPagerAdapter(requireFragmentManager(), requireContext(), mPokemon)
+        pokemonDetailsViewPager.adapter = PokemonDetailsViewPagerAdapter(activity!!.supportFragmentManager, requireContext(), mPokemon)
         pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
 
         pokemonDetailsProgressBar.setVisible(false)
@@ -150,17 +146,17 @@ class PokemonDetailsFragment : Fragment() {
         Picasso.get().load(mPokemon.photo_shiny).into(pokemonDetailsShinyImageView)
 
         mPokemon.types.getOrNull(0).let { firstType ->
-            pokemonDetailsType3TextView.putText(firstType?.name?.capitalize() ?: "")
+            pokemonDetailsType3TextView.putText(setTypeName(firstType?.name))
             pokemonDetailsType3TextView.setVisible(firstType != null)
         }
 
         mPokemon.types.getOrNull(1).let { secondType ->
-            pokemonDetailsType2TextView.putText(secondType?.name?.capitalize() ?: "")
+            pokemonDetailsType2TextView.putText(setTypeName(secondType?.name))
             pokemonDetailsType2TextView.setVisible(secondType != null)
         }
 
         mPokemon.types.getOrNull(2).let { thirdType ->
-            pokemonDetailsType1TextView.putText(thirdType?.name?.capitalize() ?: "")
+            pokemonDetailsType1TextView.putText(setTypeName(thirdType?.name))
             pokemonDetailsType1TextView.setVisible(thirdType != null)
         }
 
@@ -175,9 +171,9 @@ class PokemonDetailsFragment : Fragment() {
 
     private fun setFavouriteIconCorrectly() {
         if (mPokemon.favourite) {
-            pokemonDetailsFavouriteImageView.setImageDrawable(context!!.resources.getDrawable(R.drawable.ic_favourite))
+            pokemonDetailsFavouriteImageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_favourite))
         } else {
-            pokemonDetailsFavouriteImageView.setImageDrawable(context!!.resources.getDrawable(R.drawable.ic_not_favourite))
+            pokemonDetailsFavouriteImageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_not_favourite))
         }
     }
 

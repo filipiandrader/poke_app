@@ -1,5 +1,6 @@
 package com.pokeapp.data.remote.repository.details
 
+import android.annotation.SuppressLint
 import com.pokeapp.data.ResultRequest
 import com.pokeapp.data.remote.services.PokemonService
 import com.pokeapp.presentation.model.Pokemon
@@ -9,7 +10,6 @@ import com.pokeapp.util.getEvolutionChainID
 import com.pokeapp.util.getPokemonGeneration
 import org.json.JSONObject
 import retrofit2.Response
-import timber.log.Timber
 
 /**
  * Created by Filipi Andrade on 04/04/2020
@@ -17,8 +17,9 @@ import timber.log.Timber
 
 class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDetailsRepository {
 
+    @SuppressLint("DefaultLocale")
     override suspend fun getPokemonInfo(id: Int): ResultRequest<Pokemon> {
-        val response = api.getPokemonById(id).await()
+        val response = api.getPokemonById(id)
 
         if (!verifyResponseResult(response)) {
             return ResultRequest.error(Exception("Erro ao obter info do pokemon!"))
@@ -34,14 +35,14 @@ class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDe
         pokemon.stats = objPkm.stats
         pokemon.generation = id.getPokemonGeneration()
 
-        val responseSpecies = api.getPokemonSpecies(id).await()
+        val responseSpecies = api.getPokemonSpecies(id)
 
         if (!verifyResponseResult(responseSpecies)) {
             return ResultRequest.error(Exception("Erro ao obter info do pokemon!"))
         }
 
         val evolutionChainId = responseSpecies.body()!!.getEvolutionChainID()
-        val responseEvolutionChain = api.getPokemonEvolutionChain(evolutionChainId).await()
+        val responseEvolutionChain = api.getPokemonEvolutionChain(evolutionChainId)
 
         if (!verifyResponseResult(responseEvolutionChain)) {
             return ResultRequest.error(Exception("Erro ao obter info do pokemon!"))
@@ -55,7 +56,7 @@ class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDe
             val secondEvolveArr = evolvesToArr.getJSONObject(0).getJSONArray("evolves_to")
 
             val firstEvolveName = firstEvolve.getString("name")
-            val firstEvolveResponse = api.getPokemon(firstEvolveName).await()
+            val firstEvolveResponse = api.getPokemon(firstEvolveName)
             val firstEvolveSprites = JSONObject(firstEvolveResponse.body() as Map<*, *>).getJSONObject("sprites")
             val photoFirstEvolve = firstEvolveSprites.getString("front_default")
             evolves.add(Species(name = firstEvolveName.capitalize(), photo = photoFirstEvolve))
@@ -63,7 +64,7 @@ class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDe
             if (secondEvolveArr.length() > 0) {
                 val secondEvolve = secondEvolveArr.getJSONObject(0).getJSONObject("species")
                 val secondEvolveName = secondEvolve.getString("name")
-                val secondEvolveResponse = api.getPokemon(secondEvolveName).await()
+                val secondEvolveResponse = api.getPokemon(secondEvolveName)
                 val secondEvolveSprites = JSONObject(secondEvolveResponse.body() as Map<*, *>).getJSONObject("sprites")
                 val photoSecondEvolve = secondEvolveSprites.getString("front_default")
                 evolves.add(Species(name = secondEvolve.getString("name").capitalize(), photo = photoSecondEvolve))

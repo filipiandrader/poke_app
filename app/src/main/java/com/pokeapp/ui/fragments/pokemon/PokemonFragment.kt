@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Point
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -41,12 +43,11 @@ import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
 import com.pokeapp.ui.fragments.BottomSheetTypeViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.pokeapp.util.PokemonColorUtil
-import com.pokeapp.util.formatNamePokemon
 import com.pokeapp.util.putText
+import com.pokeapp.util.setTypeName
 import com.pokeapp.util.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
-import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.textColor
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -64,7 +65,6 @@ class PokemonFragment : Fragment() {
     private var mOffset = 0
 
     var isLoading = false
-    var isClicked = false
 
     var visibleItemCount = 0
     var totalItemCount = 0
@@ -118,7 +118,9 @@ class PokemonFragment : Fragment() {
         pokemonMenuFAM.close(true)
         val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
-        val peekHeight = display.height * 0.70
+        val size = Point()
+        display.getSize(size)
+        val peekHeight = size.y * 0.70
 
         val dialog = MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             setPeekHeight(literal = peekHeight.toInt())
@@ -159,7 +161,9 @@ class PokemonFragment : Fragment() {
         pokemonMenuFAM.close(true)
         val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
-        val peekHeight = display.height * 0.70
+        val size = Point()
+        display.getSize(size)
+        val peekHeight = size.y * 0.70
 
         val dialog = MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             setPeekHeight(literal = peekHeight.toInt())
@@ -176,7 +180,7 @@ class PokemonFragment : Fragment() {
             withDataSource(dataSourceOf(mTypes))
             withItem<Type, BottomSheetTypeViewHolder>(R.layout.item_type) {
                 onBind(::BottomSheetTypeViewHolder) { _, item ->
-                    this.itemTypeNameTextView.putText(item.name.capitalize())
+                    this.itemTypeNameTextView.putText(setTypeName(item.name))
 
                     val color = PokemonColorUtil(itemView.context).getPokemonColor(item.name)
                     this.itemTypeCardView.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
@@ -350,29 +354,26 @@ class PokemonFragment : Fragment() {
 
                         if (item.types.size == 1) {
                             if (item.types[0].name == "dark") {
-                                this.itemPokemonIDTextView.textColor = resources.getColor(R.color.colorIcons)
+                                this.itemPokemonIDTextView.textColor = ContextCompat.getColor(context!!, R.color.colorIcons)
                             }
                         } else if (item.types.size == 2) {
                             if (item.types[1].name == "dark") {
-                                this.itemPokemonIDTextView.textColor = resources.getColor(R.color.colorIcons)
+                                this.itemPokemonIDTextView.textColor = ContextCompat.getColor(context!!, R.color.colorIcons)
                             }
                         }
 
                         item.types.getOrNull(0).let { firstType ->
-                            this.itemPokemonType1TextView.putText(firstType?.name?.capitalize()
-                                    ?: "")
+                            this.itemPokemonType1TextView.putText(setTypeName(firstType?.name))
                             this.itemPokemonType1TextView.setVisible(firstType != null)
                         }
 
                         item.types.getOrNull(1).let { secondType ->
-                            this.itemPokemonType2TextView.putText(secondType?.name?.capitalize()
-                                    ?: "")
+                            this.itemPokemonType2TextView.putText(setTypeName(secondType?.name))
                             this.itemPokemonType2TextView.setVisible(secondType != null)
                         }
 
                         item.types.getOrNull(2).let { thirdType ->
-                            this.itemPokemonType3TextView.putText(thirdType?.name?.capitalize()
-                                    ?: "")
+                            this.itemPokemonType3TextView.putText(setTypeName(thirdType?.name))
                             this.itemPokemonType3TextView.setVisible(thirdType != null)
                         }
                     }

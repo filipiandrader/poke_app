@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/gen1.png" />
+        <ignore path="src/main/res/drawable/gen2.png" />
+        <ignore path="src/main/res/drawable/gen3.png" />
+        <ignore path="src/main/res/drawable/gen4.png" />
+        <ignore path="src/main/res/drawable/gen5.png" />
+        <ignore path="src/main/res/drawable/gen6.png" />
+        <ignore path="src/main/res/drawable/gen7.png" />
+        <ignore path="src/main/res/drawable/ic_splash.png" />
+        <ignore path="src/main/res/drawable/poke001.png" />
+        <ignore path="src/main/res/drawable/pokeball.png" />
+    </issue>
+</lint>

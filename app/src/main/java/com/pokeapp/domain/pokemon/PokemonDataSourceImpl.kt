@@ -1,6 +1,5 @@
 package com.pokeapp.domain.pokemon
 
-import com.google.gson.Gson
 import com.pokeapp.data.cache.room.repository.type.TypeRoom
 import com.pokeapp.data.remote.repository.pokemon.PokemonRepository
 import com.pokeapp.presentation.model.Pokemon
@@ -13,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 /**
  * Created by Filipi Andrade on 29/03/2020

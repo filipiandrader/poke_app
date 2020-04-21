@@ -1,12 +1,11 @@
 package com.pokeapp.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.pokeapp.R
 import com.pokeapp.data.cache.entities.*
 import com.pokeapp.data.remote.model.*
@@ -25,10 +24,6 @@ fun View.setVisible(visible: Boolean) = if (visible) {
     this.visibility = View.GONE
 }
 
-fun View.setEnable(enable: Boolean) {
-    this.isEnabled = enable
-}
-
 fun TextView.putText(text: String) {
     this.text = text
 }
@@ -37,19 +32,39 @@ fun ProgressBar.putProgress(progress: Int) {
     this.progress = progress
 }
 
-fun TextInputEditText.getTextString() = this.text.toString()
-
-fun TextInputLayout.setErrorText(error: String) {
-//    this.isErrorEnabled = true
-    this.error = error
-}
-
 fun SwipeRefreshLayout.setRefresh(refresh: Boolean) {
     this.isRefreshing = refresh
 }
 
+fun setTypeName(type: String?) : String {
+    return when (type) {
+        "normal" -> "Normal"
+        "fighting" -> "Lutador"
+        "flying" -> "Voador"
+        "poison" -> "Venenoso"
+        "ground" -> "Terra"
+        "rock" -> "Pedra"
+        "bug" -> "Inseto"
+        "ghost" -> "Fantasma"
+        "steel" -> "Metal"
+        "fire" -> "Fogo"
+        "water" -> "Água"
+        "grass" -> "Grama"
+        "electric" -> "Elétrico"
+        "psychic" -> "Psíquico"
+        "ice" -> "Gelo"
+        "dragon" -> "Dragão"
+        "dark" -> "Sombrio"
+        "fairy" -> "Fada"
+        "unknown" -> "Desconhecido"
+        "shadow" -> "Corrompidos"
+        else -> ""
+    }
+}
+
+@SuppressLint("DefaultLocale")
 fun String.formatNamePokemon(): String {
-    var nameFormated = ""
+    var nameFormated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
@@ -66,8 +81,9 @@ fun String.formatNamePokemon(): String {
     return nameFormated.replace("-", "")
 }
 
+@SuppressLint("DefaultLocale")
 fun String.formatNameMove(): String {
-    var moveFormated = ""
+    var moveFormated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
@@ -83,8 +99,9 @@ fun String.formatNameMove(): String {
     return moveFormated.replace("-", "")
 }
 
+@SuppressLint("DefaultLocale")
 fun String.formatNameAbility(): String {
-    var moveFormated = ""
+    var moveFormated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
@@ -100,8 +117,9 @@ fun String.formatNameAbility(): String {
     return moveFormated.replace("-", "")
 }
 
+@SuppressLint("DefaultLocale")
 fun String.formatNameRegion(): String {
-    var formated = ""
+    var formated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
@@ -219,19 +237,6 @@ fun HashMap<String, Any>.convertToPokemon(): Pokemon {
             stats = stats.convertToStats(),
             abilities = abilities.convertToAbility()
     )
-}
-
-fun HashMap<String, Any>.convertToSpecie(): MutableList<Species> {
-    val chain = JSONObject(this as Map<*, *>).getJSONObject("chain")
-    val evolvesToArr = chain.getJSONArray("evolves_to")
-    val evolves = mutableListOf<Species>()
-
-    if (evolvesToArr.length() > 0) {
-        val firstEvolve = evolvesToArr.getJSONObject(0).getJSONObject("species")
-
-    }
-
-    return evolves
 }
 
 fun JSONObject.convertToSprite(): SpritesApi =
@@ -491,12 +496,6 @@ fun JSONArray.convertToGroupList(): MutableList<GroupsApi> {
 }
 
 fun JSONObject.convertGroup(): GroupsApi = GroupsApi(name = this.getString("name"))
-
-fun TypeResponse.convertToType(): MutableList<Type> {
-    val list = mutableListOf<Type>()
-    this.results.forEach { listApi -> list.add(listApi.convertType()) }
-    return list
-}
 
 fun TypeApi.convertType() = Type(id = url.getTypeId(), name = name)
 

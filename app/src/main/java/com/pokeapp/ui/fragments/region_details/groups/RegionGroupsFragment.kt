@@ -1,18 +1,16 @@
 package com.pokeapp.ui.fragments.region_details.groups
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
-
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Groups
-import com.pokeapp.presentation.model.Location
 import com.pokeapp.presentation.model.Region
 import com.pokeapp.ui.fragments.region_details.RegionDetailsViewHolder
 import com.pokeapp.util.formatNameRegion

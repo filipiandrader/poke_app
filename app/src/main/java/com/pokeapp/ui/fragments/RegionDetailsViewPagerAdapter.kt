@@ -5,12 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Region
-import com.pokeapp.ui.fragments.details.about.AboutFragment
-import com.pokeapp.ui.fragments.details.base_stats.BaseStatsFragment
-import com.pokeapp.ui.fragments.details.evolution.EvolutionFragment
-import com.pokeapp.ui.fragments.details.moves.MovesFragment
 import com.pokeapp.ui.fragments.region_details.cities.RegionCitiesFragment
 import com.pokeapp.ui.fragments.region_details.groups.RegionGroupsFragment
 

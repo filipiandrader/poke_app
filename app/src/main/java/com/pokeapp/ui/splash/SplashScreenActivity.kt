@@ -1,9 +1,7 @@
 package com.pokeapp.ui.splash
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import com.pokeapp.R
+import androidx.appcompat.app.AppCompatActivity
 import com.pokeapp.ui.main.MainActivity
 import org.jetbrains.anko.startActivity
 

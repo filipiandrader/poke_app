@@ -8,12 +8,14 @@
     android:layout_margin="8dp"
     android:background="@color/backgroundLight"
     app:cardCornerRadius="8dp"
-    app:cardElevation="0dp">
+    app:cardElevation="0dp"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="?android:selectableItemBackground">
+        android:foreground="?android:selectableItemBackground"
+        tools:ignore="UnusedAttribute">
 
         <TextView
             android:id="@+id/itemPokemonNameTextView"
@@ -55,7 +57,6 @@
             tools:text="Grass" />
 
         <LinearLayout
-            android:id="@+id/itemPokemonLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

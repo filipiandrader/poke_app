@@ -1,9 +1,6 @@
 package com.pokeapp.ui.fragments.details.base_stats
 
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

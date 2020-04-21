@@ -1,9 +1,7 @@
 package com.pokeapp.data.cache.room.repository.type
 
-import com.google.gson.Gson
 import com.pokeapp.PokeApplication
 import com.pokeapp.data.cache.entities.TypeLocal
-import timber.log.Timber
 
 /**
  * Created by Filipi Andrade on 05/04/2020

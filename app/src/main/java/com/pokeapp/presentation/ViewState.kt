@@ -15,7 +15,7 @@ class ViewState<T>(val data: T? = null,
 
         fun <T> loading() = ViewState<T>(state = State.LOADING)
 
-        fun <T> gettingData(t: T) = ViewState(data = t, state = State.GETTING_DATA)
+//        fun <T> gettingData(t: T) = ViewState(data = t, state = State.GETTING_DATA)
 
         fun <T> initializing() = ViewState<T>(state = State.WAITING_DATA)
     }
@@ -23,7 +23,7 @@ class ViewState<T>(val data: T? = null,
 
 enum class State {
     WAITING_DATA,
-    GETTING_DATA,
+//    GETTING_DATA,
     LOADING,
     SUCCESS,
     FAILURE

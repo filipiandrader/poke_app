@@ -2,7 +2,6 @@
     <string name="app_name">DexApp</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="pokemon_details_tab_1">Sobre</string>
     <string name="pokemon_details_tab_2">Status Base</string>
@@ -35,9 +34,6 @@
     <string name="pokedex_title">Pokedex</string>
     <string name="region_title">Regiões</string>
 
-    <string name="region_details_location">Cidades</string>
-
-    <string name="pokemon_fam_filter_by">Filtrar...</string>
     <string name="pokemon_fab_all">Todos os Pokemons</string>
     <string name="pokemon_fab_by_generation">Pokemons por Geração</string>
     <string name="pokemon_fab_by_type">Pokemons por Tipo</string>

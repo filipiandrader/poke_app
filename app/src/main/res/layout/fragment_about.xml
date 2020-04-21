@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundLight"
-    tools:context=".ui.fragments.details.about.AboutFragment">
+    tools:context=".ui.fragments.details.about.AboutFragment"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -31,7 +32,6 @@
                 android:padding="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/aboutHeightConstraintLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
@@ -58,7 +58,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/aboutWeightConstraintLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">

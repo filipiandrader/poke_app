@@ -1,5 +1,6 @@
 package com.pokeapp.ui.fragments.region
 
+import android.annotation.SuppressLint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
@@ -86,6 +87,7 @@ class RegionFragment : Fragment() {
         })
     }
 
+    @SuppressLint("DefaultLocale")
     private fun setupRecyclerView(region: MutableList<Region>) {
         if (region.isNotEmpty()) {
             regionRecyclerView.setup {

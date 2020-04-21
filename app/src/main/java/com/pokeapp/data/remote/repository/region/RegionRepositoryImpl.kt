@@ -13,7 +13,7 @@ import com.pokeapp.util.convertToRegionInfoApi
 class RegionRepositoryImpl(private val api: PokemonService) : RegionRepository {
 
     override suspend fun getRegion(): ResultRequest<MutableList<Region>> {
-        val response = api.getRegion().await()
+        val response = api.getRegion()
 
         if (!response.isSuccessful) {
             return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
@@ -27,7 +27,7 @@ class RegionRepositoryImpl(private val api: PokemonService) : RegionRepository {
                 val r = Region()
                 r.name = name
 
-                val responseInfo = api.getRegionByName(name).await()
+                val responseInfo = api.getRegionByName(name)
 
                 if (!responseInfo.isSuccessful) {
                     return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))

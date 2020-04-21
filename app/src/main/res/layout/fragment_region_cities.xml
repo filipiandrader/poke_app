@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundLight"
-    tools:context=".ui.fragments.region_details.cities.RegionCitiesFragment">
+    tools:context=".ui.fragments.region_details.cities.RegionCitiesFragment"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

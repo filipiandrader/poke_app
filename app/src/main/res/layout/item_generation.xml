@@ -7,12 +7,14 @@
     android:layout_margin="8dp"
     android:background="@color/backgroundLight"
     app:cardCornerRadius="6dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:selectableItemBackground">
+        android:foreground="?android:selectableItemBackground"
+        tools:ignore="UnusedAttribute">
 
         <TextView
             android:id="@+id/itemGenerationNameTextView"

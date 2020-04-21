@@ -12,7 +12,7 @@ import com.pokeapp.util.verifyResponseResult
 class FavouriteRepositoryImpl(private val api: PokemonService) : FavouriteRepository {
 
     override suspend fun getAllTypes(): ResultRequest<TypeResponse> {
-        val response = api.getType().await()
+        val response = api.getType()
 
         if (!response.verifyResponseResult()) {
             return ResultRequest.error(Exception("HTTP: ${response.code()} - ${response.message()}"))
