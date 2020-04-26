@@ -15,7 +15,7 @@ import retrofit2.Response
  * Created by Filipi Andrade on 04/04/2020
  */
 
-class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDetailsRepository {
+class PokemonDetailsRepositoryImpl(private val api: PokemonService) : PokemonDetailsRepository {
 
     @SuppressLint("DefaultLocale")
     override suspend fun getPokemonInfo(id: Int): ResultRequest<Pokemon> {
@@ -36,10 +36,20 @@ class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDe
         pokemon.generation = id.getPokemonGeneration()
 
         val responseSpecies = api.getPokemonSpecies(id)
-
         if (!verifyResponseResult(responseSpecies)) {
             return ResultRequest.error(Exception("Erro ao obter info do pokemon!"))
         }
+
+        val flavorTextEntries = JSONObject(responseSpecies.body() as Map<*, *>).getJSONArray("flavor_text_entries")
+        for (i in 0 until flavorTextEntries.length()) {
+            val obj = flavorTextEntries.getJSONObject(i)
+            val language = obj.getJSONObject("language").getString("name")
+            if (language.toLowerCase() == "en") {
+                pokemon.about = obj.getString("flavor_text")
+                break
+            }
+        }
+
 
         val evolutionChainId = responseSpecies.body()!!.getEvolutionChainID()
         val responseEvolutionChain = api.getPokemonEvolutionChain(evolutionChainId)
@@ -76,7 +86,7 @@ class PokemonDetailsRepositoryImpl (private val api: PokemonService) : PokemonDe
         return ResultRequest.success(pokemon)
     }
 
-    private fun verifyResponseResult(response: Response<*>) : Boolean {
+    private fun verifyResponseResult(response: Response<*>): Boolean {
         if (!response.isSuccessful) {
             return false
         } else if (response.body() == null) {

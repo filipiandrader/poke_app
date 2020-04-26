@@ -93,6 +93,7 @@ class PokemonDetailsFragment : Fragment() {
         mPokemon.height = pokemon.height
         mPokemon.weight = pokemon.weight
         mPokemon.generation = pokemon.generation
+        mPokemon.about = pokemon.about
         mPokemon.base_experience = pokemon.base_experience
         mPokemon.abilities = pokemon.abilities
         mPokemon.moves = pokemon.moves

@@ -17,6 +17,7 @@ class PokemonLocal(@PrimaryKey
                    var photo: String = "",
                    var photo_shiny: String = "",
                    var generation: String = "",
+                   var about: String = "",
                    var height: Int = -1,
                    var base_experience: Int = -1,
                    var weight: Int = -1,

@@ -24,6 +24,7 @@ class PokeApplication : Application() {
         database = Room.databaseBuilder(this,
                 PokemonDatabase::class.java,
                 DB_NAME)
+                .fallbackToDestructiveMigration()
                 .build()
 
         if (BuildConfig.DEBUG) {

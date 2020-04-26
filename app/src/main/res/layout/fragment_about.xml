@@ -12,6 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.codesgood.views.JustifiedTextView
+            android:id="@+id/aboutDescriptionTextView"
+            style="@style/PokeApp.About.TextAppearance.Info"
+            android:layout_margin="16dp"
+            android:textColor="@color/colorSecondaryText"
+            app:barrierAllowsGoneWidgets="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_optimizationLevel="groups"
+            tools:text="Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun’s rays, the seed grows progressively larger." />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/aboutCardView"
             android:layout_width="match_parent"
@@ -22,7 +34,7 @@
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/aboutDescriptionTextView">
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "91175015892",
+    "firebase_url": "https://dexapp-e07b8.firebaseio.com",
+    "project_id": "dexapp-e07b8",
+    "storage_bucket": "dexapp-e07b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91175015892:android:848ebf750a130fc715b241",
+        "android_client_info": {
+          "package_name": "com.pokeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91175015892-o2r8hsah8jlbu7jb2asqiodpn8u2pl9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoAQaXr4trzP-vIQEXZ_7L7XnG6nA4c_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91175015892-o2r8hsah8jlbu7jb2asqiodpn8u2pl9k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

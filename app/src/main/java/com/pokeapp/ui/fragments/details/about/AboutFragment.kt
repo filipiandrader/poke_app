@@ -36,6 +36,7 @@ class AboutFragment : Fragment() {
 
         val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
         pokemon.let { p ->
+            aboutDescriptionTextView.putText(p.about.replace("\n", " "))
             aboutHeightTextView.putText(p.height.convertToMeter())
             aboutWeightTextView.putText(p.weight.convertToKilos())
             aboutBaseExpTextView.putText("${p.base_experience}")
