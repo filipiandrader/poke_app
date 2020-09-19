@@ -30,8 +30,8 @@ import com.pokeapp.presentation.details.PokemonDetailsViewModel
 import com.pokeapp.presentation.favourite.FavouriteViewModel
 import com.pokeapp.presentation.pokemon.PokemonViewModel
 import com.pokeapp.presentation.region.RegionViewModel
-import org.koin.android.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.dsl.module
+import org.koin.androidx.viewmodel.dsl.viewModel
 
 /**
  * Created by Filipi Andrade on 29/03/2020
@@ -43,13 +43,13 @@ val pokeModule = module {
 
     single { getBaseUrl() }
     single { getOkHttpClient() }
-    single { createWebService<PokemonService>(getBaseUrl()) }
+    single<PokemonService> { createWebService(getBaseUrl()) }
 
     single { PokemonRoomImpl() as PokemonRoom }
     single { TypeRoomImpl() as TypeRoom }
 
-    single { FavouriteRepositoryImpl(get()) as FavouriteRepository }
-    single { FavouriteDataSourceImpl(get(), get(), get()) as FavouriteDataSource }
+    single<FavouriteRepository> { FavouriteRepositoryImpl(get()) }
+    single<FavouriteDataSource> { FavouriteDataSourceImpl(get(), get(), get()) }
     viewModel { FavouriteViewModel(get()) }
 
     single { PokemonDetailsRepositoryImpl(get()) as PokemonDetailsRepository }

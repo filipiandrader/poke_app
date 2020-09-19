@@ -5,7 +5,8 @@ import androidx.room.Room
 import com.pokeapp.data.cache.room.PokemonDatabase
 import com.pokeapp.di.pokeModule
 import com.pokeapp.util.LogReportingTree
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import timber.log.Timber
 
 /**
@@ -33,6 +34,8 @@ class PokeApplication : Application() {
             Timber.plant(LogReportingTree())
         }
 
-        startKoin(this, listOf(pokeModule))
+        startKoin {
+            modules(pokeModule).androidContext(applicationContext)
+        }
     }
 }
