@@ -1,0 +1,12 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    domainDependencies.each { add(it.configuration, it.dependency, it.options) }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"

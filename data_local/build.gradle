@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: "$rootProject.projectDir/android-common.gradle"
+
+dependencies {
+    implementation project(':data')
+
+    dataLocalDependencies.each { add(it.configuration, it.dependency, it.option) }
+}

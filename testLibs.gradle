@@ -1,0 +1,34 @@
+ext {
+    //version
+    mockitoKotlinVersion      = "2.0.0"
+    junitVersion              = "4.13"
+    androidJunitVersion       = "1.1.2"
+    robolectricVersion        = "3.4.2"
+
+    androidTestRulesVersion   = "1.1.0"
+    androidTestVersion        = "1.2.0"
+    coreTestVersion           = "2.0.0"
+    mockkVersion              = "1.9.2"
+    androidJunitVersion       = "1.1.0"
+    androidCoreTestVersion    = "1.2.0"
+
+    //androidTestImplementation libs
+    androidTestRules          = "androidx.test:rules:$androidTestRulesVersion"
+    androidJunit              = "androidx.test.ext:junit:$androidJunitVersion"
+    androidTestRunner         = "androidx.test:runner:$androidTestVersion"
+
+    androidJunit              = "de.mannodermaus.junit5:android-test-core:$androidJunitVersion"
+    androidJunitRunner        = "de.mannodermaus.junit5:android-test-runner:$androidJunitVersion"
+    androidMockk              = "io.mockk:mockk-android:$mockkVersion"
+    androidCoreTest           = "androidx.test:core:$androidCoreTestVersion"
+
+    //testImplementation libs
+    junit                     = "junit:junit:$junitVersion"
+    kotlinTest                = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    kotlinJunit               = "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+    mockitoKotlin             = "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    koinTest                  = "org.koin:koin-test:$koinVersion"
+    coreTesting               = "androidx.arch.core:core-testing:$coreTestVersion"
+    robolectric               = "org.robolectric:robolectric:$robolectricVersion"
+    mockk                     = "io.mockk:mockk:$mockkVersion"
+}

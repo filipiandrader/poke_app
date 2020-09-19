@@ -1,0 +1,54 @@
+ext {
+    // kotlin
+    kotlin                     = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    coroutine                  = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+
+    // retrofit
+    retrofit2                  = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    retrofitCoroutine          = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofitCoroutineVersion"
+    loggingInterceptor         = "com.squareup.okhttp3:logging-interceptor:$intercptorVersion"
+    gsonConvertFactory         = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //androidx
+    appCompat                  = "androidx.appcompat:appcompat:$appCompatVersion"
+    androidKtxCore             = "androidx.core:core-ktx:$androidKtxCoreVersion"
+    constraintLayout           = "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    navigationUi               = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    navigationFragment         = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    material                   = "com.google.android.material:material:$materialVersion"
+    cardView                   = "androidx.cardview:cardview:$cardviewVersion"
+    swipeRefresh               = "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
+
+    //androidx lifecycle
+    viewModelRuntime           = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    viewModel                  = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    lifecycleXt                = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    liveData                   = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+
+    // koin
+    koinScope                  = "org.koin:koin-androidx-scope:$koinVersion"
+    koinViewModel              = "org.koin:koin-androidx-viewmodel:$koinVersion"
+    koinFragment               = "org.koin:koin-androidx-fragment:$koinVersion"
+    koinAndroid                = "org.koin:koin-androidx-ext:$koinVersion"
+
+    // gson
+    gson                       = "com.google.code.gson:gson:$gsonVersion"
+
+    // timber
+    timber                     = "com.jakewharton.timber:timber:$timberVersion"
+
+    // afollestad
+    recyclical                 = "com.afollestad:recyclical:$recyclicalVersion"
+    bottomSheets                 = "com.afollestad.material-dialogs:bottomsheets:$bottomSheetsVersion"
+
+    // lottie
+    lottie                     = "com.airbnb.android:lottie:$lottieVersion"
+
+    // room
+    room                       = "androidx.room:room-runtime:$roomVersion"
+    roomKtx                    = "androidx.room:room-ktx:$roomVersion"
+    roomCompiler               = "androidx.room:room-compiler:$roomVersion"
+
+    // recyclerview animation
+    recyclerViewAnim           = "jp.wasabeef:recyclerview-animators:$recyclerViewAnimVersion"
+}

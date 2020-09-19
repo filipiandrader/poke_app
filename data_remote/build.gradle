@@ -1,0 +1,19 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation project(':data')
+
+    dataRemoteDependencies.each { add(it.configuration, it.dependency, it.options) }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.freeCompilerArgs = ["-Xallow-result-return-type"]
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
