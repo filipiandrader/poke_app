@@ -42,6 +42,7 @@ ext {
     // afollestad
     recyclicalVersion          = "1.1.1"
     bottomSheetsVersion        = "3.3.0"
+    dialogsVersion             = "3.3.0"
 
     // timber
     timberVersion              = "4.7.1"
@@ -51,4 +52,19 @@ ext {
 
     // recyclerview animation
     recyclerViewAnimVersion    = "4.0.1"
+
+    // firebase
+    firebaseCoreVersion        = "17.5.0"
+    firebaseAnalyticsVersion   = "17.5.0"
+    firebaseLanguageVersion    = "22.0.1"
+    firebaseTranslateVersion   = "20.0.9"
+
+    // justify textview
+    justifyTextViewVersion     = "1.1.0"
+
+    // picasso
+    picassoVersion             = "2.71828"
+
+    // fab
+    fabVersion                 = "1.6.4"
 }

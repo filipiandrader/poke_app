@@ -2,7 +2,7 @@ package com.pokeapp
 
 import android.app.Application
 import androidx.room.Room
-import com.pokeapp.data.cache.room.PokemonDatabase
+import com.pokeapp.data_local.PokemonDatabase
 import com.pokeapp.di.pokeModule
 import com.pokeapp.util.LogReportingTree
 import org.koin.android.ext.koin.androidContext
@@ -15,7 +15,7 @@ import timber.log.Timber
 class PokeApplication : Application() {
 
     companion object {
-        var database: PokemonDatabase? = null
+        var database: com.pokeapp.data_local.PokemonDatabase? = null
         const val DB_NAME = "pokemon.db"
     }
 
@@ -23,7 +23,7 @@ class PokeApplication : Application() {
         super.onCreate()
 
         database = Room.databaseBuilder(this,
-                PokemonDatabase::class.java,
+                com.pokeapp.data_local.PokemonDatabase::class.java,
                 DB_NAME)
                 .fallbackToDestructiveMigration()
                 .build()

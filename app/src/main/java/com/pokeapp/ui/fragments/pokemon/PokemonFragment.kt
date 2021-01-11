@@ -42,10 +42,10 @@ import com.pokeapp.presentation.pokemon.PokemonViewModel
 import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
 import com.pokeapp.ui.fragments.BottomSheetTypeViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
-import com.pokeapp.util.PokemonColorUtil
-import com.pokeapp.util.putText
-import com.pokeapp.util.setTypeName
-import com.pokeapp.util.setVisible
+import com.pokeapp.base_feature.util.extensions.PokemonColorUtil
+import com.pokeapp.base_feature.util.extensions.putText
+import com.pokeapp.base_feature.util.extensions.setTypeName
+import com.pokeapp.base_feature.util.extensions.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import org.jetbrains.anko.textColor

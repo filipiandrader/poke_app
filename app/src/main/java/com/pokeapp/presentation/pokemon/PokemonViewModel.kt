@@ -3,7 +3,7 @@ package com.pokeapp.presentation.pokemon
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pokeapp.domain.pokemon.PokemonDataSource
+import com.pokeapp.data.datasource.remote.PokemonDataSource
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.ViewState
 import com.pokeapp.presentation.model.Pokemon
@@ -13,7 +13,7 @@ import com.pokeapp.presentation.model.Type
  * Created by Filipi Andrade on 29/03/2020
  */
 
-class PokemonViewModel(private val dataSource: PokemonDataSource) : ViewModel() {
+class PokemonViewModel(private val dataSource: com.pokeapp.data.datasource.remote.PokemonDataSource) : ViewModel() {
 
     private var mState = MutableLiveData<ViewState<MutableList<Pokemon>>>()
     private var mStateByGeneration = MutableLiveData<ViewState<MutableList<Pokemon>>>()

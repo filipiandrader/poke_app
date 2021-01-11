@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Region
 import com.pokeapp.ui.fragments.RegionDetailsViewPagerAdapter
-import com.pokeapp.util.PokemonColorUtil
-import com.pokeapp.util.formatGenerationName
-import com.pokeapp.util.putText
+import com.pokeapp.base_feature.util.extensions.PokemonColorUtil
+import com.pokeapp.base_feature.util.extensions.formatGenerationName
+import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_region_details.*
 import org.jetbrains.anko.backgroundColor
 

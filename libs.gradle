@@ -39,7 +39,8 @@ ext {
 
     // afollestad
     recyclical                 = "com.afollestad:recyclical:$recyclicalVersion"
-    bottomSheets                 = "com.afollestad.material-dialogs:bottomsheets:$bottomSheetsVersion"
+    dialogs                    = "com.afollestad.material-dialogs:core:$dialogsVersion"
+    bottomSheets               = "com.afollestad.material-dialogs:bottomsheets:$bottomSheetsVersion"
 
     // lottie
     lottie                     = "com.airbnb.android:lottie:$lottieVersion"
@@ -51,4 +52,19 @@ ext {
 
     // recyclerview animation
     recyclerViewAnim           = "jp.wasabeef:recyclerview-animators:$recyclerViewAnimVersion"
+
+    // firebase
+    firebaseCore               = "com.google.firebase:firebase-core:$firebaseCoreVersion"
+    firebaseAnalytics          = "com.google.firebase:firebase-analytics:$firebaseAnalyticsVersion"
+    firebaseLanguage           = "com.google.firebase:firebase-ml-natural-language:$firebaseLanguageVersion"
+    firebaseTranslate          = "com.google.firebase:firebase-ml-natural-language-translate-model:$firebaseTranslateVersion"
+
+    // justify textview
+    justifyTextView            = "com.codesgood:justifiedtextview:$justifyTextViewVersion"
+
+    // picasso
+    picasso                    = "com.squareup.picasso:picasso:$picassoVersion"
+
+    // fab
+    fab                        = "com.github.clans:fab:$fabVersion"
 }

@@ -10,9 +10,9 @@ import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
+import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.presentation.model.Stats
-import com.pokeapp.util.*
 import kotlinx.android.synthetic.main.fragment_base_stats.*
 
 /**

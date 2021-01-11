@@ -12,8 +12,8 @@ import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Ability
 import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.util.formatNameAbility
-import com.pokeapp.util.putText
+import com.pokeapp.base_feature.util.extensions.formatNameAbility
+import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_abilities.*
 
 /**

@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.pokeapp.R
+import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.databinding.FragmentPokemonDetailsBinding
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.details.PokemonDetailsViewModel
 import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.ui.fragments.PokemonDetailsViewPagerAdapter
-import com.pokeapp.util.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.*
 import org.jetbrains.anko.backgroundColor

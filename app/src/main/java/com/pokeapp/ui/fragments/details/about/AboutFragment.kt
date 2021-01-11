@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.util.convertToMeter
-import com.pokeapp.util.convertToKilos
-import com.pokeapp.util.putText
+import com.pokeapp.base_feature.util.extensions.convertToMeter
+import com.pokeapp.base_feature.util.extensions.convertToKilos
+import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_about.*
 
 /**

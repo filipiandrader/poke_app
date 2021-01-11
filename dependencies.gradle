@@ -22,6 +22,13 @@ ext {
             [configuration: "implementation", dependency: "$recyclical"],
             [configuration: "implementation", dependency: "$bottomSheets"],
             [configuration: "implementation", dependency: "$recyclerViewAnim"],
+            [configuration: "implementation", dependency: "$firebaseCore"],
+            [configuration: "implementation", dependency: "$firebaseAnalytics"],
+            [configuration: "implementation", dependency: "$firebaseLanguage"],
+            [configuration: "implementation", dependency: "$firebaseTranslate"],
+            [configuration: "implementation", dependency: "$justifyTextView"],
+            [configuration: "implementation", dependency: "$picasso"],
+            [configuration: "implementation", dependency: "$fab"],
             [configuration: "implementation", dependency: "$lottie"]
     ]
 

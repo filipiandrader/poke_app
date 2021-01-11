@@ -13,8 +13,8 @@ import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Move
 import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.util.formatNameMove
-import com.pokeapp.util.putText
+import com.pokeapp.base_feature.util.extensions.formatNameMove
+import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_moves.*
 
 /**

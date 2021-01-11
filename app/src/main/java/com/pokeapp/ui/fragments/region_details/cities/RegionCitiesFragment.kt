@@ -14,8 +14,8 @@ import com.pokeapp.R
 import com.pokeapp.presentation.model.Location
 import com.pokeapp.presentation.model.Region
 import com.pokeapp.ui.fragments.region_details.RegionDetailsViewHolder
-import com.pokeapp.util.formatNameRegion
-import com.pokeapp.util.putText
+import com.pokeapp.base_feature.util.extensions.formatNameRegion
+import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_region_cities.*
 
 /**

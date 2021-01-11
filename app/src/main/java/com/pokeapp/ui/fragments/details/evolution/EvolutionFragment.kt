@@ -8,8 +8,8 @@ import android.view.ViewGroup
 
 import com.pokeapp.R
 import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.util.putText
-import com.pokeapp.util.setVisible
+import com.pokeapp.base_feature.util.extensions.putText
+import com.pokeapp.base_feature.util.extensions.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_evolution.*
 

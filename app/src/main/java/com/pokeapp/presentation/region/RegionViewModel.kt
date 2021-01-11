@@ -3,7 +3,7 @@ package com.pokeapp.presentation.region
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pokeapp.domain.region.RegionDataSource
+import com.pokeapp.data.datasource.remote.RegionDataSource
 import com.pokeapp.presentation.State
 import com.pokeapp.presentation.ViewState
 import com.pokeapp.presentation.model.Region
@@ -11,7 +11,7 @@ import com.pokeapp.presentation.model.Region
 /**
  * Created by Filipi Andrade on 01/04/2020
  */
-class RegionViewModel(private val dataSource: RegionDataSource) : ViewModel() {
+class RegionViewModel(private val dataSource: com.pokeapp.data.datasource.remote.RegionDataSource) : ViewModel() {
 
     private var mState = MutableLiveData<ViewState<MutableList<Region>>>()
 

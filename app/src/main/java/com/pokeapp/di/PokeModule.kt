@@ -2,30 +2,30 @@
 
 package com.pokeapp.di
 
-import com.pokeapp.data.cache.room.repository.pokemon.PokemonRoom
-import com.pokeapp.data.cache.room.repository.pokemon.PokemonRoomImpl
-import com.pokeapp.data.cache.room.repository.type.TypeRoom
-import com.pokeapp.data.cache.room.repository.type.TypeRoomImpl
-import com.pokeapp.data.remote.repository.details.PokemonDetailsRepository
-import com.pokeapp.data.remote.repository.details.PokemonDetailsRepositoryImpl
-import com.pokeapp.data.remote.repository.favourite.FavouriteRepository
-import com.pokeapp.data.remote.repository.favourite.FavouriteRepositoryImpl
-import com.pokeapp.data.remote.repository.pokemon.PokemonRepository
-import com.pokeapp.data.remote.repository.pokemon.PokemonRepositoryImpl
-import com.pokeapp.data.remote.repository.region.RegionRepository
-import com.pokeapp.data.remote.repository.region.RegionRepositoryImpl
-import com.pokeapp.data.remote.services.PokemonService
-import com.pokeapp.data.remote.services.createWebService
-import com.pokeapp.data.remote.services.getBaseUrl
-import com.pokeapp.data.remote.services.getOkHttpClient
-import com.pokeapp.domain.details.PokemonDetailsDataSource
-import com.pokeapp.domain.details.PokemonDetailsDataSourceImpl
-import com.pokeapp.domain.favourite.FavouriteDataSource
-import com.pokeapp.domain.favourite.FavouriteDataSourceImpl
-import com.pokeapp.domain.pokemon.PokemonDataSource
-import com.pokeapp.domain.pokemon.PokemonDataSourceImpl
-import com.pokeapp.domain.region.RegionDataSource
-import com.pokeapp.domain.region.RegionDataSourceImpl
+import com.pokeapp.data_local.datasource.pokemon.PokemonRoom
+import com.pokeapp.data_local.datasource.pokemon.PokemonRoomImpl
+import com.pokeapp.data_local.datasource.type.TypeRoom
+import com.pokeapp.data_local.datasource.type.TypeRoomImpl
+import com.pokeapp.data.PokemonDetailsRepository
+import com.pokeapp.data.PokemonDetailsRepositoryImpl
+import com.pokeapp.data.FavouriteRepository
+import com.pokeapp.data.FavouriteRepositoryImpl
+import com.pokeapp.data.PokemonRepository
+import com.pokeapp.data.PokemonRepositoryImpl
+import com.pokeapp.data.RegionRepository
+import com.pokeapp.data.RegionRepositoryImpl
+import com.pokeapp.data_remote.service.PokemonService
+import com.pokeapp.data_remote.service.createWebService
+import com.pokeapp.data_remote.service.getBaseUrl
+import com.pokeapp.data_remote.service.getOkHttpClient
+import com.pokeapp.data.datasource.remote.PokemonDetailsDataSource
+import com.pokeapp.data_remote.datasource.PokemonDetailsDataSourceImpl
+import com.pokeapp.data.datasource.remote.FavouriteDataSource
+import com.pokeapp.data_remote.datasource.FavouriteDataSourceImpl
+import com.pokeapp.data.datasource.remote.PokemonDataSource
+import com.pokeapp.data_remote.datasource.PokemonDataSourceImpl
+import com.pokeapp.data.datasource.remote.RegionDataSource
+import com.pokeapp.data_remote.datasource.RegionDataSourceImpl
 import com.pokeapp.presentation.details.PokemonDetailsViewModel
 import com.pokeapp.presentation.favourite.FavouriteViewModel
 import com.pokeapp.presentation.pokemon.PokemonViewModel
@@ -41,26 +41,32 @@ val pokeModule = module {
 
     single { this }
 
-    single { getBaseUrl() }
-    single { getOkHttpClient() }
-    single<PokemonService> { createWebService(getBaseUrl()) }
+    single { com.pokeapp.data_remote.service.getBaseUrl() }
+    single { com.pokeapp.data_remote.service.getOkHttpClient() }
+    single<com.pokeapp.data_remote.service.PokemonService> { com.pokeapp.data_remote.service.createWebService(com.pokeapp.data_remote.service.getBaseUrl()) }
 
     single { PokemonRoomImpl() as PokemonRoom }
     single { TypeRoomImpl() as TypeRoom }
 
-    single<FavouriteRepository> { FavouriteRepositoryImpl(get()) }
-    single<FavouriteDataSource> { FavouriteDataSourceImpl(get(), get(), get()) }
+    single<com.pokeapp.data.FavouriteRepository> { com.pokeapp.data.FavouriteRepositoryImpl(get()) }
+    single<com.pokeapp.data.datasource.remote.FavouriteDataSource> {
+        com.pokeapp.data_remote.datasource.FavouriteDataSourceImpl(
+            get(),
+            get(),
+            get()
+        )
+    }
     viewModel { FavouriteViewModel(get()) }
 
-    single { PokemonDetailsRepositoryImpl(get()) as PokemonDetailsRepository }
-    single { PokemonDetailsDataSourceImpl(get(), get()) as PokemonDetailsDataSource }
+    single { com.pokeapp.data.PokemonDetailsRepositoryImpl(get()) as com.pokeapp.data.PokemonDetailsRepository }
+    single { com.pokeapp.data_remote.datasource.PokemonDetailsDataSourceImpl(get(), get()) as com.pokeapp.data.datasource.remote.PokemonDetailsDataSource }
     viewModel { PokemonDetailsViewModel(get()) }
 
-    single { PokemonRepositoryImpl(get(), get()) as PokemonRepository }
-    single { PokemonDataSourceImpl(get(), get()) as PokemonDataSource }
+    single { com.pokeapp.data.PokemonRepositoryImpl(get(), get()) as com.pokeapp.data.PokemonRepository }
+    single { com.pokeapp.data_remote.datasource.PokemonDataSourceImpl(get(), get()) as com.pokeapp.data.datasource.remote.PokemonDataSource }
     viewModel { PokemonViewModel(get()) }
 
-    single { RegionRepositoryImpl(get()) as RegionRepository }
-    single { RegionDataSourceImpl(get()) as RegionDataSource }
+    single { com.pokeapp.data.RegionRepositoryImpl(get()) as com.pokeapp.data.RegionRepository }
+    single { com.pokeapp.data_remote.datasource.RegionDataSourceImpl(get()) as com.pokeapp.data.datasource.remote.RegionDataSource }
     viewModel { RegionViewModel(get()) }
 }

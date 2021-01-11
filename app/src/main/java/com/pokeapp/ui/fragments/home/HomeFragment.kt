@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 
 import com.pokeapp.R
-import com.pokeapp.util.PokemonColorUtil
+import com.pokeapp.base_feature.util.extensions.PokemonColorUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
