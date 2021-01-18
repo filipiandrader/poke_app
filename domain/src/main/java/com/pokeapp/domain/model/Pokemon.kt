@@ -9,6 +9,7 @@ data class Pokemon(
         val name: String,
         val photo: String,
         val photoShiny: String,
+        val generationName: String,
         val types: List<Type> = listOf(),
         val liked: Boolean = false
 )

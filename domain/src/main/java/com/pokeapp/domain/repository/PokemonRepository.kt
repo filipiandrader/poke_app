@@ -1,19 +1,25 @@
 package com.pokeapp.domain.repository
 
 import com.pokeapp.domain.model.Pokemon
+import com.pokeapp.domain.model.PokemonInfo
 import com.pokeapp.domain.model.Type
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Filipi Andrade on 29/03/2020
  */
+
 interface PokemonRepository {
 
-    suspend fun getAllPokemon(offset: Int): Flow<List<Pokemon>>
+    fun getAllPokemons(offset: Int, previous: Int): Flow<List<Pokemon>>
 
-    suspend fun getPokemonByGeneration(id: Int): Flow<List<Pokemon>>
+    fun getPokemonInfo(id: Int): Flow<PokemonInfo>
 
-    suspend fun getAllTypes(): Flow<List<Type>>
+    fun insert(pokemon: Pokemon): Flow<Unit>
 
-    suspend fun getPokemonByType(id: Int): Flow<List<HashMap<String, Any>>>
+    fun delete(pokemon: Pokemon): Flow<Unit>
+
+    fun getPokemonLikedById(id: Int): Flow<Pokemon?>
+
+    fun getAllPokemonsLiked(): Flow<List<Pokemon>?>
 }

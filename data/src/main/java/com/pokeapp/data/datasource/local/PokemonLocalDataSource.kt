@@ -1,6 +1,7 @@
 package com.pokeapp.data.datasource.local
 
 import com.pokeapp.domain.model.Pokemon
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Filipi Andrade on 30/03/2020
@@ -8,15 +9,15 @@ import com.pokeapp.domain.model.Pokemon
 
 interface PokemonLocalDataSource {
 
-    suspend fun insert(pokemon: Pokemon)
+    fun insert(pokemon: Pokemon): Flow<Unit>
 
-    suspend fun delete(pokemon: Pokemon)
+    fun delete(pokemon: Pokemon): Flow<Unit>
 
-    suspend fun getById(id: Int): Pokemon?
+    fun getPokemonLikedById(id: Int): Flow<Pokemon?>
 
-    suspend fun getAll(): List<Pokemon>?
+    fun getAllPokemonsLiked(): Flow<List<Pokemon>?>
 
-    suspend fun getPokemonByGeneration(region: String): List<Pokemon>?
+    fun getPokemonLikedByGeneration(region: String): Flow<List<Pokemon>?>
 
-    suspend fun getPokemonByType(type: String): List<Pokemon>?
+    fun getPokemonLikedByType(type: String): Flow<List<Pokemon>?>
 }

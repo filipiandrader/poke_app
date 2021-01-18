@@ -17,6 +17,7 @@ object PokemonMapper : DataRemoteMapper<PokemonResponse, Pokemon>() {
             name = data.name ?: "",
             photo = data.photo ?: "",
             photoShiny = data.photoShiny ?: "",
+            generationName = data.generationName ?: "",
             types = TypeMapper.listToDomain(data.types)
     )
 }

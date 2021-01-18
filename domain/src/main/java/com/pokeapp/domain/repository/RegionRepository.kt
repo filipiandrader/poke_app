@@ -1,6 +1,7 @@
 package com.pokeapp.domain.repository
 
 import com.pokeapp.domain.model.Region
+import com.pokeapp.domain.model.RegionInfo
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -9,5 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface RegionRepository {
 
-    suspend fun getRegion(): Flow<List<Region>>
+    fun getRegion(): Flow<List<Region>>
+
+    fun getRegionByName(name: String): Flow<RegionInfo>
 }

@@ -1,10 +1,13 @@
 package com.pokeapp.data_local.datasource.pokemon
 
 import com.pokeapp.data.datasource.local.PokemonLocalDataSource
+import com.pokeapp.data.utils.flatMap
 import com.pokeapp.data_local.dao.PokemonDAO
 import com.pokeapp.data_local.mapper.PokemonLocalMapper
 import com.pokeapp.data_local.model.PokemonLocal
 import com.pokeapp.domain.model.Pokemon
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 
 /**
  * Created by Filipi Andrade on 30/03/2020
@@ -12,40 +15,46 @@ import com.pokeapp.domain.model.Pokemon
 
 class PokemonLocalDataSourceImpl(private val dao: PokemonDAO) : PokemonLocalDataSource {
 
-    override suspend fun insert(pokemon: Pokemon) {
-        dao.insert(PokemonLocalMapper.toSaveLocal(pokemon))
+    override fun insert(pokemon: Pokemon) = flow {
+        emit(
+                dao.insert(PokemonLocalMapper.toSaveLocal(pokemon))
+        )
     }
 
-    override suspend fun delete(pokemon: Pokemon) {
-        dao.delete(PokemonLocalMapper.toSaveLocal(pokemon))
+    override fun delete(pokemon: Pokemon) = flow {
+        emit(
+                dao.delete(PokemonLocalMapper.toSaveLocal(pokemon))
+        )
     }
 
-    override suspend fun getById(id: Int) =
-        PokemonLocalMapper.toDomain(dao.getPokemon(id) ?: PokemonLocal())
+    override fun getPokemonLikedById(id: Int) = flow {
+        emit(
+                PokemonLocalMapper.toDomain(dao.getPokemon(id) ?: PokemonLocal())
+        )
+    }
 
-    override suspend fun getAll() = PokemonLocalMapper.toDomainList(dao.getPokemons())
+    override fun getAllPokemonsLiked() = flow {
+        emit(
+                PokemonLocalMapper.toDomainList(dao.getPokemons())
+        )
+    }
 
-    override suspend fun getPokemonByGeneration(region: String): MutableList<Pokemon> {
-        val pokemonsLocal = getAll()
+    override fun getPokemonLikedByGeneration(region: String) = getAllPokemonsLiked().flatMap { list ->
         val pokemons = mutableListOf<Pokemon>()
-
-        if (pokemonsLocal.isNotEmpty()) {
-            pokemonsLocal.map { p ->
-                if (p.generation.equals(region, ignoreCase = true)) {
+        if (list.isNotEmpty()) {
+            list.map { p ->
+                if (p.generationName.equals(region, ignoreCase = true)) {
                     pokemons.add(p)
                 }
             }
         }
-
-        return pokemons
+        flowOf(pokemons)
     }
 
-    override suspend fun getPokemonByType(type: String): MutableList<Pokemon> {
-        val pokemonsLocal = getAll()
+    override fun getPokemonLikedByType(type: String) = getAllPokemonsLiked().flatMap { list ->
         val pokemons = mutableListOf<Pokemon>()
-
-        if (pokemonsLocal.isNotEmpty()) {
-            pokemonsLocal.map { p ->
+        if (list.isNotEmpty()) {
+            list.map { p ->
                 p.types.map { t ->
                     if (t.name.equals(type, ignoreCase = true)) {
                         pokemons.add(p)
@@ -53,7 +62,6 @@ class PokemonLocalDataSourceImpl(private val dao: PokemonDAO) : PokemonLocalData
                 }
             }
         }
-
-        return pokemons
+        flowOf(pokemons)
     }
 }

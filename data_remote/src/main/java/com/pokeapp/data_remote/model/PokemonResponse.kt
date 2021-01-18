@@ -11,6 +11,8 @@ data class PokemonResponse(
     val photo: String? = null,
     @SerializedName("photo_shiny")
     val photoShiny: String? = null,
+    @SerializedName("generation_name")
+    val generationName: String? = null,
     @SerializedName("types")
     val types: List<TypeResponse> = listOf()
 )
