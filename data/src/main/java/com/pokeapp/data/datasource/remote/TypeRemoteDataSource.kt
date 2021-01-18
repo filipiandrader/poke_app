@@ -12,5 +12,5 @@ interface TypeRemoteDataSource {
 
     fun getAllTypes(): Flow<List<Type>>
 
-    fun getPokemonByType(id: Int): Flow<List<Pokemon>>
+    fun getPokemonByType(name: String): Flow<List<Pokemon>>
 }
