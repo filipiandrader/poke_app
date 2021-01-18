@@ -6,6 +6,5 @@ apply from: "$rootProject.projectDir/android-common.gradle"
 
 dependencies {
     presentationDependencies.each { add(it.configuration, it.dependency, it.option) }
-
     api project(':domain')
 }

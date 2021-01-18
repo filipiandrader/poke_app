@@ -1,9 +1,8 @@
 package com.pokeapp
 
 import android.app.Application
-import androidx.room.Room
-import com.pokeapp.data_local.PokemonDatabase
-import com.pokeapp.di.pokeModule
+import com.pokeapp.di.*
+import com.pokeapp.di.intent.intentModule
 import com.pokeapp.util.LogReportingTree
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -12,21 +11,11 @@ import timber.log.Timber
 /**
  * Created by Filipi Andrade on 29/03/2020
  */
-class PokeApplication : Application() {
 
-    companion object {
-        var database: com.pokeapp.data_local.PokemonDatabase? = null
-        const val DB_NAME = "pokemon.db"
-    }
+class PokeApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        database = Room.databaseBuilder(this,
-                com.pokeapp.data_local.PokemonDatabase::class.java,
-                DB_NAME)
-                .fallbackToDestructiveMigration()
-                .build()
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
@@ -35,7 +24,16 @@ class PokeApplication : Application() {
         }
 
         startKoin {
-            modules(pokeModule).androidContext(applicationContext)
+            modules(
+                    intentModule +
+                            listOf(
+                                    presentationModule,
+                                    domainModule,
+                                    dataModule,
+                                    dataRemoteModule,
+                                    dataLocalModule
+                            )
+            ).androidContext(applicationContext)
         }
     }
 }
