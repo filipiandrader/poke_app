@@ -1,9 +1,18 @@
 package com.pokeapp.data_local.mapper
 
+import com.pokeapp.data_local.mapper.AbilityLocalMapper.toAbilityList
+import com.pokeapp.data_local.mapper.AbilityLocalMapper.toAbilityLocalList
+import com.pokeapp.data_local.mapper.EvolvesLocalMapper.toEvolvesList
+import com.pokeapp.data_local.mapper.EvolvesLocalMapper.toEvolvesLocalList
+import com.pokeapp.data_local.mapper.MovesLocalMapper.toMovesList
+import com.pokeapp.data_local.mapper.MovesLocalMapper.toMovesLocalList
+import com.pokeapp.data_local.mapper.StatsLocalMapper.toStatsList
+import com.pokeapp.data_local.mapper.StatsLocalMapper.toStatsLocalList
 import com.pokeapp.data_local.mapper.TypeLocalMapper.toTypeList
 import com.pokeapp.data_local.mapper.TypeLocalMapper.toTypeLocalList
-import com.pokeapp.data_local.model.*
-import com.pokeapp.domain.model.*
+import com.pokeapp.data_local.model.PokemonLocal
+import com.pokeapp.domain.model.Pokemon
+import com.pokeapp.domain.model.PokemonInfo
 
 /*
  * Created by Filipi Andrade Rocha on 11/01/2021.
@@ -41,32 +50,6 @@ object PokemonLocalMapper {
             liked = pokemonLocal.liked
     )
 
-    fun toAbilityList(abilitiesLocal: List<AbilityLocal>) = abilitiesLocal.map { toAbility(it) }
-
-    fun toAbility(abilityLocal: AbilityLocal) = Ability(
-            name = abilityLocal.name
-    )
-
-    fun toMovesList(movesLocal: List<MoveLocal>) = movesLocal.map { toMoves(it) }
-
-    fun toMoves(moveLocal: MoveLocal) = Move(
-            name = moveLocal.name
-    )
-
-    fun toStatsList(statsLocal: List<StatsLocal>) = statsLocal.map { toStats(it) }
-
-    fun toStats(statLocal: StatsLocal) = Stats(
-            name = statLocal.name,
-            baseState = statLocal.baseState
-    )
-
-    fun toEvolvesList(evolvesLocal: List<SpeciesLocal>) = evolvesLocal.map { toEvolves(it) }
-
-    fun toEvolves(evolveLocal: SpeciesLocal) = Species(
-            name = evolveLocal.name,
-            photo = evolveLocal.photo
-    )
-
     fun toSaveLocal(pokemon: PokemonInfo) = PokemonLocal(
             id = pokemon.id,
             name = pokemon.name,
@@ -83,31 +66,5 @@ object PokemonLocalMapper {
             stats = toStatsLocalList(pokemon.stats).toMutableList(),
             evolves = toEvolvesLocalList(pokemon.evolves).toMutableList(),
             liked = true
-    )
-
-    fun toAbilityLocalList(abilities: List<Ability>) = abilities.map { toAbilityLocal(it) }
-
-    fun toAbilityLocal(ability: Ability) = AbilityLocal(
-            name = ability.name
-    )
-
-    fun toMovesLocalList(moves: List<Move>) = moves.map { toMovesLocal(it) }
-
-    fun toMovesLocal(move: Move) = MoveLocal(
-            name = move.name
-    )
-
-    fun toStatsLocalList(stats: List<Stats>) = stats.map { toStatsLocal(it) }
-
-    fun toStatsLocal(stat: Stats) = StatsLocal(
-            name = stat.name,
-            baseState = stat.baseState
-    )
-
-    fun toEvolvesLocalList(evolves: List<Species>) = evolves.map { toEvolvesLocal(it) }
-
-    fun toEvolvesLocal(evolve: Species) = SpeciesLocal(
-            name = evolve.name,
-            photo = evolve.photo
     )
 }
