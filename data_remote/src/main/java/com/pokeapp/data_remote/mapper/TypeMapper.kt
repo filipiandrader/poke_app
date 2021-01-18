@@ -1,6 +1,6 @@
 package com.pokeapp.data_remote.mapper
 
-import com.pokeapp.data_remote.model.TypeApi
+import com.pokeapp.data_remote.model.TypeResponse
 import com.pokeapp.data_remote.utils.DataRemoteMapper
 import com.pokeapp.domain.model.Type
 
@@ -8,12 +8,11 @@ import com.pokeapp.domain.model.Type
  * Created by Filipi Andrade Rocha on 11/01/2021.
  */
 
-object TypeMapper : DataRemoteMapper<MutableList<TypeApi>, MutableList<Type>>() {
+object TypeMapper : DataRemoteMapper<TypeResponse, Type>() {
 
-    override fun toDomain(data: MutableList<TypeApi>) = data.map { toDomain(it) }.toMutableList()
+    fun listToDomain(data: List<TypeResponse>) = data.map { toDomain(it) }
 
-    private fun toDomain(data: TypeApi) = Type(
-        name = data.name ?: "",
-        id = data.url?.toInt() ?: -1
+    override fun toDomain(data: TypeResponse) = Type(
+        name = data.name ?: ""
     )
 }

@@ -11,15 +11,13 @@ object TypeLocalMapper {
 
     fun toTypeList(typesLocal: List<TypeLocal>) = typesLocal.map { toType(it) }
 
-    fun toType(typeLocal: TypeLocal) = Type(
-        name = typeLocal.name,
-        id = typeLocal.id
+    private fun toType(typeLocal: TypeLocal) = Type(
+        name = typeLocal.name
     )
 
     fun toTypeLocalList(types: List<Type>) = types.map { toTypeLocal(it) }
 
     fun toTypeLocal(type: Type) = TypeLocal(
-        name = type.name,
-        id = type.id
+        name = type.name
     )
 }

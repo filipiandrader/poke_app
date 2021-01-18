@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
  * Created by Filipi Andrade on 31/03/2020
  */
 
-interface PokemonDetailsDataSource {
+interface GenerationRemoteDataSource {
 
-    fun getPokemonInfo(id: Int): Flow<Pokemon>
+    fun getPokemonByGeneration(id: Int): Flow<List<Pokemon>>
 }

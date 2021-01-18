@@ -4,15 +4,11 @@ import com.pokeapp.domain.model.Pokemon
 import com.pokeapp.domain.model.Type
 import kotlinx.coroutines.flow.Flow
 
-/**
- * Created by Filipi Andrade on 29/03/2020
+/*
+ * Created by Filipi Andrade Rocha on 18/01/2021.
  */
 
-interface PokemonDataSource {
-
-    fun getAllPokemons(offset: Int): Flow<List<Pokemon>>
-
-    fun getPokemonByGeneration(id: Int): Flow<List<Pokemon>>
+interface TypeRemoteDataSource {
 
     fun getAllTypes(): Flow<List<Type>>
 

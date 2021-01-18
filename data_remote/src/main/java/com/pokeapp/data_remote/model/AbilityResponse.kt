@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName
  * Created by Filipi Andrade on 03/04/2020
  */
 
-class StatsApi(
+data class AbilityResponse(
     @SerializedName("name")
-    var name: String? = null,
-    @SerializedName("base_state")
-    var baseState: Int? = null
+    val name: String? = null
 )

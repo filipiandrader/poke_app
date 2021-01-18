@@ -1,6 +1,6 @@
 package com.pokeapp.data_remote.mapper
 
-import com.pokeapp.data_remote.model.AbilityApi
+import com.pokeapp.data_remote.model.AbilityResponse
 import com.pokeapp.data_remote.utils.DataRemoteMapper
 import com.pokeapp.domain.model.Ability
 
@@ -8,11 +8,11 @@ import com.pokeapp.domain.model.Ability
  * Created by Filipi Andrade Rocha on 11/01/2021.
  */
 
-object AbilityMapper : DataRemoteMapper<MutableList<AbilityApi>, MutableList<Ability>>() {
+object AbilityMapper : DataRemoteMapper<AbilityResponse, Ability>() {
 
-    override fun toDomain(data: MutableList<AbilityApi>) = data.map { toDomain(it) }.toMutableList()
+    fun listToDomain(data: List<AbilityResponse>) = data.map { toDomain(it) }
 
-    private fun toDomain(data: AbilityApi) = Ability(
+    override fun toDomain(data: AbilityResponse) = Ability(
         name = data.name ?: "",
     )
 }

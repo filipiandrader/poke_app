@@ -1,20 +1,18 @@
 package com.pokeapp.data_remote.mapper
 
-import com.pokeapp.data_remote.model.AbilityApi
-import com.pokeapp.data_remote.model.SpeciesApi
+import com.pokeapp.data_remote.model.EvolutionResponse
 import com.pokeapp.data_remote.utils.DataRemoteMapper
-import com.pokeapp.domain.model.Ability
 import com.pokeapp.domain.model.Species
 
 /*
  * Created by Filipi Andrade Rocha on 11/01/2021.
  */
 
-object EvolvesMapper : DataRemoteMapper<MutableList<SpeciesApi>, MutableList<Species>>() {
+object EvolvesMapper : DataRemoteMapper<EvolutionResponse, Species>() {
 
-    override fun toDomain(data: MutableList<SpeciesApi>) = data.map { toDomain(it) }.toMutableList()
+    fun listToDomain(data: List<EvolutionResponse>) = data.map { toDomain(it) }
 
-    private fun toDomain(data: SpeciesApi) = Species(
+    override fun toDomain(data: EvolutionResponse) = Species(
         name = data.name ?: "",
         photo = data.photo ?: ""
     )

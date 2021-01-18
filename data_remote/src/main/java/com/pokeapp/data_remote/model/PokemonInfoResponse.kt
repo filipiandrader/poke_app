@@ -11,28 +11,30 @@ data class PokemonInfoResponse(
     var id: Int? = null,
     @SerializedName("name")
     var name: String? = null,
+    @SerializedName("base_experience")
+    var baseExperience: Int? = null,
+    @SerializedName("height")
+    var height: Int? = null,
+    @SerializedName("weight")
+    var weight: Int? = null,
     @SerializedName("photo")
     var photo: String? = null,
     @SerializedName("photo_shiny")
     var photoShiny: String? = null,
-    @SerializedName("generation")
+    @SerializedName("description")
+    var description: String? = null,
+    @SerializedName("generation_name")
     var generation: String? = null,
-    @SerializedName("about")
-    var about: String? = null,
-    @SerializedName("height")
-    var height: Int? = null,
-    @SerializedName("base_experience")
-    var baseExperience: Int? = null,
-    @SerializedName("weight")
-    var weight: Int? = null,
     @SerializedName("types")
-    var types: MutableList<TypeApi> = mutableListOf(),
+    var types: List<TypeResponse> = listOf(),
     @SerializedName("abilities")
-    var abilities: MutableList<AbilityApi> = mutableListOf(),
+    var abilities: List<AbilityResponse> = listOf(),
     @SerializedName("moves")
-    var moves: MutableList<MoveApi> = mutableListOf(),
+    var moves: List<MoveResponse> = listOf(),
     @SerializedName("stats")
-    var stats: MutableList<StatsApi> = mutableListOf(),
-    @SerializedName("evolves")
-    var evolves: MutableList<SpeciesApi> = mutableListOf()
+    var stats: List<StatsResponse> = listOf(),
+    @SerializedName("first_evolution")
+    var firstEvolution: EvolutionResponse? = null,
+    @SerializedName("second_evolution")
+    var secondEvolution: EvolutionResponse? = null
 )

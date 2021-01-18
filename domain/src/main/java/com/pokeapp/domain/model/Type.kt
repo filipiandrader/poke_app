@@ -5,6 +5,5 @@ package com.pokeapp.domain.model
  */
 
 data class Type(
-    var name: String,
-    var id: Int
+        val name: String
 )
