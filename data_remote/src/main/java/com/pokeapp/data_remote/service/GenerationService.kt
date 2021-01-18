@@ -1,6 +1,7 @@
 package com.pokeapp.data_remote.service
 
 import com.pokeapp.data_remote.model.PokemonResponse
+import com.pokeapp.data_remote.utils.GenericResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -11,5 +12,5 @@ import retrofit2.http.Path
 interface GenerationService {
 
     @GET("generation/{id}")
-    suspend fun getPokemomByGeneration(@Path("id") id: Int): List<PokemonResponse>
+    suspend fun getPokemomByGeneration(@Path("id") id: Int): GenericResponse<List<PokemonResponse>>
 }
