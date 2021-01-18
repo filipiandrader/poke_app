@@ -15,4 +15,6 @@ object DatabaseFactory {
                     .build()
 
     fun providePokemonDao(database: PokemonDatabase) = database.pokemonDao()
+
+    fun provideTypeDao(database: PokemonDatabase) = database.typeDao()
 }

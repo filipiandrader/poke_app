@@ -1,6 +1,7 @@
 package com.pokeapp.data.datasource.local
 
 import com.pokeapp.domain.model.Type
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Filipi Andrade on 05/04/2020
@@ -8,7 +9,7 @@ import com.pokeapp.domain.model.Type
 
 interface TypeLocalDataSource {
 
-    suspend fun insert(type: Type): Boolean
+    fun insert(type: Type): Flow<Unit>
 
-    suspend fun getAll(): List<Type>?
+    fun getAllTypesLocal(): Flow<List<Type>?>
 }

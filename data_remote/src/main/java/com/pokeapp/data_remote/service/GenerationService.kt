@@ -11,6 +11,6 @@ import retrofit2.http.Path
 
 interface GenerationService {
 
-    @GET("generation/{id}")
+    @GET("generationName/{id}")
     suspend fun getPokemomByGeneration(@Path("id") id: Int): GenericResponse<List<PokemonResponse>>
 }

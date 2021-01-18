@@ -1,6 +1,7 @@
 package com.pokeapp.data.datasource.local
 
 import com.pokeapp.domain.model.Pokemon
+import com.pokeapp.domain.model.PokemonInfo
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -9,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface PokemonLocalDataSource {
 
-    fun insert(pokemon: Pokemon): Flow<Unit>
+    fun insert(pokemon: PokemonInfo): Flow<Unit>
 
-    fun delete(pokemon: Pokemon): Flow<Unit>
+    fun delete(pokemon: PokemonInfo): Flow<Unit>
 
-    fun getPokemonLikedById(id: Int): Flow<Pokemon?>
+    fun getPokemonLikedById(id: Int): Flow<PokemonInfo?>
 
     fun getAllPokemonsLiked(): Flow<List<Pokemon>?>
 

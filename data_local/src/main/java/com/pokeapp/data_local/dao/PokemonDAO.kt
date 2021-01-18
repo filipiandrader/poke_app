@@ -22,10 +22,4 @@ abstract class PokemonDAO {
 
     @Query("SELECT * FROM pokemon ORDER BY id")
     abstract suspend fun getPokemons(): MutableList<PokemonLocal>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertType(vararg type: TypeLocal)
-
-    @Query("SELECT * FROM type")
-    abstract suspend fun getTypes(): MutableList<TypeLocal>
 }

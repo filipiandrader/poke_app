@@ -3,9 +3,7 @@ package com.pokeapp.data.repository
 import com.pokeapp.data.datasource.local.PokemonLocalDataSource
 import com.pokeapp.data.datasource.remote.PokemonRemoteDataSource
 import com.pokeapp.domain.model.Pokemon
-import com.pokeapp.domain.model.PokemonInfo
 import com.pokeapp.domain.repository.PokemonRepository
-import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Filipi Andrade on 29/03/2020

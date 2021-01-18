@@ -3,6 +3,7 @@ package com.pokeapp.data_local.base
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.pokeapp.data_local.dao.PokemonDAO
+import com.pokeapp.data_local.dao.TypeDAO
 import com.pokeapp.domain.model.*
 
 /**
@@ -14,4 +15,6 @@ import com.pokeapp.domain.model.*
 abstract class PokemonDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDAO
+
+    abstract fun typeDao(): TypeDAO
 }
