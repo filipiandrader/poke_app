@@ -1,4 +1,4 @@
-package com.pokeapp.data_local.datasource.type
+package com.pokeapp.data_local.datasource
 
 import com.pokeapp.data.datasource.local.TypeLocalDataSource
 import com.pokeapp.data_local.dao.TypeDAO

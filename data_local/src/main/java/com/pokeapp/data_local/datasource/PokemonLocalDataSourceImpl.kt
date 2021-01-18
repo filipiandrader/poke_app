@@ -1,4 +1,4 @@
-package com.pokeapp.data_local.datasource.pokemon
+package com.pokeapp.data_local.datasource
 
 import com.pokeapp.data.datasource.local.PokemonLocalDataSource
 import com.pokeapp.data.utils.flatMap
