@@ -9,7 +9,7 @@
 
 ## Você pode baixar em...
 
-- [Google Play](https://play.google.com/store/apps/details?id=com.pokeapp)
+- Em breve...
 
 ## Bibliotecas Usadas
 
