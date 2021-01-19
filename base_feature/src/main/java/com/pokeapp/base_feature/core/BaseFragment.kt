@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import com.pokeapp.base_feature.customview.LoadingDialog
 import com.pokeapp.base_presentation.core.ViewStateListener
 import org.koin.core.KoinComponent
 
@@ -12,6 +13,8 @@ import org.koin.core.KoinComponent
  */
 
 abstract class BaseFragment : Fragment(), ViewStateListener, KoinComponent {
+
+    private val mLoadingDialog = LoadingDialog()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,11 +31,22 @@ abstract class BaseFragment : Fragment(), ViewStateListener, KoinComponent {
     open fun setupView() {}
 
     override fun onStateError(error: Throwable) {
+        hideLoading()
+        error.message?.let {
+            showDialog(it)
+        }
+    }
+
+    fun showDialog(message: String, isAttachToActivity: Boolean = false) {
+
     }
 
     override fun onStateLoading() {
+        hideLoading()
+        childFragmentManager.let { mLoadingDialog.show(this) }
     }
 
     override fun hideLoading() {
+        mLoadingDialog.dismissAllowingStateLoss()
     }
 }

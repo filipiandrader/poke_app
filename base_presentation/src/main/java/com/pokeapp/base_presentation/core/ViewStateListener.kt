@@ -11,27 +11,6 @@ interface ViewStateListener {
 
     fun hideLoading()
 
-    private fun <T> ViewState<T>.handle(
-        onError: ((Throwable) -> Unit)? = null,
-        onLoading: (() -> Unit)? = null,
-        onComplete: (() -> Unit)? = null,
-        onSuccess: ((T) -> Unit)? = null
-    ) {
-        stateHandler(
-            onSuccess = {
-                hideLoading()
-                onSuccess?.invoke(it)
-                onComplete?.invoke()
-            },
-            onError = { error ->
-                hideLoading()
-                onError?.invoke(error) ?: onStateError(error)
-                onComplete?.invoke()
-            },
-            loading = { onLoading?.invoke() ?: onStateLoading() }
-        )
-    }
-
     fun <T> LiveData<ViewState<T>>.onPostValue(
         lifecycleOwner: LifecycleOwner,
         onError: ((Throwable) -> Unit)? = null,
@@ -42,5 +21,26 @@ interface ViewStateListener {
         observe(lifecycleOwner) {
             it.handle(onError, onLoading, onComplete, onSuccess)
         }
+    }
+
+    private fun <T> ViewState<T>.handle(
+        onError: ((Throwable) -> Unit)? = null,
+        onLoading: (() -> Unit)? = null,
+        onComplete: (() -> Unit)? = null,
+        onSuccess: ((T) -> Unit)? = null
+    ) {
+        stateHandler(
+            onLoading = { onLoading?.invoke() ?: onStateLoading() },
+            onSuccess = {
+                hideLoading()
+                onSuccess?.invoke(it)
+                onComplete?.invoke()
+            },
+            onError = { error ->
+                hideLoading()
+                onError?.invoke(error) ?: onStateError(error)
+                onComplete?.invoke()
+            }
+        )
     }
 }

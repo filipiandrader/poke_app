@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.appbar.AppBarLayout
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
 import com.pokeapp.base_feature.util.extensions.configureNoScroll
@@ -19,7 +18,6 @@ import com.pokeapp.feature_region.adapter.RegionAdapter
 import com.pokeapp.feature_region.databinding.FragmentRegionBinding
 import com.pokeapp.feature_region.navigation.main.RegionNavigation
 import com.pokeapp.presentation_region.RegionViewModel
-import kotlinx.android.synthetic.main.fragment_region.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegionFragment : BaseFragment() {
@@ -41,7 +39,7 @@ class RegionFragment : BaseFragment() {
         activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
         viewModel.getRegion()
 
-        navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
+        binding.navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
     }
 
     override fun addObservers(owner: LifecycleOwner) {
