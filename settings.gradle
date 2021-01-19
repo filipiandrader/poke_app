@@ -1,3 +1,5 @@
+include ':presentation_region'
+include ':feature_region'
 include ':presentation_main'
 include ':feature_main'
 include ':intent'

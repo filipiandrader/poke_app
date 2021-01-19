@@ -13,9 +13,7 @@ import com.pokeapp.base_feature.util.extensions.setVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_evolution.*
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class EvolutionFragment : Fragment() {
 
     companion object {

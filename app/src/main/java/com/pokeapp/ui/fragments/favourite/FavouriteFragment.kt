@@ -44,9 +44,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_favourite.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class FavouriteFragment : Fragment() {
 
     private val mViewModel: FavouriteViewModel by viewModel()

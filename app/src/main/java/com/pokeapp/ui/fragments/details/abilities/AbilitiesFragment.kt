@@ -16,9 +16,7 @@ import com.pokeapp.base_feature.util.extensions.formatNameAbility
 import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_abilities.*
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class AbilitiesFragment : Fragment() {
 
     companion object {

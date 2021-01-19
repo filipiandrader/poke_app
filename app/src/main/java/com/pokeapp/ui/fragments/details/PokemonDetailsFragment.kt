@@ -18,9 +18,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class PokemonDetailsFragment : Fragment() {
 
     private val mViewModel: PokemonDetailsViewModel by viewModel()

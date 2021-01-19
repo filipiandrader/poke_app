@@ -3,8 +3,8 @@ package com.pokeapp.di.intent
 import androidx.fragment.app.Fragment
 import com.pokeapp.feature_main.navigation.home.HomeNavigation
 import com.pokeapp.feature_main.navigation.splash.SplashNavigation
-import com.pokeapp.intent.navigation.HomeNavigationImpl
-import com.pokeapp.intent.navigation.SplashNavigationImpl
+import com.pokeapp.intent.navigation.home.HomeNavigationImpl
+import com.pokeapp.intent.navigation.splash.SplashNavigationImpl
 import org.koin.dsl.module
 
 /*

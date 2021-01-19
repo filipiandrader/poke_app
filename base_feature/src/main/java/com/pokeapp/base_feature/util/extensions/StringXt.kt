@@ -1,6 +1,5 @@
 package com.pokeapp.base_feature.util.extensions
 
-import android.annotation.SuppressLint
 import android.content.Context
 import com.pokeapp.base_feature.R
 import java.util.*
@@ -35,75 +34,71 @@ fun setTypeName(type: String?): String {
     }
 }
 
-@SuppressLint("DefaultLocale")
 fun String.formatNamePokemon(): String {
     var nameFormated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
-        nameFormated = split[0].capitalize()
+        nameFormated = split[0].uppercase()
         if (split.size > 1) {
             for (i in 1 until split.size) {
-                nameFormated = "$nameFormated ${split[i].capitalize()}"
+                nameFormated = "$nameFormated ${split[i].uppercase()}"
             }
         }
     } else {
-        nameFormated = this.capitalize()
+        nameFormated = this.uppercase()
     }
 
     return nameFormated.replace("-", "")
 }
 
-@SuppressLint("DefaultLocale")
 fun String.formatNameMove(): String {
     var moveFormated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
-        moveFormated = split[0].capitalize()
+        moveFormated = split[0].uppercase()
         if (split.size > 1) {
             for (i in 1 until split.size) {
-                moveFormated = "$moveFormated ${split[i].capitalize()}"
+                moveFormated = "$moveFormated ${split[i].uppercase()}"
             }
         }
     } else {
-        moveFormated = this.capitalize()
+        moveFormated = this.uppercase()
     }
     return moveFormated.replace("-", "")
 }
 
-@SuppressLint("DefaultLocale")
 fun String.formatNameAbility(): String {
     var moveFormated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
-        moveFormated = split[0].capitalize()
+        moveFormated = split[0].uppercase()
         if (split.size > 1) {
             for (i in 1 until split.size) {
-                moveFormated = "$moveFormated ${split[i].capitalize()}"
+                moveFormated = "$moveFormated ${split[i].uppercase()}"
             }
         }
     } else {
-        moveFormated = this.capitalize()
+        moveFormated = this.uppercase()
     }
     return moveFormated.replace("-", "")
 }
 
-@SuppressLint("DefaultLocale")
 fun String.formatNameRegion(): String {
     var formated: String
 
     if (this.contains("-")) {
         val split = this.split("-")
-        formated = split[0].replace("-", "").capitalize()
+        formated = split[0].replace("-", "").uppercase()
         if (split.size > 1) {
             for (i in 1 until split.size) {
-                formated = "$formated ${split[i].capitalize()}"
+                formated = "$formated ${split[i].uppercase()}"
             }
         }
     } else {
-        formated = this.capitalize()
+        formated = this.uppercase()
     }
     return formated.replace("-", "")
 }
@@ -132,4 +127,8 @@ fun String.formatGenerationName(): String {
         "generationName-vii" -> "7° Geração"
         else -> ""
     }
+}
+
+fun String.uppercase(): String {
+    return this.capitalize(Locale("pt", "BR"))
 }

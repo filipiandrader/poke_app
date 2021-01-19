@@ -17,9 +17,7 @@ import com.pokeapp.base_feature.util.extensions.formatNameMove
 import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_moves.*
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class MovesFragment : Fragment() {
 
     companion object {

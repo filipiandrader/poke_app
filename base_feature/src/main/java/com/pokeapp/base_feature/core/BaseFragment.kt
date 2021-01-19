@@ -18,6 +18,11 @@ abstract class BaseFragment : Fragment(), ViewStateListener, KoinComponent {
         setupView()
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        addObservers(viewLifecycleOwner)
+    }
+
     open fun addObservers(owner: LifecycleOwner) {}
 
     open fun setupView() {}

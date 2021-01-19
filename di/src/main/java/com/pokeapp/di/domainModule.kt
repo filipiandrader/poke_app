@@ -1,5 +1,8 @@
 package com.pokeapp.di
 
+import com.pokeapp.domain.core.ThreadContextProvider
+import com.pokeapp.domain.interactor.GetRegion
+import kotlinx.coroutines.CoroutineScope
 import org.koin.dsl.module
 
 /*
@@ -8,4 +11,9 @@ import org.koin.dsl.module
 
 val domainModule = module {
 
+    single { ThreadContextProvider() }
+
+    factory { (scope: CoroutineScope) ->
+        GetRegion(get(), scope)
+    }
 }

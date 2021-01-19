@@ -9,8 +9,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class RegionBinding(
-    var name: String,
-    var mainGeneration: String,
-    var locations: List<LocationBinding>,
-    var groups: List<GroupsBinding>
+    var name: String
 ) : Parcelable

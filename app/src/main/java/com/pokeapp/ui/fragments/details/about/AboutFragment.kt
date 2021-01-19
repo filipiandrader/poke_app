@@ -12,9 +12,7 @@ import com.pokeapp.base_feature.util.extensions.convertToKilos
 import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_about.*
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class AboutFragment : Fragment() {
 
     companion object {

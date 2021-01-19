@@ -15,9 +15,7 @@ import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_presentation.model.StatsBinding
 import kotlinx.android.synthetic.main.fragment_base_stats.*
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class BaseStatsFragment : Fragment() {
 
     private lateinit var mPokemon: PokemonBinding

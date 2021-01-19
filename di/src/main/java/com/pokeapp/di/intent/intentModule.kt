@@ -5,5 +5,6 @@ package com.pokeapp.di.intent
  */
  
 val intentModule = listOf(
-    intentMainModule
+    intentMainModule,
+    intentRegionModule
 )

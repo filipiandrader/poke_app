@@ -71,7 +71,7 @@
         tools:layout="@layout/fragment_moves" />
     <fragment
         android:id="@+id/regionFragment"
-        android:name="com.pokeapp.ui.fragments.region.RegionFragment"
+        android:name="com.pokeapp.feature_region.fragment.main.RegionFragment"
         android:label="fragment_region"
         tools:layout="@layout/fragment_region" >
         <action
@@ -83,7 +83,7 @@
     </fragment>
     <fragment
         android:id="@+id/regionDetailsFragment"
-        android:name="com.pokeapp.ui.fragments.region_details.RegionDetailsFragment"
+        android:name="com.pokeapp.feature_region.fragment.info.RegionDetailsFragment"
         android:label="fragment_region_details"
         tools:layout="@layout/fragment_region_details" />
 </navigation>

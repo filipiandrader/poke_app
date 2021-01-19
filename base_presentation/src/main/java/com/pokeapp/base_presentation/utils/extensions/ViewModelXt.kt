@@ -19,6 +19,3 @@ inline fun <V, reified U> V.useCase() where U : UseCase<*, *>, V : ViewModel, V 
     inject<U> {
         parametersOf(viewModelScope)
     }
-
-fun AndroidViewModel.getString(resId: Int, vararg formatArgs: Any): String =
-    getApplication<Application>().getString(resId, formatArgs)
