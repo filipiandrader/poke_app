@@ -21,4 +21,13 @@ abstract class BaseFragment : Fragment(), ViewStateListener, KoinComponent {
     open fun addObservers(owner: LifecycleOwner) {}
 
     open fun setupView() {}
+
+    override fun onStateError(error: Throwable) {
+    }
+
+    override fun onStateLoading() {
+    }
+
+    override fun hideLoading() {
+    }
 }

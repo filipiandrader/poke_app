@@ -1,13 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
 
 apply from: "$rootProject.projectDir/android-common.gradle"
 
 dependencies {
     api project(':base_presentation')
-
     api project(':base_feature')
+
+    api project(':feature_main')
 
     intentDependencies.each { add(it.configuration, it.dependency) }
 }

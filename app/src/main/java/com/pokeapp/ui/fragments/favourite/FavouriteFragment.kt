@@ -18,7 +18,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,19 +33,16 @@ import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.databinding.FragmentFavouriteBinding
-import com.pokeapp.presentation.State
+import com.pokeapp.base_presentation.model.GenerationBinding
+import com.pokeapp.base_presentation.model.PokemonBinding
+import com.pokeapp.base_presentation.model.TypeBinding
 import com.pokeapp.presentation.favourite.FavouriteViewModel
-import com.pokeapp.presentation.model.Generation
-import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.presentation.model.Type
 import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
 import com.pokeapp.ui.fragments.BottomSheetTypeViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_favourite.*
-import org.jetbrains.anko.textColor
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -55,16 +51,13 @@ class FavouriteFragment : Fragment() {
 
     private val mViewModel: FavouriteViewModel by viewModel()
 
-    private lateinit var mTypes: MutableList<Type>
+    private lateinit var mTypes: MutableList<TypeBinding>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val bindind: FragmentFavouriteBinding = FragmentFavouriteBinding.inflate(inflater, container, false)
-        bindind.viewModel = mViewModel
-        creatingObservers()
-        bindind.executePendingBindings()
-        return bindind.root
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_favourite, container, false)
 
     override fun onStart() {
         super.onStart()
@@ -89,7 +82,7 @@ class FavouriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.window?.statusBarColor = PokemonColorUtil(view.context).convertColor(R.color.background)
+        activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
     }
 
     private fun createCustomAnimation() {
@@ -106,7 +99,10 @@ class FavouriteFragment : Fragment() {
 
         scaleInX.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator) {
-                val img = if (favouriteMenuFAM.isOpened) context!!.getDrawable(R.drawable.ic_pokeball) else context!!.getDrawable(R.drawable.ic_close)
+                val img =
+                    if (favouriteMenuFAM.isOpened) requireContext().getDrawable(R.drawable.ic_pokeball) else requireContext().getDrawable(
+                        R.drawable.ic_close
+                    )
                 favouriteMenuFAM.menuIconView.setImageDrawable(img)
             }
         })
@@ -120,34 +116,42 @@ class FavouriteFragment : Fragment() {
 
     private fun showBottomSheetGeneration() {
         favouriteMenuFAM.close(true)
-        val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
         val size = Point()
         display.getSize(size)
         val peekHeight = size.y * 0.70
 
-        val dialog = MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             setPeekHeight(literal = peekHeight.toInt())
-            customView(viewRes = R.layout.bottom_sheet_layout, scrollable = false, noVerticalPadding = true, horizontalPadding = false, dialogWrapContent = true)
+            customView(
+                viewRes = R.layout.bottom_sheet_layout,
+                scrollable = false,
+                noVerticalPadding = true,
+                horizontalPadding = false,
+                dialogWrapContent = true
+            )
         }
 
-        val itemFilterNameTextView = dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
+        val itemFilterNameTextView =
+            dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
         itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_generation_label))
 
-        val bottomSheetRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
-        val generations = mutableListOf<Generation>()
-        generations.add(Generation(id = 1, name = "1° Geração", img = R.drawable.gen1))
-        generations.add(Generation(id = 2, name = "2° Geração", img = R.drawable.gen2))
-        generations.add(Generation(id = 3, name = "3° Geração", img = R.drawable.gen3))
-        generations.add(Generation(id = 4, name = "4° Geração", img = R.drawable.gen4))
-        generations.add(Generation(id = 5, name = "5° Geração", img = R.drawable.gen5))
-        generations.add(Generation(id = 6, name = "6° Geração", img = R.drawable.gen6))
-        generations.add(Generation(id = 7, name = "7° Geração", img = R.drawable.gen7))
+        val bottomSheetRecyclerView =
+            dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
+        val generations = mutableListOf<GenerationBinding>()
+        generations.add(GenerationBinding(id = 1, name = "1° Geração", img = R.drawable.gen1))
+        generations.add(GenerationBinding(id = 2, name = "2° Geração", img = R.drawable.gen2))
+        generations.add(GenerationBinding(id = 3, name = "3° Geração", img = R.drawable.gen3))
+        generations.add(GenerationBinding(id = 4, name = "4° Geração", img = R.drawable.gen4))
+        generations.add(GenerationBinding(id = 5, name = "5° Geração", img = R.drawable.gen5))
+        generations.add(GenerationBinding(id = 6, name = "6° Geração", img = R.drawable.gen6))
+        generations.add(GenerationBinding(id = 7, name = "7° Geração", img = R.drawable.gen7))
 
         bottomSheetRecyclerView.setup {
-            withLayoutManager(GridLayoutManager(context!!, 2))
+            withLayoutManager(GridLayoutManager(requireContext(), 2))
             withDataSource(dataSourceOf(generations))
-            withItem<Generation, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
+            withItem<GenerationBinding, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
                 onBind(::BottomSheetGenerationViewHolder) { _, item ->
                     this.itemGenerationNameTextView.putText(item.name)
                     this.itemGenerationPhotoImageView.setImageResource(item.img)
@@ -163,31 +167,40 @@ class FavouriteFragment : Fragment() {
 
     private fun showBottomSheetType() {
         favouriteMenuFAM.close(true)
-        val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
         val size = Point()
         display.getSize(size)
         val peekHeight = size.y * 0.70
 
-        val dialog = MaterialDialog(activity!!, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             setPeekHeight(literal = peekHeight.toInt())
-            customView(viewRes = R.layout.bottom_sheet_layout, scrollable = false, noVerticalPadding = true, horizontalPadding = false, dialogWrapContent = true)
+            customView(
+                viewRes = R.layout.bottom_sheet_layout,
+                scrollable = false,
+                noVerticalPadding = true,
+                horizontalPadding = false,
+                dialogWrapContent = true
+            )
         }
 
-        val itemFilterNameTextView = dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
+        val itemFilterNameTextView =
+            dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
         itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_type_label))
 
-        val bottomSheetRecyclerView = dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
+        val bottomSheetRecyclerView =
+            dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
 
         bottomSheetRecyclerView.setup {
-            withLayoutManager(GridLayoutManager(context!!, 2))
+            withLayoutManager(GridLayoutManager(requireContext(), 2))
             withDataSource(dataSourceOf(mTypes))
-            withItem<Type, BottomSheetTypeViewHolder>(R.layout.item_type) {
+            withItem<TypeBinding, BottomSheetTypeViewHolder>(R.layout.item_type) {
                 onBind(::BottomSheetTypeViewHolder) { _, item ->
                     this.itemTypeNameTextView.putText(setTypeName(item.name))
 
-                    val color = PokemonColorUtil(itemView.context).getPokemonColor(item.name)
-                    this.itemTypeCardView.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+                    val color = itemView.context.getPokemonColor(item.name)
+                    this.itemTypeCardView.background.colorFilter =
+                        PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
                 }
 
                 onClick { index ->
@@ -199,7 +212,7 @@ class FavouriteFragment : Fragment() {
 
     }
 
-    private fun creatingObservers() {
+    /*private fun creatingObservers() {
         mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.LOADING -> {
@@ -219,7 +232,7 @@ class FavouriteFragment : Fragment() {
                     favouriteRecyclerView.setVisible(false)
                     favouriteProgressBar.setVisible(false)
                 }
-                else -> { /* ignore */
+                else -> { *//* ignore *//*
                 }
             }
         })
@@ -243,7 +256,7 @@ class FavouriteFragment : Fragment() {
                     favouriteRecyclerView.setVisible(false)
                     favouriteProgressBar.setVisible(false)
                 }
-                else -> { /* ignore */
+                else -> { *//* ignore *//*
                 }
             }
         })
@@ -283,13 +296,13 @@ class FavouriteFragment : Fragment() {
                     favouriteRecyclerView.setVisible(false)
                     favouriteProgressBar.setVisible(false)
                 }
-                else -> { /* ignore */
+                else -> { *//* ignore *//*
                 }
             }
         })
-    }
+    }*/
 
-    private fun setupRecyclerView(pokemon: MutableList<Pokemon>) {
+    private fun setupRecyclerView(pokemon: MutableList<PokemonBinding>) {
         if (pokemon.isNotEmpty()) {
             val layoutManager = if (pokemon.size == 1) {
                 LinearLayoutManager(context)
@@ -299,9 +312,10 @@ class FavouriteFragment : Fragment() {
             favouriteRecyclerView.setup {
                 withLayoutManager(layoutManager)
                 withDataSource(dataSourceOf(pokemon))
-                withItem<Pokemon, PokemonViewHolder>(R.layout.item_pokemon) {
+                withItem<PokemonBinding, PokemonViewHolder>(R.layout.item_pokemon) {
                     onBind(::PokemonViewHolder) { _, item ->
-                        Picasso.get().load(item.photo).placeholder(android.R.color.transparent).into(this.itemPokemonPhotoImageView)
+                        Picasso.get().load(item.photo).placeholder(android.R.color.transparent)
+                            .into(this.itemPokemonPhotoImageView)
                         this.itemPokemonNameTextView.putText(item.name)
                         val id = when (item.id) {
                             in 1..9 -> {
@@ -316,16 +330,27 @@ class FavouriteFragment : Fragment() {
                         }
                         this.itemPokemonIDTextView.putText(id)
 
-                        val color = PokemonColorUtil(itemView.context).getPokemonColor(item.types)
-                        this.itemPokemonCardView.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+                        val color = itemView.context.getPokemonColor(item.types)
+                        this.itemPokemonCardView.background.colorFilter =
+                            PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
                         if (item.types.size == 1) {
                             if (item.types[0].name == "dark") {
-                                this.itemPokemonIDTextView.textColor = ContextCompat.getColor(context!!, R.color.colorIcons)
+                                this.itemPokemonIDTextView.setTextColor(
+                                    ContextCompat.getColor(
+                                        requireContext(),
+                                        R.color.colorIcons
+                                    )
+                                )
                             }
                         } else if (item.types.size == 2) {
                             if (item.types[1].name == "dark") {
-                                this.itemPokemonIDTextView.textColor = ContextCompat.getColor(context!!, R.color.colorIcons)
+                                this.itemPokemonIDTextView.setTextColor(
+                                    ContextCompat.getColor(
+                                        requireContext(),
+                                        R.color.colorIcons
+                                    )
+                                )
                             }
                         }
 
@@ -347,7 +372,10 @@ class FavouriteFragment : Fragment() {
 
                     onClick { index ->
                         val bundle = bundleOf("pokemon" to pokemon[index])
-                        findNavController().navigate(R.id.action_favouriteFragment_to_pokemonDetailsFragment, bundle)
+                        findNavController().navigate(
+                            R.id.action_favouriteFragment_to_pokemonDetailsFragment,
+                            bundle
+                        )
                     }
                 }
             }

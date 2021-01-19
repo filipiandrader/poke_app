@@ -1,3 +1,5 @@
+include ':presentation_main'
+include ':feature_main'
 include ':intent'
 include ':domain'
 include ':di'

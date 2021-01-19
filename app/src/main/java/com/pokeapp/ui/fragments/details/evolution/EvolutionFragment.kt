@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_feature.util.extensions.setVisible
 import com.squareup.picasso.Picasso
@@ -20,9 +20,9 @@ class EvolutionFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(pokemon: Pokemon) = EvolutionFragment().apply {
+        fun newInstance(pokemon: PokemonBinding) = EvolutionFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("pokemon", pokemon)
+                putParcelable("pokemon", pokemon)
             }
         }
     }
@@ -34,7 +34,7 @@ class EvolutionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as PokemonBinding)
         pokemon.let {
             if (pokemon.evolves.isNotEmpty()) {
                 if (pokemon.evolves.size == 1) {

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.ui.fragments.details.abilities.AbilitiesFragment
 import com.pokeapp.ui.fragments.details.about.AboutFragment
 import com.pokeapp.ui.fragments.details.base_stats.BaseStatsFragment
@@ -16,7 +16,7 @@ import com.pokeapp.ui.fragments.details.moves.MovesFragment
  * Created by Filipi Andrade on 30/03/2020
  */
 
-class PokemonDetailsViewPagerAdapter(supportFragmentManager: FragmentManager, context: Context, private val pokemon: Pokemon) :
+class PokemonDetailsViewPagerAdapter(supportFragmentManager: FragmentManager, context: Context, private val pokemon: PokemonBinding) :
         FragmentStatePagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     data class Page(val title: String, val ctor: () -> Fragment)

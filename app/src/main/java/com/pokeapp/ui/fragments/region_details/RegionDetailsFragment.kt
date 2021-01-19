@@ -10,20 +10,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Region
-import com.pokeapp.ui.fragments.RegionDetailsViewPagerAdapter
-import com.pokeapp.base_feature.util.extensions.PokemonColorUtil
 import com.pokeapp.base_feature.util.extensions.formatGenerationName
+import com.pokeapp.base_feature.util.extensions.getCardViewColor
 import com.pokeapp.base_feature.util.extensions.putText
+import com.pokeapp.base_presentation.model.RegionBinding
+import com.pokeapp.ui.fragments.RegionDetailsViewPagerAdapter
 import kotlinx.android.synthetic.main.fragment_region_details.*
-import org.jetbrains.anko.backgroundColor
 
 /**
  * A simple [Fragment] subclass.
  */
 class RegionDetailsFragment : Fragment() {
 
-    private lateinit var mRegion: Region
+    private lateinit var mRegion: RegionBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,17 +34,17 @@ class RegionDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mRegion = checkNotNull(arguments?.getSerializable("region") as Region)
+        mRegion = checkNotNull(arguments?.getSerializable("region") as RegionBinding)
 
-        val color = PokemonColorUtil(view.context).getCardViewColor(mRegion.name)
-        pokemonDetailsAppBarLayout.backgroundColor = color
+        val color = requireContext().getCardViewColor(mRegion.name)
+        pokemonDetailsAppBarLayout.setBackgroundColor(color)
         pokemonDetailsCollapsingToolbarLayout.contentScrim?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         activity?.window?.statusBarColor = color
 
         regionDetailsNameTextView.putText(mRegion.name.capitalize())
-        regionDetailsGenerationTextView.putText(mRegion.main_generation.formatGenerationName())
+        regionDetailsGenerationTextView.putText(mRegion.mainGeneration.formatGenerationName())
 
-        regionDetailsViewPager.adapter = RegionDetailsViewPagerAdapter(activity!!.supportFragmentManager, requireContext(), mRegion)
+        regionDetailsViewPager.adapter = RegionDetailsViewPagerAdapter(requireActivity().supportFragmentManager, requireContext(), mRegion)
         regionDetailsTabLayout.setupWithViewPager(regionDetailsViewPager)
     }
 

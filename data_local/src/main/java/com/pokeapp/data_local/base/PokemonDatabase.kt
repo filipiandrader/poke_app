@@ -4,14 +4,16 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.pokeapp.data_local.dao.PokemonDAO
 import com.pokeapp.data_local.dao.TypeDAO
-import com.pokeapp.domain.model.*
+import com.pokeapp.data_local.model.*
 
 /**
  * Created by Filipi Andrade on 30/03/2020
  */
 
-@Database(entities = [Pokemon::class, Type::class, Ability::class,
-    Move::class, Stats::class], version = 1, exportSchema = false)
+@Database(
+    entities = [PokemonLocal::class, TypeLocal::class, AbilityLocal::class,
+        MoveLocal::class, StatsLocal::class], version = 1, exportSchema = false
+)
 abstract class PokemonDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDAO

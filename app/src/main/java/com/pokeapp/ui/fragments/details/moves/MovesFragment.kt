@@ -11,8 +11,8 @@ import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Move
-import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.base_presentation.model.MoveBinding
+import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_feature.util.extensions.formatNameMove
 import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_moves.*
@@ -24,9 +24,9 @@ class MovesFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(pokemon: Pokemon) = MovesFragment().apply {
+        fun newInstance(pokemon: PokemonBinding) = MovesFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("pokemon", pokemon)
+                putParcelable("pokemon", pokemon)
             }
         }
     }
@@ -39,11 +39,11 @@ class MovesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as PokemonBinding)
         movesRecyclerView.setup {
             withLayoutManager(GridLayoutManager(view.context, 2))
             withDataSource(dataSourceOf(pokemon.moves))
-            withItem<Move, MovesViewHolder>(R.layout.item_moves) {
+            withItem<MoveBinding, MovesViewHolder>(R.layout.item_moves) {
                 onBind(::MovesViewHolder) { _, item ->
                     this.itemMoveTextView.putText(item.name.formatNameMove())
                 }

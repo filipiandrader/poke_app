@@ -15,11 +15,11 @@ interface PokemonRepository {
 
     fun getPokemonInfo(id: Int): Flow<PokemonInfo>
 
-    fun insert(pokemon: Pokemon): Flow<Unit>
+    fun insert(pokemon: PokemonInfo): Flow<Unit>
 
-    fun delete(pokemon: Pokemon): Flow<Unit>
+    fun delete(pokemon: PokemonInfo): Flow<Unit>
 
-    fun getPokemonLikedById(id: Int): Flow<Pokemon?>
+    fun getPokemonLikedById(id: Int): Flow<PokemonInfo?>
 
     fun getAllPokemonsLiked(): Flow<List<Pokemon>?>
 }

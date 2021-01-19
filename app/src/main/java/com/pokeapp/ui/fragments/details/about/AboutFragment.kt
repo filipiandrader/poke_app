@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_feature.util.extensions.convertToMeter
 import com.pokeapp.base_feature.util.extensions.convertToKilos
 import com.pokeapp.base_feature.util.extensions.putText
@@ -19,9 +19,9 @@ class AboutFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(pokemon: Pokemon) = AboutFragment().apply {
+        fun newInstance(pokemon: PokemonBinding) = AboutFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("pokemon", pokemon)
+                putParcelable("pokemon", pokemon)
             }
         }
     }
@@ -34,7 +34,7 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as PokemonBinding)
         pokemon.let { p ->
             aboutDescriptionTextView.putText(p.about.replace("\n", " "))
             aboutHeightTextView.putText(p.height.convertToMeter())

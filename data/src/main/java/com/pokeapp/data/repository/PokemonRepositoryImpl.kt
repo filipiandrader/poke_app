@@ -3,6 +3,7 @@ package com.pokeapp.data.repository
 import com.pokeapp.data.datasource.local.PokemonLocalDataSource
 import com.pokeapp.data.datasource.remote.PokemonRemoteDataSource
 import com.pokeapp.domain.model.Pokemon
+import com.pokeapp.domain.model.PokemonInfo
 import com.pokeapp.domain.repository.PokemonRepository
 
 /**
@@ -18,9 +19,9 @@ class PokemonRepositoryImpl(
 
     override fun getPokemonInfo(id: Int) = pokemonRemoteDataSource.getPokemonInfo(id)
 
-    override fun insert(pokemon: Pokemon) = pokemonLocalDataSource.insert(pokemon)
+    override fun insert(pokemon: PokemonInfo) = pokemonLocalDataSource.insert(pokemon)
 
-    override fun delete(pokemon: Pokemon) = pokemonLocalDataSource.delete(pokemon)
+    override fun delete(pokemon: PokemonInfo) = pokemonLocalDataSource.delete(pokemon)
 
     override fun getPokemonLikedById(id: Int) = pokemonLocalDataSource.getPokemonLikedById(id)
 

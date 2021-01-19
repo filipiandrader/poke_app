@@ -10,8 +10,8 @@ import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Ability
-import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.base_presentation.model.AbilityBinding
+import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_feature.util.extensions.formatNameAbility
 import com.pokeapp.base_feature.util.extensions.putText
 import kotlinx.android.synthetic.main.fragment_abilities.*
@@ -23,9 +23,9 @@ class AbilitiesFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(pokemon: Pokemon) = AbilitiesFragment().apply {
+        fun newInstance(pokemon: PokemonBinding) = AbilitiesFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("pokemon", pokemon)
+                putParcelable("pokemon", pokemon)
             }
         }
     }
@@ -38,11 +38,11 @@ class AbilitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        val pokemon = checkNotNull(arguments?.getSerializable("pokemon") as PokemonBinding)
         abilitiesRecyclerView.setup {
             withLayoutManager(GridLayoutManager(view.context, 2))
             withDataSource(dataSourceOf(pokemon.abilities))
-            withItem<Ability, AbilityViewHolder>(R.layout.item_ability) {
+            withItem<AbilityBinding, AbilityViewHolder>(R.layout.item_ability) {
                 onBind(::AbilityViewHolder) { _, item ->
                     this.itemAbilityTextView.putText(item.name.formatNameAbility())
                 }

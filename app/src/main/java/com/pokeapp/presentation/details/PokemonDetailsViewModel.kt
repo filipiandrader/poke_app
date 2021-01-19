@@ -1,52 +1,42 @@
 package com.pokeapp.presentation.details
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pokeapp.data.datasource.remote.PokemonDetailsDataSource
-import com.pokeapp.presentation.State
-import com.pokeapp.presentation.ViewState
-import com.pokeapp.presentation.model.Pokemon
+import com.pokeapp.base_presentation.model.PokemonBinding
 
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-class PokemonDetailsViewModel(private val dataSource: com.pokeapp.data.datasource.remote.PokemonDetailsDataSource) : ViewModel() {
+class PokemonDetailsViewModel : ViewModel() {
 
-    private var mState = MutableLiveData<ViewState<String>>()
-    private var mStateInfo = MutableLiveData<ViewState<Pokemon>>()
+    /*private var mState = MutableLiveData<ViewState<String>>()
+    private var mStateInfo = MutableLiveData<ViewState<PokemonBinding>>()
 
     init {
         mState.value = ViewState.initializing()
         mStateInfo.value = ViewState(data = null, state = State.LOADING)
-    }
+    }*/
     
     fun getPokemonInfo(id: Int) {
-        dataSource.getPokemonInfo(id,
+        /*dataSource.getPokemonInfo(id,
             onSuccess = {
                 mStateInfo.postValue(ViewState.success(it))
             },
             onFailure = {
                 mStateInfo.postValue(ViewState.failure(it))
-            })
+            })*/
     }
 
-    fun doFavouritePokemon(pokemon: Pokemon) {
-        dataSource.doFavouritePokemon(pokemon,
+    fun doFavouritePokemon(pokemon: PokemonBinding) {
+        /*dataSource.doFavouritePokemon(pokemon,
                 onSuccess = {
                     mState.postValue(ViewState.success())
                 },
                 onFailure = {
                     mState.postValue(ViewState.failure())
-                })
+                })*/
     }
 
-    fun getState(): LiveData<ViewState<String>> = mState
+    /*fun getState(): LiveData<ViewState<String>> = mState
 
-    fun getStateInfo(): LiveData<ViewState<Pokemon>> = mStateInfo
-
-    override fun onCleared() {
-        super.onCleared()
-        dataSource.cancelJob()
-    }
+    fun getStateInfo(): LiveData<ViewState<PokemonBinding>> = mStateInfo*/
 }

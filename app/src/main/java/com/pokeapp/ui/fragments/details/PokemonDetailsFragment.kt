@@ -8,20 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.pokeapp.R
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.databinding.FragmentPokemonDetailsBinding
-import com.pokeapp.presentation.State
+import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.presentation.details.PokemonDetailsViewModel
-import com.pokeapp.presentation.model.Pokemon
 import com.pokeapp.ui.fragments.PokemonDetailsViewPagerAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.*
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.support.v4.longToast
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -30,18 +25,12 @@ class PokemonDetailsFragment : Fragment() {
 
     private val mViewModel: PokemonDetailsViewModel by viewModel()
 
-    private lateinit var mPokemon: Pokemon
+    private lateinit var mPokemon: PokemonBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val binding: FragmentPokemonDetailsBinding = FragmentPokemonDetailsBinding.inflate(inflater, container, false)
-        binding.viewModel = mViewModel
-        creatingObservers()
-        binding.executePendingBindings()
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_pokemon_details, container, false)
 
-    private fun creatingObservers() {
+    /*private fun creatingObservers() {
         mViewModel.getStateInfo().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.LOADING -> {
@@ -70,13 +59,13 @@ class PokemonDetailsFragment : Fragment() {
         mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.SUCCESS -> showToast()
-                State.FAILURE -> longToast("Ocorreu um erro ao favoritar/desfavoritar ${mPokemon.name} :(")
+                State.FAILURE -> {}*//*longToast("Ocorreu um erro ao favoritar/desfavoritar ${mPokemon.name} :(")*//*
                 else -> {
                     // IGNORE
                 }
             }
         })
-    }
+    }*/
 
     override fun onStart() {
         super.onStart()
@@ -89,7 +78,7 @@ class PokemonDetailsFragment : Fragment() {
         pokemonDetailsFavouriteImageView.isClickable = isClickable
     }
 
-    private fun bindInfo(pokemon: Pokemon) {
+    private fun bindInfo(pokemon: PokemonBinding) {
         mPokemon.height = pokemon.height
         mPokemon.weight = pokemon.weight
         mPokemon.generation = pokemon.generation
@@ -100,7 +89,7 @@ class PokemonDetailsFragment : Fragment() {
         mPokemon.stats = pokemon.stats
         mPokemon.evolves = pokemon.evolves
 
-        pokemonDetailsViewPager.adapter = PokemonDetailsViewPagerAdapter(activity!!.supportFragmentManager, requireContext(), mPokemon)
+        pokemonDetailsViewPager.adapter = PokemonDetailsViewPagerAdapter(requireActivity().supportFragmentManager, requireContext(), mPokemon)
         pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
 
         pokemonDetailsProgressBar.setVisible(false)
@@ -110,9 +99,9 @@ class PokemonDetailsFragment : Fragment() {
 
     private fun showToast() {
         if (mPokemon.favourite) {
-            longToast("${mPokemon.name} foi favoritado(a) :)")
+//            longToast("${mPokemon.name} foi favoritado(a) :)")
         } else {
-            longToast("${mPokemon.name} foi desfavoritado(a) :(")
+//            longToast("${mPokemon.name} foi desfavoritado(a) :(")
         }
 
         setFavouriteIconCorrectly()
@@ -121,7 +110,7 @@ class PokemonDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mPokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        mPokemon = checkNotNull(arguments?.getSerializable("pokemon") as PokemonBinding)
         mViewModel.getPokemonInfo(mPokemon.id)
 
         pokemonDetailsNameTextView.putText(mPokemon.name)
@@ -138,8 +127,8 @@ class PokemonDetailsFragment : Fragment() {
         }
         pokemonDetailsIDTextView.putText(id)
 
-        val color = PokemonColorUtil(view.context).getPokemonColor(mPokemon.types)
-        pokemonDetailsAppBarLayout.backgroundColor = color
+        val color = requireContext().getPokemonColor(mPokemon.types)
+        pokemonDetailsAppBarLayout.setBackgroundColor(color)
         pokemonDetailsCollapsingToolbarLayout.contentScrim?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         activity?.window?.statusBarColor = color
 
@@ -172,9 +161,9 @@ class PokemonDetailsFragment : Fragment() {
 
     private fun setFavouriteIconCorrectly() {
         if (mPokemon.favourite) {
-            pokemonDetailsFavouriteImageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_favourite))
+            pokemonDetailsFavouriteImageView.setImageDrawable(ContextCompat.getDrawable( requireContext(), R.drawable.ic_favourite))
         } else {
-            pokemonDetailsFavouriteImageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_not_favourite))
+            pokemonDetailsFavouriteImageView.setImageDrawable(ContextCompat.getDrawable( requireContext(), R.drawable.ic_not_favourite))
         }
     }
 

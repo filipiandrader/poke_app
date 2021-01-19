@@ -11,19 +11,21 @@ import com.pokeapp.data_local.base.DataConverter
 
 @Entity(tableName = "pokemon")
 @TypeConverters(DataConverter::class)
-class PokemonLocal(@PrimaryKey
-                   var id: Int = 0,
-                   var name: String = "",
-                   var photo: String = "",
-                   var photoShiny: String = "",
-                   var generationName: String = "",
-                   var description: String = "",
-                   var height: Int = -1,
-                   var baseExperience: Int = -1,
-                   var weight: Int = -1,
-                   var types: MutableList<TypeLocal> = mutableListOf(),
-                   var abilities: MutableList<AbilityLocal> = mutableListOf(),
-                   var moves: MutableList<MoveLocal> = mutableListOf(),
-                   var stats: MutableList<StatsLocal> = mutableListOf(),
-                   var evolves: MutableList<SpeciesLocal> = mutableListOf(),
-                   var liked: Boolean = false)
+class PokemonLocal(
+    @PrimaryKey
+    var id: Int = 0,
+    var name: String = "",
+    var photo: String = "",
+    var photoShiny: String = "",
+    var generationName: String = "",
+    var description: String = "",
+    var height: Int = -1,
+    var baseExperience: Int = -1,
+    var weight: Int = -1,
+    var types: MutableList<TypeLocal> = mutableListOf(),
+    var abilities: MutableList<AbilityLocal> = mutableListOf(),
+    var moves: MutableList<MoveLocal> = mutableListOf(),
+    var stats: MutableList<StatsLocal> = mutableListOf(),
+    var evolves: MutableList<SpeciesLocal> = mutableListOf(),
+    var liked: Boolean = false
+)

@@ -10,8 +10,8 @@ import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
-import com.pokeapp.presentation.model.Groups
-import com.pokeapp.presentation.model.Region
+import com.pokeapp.base_presentation.model.GroupsBinding
+import com.pokeapp.base_presentation.model.RegionBinding
 import com.pokeapp.ui.fragments.region_details.RegionDetailsViewHolder
 import com.pokeapp.base_feature.util.extensions.formatNameRegion
 import com.pokeapp.base_feature.util.extensions.putText
@@ -24,9 +24,9 @@ class RegionGroupsFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(region: Region) = RegionGroupsFragment().apply {
+        fun newInstance(region: RegionBinding) = RegionGroupsFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("region", region)
+                putParcelable("region", region)
             }
         }
     }
@@ -39,11 +39,11 @@ class RegionGroupsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val region = checkNotNull(arguments?.getSerializable("region") as Region)
+        val region = checkNotNull(arguments?.getSerializable("region") as RegionBinding)
         regionGroupsRecyclerView.setup {
             withLayoutManager(GridLayoutManager(view.context, 2))
             withDataSource(dataSourceOf(region.groups))
-            withItem<Groups, RegionDetailsViewHolder>(R.layout.item_region_details) {
+            withItem<GroupsBinding, RegionDetailsViewHolder>(R.layout.item_region_details) {
                 onBind(::RegionDetailsViewHolder) { _, item ->
                     this.itemNameTextView.putText(item.name.formatNameRegion())
                 }

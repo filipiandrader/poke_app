@@ -11,8 +11,8 @@ import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.presentation.model.Pokemon
-import com.pokeapp.presentation.model.Stats
+import com.pokeapp.base_presentation.model.PokemonBinding
+import com.pokeapp.base_presentation.model.StatsBinding
 import kotlinx.android.synthetic.main.fragment_base_stats.*
 
 /**
@@ -20,13 +20,13 @@ import kotlinx.android.synthetic.main.fragment_base_stats.*
  */
 class BaseStatsFragment : Fragment() {
 
-    private lateinit var mPokemon: Pokemon
+    private lateinit var mPokemon: PokemonBinding
 
     companion object {
         @JvmStatic
-        fun newInstance(pokemon: Pokemon) = BaseStatsFragment().apply {
+        fun newInstance(pokemon: PokemonBinding) = BaseStatsFragment().apply {
             arguments = Bundle().apply {
-                putSerializable("pokemon", pokemon)
+                putParcelable("pokemon", pokemon)
             }
         }
     }
@@ -39,24 +39,24 @@ class BaseStatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mPokemon = checkNotNull(arguments?.getSerializable("pokemon") as Pokemon)
+        mPokemon = checkNotNull(arguments?.getSerializable("pokemon") as PokemonBinding)
         setupRecyclerView(mPokemon.stats)
     }
 
-    private fun setupRecyclerView(stats: MutableList<Stats>) {
+    private fun setupRecyclerView(stats: MutableList<StatsBinding>) {
         if (stats.isNotEmpty()) {
             baseStatsRecyclerView.setup {
                 withDataSource(dataSourceOf(stats))
-                withItem<Stats, BaseStatsViewHolder>(R.layout.item_base_stats) {
+                withItem<StatsBinding, BaseStatsViewHolder>(R.layout.item_base_stats) {
                     onBind(::BaseStatsViewHolder) { _, item ->
-                        this.baseStatsLabelTextView.putText(item.name.formatNameStats(context!!))
+                        this.baseStatsLabelTextView.putText(item.name.formatNameStats( requireContext()))
                         this.baseStatsTextView.putText("${item.base_state}")
                         if (item.name == "total") {
                             this.baseStatsTotalProgressBar.putProgress(item.base_state)
                             this.baseStatsTotalProgressBar.setVisible(true)
                             this.baseStatsProgressBar.setVisible(false)
 
-                            val color = PokemonColorUtil(itemView.context).getPokemonColor(mPokemon.types)
+                            val color = requireContext().getPokemonColor(mPokemon.types)
                             this.baseStatsTotalProgressBar.progressTintList = ColorStateList.valueOf(color)
                         } else {
                             this.baseStatsProgressBar.putProgress(item.base_state)
