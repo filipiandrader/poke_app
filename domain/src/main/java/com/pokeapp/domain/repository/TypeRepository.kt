@@ -11,8 +11,6 @@ import kotlinx.coroutines.flow.Flow
 interface TypeRepository {
 
     fun getAllTypes(): Flow<List<Type>>
-
     fun getPokemonByType(name: String): Flow<List<Pokemon>>
-
     fun getPokemonLikedByType(type: String): Flow<List<Pokemon>?>
 }

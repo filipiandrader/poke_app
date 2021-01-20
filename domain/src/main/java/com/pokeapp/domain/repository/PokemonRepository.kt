@@ -12,14 +12,9 @@ import kotlinx.coroutines.flow.Flow
 interface PokemonRepository {
 
     fun getAllPokemons(offset: Int, previous: Int): Flow<List<Pokemon>>
-
     fun getPokemonInfo(id: Int): Flow<PokemonInfo>
-
     fun insert(pokemon: PokemonInfo): Flow<Unit>
-
     fun delete(pokemon: PokemonInfo): Flow<Unit>
-
     fun getPokemonLikedById(id: Int): Flow<PokemonInfo?>
-
     fun getAllPokemonsLiked(): Flow<List<Pokemon>?>
 }

@@ -11,6 +11,5 @@ import kotlinx.coroutines.flow.Flow
 interface TypeRemoteDataSource {
 
     fun getAllTypes(): Flow<List<Type>>
-
     fun getPokemonByType(name: String): Flow<List<Pokemon>>
 }

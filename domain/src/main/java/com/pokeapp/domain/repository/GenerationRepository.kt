@@ -10,6 +10,5 @@ import kotlinx.coroutines.flow.Flow
 interface GenerationRepository {
 
     fun getPokemonByGeneration(id: Int): Flow<List<Pokemon>>
-
     fun getPokemonLikedByGeneration(region: String): Flow<List<Pokemon>?>
 }

@@ -28,12 +28,9 @@ class HomeFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        activity?.window?.statusBarColor = requireContext().convertColor(R.color.red)
-    }
-
     override fun setupView() {
+        activity?.window?.statusBarColor = requireContext().convertColor(R.color.red)
+
         binding.run {
             val colorPokedex = requireContext().getCardViewColor("pokedex")
             homePokedexConstraintLayout.setColorFilter(colorPokedex)

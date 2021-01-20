@@ -1,5 +1,6 @@
 package com.pokeapp.di
 
+import com.pokeapp.presentation_region.RegionInfoViewModel
 import com.pokeapp.presentation_region.RegionViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -11,4 +12,6 @@ import org.koin.dsl.module
 val presentationModule = module {
 
     viewModel { RegionViewModel() }
+
+    viewModel { RegionInfoViewModel() }
 }

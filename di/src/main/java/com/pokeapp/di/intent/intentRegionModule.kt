@@ -1,7 +1,9 @@
 package com.pokeapp.di.intent
 
 import androidx.fragment.app.Fragment
+import com.pokeapp.feature_region.navigation.info.RegionInfoNavigation
 import com.pokeapp.feature_region.navigation.main.RegionNavigation
+import com.pokeapp.intent.navigation.region.RegionInfoNavigationImpl
 import com.pokeapp.intent.navigation.region.RegionNavigationImpl
 import org.koin.dsl.module
 
@@ -13,5 +15,9 @@ val intentRegionModule = module {
 
     factory<RegionNavigation> { (fragment: Fragment) ->
         RegionNavigationImpl(fragment)
+    }
+
+    factory<RegionInfoNavigation> { (fragment: Fragment) ->
+        RegionInfoNavigationImpl(fragment)
     }
 }

@@ -38,7 +38,6 @@ class RegionFragment : BaseFragment() {
     override fun setupView() {
         activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
         viewModel.getRegion()
-
         binding.navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
     }
 
@@ -49,12 +48,12 @@ class RegionFragment : BaseFragment() {
     }
 
     private fun setupRegion(regions: List<RegionBinding>) {
-        binding.apply {
+        binding.run {
             regionAdapter = RegionAdapter { navigation.navigateToInfo(it) }
             regionAdapter.items = regions.toMutableList()
             regionRecyclerView.apply {
-                this.layoutManager = GridLayoutManager(requireContext(), 2)
-                this.adapter = regionAdapter
+                layoutManager = GridLayoutManager(requireContext(), 2)
+                adapter = regionAdapter
                 regionRecyclerView.enableScroll(regions.size > 12)
             }
 

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.pokeapp.base_feature.R
-import com.pokeapp.base_presentation.model.RegionBinding
+import com.pokeapp.base_presentation.model.RegionInfoBinding
 import com.pokeapp.feature_region.fragment.info.cities.RegionCitiesFragment
 import com.pokeapp.feature_region.fragment.info.groups.RegionGroupsFragment
 
@@ -13,7 +13,7 @@ import com.pokeapp.feature_region.fragment.info.groups.RegionGroupsFragment
  * Created by Filipi Andrade on 30/03/2020
  */
 
-class RegionDetailsViewPagerAdapter(supportFragmentManager: FragmentManager, context: Context, private val region: RegionBinding) :
+class RegionInfoViewPagerAdapter(supportFragmentManager: FragmentManager, context: Context, private val region: RegionInfoBinding) :
         FragmentStatePagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     data class Page(val title: String, val ctor: () -> Fragment)

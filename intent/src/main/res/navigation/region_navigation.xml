@@ -22,7 +22,11 @@
 
     <fragment
         android:id="@+id/regionDetailsFragment"
-        android:name="com.pokeapp.feature_region.fragment.info.RegionDetailsFragment"
+        android:name="com.pokeapp.feature_region.fragment.info.RegionInfoFragment"
         android:label="@string/fragment_no_title"
-        tools:layout="@layout/fragment_region_details" />
+        tools:layout="@layout/fragment_region_info" >
+        <argument
+            android:name="region"
+            app:argType="com.pokeapp.base_presentation.model.RegionBinding" />
+    </fragment>
 </navigation>

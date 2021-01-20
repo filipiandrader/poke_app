@@ -12,7 +12,7 @@ data class RegionInfoResponse(
     @SerializedName("main_generation")
     val mainGeneration: String? = null,
     @SerializedName("locations")
-    var locations: List<LocationResponse> = listOf(),
+    var locations: List<LocationResponse>,
     @SerializedName("groups")
-    var groups: List<GroupsResponse> = listOf()
+    var groups: List<GroupsResponse>
 )

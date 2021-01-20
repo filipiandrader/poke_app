@@ -12,6 +12,5 @@ import kotlinx.coroutines.flow.Flow
 interface PokemonRemoteDataSource {
 
     fun getAllPokemons(offset: Int, previous: Int): Flow<List<Pokemon>>
-
     fun getPokemonInfo(id: Int): Flow<PokemonInfo>
 }

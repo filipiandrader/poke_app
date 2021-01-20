@@ -11,6 +11,5 @@ import kotlinx.coroutines.flow.Flow
 interface RegionRemoteDataSource {
 
     fun getRegion(): Flow<List<Region>>
-
     fun getRegionByName(name: String): Flow<RegionInfo>
 }

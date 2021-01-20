@@ -16,12 +16,10 @@ class RegionViewModel : ViewModel(), KoinComponent {
     private val getRegion: GetRegion by useCase()
 
     private val _fetchRegionViewState by viewState<List<RegionBinding>>()
-
     val fetchRegionViewState = _fetchRegionViewState.asLiveData()
 
     fun getRegion() {
         _fetchRegionViewState.postLoading()
-
         getRegion(
             onSuccess = { _fetchRegionViewState.postSuccess(RegionMapper.listFromDomain(it)) },
             onError = { _fetchRegionViewState.postError(it) }

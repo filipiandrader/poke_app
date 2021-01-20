@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.info.RegionDetailsFragment">
+    tools:context=".fragment.info.RegionInfoFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp">
 
-                        <androidx.appcompat.widget.AppCompatImageView
+                        <ImageView
                             android:id="@+id/navigationIconImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -68,6 +68,7 @@
                         <TextView
                             android:id="@+id/regionDetailsGenerationTextView"
                             style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            android:visibility="gone"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/regionDetailsNameTextView"
                             tools:text="1° Geração" />
