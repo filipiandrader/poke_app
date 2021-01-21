@@ -121,6 +121,11 @@ class PokemonFragment : BaseFragment() {
         viewModel.fetchTypeViewState.onPostValue(owner) {
             type = it.toMutableList()
         }
+
+        viewModel.fetchPokedexByTypeTypeViewState.onPostValue(owner) {
+            pokemon.clear()
+            setupPokedex(it)
+        }
     }
 
     private fun setupEmptyList() {
@@ -268,6 +273,7 @@ class PokemonFragment : BaseFragment() {
 
                     onClick { index ->
                         dialog.dismiss()
+                        hasPagination = false
                         viewModel.getPokemonByType(type[index].name)
                     }
                 }
