@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: "$rootProject.projectDir/android-common.gradle"
+
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(':base_feature')
+    implementation project(':base_presentation')
+
+    implementation project(':presentation_pokedex')
+    appDependencies.each { add(it.configuration, it.dependency, it.options) }
+}
+repositories {
+    mavenCentral()
+}

@@ -1,3 +1,5 @@
+include ':presentation_pokedex'
+include ':feature_pokedex'
 include ':presentation_region'
 include ':feature_region'
 include ':presentation_main'

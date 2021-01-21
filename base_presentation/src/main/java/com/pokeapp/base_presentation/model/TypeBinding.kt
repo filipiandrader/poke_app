@@ -9,6 +9,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TypeBinding(
-    var id: Int,
-    var name: String
+        var name: String
 ) : Parcelable

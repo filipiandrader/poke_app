@@ -1,5 +1,6 @@
 package com.pokeapp.di
 
+import com.pokeapp.presentation_pokedex.pokemon.PokemonViewModel
 import com.pokeapp.presentation_region.RegionInfoViewModel
 import com.pokeapp.presentation_region.RegionViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,4 +15,6 @@ val presentationModule = module {
     viewModel { RegionViewModel() }
 
     viewModel { RegionInfoViewModel() }
+
+    viewModel { PokemonViewModel() }
 }

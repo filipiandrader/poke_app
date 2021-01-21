@@ -12,6 +12,7 @@ dependencies {
     implementation project(':base_feature')
 
     implementation project(':presentation_main')
+    implementation project(':presentation_pokedex')
     implementation project(':presentation_region')
 
     implementation project(':domain')

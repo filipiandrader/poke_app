@@ -8,33 +8,7 @@ import java.util.*
  * Created by Filipi Andrade Rocha on 18/01/2021.
  */
 
-fun setTypeName(type: String?): String {
-    return when (type?.toLowerCase(Locale("pt", "BR"))) {
-        "normal" -> "Normal"
-        "fighting" -> "Lutador"
-        "flying" -> "Voador"
-        "poison" -> "Venenoso"
-        "ground" -> "Terra"
-        "rock" -> "Pedra"
-        "bug" -> "Inseto"
-        "ghost" -> "Fantasma"
-        "steel" -> "Metal"
-        "fire" -> "Fogo"
-        "water" -> "Água"
-        "grass" -> "Grama"
-        "electric" -> "Elétrico"
-        "psychic" -> "Psíquico"
-        "ice" -> "Gelo"
-        "dragon" -> "Dragão"
-        "dark" -> "Sombrio"
-        "fairy" -> "Fada"
-        "unknown" -> "Desconhecido"
-        "shadow" -> "Corrompidos"
-        else -> ""
-    }
-}
-
-fun String.formatNamePokemon(): String {
+fun String.formatPokemonName(): String {
     var nameFormated: String
 
     if (this.contains("-")) {
@@ -131,4 +105,8 @@ fun String.formatGenerationName(): String {
 
 fun String.uppercase(): String {
     return this.capitalize(Locale("pt", "BR"))
+}
+
+fun String.lowercase(): String {
+    return this.toLowerCase(Locale("pt", "BR"))
 }

@@ -9,19 +9,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class PokemonBinding(
-    var id: Int = 0,
-    var name: String = "",
-    var photo: String = "",
-    var photo_shiny: String = "",
-    var generation: String = "",
-    var about: String = "",
-    var base_experience: Int = -1,
-    var height: Int = -1,
-    var weight: Int = -1,
-    var types: MutableList<TypeBinding> = mutableListOf(),
-    var abilities: MutableList<AbilityBinding> = mutableListOf(),
-    var moves: MutableList<MoveBinding> = mutableListOf(),
-    var stats: MutableList<StatsBinding> = mutableListOf(),
-    var evolves: MutableList<SpeciesBinding> = mutableListOf(),
-    var favourite: Boolean = false
+    var id: Int,
+    var name: String,
+    var photo: String,
+    var photoShiny: String,
+    var generationName: String,
+    var types: List<TypeBinding>,
+    var liked: Boolean
 ) : Parcelable

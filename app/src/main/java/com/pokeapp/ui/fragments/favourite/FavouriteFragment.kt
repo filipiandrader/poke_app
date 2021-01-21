@@ -194,7 +194,7 @@ class FavouriteFragment : Fragment() {
             withDataSource(dataSourceOf(mTypes))
             withItem<TypeBinding, BottomSheetTypeViewHolder>(R.layout.item_type) {
                 onBind(::BottomSheetTypeViewHolder) { _, item ->
-                    this.itemTypeNameTextView.putText(setTypeName(item.name))
+                    this.itemTypeNameTextView.putText(item.name)
 
                     val color = itemView.context.getPokemonColor(item.name)
                     this.itemTypeCardView.background.colorFilter =
@@ -353,17 +353,17 @@ class FavouriteFragment : Fragment() {
                         }
 
                         item.types.getOrNull(0).let { firstType ->
-                            this.itemPokemonType1TextView.putText(setTypeName(firstType?.name))
+                            this.itemPokemonType1TextView.putText(firstType?.name ?: "")
                             this.itemPokemonType1TextView.setVisible(firstType != null)
                         }
 
                         item.types.getOrNull(1).let { secondType ->
-                            this.itemPokemonType2TextView.putText(setTypeName(secondType?.name))
+                            this.itemPokemonType2TextView.putText(secondType?.name ?: "")
                             this.itemPokemonType2TextView.setVisible(secondType != null)
                         }
 
                         item.types.getOrNull(2).let { thirdType ->
-                            this.itemPokemonType3TextView.putText(setTypeName(thirdType?.name))
+                            this.itemPokemonType3TextView.putText(thirdType?.name ?: "")
                             this.itemPokemonType3TextView.setVisible(thirdType != null)
                         }
                     }

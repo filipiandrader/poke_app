@@ -10,6 +10,7 @@ dependencies {
     api project(':base_feature')
 
     api project(':feature_main')
+    api project(':feature_pokedex')
     api project(':feature_region')
 
     intentDependencies.each { add(it.configuration, it.dependency) }

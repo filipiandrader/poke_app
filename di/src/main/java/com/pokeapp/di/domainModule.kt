@@ -1,8 +1,9 @@
 package com.pokeapp.di
 
 import com.pokeapp.domain.core.ThreadContextProvider
-import com.pokeapp.domain.interactor.GetRegion
-import com.pokeapp.domain.interactor.GetRegionInfo
+import com.pokeapp.domain.interactor.pokedex.GetPokedex
+import com.pokeapp.domain.interactor.region.GetRegion
+import com.pokeapp.domain.interactor.region.GetRegionInfo
 import kotlinx.coroutines.CoroutineScope
 import org.koin.dsl.module
 
@@ -20,5 +21,9 @@ val domainModule = module {
 
     factory { (scope: CoroutineScope) ->
         GetRegionInfo(get(), scope)
+    }
+
+    factory { (scope: CoroutineScope) ->
+        GetPokedex(get(), scope)
     }
 }

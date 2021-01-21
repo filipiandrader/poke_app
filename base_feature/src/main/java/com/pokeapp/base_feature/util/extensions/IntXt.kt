@@ -4,6 +4,12 @@ package com.pokeapp.base_feature.util.extensions
  * Created by Filipi Andrade Rocha on 18/01/2021.
  */
 
+fun Int.formatPokemonNumber() = when (this) {
+    in 1..9 -> "#00$this"
+    in 10..99 -> "#0$this"
+    else -> "#$this"
+}
+
 fun Int.getGenerationName(): String {
     return when (this) {
         1 -> "kanto"

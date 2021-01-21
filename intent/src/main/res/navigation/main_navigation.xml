@@ -34,7 +34,17 @@
             app:exitAnim="@anim/nav_slide_exit_anim"
             app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
             app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_pokedex_navigation"
+            app:destination="@id/pokedex_navigation"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
     </fragment>
 
     <include app:graph="@navigation/region_navigation" />
+
+    <include app:graph="@navigation/pokedex_navigation" />
 </navigation>

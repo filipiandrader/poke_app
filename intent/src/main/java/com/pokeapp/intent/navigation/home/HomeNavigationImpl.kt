@@ -11,9 +11,9 @@ import com.pokeapp.intent.util.navigate
 
 class HomeNavigationImpl(private val fragment: Fragment) : HomeNavigation {
 
-    override fun navigateToPokedex() {
-//            findNavController().navigate(R.id.action_homeFragment_to_pokedexFragment)
-    }
+    override fun navigateToPokedex() = fragment.navigate(
+        HomeFragmentDirections.actionHomeFragmentToPokedexNavigation()
+    )
 
     override fun navigateToFavoriDex() {
 //            findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
