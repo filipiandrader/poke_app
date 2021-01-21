@@ -2,9 +2,12 @@ package com.pokeapp.presentation_pokedex.pokemon
 
 import androidx.lifecycle.ViewModel
 import com.pokeapp.base_presentation.mapper.region.pokedex.PokedexMapper
+import com.pokeapp.base_presentation.mapper.region.type.TypeMapper
 import com.pokeapp.base_presentation.model.PokemonBinding
+import com.pokeapp.base_presentation.model.TypeBinding
 import com.pokeapp.base_presentation.utils.extensions.*
 import com.pokeapp.domain.interactor.pokedex.GetPokedex
+import com.pokeapp.domain.interactor.type.GetType
 import org.koin.core.KoinComponent
 
 /**
@@ -14,10 +17,13 @@ import org.koin.core.KoinComponent
 class PokemonViewModel : ViewModel(), KoinComponent {
 
     private val getPokedex: GetPokedex by useCase()
+    private val getType: GetType by useCase()
 
     private val _fetchPokedexViewState by viewState<List<PokemonBinding>>()
+    private val _fetchTypeViewState by viewState<List<TypeBinding>>()
 
     val fetchPokedexViewState = _fetchPokedexViewState.asLiveData()
+    val fetchTypeViewState = _fetchTypeViewState.asLiveData()
 
 /*    private var mState = MutableLiveData<ViewState<MutableList<PokemonBinding>>>()
     private var mStateByGeneration = MutableLiveData<ViewState<MutableList<PokemonBinding>>>()
@@ -54,17 +60,13 @@ class PokemonViewModel : ViewModel(), KoinComponent {
     }
 
     fun getTypes() {
-        /*dataSource.getAllTypes(
-                onSuccess = {
-                    mStateTypes.postValue(ViewState.success(it))
-                },
-                onFailure = {
-                    mStateTypes.postValue(ViewState.failure())
-                }
-        )*/
+        getType(
+                onSuccess = { _fetchTypeViewState.postSuccess(TypeMapper.listFromDomain(it)) },
+                onError = { _fetchTypeViewState.postError(it) }
+        )
     }
 
-    fun getPokemonByType(id: Int) {
+    fun getPokemonByType(name: String) {
         /*mStateByType.postValue(ViewState.loading())
         dataSource.getPokemonByType(id,
                 onSuccess = {

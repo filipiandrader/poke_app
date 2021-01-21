@@ -38,7 +38,7 @@ import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_presentation.model.TypeBinding
 import com.pokeapp.presentation.favourite.FavouriteViewModel
 import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
-import com.pokeapp.ui.fragments.BottomSheetTypeViewHolder
+import com.pokeapp.base_feature.customview.BottomSheetTypeViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_favourite.*
