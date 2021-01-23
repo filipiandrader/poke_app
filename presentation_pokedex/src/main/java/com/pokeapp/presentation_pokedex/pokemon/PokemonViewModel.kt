@@ -1,9 +1,9 @@
 package com.pokeapp.presentation_pokedex.pokemon
 
 import androidx.lifecycle.ViewModel
-import com.pokeapp.base_presentation.mapper.region.generation.GenerationMapper
-import com.pokeapp.base_presentation.mapper.region.pokedex.PokedexMapper
-import com.pokeapp.base_presentation.mapper.region.type.TypeMapper
+import com.pokeapp.base_presentation.mapper.generation.GenerationMapper
+import com.pokeapp.base_presentation.mapper.pokedex.PokedexMapper
+import com.pokeapp.base_presentation.mapper.type.TypeMapper
 import com.pokeapp.base_presentation.model.GenerationBinding
 import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_presentation.model.TypeBinding

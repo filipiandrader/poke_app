@@ -18,10 +18,10 @@ class PokemonInfoBinding(
     var baseExperience: Int,
     var height: Int,
     var weight: Int,
-    var types: MutableList<TypeBinding>,
-    var abilities: MutableList<AbilityBinding>,
-    var moves: MutableList<MoveBinding>,
-    var stats: MutableList<StatsBinding>,
-    var evolves: MutableList<SpeciesBinding>,
-    var favourite: Boolean = false
+    var types: List<TypeBinding>,
+    var abilities: List<AbilityBinding>,
+    var moves: List<MoveBinding>,
+    var stats: List<StatsBinding>,
+    var evolves: List<SpeciesBinding>,
+    var liked: Boolean = false
 ) : Parcelable

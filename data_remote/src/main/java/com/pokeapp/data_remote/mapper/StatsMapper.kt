@@ -14,6 +14,6 @@ object StatsMapper : DataRemoteMapper<StatsResponse, Stats>() {
 
     override fun toDomain(data: StatsResponse) = Stats(
         name = data.name ?: "",
-        baseState = data.baseState ?: -1
+        baseStat = data.baseStat ?: -1
     )
 }

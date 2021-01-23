@@ -10,5 +10,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class StatsBinding(
     var name: String,
-    var base_state: Int
+    var baseStat: Int
 ) : Parcelable

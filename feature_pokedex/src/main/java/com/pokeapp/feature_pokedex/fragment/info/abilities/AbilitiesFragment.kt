@@ -9,16 +9,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
+import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.extensions.formatNameAbility
 import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_presentation.model.AbilityBinding
 import com.pokeapp.base_presentation.model.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.R
+import com.pokeapp.feature_pokedex.databinding.FragmentAbilitiesBinding
 import kotlinx.android.synthetic.main.fragment_abilities.*
 
-class AbilitiesFragment : Fragment() {
+class AbilitiesFragment : BaseFragment() {
 
     private lateinit var pokemon: PokemonInfoBinding
+    private lateinit var binding: FragmentAbilitiesBinding
 
     companion object {
         @JvmStatic
@@ -31,21 +34,22 @@ class AbilitiesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_abilities, container, false)
+    ): View {
+        binding = FragmentAbilitiesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setupView() {
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
-        abilitiesRecyclerView.setup {
-            withLayoutManager(GridLayoutManager(view.context, 2))
-            withDataSource(dataSourceOf(pokemon.abilities))
-            withItem<AbilityBinding, AbilityViewHolder>(R.layout.item_ability) {
-                onBind(::AbilityViewHolder) { _, item ->
-                    this.itemAbilityTextView.putText(item.name.formatNameAbility())
+
+        binding.apply {
+            abilitiesRecyclerView.setup {
+                withLayoutManager(GridLayoutManager(requireContext(), 2))
+                withDataSource(dataSourceOf(pokemon.abilities))
+                withItem<AbilityBinding, AbilityViewHolder>(R.layout.item_ability) {
+                    onBind(::AbilityViewHolder) { _, item ->
+                        this.itemAbilityTextView.putText(item.name.formatNameAbility())
+                    }
                 }
             }
         }

@@ -9,6 +9,6 @@ import com.google.gson.annotations.SerializedName
 class StatsResponse(
     @SerializedName("name")
     val name: String? = null,
-    @SerializedName("base_state")
-    val baseState: Int? = null
+    @SerializedName("base_stat")
+    val baseStat: Int? = null
 )

@@ -15,7 +15,7 @@ object PokemonInfoMapper : DataRemoteMapper<PokemonInfoResponse, PokemonInfo>() 
         name = data.name ?: "",
         photo = data.photo ?: "",
         photoShiny = data.photoShiny ?: "",
-        generationName = data.generation ?: "",
+        generationName = data.generationName ?: "",
         description = data.description ?: "",
         height = data.height ?: -1,
         baseExperience = data.baseExperience ?: -1,

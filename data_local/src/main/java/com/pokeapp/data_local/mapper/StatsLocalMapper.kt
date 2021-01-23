@@ -13,13 +13,13 @@ object StatsLocalMapper {
 
     private fun toStats(statLocal: StatsLocal) = Stats(
             name = statLocal.name,
-            baseState = statLocal.baseState
+            baseStat = statLocal.baseState
     )
 
     fun toStatsLocalList(stats: List<Stats>) = stats.map { toStatsLocal(it) }
 
     private fun toStatsLocal(stat: Stats) = StatsLocal(
             name = stat.name,
-            baseState = stat.baseState
+            baseState = stat.baseStat
     )
 }

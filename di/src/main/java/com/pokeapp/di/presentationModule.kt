@@ -1,5 +1,6 @@
 package com.pokeapp.di
 
+import com.pokeapp.presentation_pokedex.info.PokemonInfoViewModel
 import com.pokeapp.presentation_pokedex.pokemon.PokemonViewModel
 import com.pokeapp.presentation_region.RegionInfoViewModel
 import com.pokeapp.presentation_region.RegionViewModel
@@ -17,4 +18,6 @@ val presentationModule = module {
     viewModel { RegionInfoViewModel() }
 
     viewModel { PokemonViewModel() }
+
+    viewModel { PokemonInfoViewModel() }
 }

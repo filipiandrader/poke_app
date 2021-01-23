@@ -24,7 +24,7 @@ data class PokemonInfoResponse(
     @SerializedName("description")
     var description: String? = null,
     @SerializedName("generation_name")
-    var generation: String? = null,
+    var generationName: String? = null,
     @SerializedName("types")
     var types: List<TypeResponse> = listOf(),
     @SerializedName("abilities")

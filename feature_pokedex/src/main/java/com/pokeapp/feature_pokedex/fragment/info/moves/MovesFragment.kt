@@ -9,17 +9,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
+import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.extensions.formatNameMove
 import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_presentation.model.MoveBinding
 import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_presentation.model.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.R
+import com.pokeapp.feature_pokedex.databinding.FragmentMovesBinding
 import kotlinx.android.synthetic.main.fragment_moves.*
+import org.koin.core.bind
 
-class MovesFragment : Fragment() {
+class MovesFragment : BaseFragment() {
 
     private lateinit var pokemon: PokemonInfoBinding
+    private lateinit var binding: FragmentMovesBinding
 
     companion object {
         @JvmStatic
@@ -32,21 +36,22 @@ class MovesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_moves, container, false)
+    ): View {
+        binding = FragmentMovesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setupView() {
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
-        movesRecyclerView.setup {
-            withLayoutManager(GridLayoutManager(view.context, 2))
-            withDataSource(dataSourceOf(pokemon.moves))
-            withItem<MoveBinding, MovesViewHolder>(R.layout.item_moves) {
-                onBind(::MovesViewHolder) { _, item ->
-                    this.itemMoveTextView.putText(item.name.formatNameMove())
+
+        binding.apply {
+            movesRecyclerView.setup {
+                withLayoutManager(GridLayoutManager(requireContext(), 2))
+                withDataSource(dataSourceOf(pokemon.moves))
+                withItem<MoveBinding, MovesViewHolder>(R.layout.item_moves) {
+                    onBind(::MovesViewHolder) { _, item ->
+                        this.itemMoveTextView.putText(item.name.formatNameMove())
+                    }
                 }
             }
         }

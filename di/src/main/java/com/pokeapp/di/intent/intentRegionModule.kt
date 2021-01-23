@@ -2,9 +2,11 @@ package com.pokeapp.di.intent
 
 import androidx.fragment.app.Fragment
 import com.pokeapp.feature_pokedex.navigation.PokedexNavigation
+import com.pokeapp.feature_pokedex.navigation.PokemonInfoNavigation
 import com.pokeapp.feature_region.navigation.info.RegionInfoNavigation
 import com.pokeapp.feature_region.navigation.main.RegionNavigation
 import com.pokeapp.intent.navigation.pokedex.PokedexNavigationImpl
+import com.pokeapp.intent.navigation.pokedex.PokemonInfoNavigationImpl
 import com.pokeapp.intent.navigation.region.RegionInfoNavigationImpl
 import com.pokeapp.intent.navigation.region.RegionNavigationImpl
 import org.koin.dsl.module
@@ -25,5 +27,9 @@ val intentRegionModule = module {
 
     factory<PokedexNavigation> { (fragment: Fragment) ->
         PokedexNavigationImpl(fragment)
+    }
+
+    factory<PokemonInfoNavigation> { (fragment: Fragment) ->
+        PokemonInfoNavigationImpl(fragment)
     }
 }

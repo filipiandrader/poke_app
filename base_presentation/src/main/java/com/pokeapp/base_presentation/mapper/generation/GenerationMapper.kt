@@ -1,4 +1,4 @@
-package com.pokeapp.base_presentation.mapper.region.generation
+package com.pokeapp.base_presentation.mapper.generation
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
 import com.pokeapp.base_presentation.model.GenerationBinding

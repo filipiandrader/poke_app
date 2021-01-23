@@ -1,4 +1,4 @@
-package com.pokeapp.base_presentation.mapper.region.region
+package com.pokeapp.base_presentation.mapper.region
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
 import com.pokeapp.base_presentation.mapper.group.GroupMapper

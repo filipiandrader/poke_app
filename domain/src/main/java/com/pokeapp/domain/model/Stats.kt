@@ -6,5 +6,5 @@ package com.pokeapp.domain.model
 
 data class Stats(
         val name: String,
-        val baseState: Int
+        val baseStat: Int
 )

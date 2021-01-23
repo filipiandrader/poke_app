@@ -1,5 +1,6 @@
 package com.pokeapp.base_feature.util.extensions
 
+import android.content.res.ColorStateList
 import android.widget.ProgressBar
 
 /*
@@ -8,4 +9,8 @@ import android.widget.ProgressBar
 
 fun ProgressBar.putProgress(progress: Int) {
     this.progress = progress
+}
+
+fun ProgressBar.setColor(color: Int) {
+    this.progressTintList = ColorStateList.valueOf(color)
 }

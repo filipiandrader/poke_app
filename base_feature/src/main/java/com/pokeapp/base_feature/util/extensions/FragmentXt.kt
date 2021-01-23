@@ -1,5 +1,6 @@
 package com.pokeapp.base_feature.util.extensions
 
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,4 +18,12 @@ fun Fragment.addOnBackPressedCallback(owner: LifecycleOwner, onBackPressed: () -
             }
         }
     )
+}
+
+fun Fragment.longToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+}
+
+fun Fragment.shortToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }

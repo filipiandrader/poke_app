@@ -1,4 +1,4 @@
-package com.pokeapp.base_presentation.mapper.region.type
+package com.pokeapp.base_presentation.mapper.type
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
 import com.pokeapp.base_presentation.model.TypeBinding

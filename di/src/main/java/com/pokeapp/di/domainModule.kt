@@ -4,6 +4,7 @@ import com.pokeapp.domain.core.ThreadContextProvider
 import com.pokeapp.domain.interactor.generation.GetGeneration
 import com.pokeapp.domain.interactor.generation.GetPokemonByGeneration
 import com.pokeapp.domain.interactor.pokedex.GetPokedex
+import com.pokeapp.domain.interactor.pokemon.GetPokemonInfo
 import com.pokeapp.domain.interactor.region.GetRegion
 import com.pokeapp.domain.interactor.region.GetRegionInfo
 import com.pokeapp.domain.interactor.type.GetPokemonByType
@@ -29,6 +30,10 @@ val domainModule = module {
 
     factory { (scope: CoroutineScope) ->
         GetPokedex(get(), scope)
+    }
+
+    factory { (scope: CoroutineScope) ->
+        GetPokemonInfo(get(), scope)
     }
 
     factory { (scope: CoroutineScope) ->
