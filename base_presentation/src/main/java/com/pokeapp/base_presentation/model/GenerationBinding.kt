@@ -10,6 +10,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class GenerationBinding(
     var id: Int,
-    var name: String,
-    var img: Int
+    var name: String
 ) : Parcelable

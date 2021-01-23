@@ -1,5 +1,6 @@
 package com.pokeapp.data.datasource.remote
 
+import com.pokeapp.domain.model.Generation
 import com.pokeapp.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 
@@ -9,5 +10,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface GenerationRemoteDataSource {
 
+    fun getGeneration(): Flow<List<Generation>>
     fun getPokemonByGeneration(id: Int): Flow<List<Pokemon>>
 }

@@ -9,11 +9,15 @@ import com.pokeapp.domain.repository.GenerationRepository
  */
 
 class GenerationRepositoryImpl(
-        private val generationRemoteDataSource: GenerationRemoteDataSource,
-        private val pokemonLocalDataSource: PokemonLocalDataSource
+    private val generationRemoteDataSource: GenerationRemoteDataSource,
+    private val pokemonLocalDataSource: PokemonLocalDataSource
 ) : GenerationRepository {
 
-    override fun getPokemonByGeneration(id: Int) = generationRemoteDataSource.getPokemonByGeneration(id)
+    override fun getGeneration() = generationRemoteDataSource.getGeneration()
 
-    override fun getPokemonLikedByGeneration(region: String) = pokemonLocalDataSource.getPokemonLikedByGeneration(region)
+    override fun getPokemonByGeneration(id: Int) =
+        generationRemoteDataSource.getPokemonByGeneration(id)
+
+    override fun getPokemonLikedByGeneration(region: String) =
+        pokemonLocalDataSource.getPokemonLikedByGeneration(region)
 }

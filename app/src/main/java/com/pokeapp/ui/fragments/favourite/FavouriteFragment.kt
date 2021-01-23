@@ -37,7 +37,7 @@ import com.pokeapp.base_presentation.model.GenerationBinding
 import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_presentation.model.TypeBinding
 import com.pokeapp.presentation.favourite.FavouriteViewModel
-import com.pokeapp.ui.fragments.BottomSheetGenerationViewHolder
+import com.pokeapp.base_feature.customview.BottomSheetGenerationViewHolder
 import com.pokeapp.base_feature.customview.BottomSheetTypeViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.squareup.picasso.Picasso
@@ -138,13 +138,13 @@ class FavouriteFragment : Fragment() {
         val bottomSheetRecyclerView =
             dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
         val generations = mutableListOf<GenerationBinding>()
-        generations.add(GenerationBinding(id = 1, name = "1° Geração", img = R.drawable.gen1))
-        generations.add(GenerationBinding(id = 2, name = "2° Geração", img = R.drawable.gen2))
-        generations.add(GenerationBinding(id = 3, name = "3° Geração", img = R.drawable.gen3))
-        generations.add(GenerationBinding(id = 4, name = "4° Geração", img = R.drawable.gen4))
-        generations.add(GenerationBinding(id = 5, name = "5° Geração", img = R.drawable.gen5))
-        generations.add(GenerationBinding(id = 6, name = "6° Geração", img = R.drawable.gen6))
-        generations.add(GenerationBinding(id = 7, name = "7° Geração", img = R.drawable.gen7))
+        generations.add(GenerationBinding(id = 1, name = "1° Geração"))
+        generations.add(GenerationBinding(id = 2, name = "2° Geração"))
+        generations.add(GenerationBinding(id = 3, name = "3° Geração"))
+        generations.add(GenerationBinding(id = 4, name = "4° Geração"))
+        generations.add(GenerationBinding(id = 5, name = "5° Geração"))
+        generations.add(GenerationBinding(id = 6, name = "6° Geração"))
+        generations.add(GenerationBinding(id = 7, name = "7° Geração"))
 
         bottomSheetRecyclerView.setup {
             withLayoutManager(GridLayoutManager(requireContext(), 2))
@@ -152,7 +152,7 @@ class FavouriteFragment : Fragment() {
             withItem<GenerationBinding, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
                 onBind(::BottomSheetGenerationViewHolder) { _, item ->
                     this.itemGenerationNameTextView.putText(item.name)
-                    this.itemGenerationPhotoImageView.setImageResource(item.img)
+//                    this.itemGenerationPhotoImageView.setImageResource(item.img)
                 }
 
                 onClick { index ->

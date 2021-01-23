@@ -1,12 +1,13 @@
-package com.pokeapp.presentation_pokedex.details
+package com.pokeapp.presentation_pokedex.info
 
 import androidx.lifecycle.ViewModel
 import com.pokeapp.base_presentation.model.PokemonBinding
+import org.koin.core.KoinComponent
 
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-class PokemonDetailsViewModel : ViewModel() {
+class PokemonInfoViewModel : ViewModel(), KoinComponent {
 
     /*private var mState = MutableLiveData<ViewState<String>>()
     private var mStateInfo = MutableLiveData<ViewState<PokemonBinding>>()

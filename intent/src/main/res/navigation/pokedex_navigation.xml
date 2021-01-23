@@ -25,7 +25,8 @@
         android:id="@+id/pokemonInfoFragment"
         android:name="com.pokeapp.feature_pokedex.fragment.info.PokemonInfoFragment"
         android:label="@string/fragment_no_title"
-        tools:layout="@layout/fragment_pokemon_info" >
+        tools:layout="@layout/fragment_pokemon_info">
+
         <argument
             android:name="pokemon"
             app:argType="com.pokeapp.base_presentation.model.PokemonBinding" />

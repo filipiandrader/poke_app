@@ -15,7 +15,6 @@ import android.view.animation.OvershootInterpolator
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,14 +28,19 @@ import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.base_feature.core.BaseFragment
+import com.pokeapp.base_feature.customview.BottomSheetGenerationViewHolder
 import com.pokeapp.base_feature.customview.BottomSheetTypeViewHolder
+import com.pokeapp.base_feature.util.delegateproperties.navDirections
+import com.pokeapp.base_feature.util.enums.GenerationEnum
 import com.pokeapp.base_feature.util.enums.PokemonTypeEnum
 import com.pokeapp.base_feature.util.extensions.*
+import com.pokeapp.base_presentation.model.GenerationBinding
 import com.pokeapp.base_presentation.model.PokemonBinding
 import com.pokeapp.base_presentation.model.TypeBinding
 import com.pokeapp.feature_pokedex.R
 import com.pokeapp.feature_pokedex.adapter.PokedexAdapter
 import com.pokeapp.feature_pokedex.databinding.FragmentPokemonBinding
+import com.pokeapp.feature_pokedex.navigation.PokedexNavigation
 import com.pokeapp.presentation_pokedex.pokemon.PokemonViewModel
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,9 +48,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class PokemonFragment : BaseFragment() {
 
     private val viewModel: PokemonViewModel by viewModel()
+    private val navigation: PokedexNavigation by navDirections()
 
     private val pokemon = mutableListOf<PokemonBinding>()
     private var type = mutableListOf<TypeBinding>()
+    private var generation = mutableListOf<GenerationBinding>()
     private lateinit var binding: FragmentPokemonBinding
     private lateinit var pokedexAdapter: PokedexAdapter
 
@@ -61,7 +67,7 @@ class PokemonFragment : BaseFragment() {
     var firstVisibleItemPosition = 0
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentPokemonBinding.inflate(inflater, container, false)
         return binding.root
@@ -71,13 +77,14 @@ class PokemonFragment : BaseFragment() {
         activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
         viewModel.getAllPokemon(mOffset, mPrevious)
         viewModel.getTypes()
+        viewModel.getGenerations()
         createCustomAnimation()
 
         binding.run {
             pokemonAllFAB.setOnClickListener { getAllPokedex() }
             pokemonByGenFAB.setOnClickListener { showBottomSheetGeneration() }
             pokemonByTypeFAB.setOnClickListener { showBottomSheetType() }
-            navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
+            navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
 
             pokemonRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -85,7 +92,7 @@ class PokemonFragment : BaseFragment() {
                         visibleItemCount = pokemonRecyclerView.layoutManager!!.childCount
                         totalItemCount = pokemonRecyclerView.layoutManager!!.itemCount
                         firstVisibleItemPosition =
-                                (pokemonRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                            (pokemonRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
 
                         if (!isLoading && (firstVisibleItemPosition + visibleItemCount) >= totalItemCount) {
                             mPrevious = mOffset
@@ -126,6 +133,15 @@ class PokemonFragment : BaseFragment() {
             pokemon.clear()
             setupPokedex(it)
         }
+
+        viewModel.fetchGenerationViewState.onPostValue(owner) {
+            generation = it.toMutableList()
+        }
+
+        viewModel.fetchPokedexByGenerationTypeViewState.onPostValue(owner) {
+            pokemon.clear()
+            setupPokedex(it)
+        }
     }
 
     private fun setupEmptyList() {
@@ -135,7 +151,7 @@ class PokemonFragment : BaseFragment() {
     private fun setupPokedex(pokedex: List<PokemonBinding>) {
         pokemon.addAll(pokemon.size, pokedex)
         binding.run {
-            pokedexAdapter = PokedexAdapter { }
+            pokedexAdapter = PokedexAdapter { navigation.navigateToPokemonInfo(it) }
             pokedexAdapter.items = pokemon.toMutableList()
             pokemonRecyclerView.apply {
                 layoutManager = GridLayoutManager(requireContext(), 2)
@@ -183,54 +199,53 @@ class PokemonFragment : BaseFragment() {
     }
 
     private fun showBottomSheetGeneration() {
-        /*pokemonMenuFAM.close(true)
-        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = wm.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        val peekHeight = size.y * 0.70
+        binding.run {
+            pokemonMenuFAM.close(true)
+            val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val display = wm.defaultDisplay
+            val size = Point()
+            display.getSize(size)
+            val peekHeight = size.y * 0.70
 
-        val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-            setPeekHeight(literal = peekHeight.toInt())
-            customView(
-                viewRes = R.layout.bottom_sheet_layout,
-                scrollable = false,
-                noVerticalPadding = true,
-                horizontalPadding = false,
-                dialogWrapContent = true
-            )
-        }
-
-        val itemFilterNameTextView =
-            dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
-        itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_generation_label))
-
-        val bottomSheetRecyclerView =
-            dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
-        val generations = mutableListOf<GenerationBinding>()
-        generations.add(GenerationBinding(id = 1, name = "1° Geração", img = R.drawable.gen1))
-        generations.add(GenerationBinding(id = 2, name = "2° Geração", img = R.drawable.gen2))
-        generations.add(GenerationBinding(id = 3, name = "3° Geração", img = R.drawable.gen3))
-        generations.add(GenerationBinding(id = 4, name = "4° Geração", img = R.drawable.gen4))
-        generations.add(GenerationBinding(id = 5, name = "5° Geração", img = R.drawable.gen5))
-        generations.add(GenerationBinding(id = 6, name = "6° Geração", img = R.drawable.gen6))
-        generations.add(GenerationBinding(id = 7, name = "7° Geração", img = R.drawable.gen7))
-
-        bottomSheetRecyclerView.setup {
-            withLayoutManager(GridLayoutManager(requireContext(), 2))
-            withDataSource(dataSourceOf(generations))
-            withItem<GenerationBinding, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
-                onBind(::BottomSheetGenerationViewHolder) { _, item ->
-                    this.itemGenerationNameTextView.putText(item.name)
-                    this.itemGenerationPhotoImageView.setImageResource(item.img)
+            val dialog =
+                MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                    setPeekHeight(literal = peekHeight.toInt())
+                    customView(
+                        viewRes = R.layout.bottom_sheet_layout,
+                        scrollable = false,
+                        noVerticalPadding = true,
+                        horizontalPadding = false,
+                        dialogWrapContent = true
+                    )
                 }
 
-                onClick { index ->
-                    dialog.dismiss()
-                    viewModel.getPokemonByGenenration(generations[index].id)
+            val itemFilterNameTextView =
+                dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
+            itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_generation_label))
+
+            val bottomSheetRecyclerView =
+                dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
+
+            bottomSheetRecyclerView.setup {
+                withLayoutManager(GridLayoutManager(requireContext(), 2))
+                withDataSource(dataSourceOf(generation))
+                withItem<GenerationBinding, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
+                    onBind(::BottomSheetGenerationViewHolder) { _, item ->
+                        val name = requireContext().getString(GenerationEnum.getName(item.name))
+                        this.itemGenerationNameTextView.putText(name)
+                        val icon = GenerationEnum.getIcon(item.name)
+                        this.itemGenerationPhotoImageView.setImageResource(icon)
+                    }
+
+                    onClick { index ->
+                        dialog.dismiss()
+                        pokemon.clear()
+                        hasPagination = false
+                        viewModel.getPokemonByGenenration(generation[index].id)
+                    }
                 }
             }
-        }*/
+        }
     }
 
     private fun showBottomSheetType() {
@@ -242,23 +257,24 @@ class PokemonFragment : BaseFragment() {
             display.getSize(size)
             val peekHeight = size.y * 0.70
 
-            val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-                setPeekHeight(literal = peekHeight.toInt())
-                customView(
+            val dialog =
+                MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                    setPeekHeight(literal = peekHeight.toInt())
+                    customView(
                         viewRes = R.layout.bottom_sheet_layout,
                         scrollable = false,
                         noVerticalPadding = true,
                         horizontalPadding = false,
                         dialogWrapContent = true
-                )
-            }
+                    )
+                }
 
             val itemFilterNameTextView =
-                    dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
+                dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
             itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_type_label))
 
             val bottomSheetRecyclerView =
-                    dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
+                dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
 
             bottomSheetRecyclerView.setup {
                 withLayoutManager(GridLayoutManager(requireContext(), 2))
@@ -266,7 +282,6 @@ class PokemonFragment : BaseFragment() {
                 withItem<TypeBinding, BottomSheetTypeViewHolder>(R.layout.item_type) {
                     onBind(::BottomSheetTypeViewHolder) { _, item ->
                         this.itemTypeNameTextView.putText(PokemonTypeEnum.match(item.name))
-
                         val color = requireContext().getPokemonColor(item.name)
                         this.itemTypeCardView.setColorFilter(color)
                     }

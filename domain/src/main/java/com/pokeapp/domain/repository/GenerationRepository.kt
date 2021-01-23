@@ -1,5 +1,6 @@
 package com.pokeapp.domain.repository
 
+import com.pokeapp.domain.model.Generation
 import com.pokeapp.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GenerationRepository {
 
+    fun getGeneration(): Flow<List<Generation>>
     fun getPokemonByGeneration(id: Int): Flow<List<Pokemon>>
     fun getPokemonLikedByGeneration(region: String): Flow<List<Pokemon>?>
 }

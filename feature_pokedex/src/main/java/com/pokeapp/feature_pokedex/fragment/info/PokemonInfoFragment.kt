@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_pokemon_info.*
 
 class PokemonInfoFragment : Fragment() {
 
-//    private val mViewModel: PokemonDetailsViewModel by viewModel()
+//    private val viewModel: PokemonInfoViewModel by viewModel()
 
     private lateinit var pokemon: PokemonInfoBinding
 
@@ -28,7 +28,7 @@ class PokemonInfoFragment : Fragment() {
         inflater.inflate(R.layout.fragment_pokemon_info, container, false)
 
     /*private fun creatingObservers() {
-        mViewModel.getStateInfo().observe(viewLifecycleOwner, Observer { viewState ->
+        viewModel.getStateInfo().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.LOADING -> {
                     isClickableImageView(false)
@@ -38,7 +38,7 @@ class PokemonInfoFragment : Fragment() {
                 }
                 State.SUCCESS -> {
                     pokemonDetailsSwipeRefreshLayout.setRefresh(false)
-                    mViewModel.getStateInfo().value?.data?.let {
+                    viewModel.getStateInfo().value?.data?.let {
                         bindInfo(it)
                     }
                 }
@@ -53,7 +53,7 @@ class PokemonInfoFragment : Fragment() {
             }
         })
 
-        mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
+        viewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState?.state) {
                 State.SUCCESS -> showToast()
                 State.FAILURE -> {}*//*longToast("Ocorreu um erro ao favoritar/desfavoritar ${pokemon.name} :(")*//*
@@ -113,7 +113,7 @@ class PokemonInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
-//        mViewModel.getPokemonInfo(pokemon.id)
+//        viewModel.getPokemonInfo(pokemon.id)
 
         pokemonDetailsNameTextView.putText(pokemon.name)
         val id = when (pokemon.id) {
@@ -157,7 +157,7 @@ class PokemonInfoFragment : Fragment() {
 
         pokemonDetailsSwipeRefreshLayout.setOnRefreshListener {
             pokemonDetailsSwipeRefreshLayout.setRefresh(true)
-//            mViewModel.getPokemonInfo(pokemon.id)
+//            viewModel.getPokemonInfo(pokemon.id)
         }
     }
 
@@ -171,6 +171,6 @@ class PokemonInfoFragment : Fragment() {
 
     private fun doFavouritePokemon() {
         pokemon.favourite = !pokemon.favourite
-//        mViewModel.doFavouritePokemon(pokemon)
+//        viewModel.doFavouritePokemon(pokemon)
     }
 }

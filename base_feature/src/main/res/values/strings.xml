@@ -39,4 +39,13 @@
     <string name="bottom_sheet_generation_label">Geração</string>
     <string name="bottom_sheet_type_label">Tipos</string>
     <string name="about_description_label">Sobre</string>
+
+    <string name="first_generation_name">1° Geração</string>
+    <string name="second_generation_name">2° Geração</string>
+    <string name="third_generation_name">3° Geração</string>
+    <string name="fourth_generation_name">4° Geração</string>
+    <string name="fifth_generation_name">5° Geração</string>
+    <string name="sixth_generation_name">6° Geração</string>
+    <string name="seventh_generation_name">7° Geração</string>
+    <string name="eighth_generation_name">8° Geração</string>
 </resources>
