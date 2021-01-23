@@ -2,7 +2,7 @@ package com.pokeapp.presentation_region
 
 import androidx.lifecycle.ViewModel
 import com.pokeapp.base_presentation.mapper.region.RegionMapper
-import com.pokeapp.base_presentation.model.RegionBinding
+import com.pokeapp.base_presentation.model.region.RegionBinding
 import com.pokeapp.base_presentation.utils.extensions.*
 import com.pokeapp.domain.interactor.region.GetRegion
 import org.koin.core.KoinComponent

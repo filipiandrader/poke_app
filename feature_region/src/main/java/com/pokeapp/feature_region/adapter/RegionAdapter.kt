@@ -7,7 +7,7 @@ import com.pokeapp.base_feature.util.extensions.getCardViewColor
 import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_feature.util.extensions.setColorFilter
 import com.pokeapp.base_feature.util.extensions.uppercase
-import com.pokeapp.base_presentation.model.RegionBinding
+import com.pokeapp.base_presentation.model.region.RegionBinding
 import com.pokeapp.feature_region.R
 import kotlinx.android.synthetic.main.item_region.view.*
 

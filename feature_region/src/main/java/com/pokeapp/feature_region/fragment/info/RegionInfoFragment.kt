@@ -8,7 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.base_presentation.model.RegionInfoBinding
+import com.pokeapp.base_presentation.model.region.RegionInfoBinding
 import com.pokeapp.feature_region.adapter.RegionInfoViewPagerAdapter
 import com.pokeapp.feature_region.databinding.FragmentRegionInfoBinding
 import com.pokeapp.feature_region.navigation.info.RegionInfoNavigation

@@ -1,10 +1,10 @@
 package com.pokeapp.di
 
-import com.pokeapp.data.datasource.local.PokemonLocalDataSource
-import com.pokeapp.data.datasource.local.TypeLocalDataSource
+import com.pokeapp.data.datasource.local.pokemon.PokemonLocalDataSource
+import com.pokeapp.data.datasource.local.type.TypeLocalDataSource
 import com.pokeapp.data_local.base.DatabaseFactory
-import com.pokeapp.data_local.datasource.PokemonLocalDataSourceImpl
-import com.pokeapp.data_local.datasource.TypeLocalDataSourceImpl
+import com.pokeapp.data_local.datasource.pokemon.PokemonLocalDataSourceImpl
+import com.pokeapp.data_local.datasource.type.TypeLocalDataSourceImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

@@ -1,8 +1,8 @@
 package com.pokeapp.base_presentation.mapper.group
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
-import com.pokeapp.base_presentation.model.GroupsBinding
-import com.pokeapp.domain.model.Groups
+import com.pokeapp.base_presentation.model.group.GroupsBinding
+import com.pokeapp.domain.model.groups.Groups
 
 /*
  * Created by Filipi Andrade Rocha on 19/01/2021.

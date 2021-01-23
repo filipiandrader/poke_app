@@ -8,7 +8,7 @@ import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.extensions.convertToKilos
 import com.pokeapp.base_feature.util.extensions.convertToMeter
 import com.pokeapp.base_feature.util.extensions.putText
-import com.pokeapp.base_presentation.model.PokemonInfoBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.databinding.FragmentAboutBinding
 
 class AboutFragment : BaseFragment() {

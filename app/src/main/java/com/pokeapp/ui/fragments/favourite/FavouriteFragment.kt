@@ -33,12 +33,12 @@ import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.R
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.base_presentation.model.GenerationBinding
-import com.pokeapp.base_presentation.model.PokemonBinding
-import com.pokeapp.base_presentation.model.TypeBinding
+import com.pokeapp.base_presentation.model.generation.GenerationBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
+import com.pokeapp.base_presentation.model.type.TypeBinding
 import com.pokeapp.presentation.favourite.FavouriteViewModel
-import com.pokeapp.base_feature.customview.BottomSheetGenerationViewHolder
-import com.pokeapp.base_feature.customview.BottomSheetTypeViewHolder
+import com.pokeapp.base_feature.customview.bottomsheet.BottomSheetGenerationViewHolder
+import com.pokeapp.base_feature.customview.bottomsheet.BottomSheetTypeViewHolder
 import com.pokeapp.ui.fragments.PokemonViewHolder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_favourite.*

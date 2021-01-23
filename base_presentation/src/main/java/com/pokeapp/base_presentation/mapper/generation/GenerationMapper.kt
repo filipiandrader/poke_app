@@ -1,8 +1,8 @@
 package com.pokeapp.base_presentation.mapper.generation
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
-import com.pokeapp.base_presentation.model.GenerationBinding
-import com.pokeapp.domain.model.Generation
+import com.pokeapp.base_presentation.model.generation.GenerationBinding
+import com.pokeapp.domain.model.generation.Generation
 
 /*
  * Created by Filipi Andrade Rocha on 22/01/2021.

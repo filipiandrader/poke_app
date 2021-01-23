@@ -1,7 +1,7 @@
 package com.pokeapp.domain.interactor.generation
 
 import com.pokeapp.domain.core.UseCase
-import com.pokeapp.domain.model.Generation
+import com.pokeapp.domain.model.generation.Generation
 import com.pokeapp.domain.repository.GenerationRepository
 import kotlinx.coroutines.CoroutineScope
 

@@ -1,6 +1,6 @@
 package com.pokeapp.feature_pokedex.navigation
 
-import com.pokeapp.base_presentation.model.PokemonBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
 
 /*
  * Created by Filipi Andrade Rocha on 22/01/2021.

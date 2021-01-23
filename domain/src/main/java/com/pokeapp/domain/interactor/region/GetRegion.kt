@@ -1,7 +1,7 @@
 package com.pokeapp.domain.interactor.region
 
 import com.pokeapp.domain.core.UseCase
-import com.pokeapp.domain.model.Region
+import com.pokeapp.domain.model.region.Region
 import com.pokeapp.domain.repository.RegionRepository
 import kotlinx.coroutines.CoroutineScope
 

@@ -10,7 +10,7 @@ import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
 import com.pokeapp.base_feature.util.enums.PokemonTypeEnum
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.base_presentation.model.PokemonInfoBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.R
 import com.pokeapp.feature_pokedex.adapter.PokemonDetailsViewPagerAdapter
 import com.pokeapp.feature_pokedex.databinding.FragmentPokemonInfoBinding

@@ -28,15 +28,15 @@ import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.base_feature.core.BaseFragment
-import com.pokeapp.base_feature.customview.BottomSheetGenerationViewHolder
-import com.pokeapp.base_feature.customview.BottomSheetTypeViewHolder
+import com.pokeapp.base_feature.customview.bottomsheet.BottomSheetGenerationViewHolder
+import com.pokeapp.base_feature.customview.bottomsheet.BottomSheetTypeViewHolder
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
 import com.pokeapp.base_feature.util.enums.GenerationEnum
 import com.pokeapp.base_feature.util.enums.PokemonTypeEnum
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.base_presentation.model.GenerationBinding
-import com.pokeapp.base_presentation.model.PokemonBinding
-import com.pokeapp.base_presentation.model.TypeBinding
+import com.pokeapp.base_presentation.model.generation.GenerationBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
+import com.pokeapp.base_presentation.model.type.TypeBinding
 import com.pokeapp.feature_pokedex.R
 import com.pokeapp.feature_pokedex.adapter.PokedexAdapter
 import com.pokeapp.feature_pokedex.databinding.FragmentPokemonBinding
@@ -76,8 +76,6 @@ class PokemonFragment : BaseFragment() {
     override fun setupView() {
         activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
         viewModel.getAllPokemon(mOffset, mPrevious)
-        viewModel.getTypes()
-        viewModel.getGenerations()
         createCustomAnimation()
 
         binding.run {
@@ -118,24 +116,18 @@ class PokemonFragment : BaseFragment() {
 
     override fun addObservers(owner: LifecycleOwner) {
         viewModel.fetchPokedexViewState.onPostValue(owner) {
-            if (it.isEmpty() && pokemon.isEmpty()) {
+            type = it.type.toMutableList()
+            generation = it.generation.toMutableList()
+            if (it.pokedex.isEmpty() && pokemon.isEmpty()) {
                 setupEmptyList()
             } else {
-                setupPokedex(it)
+                setupPokedex(it.pokedex)
             }
-        }
-
-        viewModel.fetchTypeViewState.onPostValue(owner) {
-            type = it.toMutableList()
         }
 
         viewModel.fetchPokedexByTypeTypeViewState.onPostValue(owner) {
             pokemon.clear()
             setupPokedex(it)
-        }
-
-        viewModel.fetchGenerationViewState.onPostValue(owner) {
-            generation = it.toMutableList()
         }
 
         viewModel.fetchPokedexByGenerationTypeViewState.onPostValue(owner) {
@@ -294,5 +286,10 @@ class PokemonFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.cleanValues()
     }
 }

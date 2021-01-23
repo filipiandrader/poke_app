@@ -1,7 +1,7 @@
 package com.pokeapp.domain.interactor.type
 
 import com.pokeapp.domain.core.UseCase
-import com.pokeapp.domain.model.Type
+import com.pokeapp.domain.model.type.Type
 import com.pokeapp.domain.repository.TypeRepository
 import kotlinx.coroutines.CoroutineScope
 

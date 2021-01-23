@@ -2,9 +2,13 @@ package com.pokeapp.data_local.base
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.pokeapp.data_local.dao.PokemonDAO
-import com.pokeapp.data_local.dao.TypeDAO
-import com.pokeapp.data_local.model.*
+import com.pokeapp.data_local.dao.pokemon.PokemonDAO
+import com.pokeapp.data_local.dao.type.TypeDAO
+import com.pokeapp.data_local.model.ability.AbilityLocal
+import com.pokeapp.data_local.model.move.MoveLocal
+import com.pokeapp.data_local.model.pokemon.PokemonLocal
+import com.pokeapp.data_local.model.stats.StatsLocal
+import com.pokeapp.data_local.model.type.TypeLocal
 
 /**
  * Created by Filipi Andrade on 30/03/2020

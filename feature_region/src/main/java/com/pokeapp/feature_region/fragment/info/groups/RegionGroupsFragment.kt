@@ -5,18 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.afollestad.recyclical.datasource.dataSourceOf
-import com.afollestad.recyclical.setup
-import com.afollestad.recyclical.withItem
 import com.pokeapp.base_feature.core.BaseFragment
-import com.pokeapp.base_feature.util.extensions.formatNameRegion
-import com.pokeapp.base_feature.util.extensions.putText
-import com.pokeapp.base_presentation.model.GroupsBinding
-import com.pokeapp.base_presentation.model.RegionInfoBinding
-import com.pokeapp.feature_region.R
+import com.pokeapp.base_presentation.model.region.RegionInfoBinding
 import com.pokeapp.feature_region.adapter.GroupAdapter
 import com.pokeapp.feature_region.databinding.FragmentRegionGroupsBinding
-import com.pokeapp.feature_region.fragment.info.RegionDetailsViewHolder
 
 
 class RegionGroupsFragment : BaseFragment() {

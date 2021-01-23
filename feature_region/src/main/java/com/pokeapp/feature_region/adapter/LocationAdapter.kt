@@ -5,7 +5,7 @@ import com.pokeapp.base_feature.core.BaseAdapter
 import com.pokeapp.base_feature.core.BaseViewHolder
 import com.pokeapp.base_feature.util.extensions.formatNameRegion
 import com.pokeapp.base_feature.util.extensions.putText
-import com.pokeapp.base_presentation.model.LocationBinding
+import com.pokeapp.base_presentation.model.location.LocationBinding
 import com.pokeapp.feature_region.R
 import kotlinx.android.synthetic.main.item_region_info.view.*
 

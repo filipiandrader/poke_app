@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
@@ -12,13 +11,10 @@ import com.afollestad.recyclical.withItem
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.extensions.formatNameMove
 import com.pokeapp.base_feature.util.extensions.putText
-import com.pokeapp.base_presentation.model.MoveBinding
-import com.pokeapp.base_presentation.model.PokemonBinding
-import com.pokeapp.base_presentation.model.PokemonInfoBinding
+import com.pokeapp.base_presentation.model.move.MoveBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.R
 import com.pokeapp.feature_pokedex.databinding.FragmentMovesBinding
-import kotlinx.android.synthetic.main.fragment_moves.*
-import org.koin.core.bind
 
 class MovesFragment : BaseFragment() {
 

@@ -2,7 +2,7 @@ package com.pokeapp.intent.navigation.region
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.pokeapp.base_presentation.model.RegionBinding
+import com.pokeapp.base_presentation.model.region.RegionBinding
 import com.pokeapp.feature_region.fragment.main.RegionFragmentDirections
 import com.pokeapp.feature_region.navigation.main.RegionNavigation
 import com.pokeapp.intent.util.navigate

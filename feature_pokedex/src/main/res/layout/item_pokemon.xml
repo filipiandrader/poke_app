@@ -20,6 +20,10 @@
         <TextView
             android:id="@+id/itemPokemonNameTextView"
             style="@style/PokeApp.Item.TextAppearance.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/itemPokemonIDTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Titulo" />
@@ -30,7 +34,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="#001" />
-
 
         <TextView
             android:id="@+id/itemPokemonType3TextView"

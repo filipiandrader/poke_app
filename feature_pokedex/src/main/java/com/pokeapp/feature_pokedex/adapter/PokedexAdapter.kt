@@ -7,7 +7,7 @@ import com.pokeapp.base_feature.core.BaseViewHolder
 import com.pokeapp.base_feature.util.enums.PokemonTypeEnum
 import com.pokeapp.base_feature.util.enums.PokemonTypeEnum.DARK
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.base_presentation.model.PokemonBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
 import com.pokeapp.feature_pokedex.R
 import kotlinx.android.synthetic.main.item_pokemon.view.*
 

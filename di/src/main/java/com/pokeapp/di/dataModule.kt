@@ -1,9 +1,9 @@
 package com.pokeapp.di
 
-import com.pokeapp.data.repository.GenerationRepositoryImpl
-import com.pokeapp.data.repository.PokemonRepositoryImpl
-import com.pokeapp.data.repository.RegionRepositoryImpl
-import com.pokeapp.data.repository.TypeRepositoryImpl
+import com.pokeapp.data.repository.generation.GenerationRepositoryImpl
+import com.pokeapp.data.repository.pokemon.PokemonRepositoryImpl
+import com.pokeapp.data.repository.region.RegionRepositoryImpl
+import com.pokeapp.data.repository.type.TypeRepositoryImpl
 import com.pokeapp.domain.repository.GenerationRepository
 import com.pokeapp.domain.repository.PokemonRepository
 import com.pokeapp.domain.repository.RegionRepository

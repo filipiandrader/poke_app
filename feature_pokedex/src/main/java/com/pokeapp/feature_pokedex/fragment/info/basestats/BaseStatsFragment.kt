@@ -9,8 +9,8 @@ import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.extensions.*
-import com.pokeapp.base_presentation.model.PokemonInfoBinding
-import com.pokeapp.base_presentation.model.StatsBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
+import com.pokeapp.base_presentation.model.stats.StatsBinding
 import com.pokeapp.feature_pokedex.R
 import com.pokeapp.feature_pokedex.databinding.FragmentBaseStatsBinding
 

@@ -3,8 +3,8 @@ package com.pokeapp.base_presentation.mapper.region
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
 import com.pokeapp.base_presentation.mapper.group.GroupMapper
 import com.pokeapp.base_presentation.mapper.location.LocationMapper
-import com.pokeapp.base_presentation.model.RegionInfoBinding
-import com.pokeapp.domain.model.RegionInfo
+import com.pokeapp.base_presentation.model.region.RegionInfoBinding
+import com.pokeapp.domain.model.region.RegionInfo
 
 /*
  * Created by Filipi Andrade Rocha on 19/01/2021.

@@ -2,8 +2,7 @@ package com.pokeapp.presentation_pokedex.info
 
 import androidx.lifecycle.ViewModel
 import com.pokeapp.base_presentation.mapper.pokemon.PokemonInfoMapper
-import com.pokeapp.base_presentation.model.PokemonBinding
-import com.pokeapp.base_presentation.model.PokemonInfoBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.base_presentation.utils.extensions.*
 import com.pokeapp.domain.interactor.pokemon.GetPokemonInfo
 import org.koin.core.KoinComponent

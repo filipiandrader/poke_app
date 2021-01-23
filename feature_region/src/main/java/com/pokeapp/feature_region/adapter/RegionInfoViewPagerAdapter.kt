@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.pokeapp.base_feature.R
-import com.pokeapp.base_presentation.model.RegionInfoBinding
+import com.pokeapp.base_presentation.model.region.RegionInfoBinding
 import com.pokeapp.feature_region.fragment.info.cities.RegionCitiesFragment
 import com.pokeapp.feature_region.fragment.info.groups.RegionGroupsFragment
 

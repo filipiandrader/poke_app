@@ -1,7 +1,7 @@
 package com.pokeapp.domain.repository
 
-import com.pokeapp.domain.model.Pokemon
-import com.pokeapp.domain.model.Type
+import com.pokeapp.domain.model.pokemon.Pokemon
+import com.pokeapp.domain.model.type.Type
 import kotlinx.coroutines.flow.Flow
 
 /*

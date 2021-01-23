@@ -3,7 +3,7 @@ package com.pokeapp.domain.interactor.pokemon
 import com.pokeapp.domain.core.UseCase
 import com.pokeapp.domain.exception.EmptyFieldException
 import com.pokeapp.domain.exception.MissingParamsException
-import com.pokeapp.domain.model.PokemonInfo
+import com.pokeapp.domain.model.pokemon.PokemonInfo
 import com.pokeapp.domain.repository.PokemonRepository
 import kotlinx.coroutines.CoroutineScope
 

@@ -1,8 +1,8 @@
 package com.pokeapp.base_presentation.mapper.region
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
-import com.pokeapp.base_presentation.model.RegionBinding
-import com.pokeapp.domain.model.Region
+import com.pokeapp.base_presentation.model.region.RegionBinding
+import com.pokeapp.domain.model.region.Region
 
 /*
  * Created by Filipi Andrade Rocha on 19/01/2021.

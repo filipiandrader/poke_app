@@ -3,7 +3,7 @@ package com.pokeapp.domain.interactor.region
 import com.pokeapp.domain.core.UseCase
 import com.pokeapp.domain.exception.EmptyFieldException
 import com.pokeapp.domain.exception.MissingParamsException
-import com.pokeapp.domain.model.RegionInfo
+import com.pokeapp.domain.model.region.RegionInfo
 import com.pokeapp.domain.repository.RegionRepository
 import kotlinx.coroutines.CoroutineScope
 

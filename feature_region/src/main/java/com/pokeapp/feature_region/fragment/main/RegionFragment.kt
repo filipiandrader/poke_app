@@ -12,7 +12,7 @@ import com.pokeapp.base_feature.util.extensions.configureNoScroll
 import com.pokeapp.base_feature.util.extensions.configureScroll
 import com.pokeapp.base_feature.util.extensions.convertColor
 import com.pokeapp.base_feature.util.extensions.enableScroll
-import com.pokeapp.base_presentation.model.RegionBinding
+import com.pokeapp.base_presentation.model.region.RegionBinding
 import com.pokeapp.feature_region.R
 import com.pokeapp.feature_region.adapter.RegionAdapter
 import com.pokeapp.feature_region.databinding.FragmentRegionBinding

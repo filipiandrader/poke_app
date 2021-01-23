@@ -1,8 +1,8 @@
 package com.pokeapp.base_presentation.mapper.stats
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
-import com.pokeapp.base_presentation.model.StatsBinding
-import com.pokeapp.domain.model.Stats
+import com.pokeapp.base_presentation.model.stats.StatsBinding
+import com.pokeapp.domain.model.stats.Stats
 
 /*
  * Created by Filipi Andrade Rocha on 22/01/2021.

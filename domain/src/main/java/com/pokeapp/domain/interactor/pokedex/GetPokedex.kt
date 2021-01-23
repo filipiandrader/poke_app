@@ -3,7 +3,7 @@ package com.pokeapp.domain.interactor.pokedex
 import com.pokeapp.domain.core.UseCase
 import com.pokeapp.domain.exception.EmptyFieldException
 import com.pokeapp.domain.exception.MissingParamsException
-import com.pokeapp.domain.model.Pokemon
+import com.pokeapp.domain.model.pokedex.Pokedex
 import com.pokeapp.domain.repository.PokemonRepository
 import kotlinx.coroutines.CoroutineScope
 
@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 class GetPokedex(
     private val repository: PokemonRepository,
     scope: CoroutineScope
-) : UseCase<List<Pokemon>, GetPokedex.Params>(scope) {
+) : UseCase<Pokedex, GetPokedex.Params>(scope) {
 
     override fun run(params: Params?) = when {
         params == null -> throw MissingParamsException()

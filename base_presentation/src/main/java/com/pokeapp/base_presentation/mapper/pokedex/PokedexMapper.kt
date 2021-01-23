@@ -1,35 +1,27 @@
 package com.pokeapp.base_presentation.mapper.pokedex
 
 import com.pokeapp.base_presentation.mapper.base.PresentationMapper
+import com.pokeapp.base_presentation.mapper.generation.GenerationMapper
+import com.pokeapp.base_presentation.mapper.pokemon.PokemonMapper
 import com.pokeapp.base_presentation.mapper.type.TypeMapper
-import com.pokeapp.base_presentation.model.PokemonBinding
-import com.pokeapp.domain.model.Pokemon
+import com.pokeapp.base_presentation.model.pokedex.PokedexBinding
+import com.pokeapp.domain.model.pokedex.Pokedex
 
 /*
  * Created by Filipi Andrade Rocha on 20/01/2021.
  */
 
-object PokedexMapper : PresentationMapper<PokemonBinding, Pokemon> {
+object PokedexMapper : PresentationMapper<PokedexBinding, Pokedex> {
 
-    fun listFromDomain(pokedex: List<Pokemon>) = pokedex.map { fromDomain(it) }
-
-    override fun toDomain(presentation: PokemonBinding) = Pokemon(
-        id = presentation.id,
-        name = presentation.name,
-        photo = presentation.photo,
-        photoShiny = presentation.photoShiny,
-        generationName = presentation.generationName,
-        types = TypeMapper.listToDomain(presentation.types),
-        liked = presentation.liked
+    override fun toDomain(presentation: PokedexBinding) = Pokedex(
+        pokedex = PokemonMapper.lisToDomain(presentation.pokedex),
+        generation = GenerationMapper.listToDomain(presentation.generation),
+        type = TypeMapper.listToDomain(presentation.type)
     )
 
-    override fun fromDomain(domain: Pokemon) = PokemonBinding(
-        id = domain.id,
-        name = domain.name,
-        photo = domain.photo,
-        photoShiny = domain.photoShiny,
-        generationName = domain.generationName,
-        types = TypeMapper.listFromDomain(domain.types),
-        liked = domain.liked
+    override fun fromDomain(domain: Pokedex) = PokedexBinding(
+        pokedex = PokemonMapper.listFromDomain(domain.pokedex),
+        generation = GenerationMapper.listFromDomain(domain.generation),
+        type = TypeMapper.listFromDomain(domain.type)
     )
 }

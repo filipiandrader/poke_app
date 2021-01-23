@@ -1,7 +1,7 @@
 package com.pokeapp.domain.repository
 
-import com.pokeapp.domain.model.Region
-import com.pokeapp.domain.model.RegionInfo
+import com.pokeapp.domain.model.region.Region
+import com.pokeapp.domain.model.region.RegionInfo
 import kotlinx.coroutines.flow.Flow
 
 /**

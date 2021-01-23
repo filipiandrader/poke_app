@@ -3,7 +3,11 @@ package com.pokeapp.data_local.base
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.pokeapp.data_local.model.*
+import com.pokeapp.data_local.model.ability.AbilityLocal
+import com.pokeapp.data_local.model.evolution.SpeciesLocal
+import com.pokeapp.data_local.model.move.MoveLocal
+import com.pokeapp.data_local.model.stats.StatsLocal
+import com.pokeapp.data_local.model.type.TypeLocal
 
 /**
  * Created by Filipi Andrade Rocha on 30/01/2020

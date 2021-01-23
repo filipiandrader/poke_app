@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pokeapp.base_feature.core.BaseFragment
-import com.pokeapp.base_feature.util.extensions.loadUrl
-import com.pokeapp.base_feature.util.extensions.putText
-import com.pokeapp.base_feature.util.extensions.setGone
-import com.pokeapp.base_feature.util.extensions.setVisible
-import com.pokeapp.base_presentation.model.PokemonInfoBinding
+import com.pokeapp.base_feature.util.extensions.*
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.databinding.FragmentEvolutionBinding
 
 class EvolutionFragment : BaseFragment() {
@@ -37,8 +34,8 @@ class EvolutionFragment : BaseFragment() {
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
         pokemon.let {
             binding.apply {
-                if (pokemon.evolves.isNotEmpty()) {
-                    if (pokemon.evolves.size == 1) {
+                if (pokemon.evolution.isNotEmpty()) {
+                    if (pokemon.evolution.size == 2) {
                         evolutionArrowImageView.setGone()
                         evolutionImageView1.setGone()
                         firstEvolutionImageView.setGone()
@@ -51,8 +48,8 @@ class EvolutionFragment : BaseFragment() {
                         uniqueEvolutionImageView.setVisible()
                         uniqueEvolutionNameTextView.setVisible()
 
-                        uniqueEvolutionImageView.loadUrl(pokemon.evolves[0].photo)
-                        uniqueEvolutionNameTextView.putText(pokemon.evolves[0].name)
+                        uniqueEvolutionImageView.loadUrl(pokemon.evolution[1].photo)
+                        uniqueEvolutionNameTextView.putText(pokemon.evolution[1].name.formatPokemonName())
                     } else {
                         evolutionImageView2.setGone()
                         uniqueEvolutionImageView.setGone()
@@ -66,13 +63,13 @@ class EvolutionFragment : BaseFragment() {
                         secondEvolutionImageView.setVisible()
                         secondEvolutionNameTextView.setVisible()
 
-                        for (i in pokemon.evolves.indices) {
-                            if (i == 0) {
-                                firstEvolutionImageView.loadUrl(pokemon.evolves[i].photo)
-                                firstEvolutionNameTextView.putText(pokemon.evolves[i].name)
-                            } else if (i == 1) {
-                                secondEvolutionImageView.loadUrl(pokemon.evolves[i].photo)
-                                secondEvolutionNameTextView.putText(pokemon.evolves[i].name)
+                        for (i in pokemon.evolution.indices) {
+                            if (i == 1) {
+                                firstEvolutionImageView.loadUrl(pokemon.evolution[i].photo)
+                                firstEvolutionNameTextView.putText(pokemon.evolution[i].name.formatPokemonName())
+                            } else if (i == 2) {
+                                secondEvolutionImageView.loadUrl(pokemon.evolution[i].photo)
+                                secondEvolutionNameTextView.putText(pokemon.evolution[i].name.formatPokemonName())
                             }
                         }
                     }

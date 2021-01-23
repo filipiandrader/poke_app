@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.pokeapp.base_presentation.model.PokemonInfoBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.R
 import com.pokeapp.feature_pokedex.fragment.info.abilities.AbilitiesFragment
 import com.pokeapp.feature_pokedex.fragment.info.about.AboutFragment
@@ -22,6 +22,7 @@ class PokemonDetailsViewPagerAdapter(supportFragmentManager: FragmentManager, co
     data class Page(val title: String, val ctor: () -> Fragment)
 
     @Suppress("MoveLambdaOutsideParentheses")
+    // TODO QUANDO O ARRAY DE EVOLUÇÕES ESTIVER VAZIO, NAO ADICIONAR A TAB DE EVOLUÇÕES
     private val pages = listOf(
             Page(context.getString(R.string.pokemon_details_tab_1), { AboutFragment.newInstance(pokemon) }),
             Page(context.getString(R.string.pokemon_details_tab_2), { BaseStatsFragment.newInstance(pokemon) }),
