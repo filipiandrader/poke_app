@@ -29,6 +29,6 @@
 
         <argument
             android:name="pokemon"
-            app:argType="com.pokeapp.base_presentation.model.PokemonBinding" />
+            app:argType="com.pokeapp.base_presentation.model.pokemon.PokemonBinding" />
     </fragment>
 </navigation>

@@ -1,9 +1,5 @@
 package com.pokeapp.feature_pokedex.fragment.main
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
@@ -11,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.view.animation.OvershootInterpolator
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -53,6 +48,7 @@ class PokemonFragment : BaseFragment() {
     private val pokemon = mutableListOf<PokemonBinding>()
     private var type = mutableListOf<TypeBinding>()
     private var generation = mutableListOf<GenerationBinding>()
+
     private lateinit var binding: FragmentPokemonBinding
     private lateinit var pokedexAdapter: PokedexAdapter
 
@@ -76,9 +72,12 @@ class PokemonFragment : BaseFragment() {
     override fun setupView() {
         activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
         viewModel.getAllPokemon(mOffset, mPrevious)
-        createCustomAnimation()
 
         binding.run {
+            val pokeballDrawable =
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokeball)
+            val closeDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_close)
+            pokemonMenuFAM.createCustomAnimation(pokeballDrawable, closeDrawable)
             pokemonAllFAB.setOnClickListener { getAllPokedex() }
             pokemonByGenFAB.setOnClickListener { showBottomSheetGeneration() }
             pokemonByTypeFAB.setOnClickListener { showBottomSheetType() }
@@ -159,35 +158,6 @@ class PokemonFragment : BaseFragment() {
             pokemonProgressBar.setGone()
             pokemonMenuFAM.setVisible()
         }
-    }
-
-    private fun createCustomAnimation() {
-        val set = AnimatorSet()
-        val scaleOutX = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleX", 1.0f, 0.2f)
-        val scaleOutY = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleY", 1.0f, 0.2f)
-        val scaleInX = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleX", 0.2f, 1.0f)
-        val scaleInY = ObjectAnimator.ofFloat(pokemonMenuFAM.menuIconView, "scaleY", 0.2f, 1.0f)
-
-        scaleOutX.duration = 50
-        scaleOutY.duration = 50
-        scaleInX.duration = 150
-        scaleInY.duration = 150
-
-        scaleInX.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator) {
-                val img = when (pokemonMenuFAM.isOpened) {
-                    true -> ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokeball)
-                    false -> ContextCompat.getDrawable(requireContext(), R.drawable.ic_close)
-                }
-                pokemonMenuFAM.menuIconView.setImageDrawable(img)
-            }
-        })
-
-        set.play(scaleOutX).with(scaleOutY)
-        set.play(scaleInX).with(scaleInY).after(scaleOutX)
-        set.interpolator = OvershootInterpolator(2f)
-
-        pokemonMenuFAM.iconToggleAnimatorSet = set
     }
 
     private fun showBottomSheetGeneration() {
@@ -290,6 +260,9 @@ class PokemonFragment : BaseFragment() {
 
     override fun onStop() {
         super.onStop()
+        pokemon.clear()
+        generation.clear()
+        type.clear()
         viewModel.cleanValues()
     }
 }

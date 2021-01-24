@@ -27,6 +27,6 @@
         tools:layout="@layout/fragment_region_info" >
         <argument
             android:name="region"
-            app:argType="com.pokeapp.base_presentation.model.RegionBinding" />
+            app:argType="com.pokeapp.base_presentation.model.region.RegionBinding" />
     </fragment>
 </navigation>

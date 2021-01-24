@@ -16,20 +16,52 @@ import com.pokeapp.feature_pokedex.fragment.info.moves.MovesFragment
  * Created by Filipi Andrade on 30/03/2020
  */
 
-class PokemonDetailsViewPagerAdapter(supportFragmentManager: FragmentManager, context: Context, private val pokemon: PokemonInfoBinding) :
-        FragmentStatePagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+@Suppress("IMPLICIT_CAST_TO_ANY")
+class PokemonDetailsViewPagerAdapter(
+    supportFragmentManager: FragmentManager,
+    context: Context,
+    private val pokemon: PokemonInfoBinding
+) : FragmentStatePagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     data class Page(val title: String, val ctor: () -> Fragment)
 
     @Suppress("MoveLambdaOutsideParentheses")
-    // TODO QUANDO O ARRAY DE EVOLUÇÕES ESTIVER VAZIO, NAO ADICIONAR A TAB DE EVOLUÇÕES
-    private val pages = listOf(
-            Page(context.getString(R.string.pokemon_details_tab_1), { AboutFragment.newInstance(pokemon) }),
-            Page(context.getString(R.string.pokemon_details_tab_2), { BaseStatsFragment.newInstance(pokemon) }),
-            Page(context.getString(R.string.pokemon_details_tab_3), { EvolutionFragment.newInstance(pokemon) }),
-            Page(context.getString(R.string.pokemon_details_tab_4), { MovesFragment.newInstance(pokemon) }),
-            Page(context.getString(R.string.pokemon_details_tab_5), { AbilitiesFragment.newInstance(pokemon) })
-    )
+    private val pages = getTabs(context)
+
+    private fun getTabs(context: Context) = when (pokemon.evolution.isEmpty()) {
+        true -> listOf(
+            Page(context.getString(R.string.pokemon_details_tab_1)) {
+                AboutFragment.newInstance(pokemon)
+            },
+            Page(context.getString(R.string.pokemon_details_tab_2)) {
+                BaseStatsFragment.newInstance(pokemon)
+            },
+            Page(
+                context.getString(R.string.pokemon_details_tab_4)
+            ) { MovesFragment.newInstance(pokemon) },
+            Page(
+                context.getString(R.string.pokemon_details_tab_5)
+            ) { AbilitiesFragment.newInstance(pokemon) }
+        )
+        false
+        -> listOf(
+            Page(context.getString(R.string.pokemon_details_tab_1)) {
+                AboutFragment.newInstance(pokemon)
+            },
+            Page(context.getString(R.string.pokemon_details_tab_2)) {
+                BaseStatsFragment.newInstance(pokemon)
+            },
+            Page(context.getString(R.string.pokemon_details_tab_3)) {
+                EvolutionFragment.newInstance(pokemon)
+            },
+            Page(context.getString(R.string.pokemon_details_tab_4)) {
+                MovesFragment.newInstance(pokemon)
+            },
+            Page(context.getString(R.string.pokemon_details_tab_5)) {
+                AbilitiesFragment.newInstance(pokemon)
+            }
+        )
+    }
 
     override fun getItem(position: Int): Fragment {
         return pages[position].ctor()
