@@ -1,3 +1,5 @@
+include ':presentation_liked'
+include ':feature_liked'
 include ':presentation_pokedex'
 include ':feature_pokedex'
 include ':presentation_region'
