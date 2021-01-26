@@ -9,7 +9,7 @@ dependencies {
     api project(':base_presentation')
     api project(':base_feature')
 
-    api project(':feature_liked')
+    api project(':feature_favoridex')
     api project(':feature_main')
     api project(':feature_pokedex')
     api project(':feature_region')
