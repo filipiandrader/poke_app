@@ -1,5 +1,6 @@
 package com.pokeapp.base_feature.util.extensions
 
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /*
@@ -9,3 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 fun RecyclerView.enableScroll(enable: Boolean) {
     this.isNestedScrollingEnabled = enable
 }
+
+fun RecyclerView.findFirstVisibleItemPosition() =
+    (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+
+fun RecyclerView.childCount() = layoutManager!!.childCount
+
+fun RecyclerView.itemCount() = layoutManager!!.itemCount

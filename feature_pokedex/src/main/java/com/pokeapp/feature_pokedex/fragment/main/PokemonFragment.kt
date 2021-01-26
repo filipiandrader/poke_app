@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.customview.bottomsheet.generation.GenerationBottomSheet
@@ -71,10 +70,9 @@ class PokemonFragment : BaseFragment() {
             pokemonRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     if (hasPagination) {
-                        visibleItemCount = pokemonRecyclerView.layoutManager!!.childCount
-                        totalItemCount = pokemonRecyclerView.layoutManager!!.itemCount
-                        firstVisibleItemPosition =
-                            (pokemonRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                        visibleItemCount = pokemonRecyclerView.childCount()
+                        totalItemCount = pokemonRecyclerView.itemCount()
+                        firstVisibleItemPosition = pokemonRecyclerView.findFirstVisibleItemPosition()
 
                         if (!isLoading && (firstVisibleItemPosition + visibleItemCount) >= totalItemCount) {
                             mPrevious = mOffset

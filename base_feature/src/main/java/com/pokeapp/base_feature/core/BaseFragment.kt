@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import com.pokeapp.base_feature.R
 import com.pokeapp.base_feature.customview.dialog.LoadingDialog
-import com.pokeapp.base_feature.util.extensions.convertColor
+import com.pokeapp.base_feature.util.extensions.longToast
 import com.pokeapp.base_presentation.core.ViewStateListener
 import org.koin.core.KoinComponent
 
@@ -40,7 +39,8 @@ abstract class BaseFragment : Fragment(), ViewStateListener, KoinComponent {
     }
 
     fun showDialog(message: String, isAttachToActivity: Boolean = false) {
-
+        // TODO CUSTOM DIALOG
+        longToast(message)
     }
 
     override fun onStateLoading() {
