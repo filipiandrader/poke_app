@@ -3,6 +3,7 @@ package com.pokeapp.base_feature.util.extensions
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 
@@ -20,6 +21,10 @@ fun Fragment.addOnBackPressedCallback(owner: LifecycleOwner, onBackPressed: () -
     )
 }
 
+fun Fragment.changeStatusBarColor(color: Int) {
+    requireActivity().window?.statusBarColor = color
+}
+
 fun Fragment.longToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
 }
@@ -27,3 +32,5 @@ fun Fragment.longToast(message: String) {
 fun Fragment.shortToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
+
+fun Fragment.getDrawableRes(drawable: Int) = ContextCompat.getDrawable(requireContext(), drawable)

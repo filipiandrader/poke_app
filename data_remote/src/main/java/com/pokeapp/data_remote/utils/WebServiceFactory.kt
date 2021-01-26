@@ -9,10 +9,10 @@ import java.util.concurrent.TimeUnit
 
 object WebServiceFactory {
 
-    inline fun <reified T> createWebService(): T =
+    inline fun <reified T> createWebService(okHttpClient: OkHttpClient): T =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(provideOkHttpClient())
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()

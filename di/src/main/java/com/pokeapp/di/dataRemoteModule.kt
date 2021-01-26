@@ -26,13 +26,13 @@ val dataRemoteModule = module {
 
     single { WebServiceFactory.provideOkHttpClient() }
 
-    single<PokemonService> { WebServiceFactory.createWebService() }
+    single<PokemonService> { WebServiceFactory.createWebService(get()) }
 
-    single<GenerationService> { WebServiceFactory.createWebService() }
+    single<GenerationService> { WebServiceFactory.createWebService(get()) }
 
-    single<RegionService> { WebServiceFactory.createWebService() }
+    single<RegionService> { WebServiceFactory.createWebService(get()) }
 
-    single<TypeService> { WebServiceFactory.createWebService() }
+    single<TypeService> { WebServiceFactory.createWebService(get()) }
 
     single { RequestWrapperImpl() } bind RequestWrapper::class
 

@@ -53,7 +53,6 @@ open class BaseDialogFragment : DialogFragment(), LifecycleObserver {
             try {
                 super.show(manager, tag)
             } catch (e: Exception) {
-                Unit
             }
         }
     }

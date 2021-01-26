@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pokeapp.base_feature.databinding.DialogLoadingBinding
+import com.pokeapp.base_feature.util.extensions.convertColor
 
 /*
  * Created by Filipi Andrade Rocha on 19/01/2021.

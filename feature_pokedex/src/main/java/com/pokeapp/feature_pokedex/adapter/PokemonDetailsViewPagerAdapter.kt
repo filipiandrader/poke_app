@@ -16,7 +16,6 @@ import com.pokeapp.feature_pokedex.fragment.info.moves.MovesFragment
  * Created by Filipi Andrade on 30/03/2020
  */
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
 class PokemonDetailsViewPagerAdapter(
     supportFragmentManager: FragmentManager,
     context: Context,
@@ -25,7 +24,6 @@ class PokemonDetailsViewPagerAdapter(
 
     data class Page(val title: String, val ctor: () -> Fragment)
 
-    @Suppress("MoveLambdaOutsideParentheses")
     private val pages = getTabs(context)
 
     private fun getTabs(context: Context) = when (pokemon.evolution.isEmpty()) {
@@ -43,8 +41,7 @@ class PokemonDetailsViewPagerAdapter(
                 context.getString(R.string.pokemon_details_tab_5)
             ) { AbilitiesFragment.newInstance(pokemon) }
         )
-        false
-        -> listOf(
+        false -> listOf(
             Page(context.getString(R.string.pokemon_details_tab_1)) {
                 AboutFragment.newInstance(pokemon)
             },

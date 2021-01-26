@@ -8,10 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
-import com.pokeapp.base_feature.util.extensions.configureNoScroll
-import com.pokeapp.base_feature.util.extensions.configureScroll
-import com.pokeapp.base_feature.util.extensions.convertColor
-import com.pokeapp.base_feature.util.extensions.enableScroll
+import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.region.RegionBinding
 import com.pokeapp.feature_region.R
 import com.pokeapp.feature_region.adapter.RegionAdapter
@@ -31,12 +28,14 @@ class RegionFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        changeStatusBarColor(getColor())
         binding = FragmentRegionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    private fun getColor() = requireContext().convertColor(R.color.background)
+
     override fun setupView() {
-        activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
         viewModel.getRegion()
         binding.navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
     }

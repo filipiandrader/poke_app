@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
+import com.pokeapp.base_feature.util.extensions.changeStatusBarColor
 import com.pokeapp.base_feature.util.extensions.convertColor
 import com.pokeapp.feature_main.R
 import com.pokeapp.feature_main.databinding.FragmentSplashBinding
@@ -21,14 +22,12 @@ class SplashFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        changeStatusBarColor(getColor())
         binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        activity?.window?.statusBarColor = requireContext().convertColor(R.color.red)
-    }
+    private fun getColor() = requireContext().convertColor(R.color.colorAccent)
 
     override fun setupView() {
         Timer().schedule(object : TimerTask() {

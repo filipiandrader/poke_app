@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.pokeapp.base_feature.util.extensions.convertColor
 import com.pokeapp.intent.util.safeNavigateUp
 
 class PokeActivity : AppCompatActivity() {

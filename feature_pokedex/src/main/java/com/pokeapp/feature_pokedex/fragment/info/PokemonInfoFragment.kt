@@ -31,9 +31,12 @@ class PokemonInfoFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        changeStatusBarColor(getColor())
         binding = FragmentPokemonInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    private fun getColor() = requireContext().getPokemonColor(navigation.pokemon.types[0].name)
 
     override fun setupView() {
         viewModel.getPokemonInfo(navigation.pokemon.id)
@@ -41,10 +44,9 @@ class PokemonInfoFragment : BaseFragment() {
         binding.apply {
             navigationIconImageView.setOnClickListener { navigation.navigateToPokedex() }
 
-            val color = requireContext().getPokemonColor(navigation.pokemon.types[0].name)
-            pokemonDetailsAppBarLayout.setBackgroundColor(color)
-            pokemonDetailsCollapsingToolbarLayout.setColorFilter(color)
-            activity?.window?.statusBarColor = color
+            pokemonDetailsAppBarLayout.setBackgroundColor(getColor())
+            pokemonDetailsCollapsingToolbarLayout.setColorFilter(getColor())
+            activity?.window?.statusBarColor = getColor()
 
             setFavouriteIconCorrectly(navigation.pokemon.liked)
 

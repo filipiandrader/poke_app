@@ -64,8 +64,9 @@ ext {
             [configuration: "implementation", dependency: "$gson"],
             [configuration: "implementation", dependency: "$retrofit2"],
             [configuration: "implementation", dependency: "$retrofitCoroutine"],
-            [configuration: "implementation", dependency: "$loggingInterceptor"],
-            [configuration: "implementation", dependency: "$gsonConvertFactory"]
+            [configuration: "implementation", dependency: "$httpInterceptor"],
+            [configuration: "implementation", dependency: "$gsonConvertFactory"],
+            [configuration: "implementation", dependency: "$okhttp"]
     ]
 
     diDependencies = commonsDependencies + dataLocalDependencies + [
@@ -74,6 +75,6 @@ ext {
             [configuration: "implementation", dependency: "$koinViewModel"],
             [configuration: "implementation", dependency: "$retrofit2"],
             [configuration: "implementation", dependency: "$retrofitCoroutine"],
-            [configuration: "implementation", dependency: "$loggingInterceptor"]
+            [configuration: "implementation", dependency: "$httpInterceptor"]
     ]
 }

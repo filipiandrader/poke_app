@@ -26,12 +26,12 @@ class RegionInfoFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        changeStatusBarColor(getColor())
         binding = FragmentRegionInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun setupView() {
-        activity?.window?.statusBarColor = getColor()
         binding.run {
             pokemonDetailsAppBarLayout.setBackgroundColor(getColor())
             pokemonDetailsCollapsingToolbarLayout.setColorFilter(getColor())
