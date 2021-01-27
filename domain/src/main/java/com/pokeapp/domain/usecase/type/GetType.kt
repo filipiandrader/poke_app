@@ -1,4 +1,4 @@
-package com.pokeapp.domain.interactor.type
+package com.pokeapp.domain.usecase.type
 
 import com.pokeapp.domain.core.UseCase
 import com.pokeapp.domain.model.type.Type
@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
  */
 
 class GetType(
-        private val typeRepository: TypeRepository,
-        scope: CoroutineScope
+    private val typeRepository: TypeRepository,
+    scope: CoroutineScope
 ) : UseCase<List<Type>, Unit>(scope) {
 
     override fun run(params: Unit?) = typeRepository.getAllTypes()

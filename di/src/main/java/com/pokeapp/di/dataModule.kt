@@ -18,9 +18,9 @@ val dataModule = module {
 
     single<PokemonRepository> { PokemonRepositoryImpl(get(), get()) }
 
-    single<GenerationRepository> { GenerationRepositoryImpl(get(), get()) }
+    single<GenerationRepository> { GenerationRepositoryImpl(get(), get(), get()) }
 
     single<RegionRepository> { RegionRepositoryImpl(get()) }
 
-    single<TypeRepository> { TypeRepositoryImpl(get(), get()) }
+    single<TypeRepository> { TypeRepositoryImpl(get(), get(), get()) }
 }

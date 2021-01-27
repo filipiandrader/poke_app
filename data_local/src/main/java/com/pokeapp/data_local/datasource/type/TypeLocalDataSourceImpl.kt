@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.flow
 
 class TypeLocalDataSourceImpl(private val dao: TypeDAO) : TypeLocalDataSource {
 
-    override fun insert(type: Type) = flow {
-        emit(dao.insertType(TypeLocalMapper.toLocal(type)))
+    override fun insertTypeLocal(type: List<Type>) = flow {
+        type.map { dao.insertType(TypeLocalMapper.toLocal(it)) }
+        emit(Unit)
     }
 
     override fun getAllTypesLocal() = flow {

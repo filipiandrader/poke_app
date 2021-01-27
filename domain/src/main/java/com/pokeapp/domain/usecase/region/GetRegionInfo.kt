@@ -1,4 +1,4 @@
-package com.pokeapp.domain.interactor.region
+package com.pokeapp.domain.usecase.region
 
 import com.pokeapp.domain.core.UseCase
 import com.pokeapp.domain.exception.EmptyFieldException

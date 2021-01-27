@@ -13,5 +13,7 @@ interface TypeRepository {
 
     fun getAllTypes(): Flow<List<Type>>
     fun getPokemonByType(name: String): Flow<List<Pokemon>>
+    fun insertTypeLocal(type: List<Type>): Flow<Unit>
+    fun getAllTypeLocal(): Flow<List<Type>?>
     fun getPokemonLikedByType(type: String): Flow<List<PokemonInfo>?>
 }

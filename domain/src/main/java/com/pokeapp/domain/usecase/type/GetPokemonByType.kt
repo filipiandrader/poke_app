@@ -1,4 +1,4 @@
-package com.pokeapp.domain.interactor.type
+package com.pokeapp.domain.usecase.type
 
 import com.pokeapp.domain.core.UseCase
 import com.pokeapp.domain.exception.EmptyFieldException
@@ -12,8 +12,8 @@ import kotlinx.coroutines.CoroutineScope
  */
 
 class GetPokemonByType(
-        private val repository: TypeRepository,
-        scope: CoroutineScope
+    private val repository: TypeRepository,
+    scope: CoroutineScope
 ) : UseCase<List<Pokemon>, GetPokemonByType.Params>(scope) {
 
     override fun run(params: Params?) = when {

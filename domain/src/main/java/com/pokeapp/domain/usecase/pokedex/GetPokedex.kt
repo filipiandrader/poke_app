@@ -1,4 +1,4 @@
-package com.pokeapp.domain.interactor.pokedex
+package com.pokeapp.domain.usecase.pokedex
 
 import com.pokeapp.domain.core.UseCase
 import com.pokeapp.domain.exception.EmptyFieldException

@@ -9,6 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface GenerationLocalDataSource {
 
-    fun insert(generation: Generation): Flow<Unit>
+    fun insertGenerationLocal(generation: List<Generation>): Flow<Unit>
     fun getAllGenerationsLocal(): Flow<List<Generation>?>
 }

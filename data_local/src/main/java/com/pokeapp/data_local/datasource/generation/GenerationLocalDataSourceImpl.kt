@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.flow
 
 class GenerationLocalDataSourceImpl(private val dao: GenerationDAO) : GenerationLocalDataSource {
 
-    override fun insert(generation: Generation) = flow {
-        emit(dao.insert(GenerationLocalMapper.toLocal(generation)))
+    override fun insertGenerationLocal(generation: List<Generation>) = flow {
+        generation.map { dao.insert(GenerationLocalMapper.toLocal(it)) }
+        emit(Unit)
     }
 
     override fun getAllGenerationsLocal() = flow {

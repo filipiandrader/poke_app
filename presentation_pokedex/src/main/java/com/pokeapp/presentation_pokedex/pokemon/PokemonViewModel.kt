@@ -6,9 +6,9 @@ import com.pokeapp.base_presentation.mapper.pokemon.PokemonMapper
 import com.pokeapp.base_presentation.model.pokedex.PokedexBinding
 import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
 import com.pokeapp.base_presentation.utils.extensions.*
-import com.pokeapp.domain.interactor.generation.GetPokemonByGeneration
-import com.pokeapp.domain.interactor.pokedex.GetPokedex
-import com.pokeapp.domain.interactor.type.GetPokemonByType
+import com.pokeapp.domain.usecase.generation.GetPokemonByGeneration
+import com.pokeapp.domain.usecase.pokedex.GetPokedex
+import com.pokeapp.domain.usecase.type.GetPokemonByType
 import org.koin.core.KoinComponent
 
 /**

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.pokeapp.base_presentation.mapper.pokemon.PokemonInfoMapper
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.base_presentation.utils.extensions.*
-import com.pokeapp.domain.interactor.pokemon.GetPokemonInfo
+import com.pokeapp.domain.usecase.pokemon.GetPokemonInfo
 import org.koin.core.KoinComponent
 
 /**
