@@ -1,8 +1,10 @@
 package com.pokeapp.di
 
+import com.pokeapp.data.datasource.local.generation.GenerationLocalDataSource
 import com.pokeapp.data.datasource.local.pokemon.PokemonLocalDataSource
 import com.pokeapp.data.datasource.local.type.TypeLocalDataSource
 import com.pokeapp.data_local.base.DatabaseFactory
+import com.pokeapp.data_local.datasource.generation.GenerationLocalDataSourceImpl
 import com.pokeapp.data_local.datasource.pokemon.PokemonLocalDataSourceImpl
 import com.pokeapp.data_local.datasource.type.TypeLocalDataSourceImpl
 import org.koin.android.ext.koin.androidApplication
@@ -20,7 +22,11 @@ val dataLocalModule = module {
 
     single { DatabaseFactory.provideTypeDao(get()) }
 
+    single { DatabaseFactory.provideGenerationDao(get()) }
+
     single<PokemonLocalDataSource> { PokemonLocalDataSourceImpl(get()) }
 
     single<TypeLocalDataSource> { TypeLocalDataSourceImpl(get()) }
+
+    single<GenerationLocalDataSource> { GenerationLocalDataSourceImpl(get()) }
 }

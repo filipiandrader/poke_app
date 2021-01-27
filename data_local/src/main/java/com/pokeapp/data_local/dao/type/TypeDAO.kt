@@ -17,5 +17,5 @@ abstract class TypeDAO {
     abstract suspend fun insertType(vararg type: TypeLocal)
 
     @Query("SELECT * FROM type")
-    abstract suspend fun getTypes(): MutableList<TypeLocal>
+    abstract suspend fun getTypes(): List<TypeLocal>
 }

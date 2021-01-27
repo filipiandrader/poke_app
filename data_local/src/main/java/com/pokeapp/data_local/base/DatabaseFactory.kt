@@ -17,4 +17,6 @@ object DatabaseFactory {
     fun providePokemonDao(database: PokemonDatabase) = database.pokemonDao()
 
     fun provideTypeDao(database: PokemonDatabase) = database.typeDao()
+
+    fun provideGenerationDao(database: PokemonDatabase) = database.generationDao()
 }

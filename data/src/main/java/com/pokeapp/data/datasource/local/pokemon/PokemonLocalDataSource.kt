@@ -10,14 +10,9 @@ import kotlinx.coroutines.flow.Flow
 interface PokemonLocalDataSource {
 
     fun insert(pokemon: PokemonInfo): Flow<Unit>
-
     fun delete(pokemon: PokemonInfo): Flow<Unit>
-
     fun getPokemonLikedById(id: Int): Flow<PokemonInfo?>
-
     fun getAllPokemonsLiked(): Flow<List<PokemonInfo>?>
-
     fun getPokemonLikedByGeneration(region: String): Flow<List<PokemonInfo>?>
-
     fun getPokemonLikedByType(type: String): Flow<List<PokemonInfo>?>
 }

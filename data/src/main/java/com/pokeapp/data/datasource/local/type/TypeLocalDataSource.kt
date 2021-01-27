@@ -10,6 +10,5 @@ import kotlinx.coroutines.flow.Flow
 interface TypeLocalDataSource {
 
     fun insert(type: Type): Flow<Unit>
-
     fun getAllTypesLocal(): Flow<List<Type>?>
 }
