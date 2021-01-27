@@ -1,61 +1,35 @@
-package com.pokeapp.ui.fragments.favourite
+package com.pokeapp.feature_favoridex
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
-import android.graphics.Point
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
-import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.LayoutMode
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import com.afollestad.materialdialogs.bottomsheets.setPeekHeight
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
-import com.afollestad.recyclical.datasource.dataSourceOf
-import com.afollestad.recyclical.setup
-import com.afollestad.recyclical.withItem
-import com.pokeapp.R
-import com.pokeapp.base_feature.util.extensions.*
+import com.pokeapp.base_feature.util.extensions.convertColor
 import com.pokeapp.base_presentation.model.generation.GenerationBinding
 import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
 import com.pokeapp.base_presentation.model.type.TypeBinding
-import com.pokeapp.presentation.favourite.FavouriteViewModel
-import com.pokeapp.base_feature.customview.bottomsheet.BottomSheetGenerationViewHolder
-import com.pokeapp.base_feature.customview.bottomsheet.BottomSheetTypeViewHolder
-import com.pokeapp.ui.fragments.PokemonViewHolder
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_favourite.*
+import com.pokeapp.presentation_favoridex.FavoridexViewModel
+import kotlinx.android.synthetic.main.fragment_favoridex.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+class FavoridexFragment : Fragment() {
 
-class FavouriteFragment : Fragment() {
+    private val viewModel: FavoridexViewModel by viewModel()
 
-    private val mViewModel: FavouriteViewModel by viewModel()
-
-    private lateinit var mTypes: MutableList<TypeBinding>
+    private lateinit var generation: List<GenerationBinding>
+    private lateinit var type: List<TypeBinding>
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_favourite, container, false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_favoridex, container, false)
 
     override fun onStart() {
         super.onStart()
@@ -63,14 +37,14 @@ class FavouriteFragment : Fragment() {
         // BACK BUTTON
         navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
 
-        mViewModel.getFavouritePokemon()
-        mViewModel.getTypes()
+        viewModel.getFavouritePokemon()
+        viewModel.getTypes()
 
         createCustomAnimation()
 
         favouriteAllFAB.setOnClickListener {
             favouriteMenuFAM.close(true)
-            mViewModel.getFavouritePokemon()
+            viewModel.getFavouritePokemon()
         }
 
         favouriteByGenFAB.setOnClickListener { showBottomSheetGeneration() }
@@ -98,9 +72,9 @@ class FavouriteFragment : Fragment() {
         scaleInX.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator) {
                 val img =
-                    if (favouriteMenuFAM.isOpened) requireContext().getDrawable(R.drawable.ic_pokeball) else requireContext().getDrawable(
-                        R.drawable.ic_close
-                    )
+                    if (favouriteMenuFAM.isOpened) ContextCompat.getDrawable(
+                        requireContext(), R.drawable.ic_pokeball
+                    ) else ContextCompat.getDrawable(requireContext(), R.drawable.ic_close)
                 favouriteMenuFAM.menuIconView.setImageDrawable(img)
             }
         })
@@ -113,7 +87,7 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun showBottomSheetGeneration() {
-        favouriteMenuFAM.close(true)
+        /*favouriteMenuFAM.close(true)
         val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
         val size = Point()
@@ -157,151 +131,60 @@ class FavouriteFragment : Fragment() {
 
                 onClick { index ->
                     dialog.dismiss()
-                    mViewModel.getPokemonByGenenration(generations[index].id.getGenerationName())
+                    viewModel.getPokemonByGenenration(generations[index].id.getGenerationName())
                 }
             }
-        }
+        }*/
     }
 
     private fun showBottomSheetType() {
-        favouriteMenuFAM.close(true)
-        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = wm.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        val peekHeight = size.y * 0.70
+        /*   favouriteMenuFAM.close(true)
+           val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+           val display = wm.defaultDisplay
+           val size = Point()
+           display.getSize(size)
+           val peekHeight = size.y * 0.70
 
-        val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-            setPeekHeight(literal = peekHeight.toInt())
-            customView(
-                viewRes = R.layout.bottom_sheet_layout,
-                scrollable = false,
-                noVerticalPadding = true,
-                horizontalPadding = false,
-                dialogWrapContent = true
-            )
-        }
+           val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+               setPeekHeight(literal = peekHeight.toInt())
+               customView(
+                   viewRes = R.layout.bottom_sheet_layout,
+                   scrollable = false,
+                   noVerticalPadding = true,
+                   horizontalPadding = false,
+                   dialogWrapContent = true
+               )
+           }
 
-        val itemFilterNameTextView =
-            dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
-        itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_type_label))
+           val itemFilterNameTextView =
+               dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
+           itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_type_label))
 
-        val bottomSheetRecyclerView =
-            dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
+           val bottomSheetRecyclerView =
+               dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
 
-        bottomSheetRecyclerView.setup {
-            withLayoutManager(GridLayoutManager(requireContext(), 2))
-            withDataSource(dataSourceOf(mTypes))
-            withItem<TypeBinding, BottomSheetTypeViewHolder>(R.layout.item_type) {
-                onBind(::BottomSheetTypeViewHolder) { _, item ->
-                    this.itemTypeNameTextView.putText(item.name)
+           bottomSheetRecyclerView.setup {
+               withLayoutManager(GridLayoutManager(requireContext(), 2))
+               withDataSource(dataSourceOf(type))
+               withItem<TypeBinding, BottomSheetTypeViewHolder>(R.layout.item_type) {
+                   onBind(::BottomSheetTypeViewHolder) { _, item ->
+                       this.itemTypeNameTextView.putText(item.name)
 
-                    val color = itemView.context.getPokemonColor(item.name)
-                    this.itemTypeCardView.background.colorFilter =
-                        PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-                }
+                       val color = itemView.context.getPokemonColor(item.name)
+                       this.itemTypeCardView.background.colorFilter =
+                           PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+                   }
 
-                onClick { index ->
-                    dialog.dismiss()
-                    mViewModel.getPokemonByType(mTypes[index].name)
-                }
-            }
-        }
-
+                   onClick { index ->
+                       dialog.dismiss()
+                       viewModel.getPokemonByType(type[index].name)
+                   }
+               }
+           }*/
     }
 
-    /*private fun creatingObservers() {
-        mViewModel.getState().observe(viewLifecycleOwner, Observer { viewState ->
-            when (viewState?.state) {
-                State.LOADING -> {
-                    favouriteProgressBar.setVisible(true)
-                    favouriteRecyclerView.setVisible(false)
-                    favouriteMenuFAM.setVisible(false)
-                    favouriteMessageTextView.setVisible(false)
-                }
-                State.SUCCESS -> {
-                    mViewModel.getState().value?.data?.let { pokemon ->
-                        setupRecyclerView(pokemon)
-                    }
-                }
-                State.FAILURE -> {
-                    favouriteMessageTextView.putText("Erro ao obter pokemons favoritados :(")
-                    favouriteMessageTextView.setVisible(true)
-                    favouriteRecyclerView.setVisible(false)
-                    favouriteProgressBar.setVisible(false)
-                }
-                else -> { *//* ignore *//*
-                }
-            }
-        })
-
-        mViewModel.getStateByGeneration().observe(viewLifecycleOwner, Observer { viewState ->
-            when (viewState?.state) {
-                State.LOADING -> {
-                    favouriteProgressBar.setVisible(true)
-                    favouriteRecyclerView.setVisible(false)
-                    favouriteMenuFAM.setVisible(false)
-                    favouriteMessageTextView.setVisible(false)
-                }
-                State.SUCCESS -> {
-                    mViewModel.getStateByGeneration().value?.data?.let { pokemon ->
-                        setupRecyclerView(pokemon)
-                    }
-                }
-                State.FAILURE -> {
-                    favouriteMessageTextView.putText("Erro ao obter pokemons favoritados :(")
-                    favouriteMessageTextView.setVisible(true)
-                    favouriteRecyclerView.setVisible(false)
-                    favouriteProgressBar.setVisible(false)
-                }
-                else -> { *//* ignore *//*
-                }
-            }
-        })
-
-        mViewModel.getStateTypes().observe(viewLifecycleOwner, Observer { viewState ->
-            when (viewState?.state) {
-                State.SUCCESS -> {
-                    mTypes = mutableListOf()
-                    mViewModel.getStateTypes().value?.data?.let {
-                        mTypes.addAll(it)
-                    }
-                    favouriteProgressBar.setVisible(false)
-                }
-                else -> {
-                    // IGNORE
-                }
-            }
-        })
-
-        mViewModel.getStateByType().observe(viewLifecycleOwner, Observer { viewState ->
-            when (viewState?.state) {
-                State.LOADING -> {
-                    favouriteProgressBar.setVisible(true)
-                    favouriteRecyclerView.setVisible(false)
-                    favouriteMenuFAM.setVisible(false)
-                    favouriteMessageTextView.setVisible(false)
-                }
-                State.SUCCESS -> {
-                    favouriteProgressBar.setVisible(false)
-                    mViewModel.getStateByType().value?.data?.let { pokemon ->
-                        setupRecyclerView(pokemon)
-                    }
-                }
-                State.FAILURE -> {
-                    favouriteMessageTextView.putText("Erro ao obter pokemons favoritados :(")
-                    favouriteMessageTextView.setVisible(true)
-                    favouriteRecyclerView.setVisible(false)
-                    favouriteProgressBar.setVisible(false)
-                }
-                else -> { *//* ignore *//*
-                }
-            }
-        })
-    }*/
-
     private fun setupRecyclerView(pokemon: MutableList<PokemonBinding>) {
-        if (pokemon.isNotEmpty()) {
+        /*if (pokemon.isNotEmpty()) {
             val layoutManager = if (pokemon.size == 1) {
                 LinearLayoutManager(context)
             } else {
@@ -387,6 +270,6 @@ class FavouriteFragment : Fragment() {
 
         favouriteProgressBar.setVisible(false)
         favouriteRecyclerView.setVisible(pokemon.isNotEmpty())
-        favouriteMenuFAM.setVisible(true)
+        favouriteMenuFAM.setVisible(true)*/
     }
 }

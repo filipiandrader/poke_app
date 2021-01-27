@@ -1,11 +1,11 @@
-package com.pokeapp.presentation.favourite
+package com.pokeapp.presentation_favoridex
 
 import androidx.lifecycle.ViewModel
 
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-class FavouriteViewModel : ViewModel() {
+class FavoridexViewModel : ViewModel() {
 
 /*    private var mState = MutableLiveData<ViewState<MutableList<PokemonBinding>>>()
     private var mStateByGeneration = MutableLiveData<ViewState<MutableList<PokemonBinding>>>()

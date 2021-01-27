@@ -16,11 +16,13 @@ object GenerationMapper : PresentationMapper<GenerationBinding, Generation> {
 
     override fun toDomain(presentation: GenerationBinding) = Generation(
         id = presentation.id,
-        name = presentation.name
+        name = presentation.name,
+        region = presentation.region
     )
 
     override fun fromDomain(domain: Generation) = GenerationBinding(
         id = domain.id,
-        name = domain.name
+        name = domain.name,
+        region = domain.region
     )
 }

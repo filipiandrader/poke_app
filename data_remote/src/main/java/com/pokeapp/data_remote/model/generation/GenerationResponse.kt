@@ -10,5 +10,7 @@ data class GenerationResponse(
     @SerializedName("id")
     val id: Int? = null,
     @SerializedName("name")
-    val name: String? = null
+    val name: String? = null,
+    @SerializedName("region")
+    val region: String? = null
 )

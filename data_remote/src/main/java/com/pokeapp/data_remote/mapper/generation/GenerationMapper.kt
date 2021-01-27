@@ -14,6 +14,7 @@ object GenerationMapper : DataRemoteMapper<GenerationResponse, Generation>() {
 
     override fun toDomain(data: GenerationResponse) = Generation(
         id = data.id ?: -1,
-        name = data.name ?: ""
+        name = data.name ?: "",
+        region = data.region ?: ""
     )
 }
