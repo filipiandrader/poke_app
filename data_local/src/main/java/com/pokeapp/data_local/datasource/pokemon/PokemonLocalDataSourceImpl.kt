@@ -5,7 +5,6 @@ import com.pokeapp.data.utils.flatMap
 import com.pokeapp.data_local.dao.pokemon.PokemonDAO
 import com.pokeapp.data_local.mapper.pokemon.PokemonLocalMapper
 import com.pokeapp.data_local.model.pokemon.PokemonLocal
-import com.pokeapp.domain.model.pokemon.Pokemon
 import com.pokeapp.domain.model.pokemon.PokemonInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,23 +17,23 @@ import kotlinx.coroutines.flow.flowOf
 class PokemonLocalDataSourceImpl(private val dao: PokemonDAO) : PokemonLocalDataSource {
 
     override fun insert(pokemon: PokemonInfo) = flow {
-        emit(dao.insert(PokemonLocalMapper.toSaveLocal(pokemon)))
+        emit(dao.insert(PokemonLocalMapper.toLocal(pokemon)))
     }
 
     override fun delete(pokemon: PokemonInfo) = flow {
-        emit(dao.delete(PokemonLocalMapper.toSaveLocal(pokemon)))
+        emit(dao.delete(PokemonLocalMapper.toLocal(pokemon)))
     }
 
     override fun getPokemonLikedById(id: Int): Flow<PokemonInfo?> = flow {
-        emit(PokemonLocalMapper.toDomainInfo(dao.getPokemon(id) ?: PokemonLocal()))
+        emit(PokemonLocalMapper.fromLocal(dao.getPokemon(id) ?: PokemonLocal()))
     }
 
     override fun getAllPokemonsLiked() = flow {
-        emit(PokemonLocalMapper.toDomainList(dao.getPokemons()))
+        emit(PokemonLocalMapper.fromLocal(dao.getPokemons()))
     }
 
     override fun getPokemonLikedByGeneration(region: String) = getAllPokemonsLiked().flatMap { list ->
-        val pokemons = mutableListOf<Pokemon>()
+        val pokemons = mutableListOf<PokemonInfo>()
         if (list.isNotEmpty()) {
             list.map { p ->
                 if (p.generationName.equals(region, ignoreCase = true)) {
@@ -45,8 +44,8 @@ class PokemonLocalDataSourceImpl(private val dao: PokemonDAO) : PokemonLocalData
         flowOf(pokemons)
     }
 
-    override fun getPokemonLikedByType(type: String) = getAllPokemonsLiked().flatMap { list ->
-        val pokemons = mutableListOf<Pokemon>()
+    override fun getPokemonLikedByType(type: String): Flow<List<PokemonInfo>?> = getAllPokemonsLiked().flatMap { list ->
+        val pokemons = mutableListOf<PokemonInfo>()
         if (list.isNotEmpty()) {
             list.map { p ->
                 p.types.map { t ->

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/favoridex_navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/favoridex_navigation"
+    app:startDestination="@id/favoridexFragment">
 
+    <fragment
+        android:id="@+id/favoridexFragment"
+        android:name="com.pokeapp.feature_favoridex.fragment.main.FavoridexFragment"
+        android:label="@string/fragment_no_title"
+        tools:layout="@layout/fragment_favoridex" />
 </navigation>

@@ -1,25 +1,22 @@
 package com.pokeapp.data_local.mapper.evolution
 
-import com.pokeapp.data_local.model.evolution.SpeciesLocal
+import com.pokeapp.data_local.mapper.base.DataLocalMapper
+import com.pokeapp.data_local.model.evolution.EvolutionLocal
 import com.pokeapp.domain.model.evolution.Evolution
 
 /*
  * Created by Filipi Andrade Rocha on 18/01/2021.
  */
 
-object EvolvesLocalMapper {
+object EvolvesLocalMapper : DataLocalMapper<EvolutionLocal, Evolution> {
 
-    fun toEvolvesList(evolvesLocal: List<SpeciesLocal>) = evolvesLocal.map { toEvolves(it) }
-
-    private fun toEvolves(evolveLocal: SpeciesLocal) = Evolution(
-            name = evolveLocal.name,
-            photo = evolveLocal.photo
+    override fun toLocal(domain: Evolution) = EvolutionLocal(
+        name = domain.name,
+        photo = domain.photo
     )
 
-    fun toEvolvesLocalList(evolves: List<Evolution>) = evolves.map { toEvolvesLocal(it) }
-
-    private fun toEvolvesLocal(evolve: Evolution) = SpeciesLocal(
-            name = evolve.name,
-            photo = evolve.photo
+    override fun fromLocal(local: EvolutionLocal) = Evolution(
+        name = local.name,
+        photo = local.photo
     )
 }

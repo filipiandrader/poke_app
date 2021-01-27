@@ -1,6 +1,7 @@
 package com.pokeapp.domain.repository
 
 import com.pokeapp.domain.model.pokemon.Pokemon
+import com.pokeapp.domain.model.pokemon.PokemonInfo
 import com.pokeapp.domain.model.type.Type
 import kotlinx.coroutines.flow.Flow
 
@@ -12,5 +13,5 @@ interface TypeRepository {
 
     fun getAllTypes(): Flow<List<Type>>
     fun getPokemonByType(name: String): Flow<List<Pokemon>>
-    fun getPokemonLikedByType(type: String): Flow<List<Pokemon>?>
+    fun getPokemonLikedByType(type: String): Flow<List<PokemonInfo>?>
 }

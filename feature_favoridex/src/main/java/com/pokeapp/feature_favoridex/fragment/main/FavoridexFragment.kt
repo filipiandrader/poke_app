@@ -1,4 +1,4 @@
-package com.pokeapp.feature_favoridex
+package com.pokeapp.feature_favoridex.fragment.main
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -12,15 +12,17 @@ import android.view.animation.OvershootInterpolator
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.extensions.convertColor
 import com.pokeapp.base_presentation.model.generation.GenerationBinding
 import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
 import com.pokeapp.base_presentation.model.type.TypeBinding
+import com.pokeapp.feature_favoridex.R
 import com.pokeapp.presentation_favoridex.FavoridexViewModel
 import kotlinx.android.synthetic.main.fragment_favoridex.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoridexFragment : Fragment() {
+class FavoridexFragment : BaseFragment() {
 
     private val viewModel: FavoridexViewModel by viewModel()
 

@@ -1,23 +1,20 @@
 package com.pokeapp.data_local.mapper.ability
 
 import com.pokeapp.data_local.model.ability.AbilityLocal
+import com.pokeapp.data_local.mapper.base.DataLocalMapper
 import com.pokeapp.domain.model.ability.Ability
 
 /*
  * Created by Filipi Andrade Rocha on 18/01/2021.
  */
 
-object AbilityLocalMapper {
+object AbilityLocalMapper : DataLocalMapper<AbilityLocal, Ability> {
 
-    fun toAbilityList(abilitiesLocal: List<AbilityLocal>) = abilitiesLocal.map { toAbility(it) }
-
-    private fun toAbility(abilityLocal: AbilityLocal) = Ability(
-            name = abilityLocal.name
+    override fun toLocal(domain: Ability) = AbilityLocal(
+        name = domain.name
     )
 
-    fun toAbilityLocalList(abilities: List<Ability>) = abilities.map { toAbilityLocal(it) }
-
-    private fun toAbilityLocal(ability: Ability) = AbilityLocal(
-            name = ability.name
+    override fun fromLocal(local: AbilityLocal) = Ability(
+        name = local.name
     )
 }

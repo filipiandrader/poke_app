@@ -1,5 +1,6 @@
 package com.pokeapp.data_local.mapper.moves
 
+import com.pokeapp.data_local.mapper.base.DataLocalMapper
 import com.pokeapp.data_local.model.move.MoveLocal
 import com.pokeapp.domain.model.move.Move
 
@@ -7,17 +8,13 @@ import com.pokeapp.domain.model.move.Move
  * Created by Filipi Andrade Rocha on 18/01/2021.
  */
 
-object MovesLocalMapper {
+object MovesLocalMapper : DataLocalMapper<MoveLocal, Move> {
 
-    fun toMovesList(movesLocal: List<MoveLocal>) = movesLocal.map { toMoves(it) }
-
-    private fun toMoves(moveLocal: MoveLocal) = Move(
-            name = moveLocal.name
+    override fun toLocal(domain: Move) = MoveLocal(
+        name = domain.name
     )
 
-    fun toMovesLocalList(moves: List<Move>) = moves.map { toMovesLocal(it) }
-
-    private fun toMovesLocal(move: Move) = MoveLocal(
-            name = move.name
+    override fun fromLocal(local: MoveLocal) = Move(
+        name = local.name
     )
 }

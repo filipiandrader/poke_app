@@ -4,6 +4,7 @@ import com.pokeapp.data.datasource.local.pokemon.PokemonLocalDataSource
 import com.pokeapp.data.datasource.remote.pokemon.PokemonRemoteDataSource
 import com.pokeapp.domain.model.pokemon.PokemonInfo
 import com.pokeapp.domain.repository.PokemonRepository
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Filipi Andrade on 29/03/2020
@@ -24,5 +25,5 @@ class PokemonRepositoryImpl(
 
     override fun getPokemonLikedById(id: Int) = pokemonLocalDataSource.getPokemonLikedById(id)
 
-    override fun getAllPokemonsLiked() = pokemonLocalDataSource.getAllPokemonsLiked()
+    override fun getAllPokemonsLiked(): Flow<List<PokemonInfo>?> = pokemonLocalDataSource.getAllPokemonsLiked()
 }

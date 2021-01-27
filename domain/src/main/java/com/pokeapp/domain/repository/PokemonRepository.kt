@@ -1,7 +1,6 @@
 package com.pokeapp.domain.repository
 
 import com.pokeapp.domain.model.pokedex.Pokedex
-import com.pokeapp.domain.model.pokemon.Pokemon
 import com.pokeapp.domain.model.pokemon.PokemonInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -16,5 +15,5 @@ interface PokemonRepository {
     fun insert(pokemon: PokemonInfo): Flow<Unit>
     fun delete(pokemon: PokemonInfo): Flow<Unit>
     fun getPokemonLikedById(id: Int): Flow<PokemonInfo?>
-    fun getAllPokemonsLiked(): Flow<List<Pokemon>?>
+    fun getAllPokemonsLiked(): Flow<List<PokemonInfo>?>
 }

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.pokeapp.data_local.base.DataConverter
-import com.pokeapp.data_local.model.evolution.SpeciesLocal
+import com.pokeapp.data_local.model.evolution.EvolutionLocal
 import com.pokeapp.data_local.model.stats.StatsLocal
 import com.pokeapp.data_local.model.type.TypeLocal
 import com.pokeapp.data_local.model.ability.AbilityLocal
@@ -31,6 +31,6 @@ class PokemonLocal(
     var abilities: MutableList<AbilityLocal> = mutableListOf(),
     var moves: MutableList<MoveLocal> = mutableListOf(),
     var stats: MutableList<StatsLocal> = mutableListOf(),
-    var evolves: MutableList<SpeciesLocal> = mutableListOf(),
+    var evolves: MutableList<EvolutionLocal> = mutableListOf(),
     var liked: Boolean = false
 )

@@ -1,70 +1,53 @@
 package com.pokeapp.data_local.mapper.pokemon
 
-import com.pokeapp.data_local.mapper.ability.AbilityLocalMapper.toAbilityList
-import com.pokeapp.data_local.mapper.ability.AbilityLocalMapper.toAbilityLocalList
-import com.pokeapp.data_local.mapper.evolution.EvolvesLocalMapper.toEvolvesList
-import com.pokeapp.data_local.mapper.evolution.EvolvesLocalMapper.toEvolvesLocalList
-import com.pokeapp.data_local.mapper.moves.MovesLocalMapper.toMovesList
-import com.pokeapp.data_local.mapper.moves.MovesLocalMapper.toMovesLocalList
-import com.pokeapp.data_local.mapper.stats.StatsLocalMapper.toStatsList
-import com.pokeapp.data_local.mapper.stats.StatsLocalMapper.toStatsLocalList
-import com.pokeapp.data_local.mapper.type.TypeLocalMapper.toTypeList
-import com.pokeapp.data_local.mapper.type.TypeLocalMapper.toTypeLocalList
+import com.pokeapp.data_local.mapper.ability.AbilityLocalMapper
+import com.pokeapp.data_local.mapper.evolution.EvolvesLocalMapper
+import com.pokeapp.data_local.mapper.moves.MovesLocalMapper
+import com.pokeapp.data_local.mapper.stats.StatsLocalMapper
+import com.pokeapp.data_local.mapper.type.TypeLocalMapper
+import com.pokeapp.data_local.mapper.base.DataLocalMapper
 import com.pokeapp.data_local.model.pokemon.PokemonLocal
-import com.pokeapp.domain.model.pokemon.Pokemon
 import com.pokeapp.domain.model.pokemon.PokemonInfo
 
 /*
  * Created by Filipi Andrade Rocha on 11/01/2021.
  */
 
-object PokemonLocalMapper {
+object PokemonLocalMapper : DataLocalMapper<PokemonLocal, PokemonInfo> {
 
-    fun toDomainList(pokemonsLocal: List<PokemonLocal>) = pokemonsLocal.map { toDomain(it) }
-
-    private fun toDomain(pokemonLocal: PokemonLocal) = Pokemon(
-            id = pokemonLocal.id,
-            name = pokemonLocal.name,
-            photo = pokemonLocal.photo,
-            photoShiny = pokemonLocal.photoShiny,
-            generationName = pokemonLocal.generationName,
-            types = toTypeList(pokemonLocal.types).toMutableList(),
-            liked = pokemonLocal.liked
+    override fun toLocal(domain: PokemonInfo) = PokemonLocal(
+        id = domain.id,
+        name = domain.name,
+        photo = domain.photo,
+        photoShiny = domain.photoShiny,
+        generationName = domain.generationName,
+        description = domain.description,
+        height = domain.height,
+        baseExperience = domain.baseExperience,
+        weight = domain.weight,
+        types = TypeLocalMapper.toLocal(domain.types).toMutableList(),
+        abilities = AbilityLocalMapper.toLocal(domain.abilities).toMutableList(),
+        moves = MovesLocalMapper.toLocal(domain.moves).toMutableList(),
+        stats = StatsLocalMapper.toLocal(domain.stats).toMutableList(),
+        evolves = EvolvesLocalMapper.toLocal(domain.evolution).toMutableList(),
+        liked = true
     )
 
-    fun toDomainInfo(pokemonLocal: PokemonLocal) = PokemonInfo(
-            id = pokemonLocal.id,
-            name = pokemonLocal.name,
-            photo = pokemonLocal.photo,
-            photoShiny = pokemonLocal.photoShiny,
-            generationName = pokemonLocal.generationName,
-            description = pokemonLocal.description,
-            height = pokemonLocal.height,
-            baseExperience = pokemonLocal.baseExperience,
-            weight = pokemonLocal.weight,
-            types = toTypeList(pokemonLocal.types).toMutableList(),
-            abilities = toAbilityList(pokemonLocal.abilities).toMutableList(),
-            moves = toMovesList(pokemonLocal.moves).toMutableList(),
-            stats = toStatsList(pokemonLocal.stats).toMutableList(),
-            evolution = toEvolvesList(pokemonLocal.evolves).toMutableList(),
-            liked = pokemonLocal.liked
-    )
-
-    fun toSaveLocal(pokemon: PokemonInfo) = PokemonLocal(
-            id = pokemon.id,
-            name = pokemon.name,
-            photo = pokemon.photo,
-            photoShiny = pokemon.photoShiny,
-            generationName = pokemon.generationName,
-            description = pokemon.description,
-            height = pokemon.height,
-            baseExperience = pokemon.baseExperience,
-            weight = pokemon.weight,
-            types = toTypeLocalList(pokemon.types).toMutableList(),
-            abilities = toAbilityLocalList(pokemon.abilities).toMutableList(),
-            moves = toMovesLocalList(pokemon.moves).toMutableList(),
-            stats = toStatsLocalList(pokemon.stats).toMutableList(),
-            evolves = toEvolvesLocalList(pokemon.evolution).toMutableList(),
-            liked = true
+    override fun fromLocal(local: PokemonLocal) = PokemonInfo(
+        id = local.id,
+        name = local.name,
+        photo = local.photo,
+        photoShiny = local.photoShiny,
+        generationName = local.generationName,
+        description = local.description,
+        height = local.height,
+        baseExperience = local.baseExperience,
+        weight = local.weight,
+        types = TypeLocalMapper.fromLocal(local.types).toMutableList(),
+        abilities = AbilityLocalMapper.fromLocal(local.abilities).toMutableList(),
+        moves = MovesLocalMapper.fromLocal(local.moves).toMutableList(),
+        stats = StatsLocalMapper.fromLocal(local.stats).toMutableList(),
+        evolution = EvolvesLocalMapper.fromLocal(local.evolves).toMutableList(),
+        liked = local.liked
     )
 }

@@ -1,6 +1,5 @@
 package com.pokeapp.data.datasource.local.pokemon
 
-import com.pokeapp.domain.model.pokemon.Pokemon
 import com.pokeapp.domain.model.pokemon.PokemonInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -16,9 +15,9 @@ interface PokemonLocalDataSource {
 
     fun getPokemonLikedById(id: Int): Flow<PokemonInfo?>
 
-    fun getAllPokemonsLiked(): Flow<List<Pokemon>?>
+    fun getAllPokemonsLiked(): Flow<List<PokemonInfo>?>
 
-    fun getPokemonLikedByGeneration(region: String): Flow<List<Pokemon>?>
+    fun getPokemonLikedByGeneration(region: String): Flow<List<PokemonInfo>?>
 
-    fun getPokemonLikedByType(type: String): Flow<List<Pokemon>?>
+    fun getPokemonLikedByType(type: String): Flow<List<PokemonInfo>?>
 }

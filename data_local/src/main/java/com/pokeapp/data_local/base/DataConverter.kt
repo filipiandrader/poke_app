@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pokeapp.data_local.model.ability.AbilityLocal
-import com.pokeapp.data_local.model.evolution.SpeciesLocal
+import com.pokeapp.data_local.model.evolution.EvolutionLocal
 import com.pokeapp.data_local.model.move.MoveLocal
 import com.pokeapp.data_local.model.stats.StatsLocal
 import com.pokeapp.data_local.model.type.TypeLocal
@@ -59,13 +59,13 @@ class DataConverter {
     }
 
     @TypeConverter
-    fun toEvolveList(string: String): MutableList<SpeciesLocal> {
-        val type = object : TypeToken<MutableList<SpeciesLocal>>() {}.type
+    fun toEvolveList(string: String): MutableList<EvolutionLocal> {
+        val type = object : TypeToken<MutableList<EvolutionLocal>>() {}.type
         return Gson().fromJson(string, type)
     }
 
     @TypeConverter
-    fun fromEvolveList(species: MutableList<SpeciesLocal>): String {
-        return Gson().toJson(species)
+    fun fromEvolveList(evolutions: MutableList<EvolutionLocal>): String {
+        return Gson().toJson(evolutions)
     }
 }
