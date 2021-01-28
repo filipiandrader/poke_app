@@ -57,33 +57,32 @@ class PokemonFragment : BaseFragment() {
     override fun setupView() {
         viewModel.getAllPokemon(mOffset, mPrevious)
 
-        binding.apply {
-            val pokeballDrawable = getDrawableRes(R.drawable.ic_pokeball)
-            val closeDrawable = getDrawableRes(R.drawable.ic_close)
-            pokemonMenuFAM.createCustomAnimation(pokeballDrawable, closeDrawable)
-            pokemonAllFAB.setOnClickListener { getAllPokedex() }
-            pokemonByGenFAB.setOnClickListener { showBottomSheetGeneration() }
-            pokemonByTypeFAB.setOnClickListener { showBottomSheetType() }
-            navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
+        val pokeballDrawable = getDrawableRes(R.drawable.ic_pokeball)
+        val closeDrawable = getDrawableRes(R.drawable.ic_close)
+        binding.pokemonMenuFAM.createCustomAnimation(pokeballDrawable, closeDrawable)
+        binding.pokemonAllFAB.setOnClickListener { getAllPokedex() }
+        binding.pokemonByGenFAB.setOnClickListener { showBottomSheetGeneration() }
+        binding.pokemonByTypeFAB.setOnClickListener { showBottomSheetType() }
+        binding.navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
 
-            pokemonRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    if (hasPagination) {
-                        visibleItemCount = pokemonRecyclerView.childCount()
-                        totalItemCount = pokemonRecyclerView.itemCount()
-                        firstVisibleItemPosition = pokemonRecyclerView.findFirstVisibleItemPosition()
+        binding.pokemonRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (hasPagination) {
+                    visibleItemCount = binding.pokemonRecyclerView.childCount()
+                    totalItemCount = binding.pokemonRecyclerView.itemCount()
+                    firstVisibleItemPosition =
+                        binding.pokemonRecyclerView.findFirstVisibleItemPosition()
 
-                        if (!isLoading && (firstVisibleItemPosition + visibleItemCount) >= totalItemCount) {
-                            mPrevious = mOffset
-                            mOffset += 20
-                            isLoading = true
-                            pokemonPaginationProgressBar.setVisible(true)
-                            viewModel.getAllPokemon(mOffset, mPrevious)
-                        }
+                    if (!isLoading && (firstVisibleItemPosition + visibleItemCount) >= totalItemCount) {
+                        mPrevious = mOffset
+                        mOffset += 20
+                        isLoading = true
+                        binding.pokemonPaginationProgressBar.setVisible(true)
+                        viewModel.getAllPokemon(mOffset, mPrevious)
                     }
                 }
-            })
-        }
+            }
+        })
     }
 
     private fun getAllPokedex() {
@@ -123,51 +122,42 @@ class PokemonFragment : BaseFragment() {
 
     private fun setupPokedex(pokedex: List<PokemonBinding>) {
         pokemon.addAll(pokemon.size, pokedex)
-        binding.apply {
-            pokedexAdapter = PokedexAdapter { navigation.navigateToPokemonInfo(it) }
-            pokedexAdapter.items = pokemon.toMutableList()
-            pokemonRecyclerView.apply {
-                layoutManager = GridLayoutManager(requireContext(), 2)
-                adapter = pokedexAdapter
-                setVisible()
-            }
-
-            if (isLoading) {
-                isLoading = false
-                pokemonRecyclerView.scrollToPosition(mPrevious - 1)
-                pokemonPaginationProgressBar.setGone()
-            }
-            pokemonMenuFAM.setVisible()
+        pokedexAdapter = PokedexAdapter { navigation.navigateToPokemonInfo(it) }
+        pokedexAdapter.items = pokemon.toMutableList()
+        binding.pokemonRecyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = pokedexAdapter
+            setVisible()
         }
+
+        if (isLoading) {
+            isLoading = false
+            binding.pokemonRecyclerView.scrollToPosition(mPrevious - 1)
+            binding.pokemonPaginationProgressBar.setGone()
+        }
+        binding.pokemonMenuFAM.setVisible()
     }
 
     private fun showBottomSheetGeneration() {
-        binding.apply {
-            pokemonMenuFAM.close(true)
-            GenerationBottomSheet(requireParentFragment(), generation).show {
-                pokemon.clear()
-                hasPagination = false
-                viewModel.getPokemonByGenenration(it.id)
-            }
+        binding.pokemonMenuFAM.close(true)
+        GenerationBottomSheet(requireParentFragment(), generation).show {
+            pokemon.clear()
+            hasPagination = false
+            viewModel.getPokemonByGenenration(it.id)
         }
     }
 
     private fun showBottomSheetType() {
-        binding.apply {
-            pokemonMenuFAM.close(true)
-            TypeBottomSheet(requireParentFragment(), type).show {
-                pokemon.clear()
-                hasPagination = false
-                viewModel.getPokemonByType(it.name)
-            }
+        binding.pokemonMenuFAM.close(true)
+        TypeBottomSheet(requireParentFragment(), type).show {
+            pokemon.clear()
+            hasPagination = false
+            viewModel.getPokemonByType(it.name)
         }
     }
 
     override fun onStop() {
         super.onStop()
-        pokemon.clear()
-        generation.clear()
-        type.clear()
         viewModel.cleanValues()
     }
 }

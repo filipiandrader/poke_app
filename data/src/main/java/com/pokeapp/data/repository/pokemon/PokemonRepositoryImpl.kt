@@ -19,9 +19,9 @@ class PokemonRepositoryImpl(
 
     override fun getPokemonInfo(id: Int) = pokemonRemoteDataSource.getPokemonInfo(id)
 
-    override fun insert(pokemon: PokemonInfo) = pokemonLocalDataSource.insert(pokemon)
+    override fun doLikePokemon(pokemon: PokemonInfo) = pokemonLocalDataSource.doLikePokemon(pokemon)
 
-    override fun delete(pokemon: PokemonInfo) = pokemonLocalDataSource.delete(pokemon)
+    override fun doDislikePokemon(pokemon: PokemonInfo) = pokemonLocalDataSource.doDislikePokemon(pokemon)
 
     override fun getPokemonLikedById(id: Int) = pokemonLocalDataSource.getPokemonLikedById(id)
 

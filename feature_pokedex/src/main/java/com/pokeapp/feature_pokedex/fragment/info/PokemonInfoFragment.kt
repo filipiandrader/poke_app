@@ -71,7 +71,7 @@ class PokemonInfoFragment : BaseFragment() {
                 pokemonDetailsType1TextView.setVisible(thirdType != null)
             }
 
-            pokemonDetailsFavouriteImageView.setOnClickListener { doFavouritePokemon() }
+            pokemonDetailsFavouriteImageView.setOnClickListener { doLikePokemon() }
 
             pokemonDetailsSwipeRefreshLayout.setOnRefreshListener {
                 pokemonDetailsSwipeRefreshLayout.setRefresh(true)
@@ -86,7 +86,8 @@ class PokemonInfoFragment : BaseFragment() {
         }
 
         viewModel.fetchLikePokemonViewState.onPostValue(owner) {
-            showToast(pokemonInfo)
+            pokemonInfo.liked = !pokemonInfo.liked
+            setFavouriteIconCorrectly(pokemonInfo.liked)
         }
     }
 
@@ -107,16 +108,6 @@ class PokemonInfoFragment : BaseFragment() {
         }
     }
 
-    private fun showToast(pokemon: PokemonInfoBinding) {
-        if (pokemon.liked) {
-            longToast("${pokemon.name.formatPokemonName()} foi favoritado(a) :)")
-        } else {
-            longToast("${pokemon.name.formatPokemonName()} foi desfavoritado(a) :(")
-        }
-
-        setFavouriteIconCorrectly(pokemon.liked)
-    }
-
     private fun setFavouriteIconCorrectly(liked: Boolean) {
         if (liked) {
             pokemonDetailsFavouriteImageView.setImageDrawable(
@@ -135,8 +126,7 @@ class PokemonInfoFragment : BaseFragment() {
         }
     }
 
-    private fun doFavouritePokemon() {
-        pokemonInfo.liked = !pokemonInfo.liked
-        viewModel.doFavouritePokemon(pokemonInfo)
+    private fun doLikePokemon() {
+        viewModel.doLikePokemon(pokemonInfo)
     }
 }

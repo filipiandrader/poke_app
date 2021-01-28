@@ -34,9 +34,7 @@ class FavoridexViewModel : ViewModel(), KoinComponent {
                 )
                 getGenerations(favoridex)
             },
-            onError = {
-                _fetchFavoridexViewState.postError(it)
-            }
+            onError = { _fetchFavoridexViewState.postError(it) }
         )
     }
 
@@ -46,9 +44,7 @@ class FavoridexViewModel : ViewModel(), KoinComponent {
                 favoridex.generation = GenerationMapper.fromDomain(it ?: listOf())
                 getTypes(favoridex)
             },
-            onError = {
-                _fetchFavoridexViewState.postError(it)
-            }
+            onError = { _fetchFavoridexViewState.postError(it) }
         )
     }
 
@@ -58,9 +54,7 @@ class FavoridexViewModel : ViewModel(), KoinComponent {
                 favoridex.type = TypeMapper.fromDomain(it ?: listOf())
                 _fetchFavoridexViewState.postSuccess(favoridex)
             },
-            onError = {
-                _fetchFavoridexViewState.postError(it)
-            }
+            onError = { _fetchFavoridexViewState.postError(it) }
         )
     }
 

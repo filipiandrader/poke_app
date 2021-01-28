@@ -16,11 +16,11 @@ import kotlinx.coroutines.flow.flowOf
 
 class PokemonLocalDataSourceImpl(private val dao: PokemonDAO) : PokemonLocalDataSource {
 
-    override fun insert(pokemon: PokemonInfo) = flow {
+    override fun doLikePokemon(pokemon: PokemonInfo) = flow {
         emit(dao.insert(PokemonLocalMapper.toLocal(pokemon)))
     }
 
-    override fun delete(pokemon: PokemonInfo) = flow {
+    override fun doDislikePokemon(pokemon: PokemonInfo) = flow {
         emit(dao.delete(PokemonLocalMapper.toLocal(pokemon)))
     }
 

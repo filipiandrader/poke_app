@@ -4,15 +4,18 @@ import androidx.lifecycle.ViewModel
 import com.pokeapp.base_presentation.mapper.pokemon.PokemonInfoMapper
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.base_presentation.utils.extensions.*
+import com.pokeapp.domain.usecase.like.LikePokemon
 import com.pokeapp.domain.usecase.pokemon.GetPokemonInfo
 import org.koin.core.KoinComponent
 
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
+
 class PokemonInfoViewModel : ViewModel(), KoinComponent {
 
     private val getPokemonInfo: GetPokemonInfo by useCase()
+    private val likePokemon: LikePokemon by useCase()
 
     private val _fetchPokemonInfoViewState by viewState<PokemonInfoBinding>()
     private val _fetchLikePokemonViewState by viewState<Unit>()
@@ -22,7 +25,6 @@ class PokemonInfoViewModel : ViewModel(), KoinComponent {
 
     fun getPokemonInfo(id: Int) {
         _fetchPokemonInfoViewState.postLoading()
-
         getPokemonInfo(
             params = GetPokemonInfo.Params(id),
             onSuccess = { _fetchPokemonInfoViewState.postSuccess(PokemonInfoMapper.fromDomain(it)) },
@@ -30,16 +32,12 @@ class PokemonInfoViewModel : ViewModel(), KoinComponent {
         )
     }
 
-    fun doFavouritePokemon(pokemon: PokemonInfoBinding) {
+    fun doLikePokemon(pokemon: PokemonInfoBinding) {
         _fetchLikePokemonViewState.postLoading()
-        _fetchLikePokemonViewState.postSuccess(Unit)
-
-        /*dataSource.doFavouritePokemon(pokemon,
-                onSuccess = {
-                    mState.postValue(ViewState.success())
-                },
-                onFailure = {
-                    mState.postValue(ViewState.failure())
-                })*/
+        likePokemon(
+            params = LikePokemon.Params(PokemonInfoMapper.toDomain(pokemon)),
+            onSuccess = { _fetchLikePokemonViewState.postSuccess(Unit) },
+            onError = { _fetchLikePokemonViewState.postError(it) }
+        )
     }
 }
