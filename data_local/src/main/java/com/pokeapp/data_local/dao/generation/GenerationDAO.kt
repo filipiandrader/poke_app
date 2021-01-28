@@ -17,5 +17,5 @@ abstract class GenerationDAO {
     abstract suspend fun insert(vararg generation: GenerationLocal)
 
     @Query("SELECT * FROM generation ORDER BY id")
-    abstract suspend fun getGenerations(): List<GenerationLocal>
+    abstract suspend fun getGenerations(): List<GenerationLocal>?
 }

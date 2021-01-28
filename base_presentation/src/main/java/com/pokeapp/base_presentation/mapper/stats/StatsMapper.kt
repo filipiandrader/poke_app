@@ -10,10 +10,6 @@ import com.pokeapp.domain.model.stats.Stats
 
 object StatsMapper : PresentationMapper<StatsBinding, Stats> {
 
-    fun listToDomain(presentation: List<StatsBinding>) = presentation.map { toDomain(it) }
-
-    fun listFromDomain(domain: List<Stats>) = domain.map { fromDomain(it) }
-
     override fun toDomain(presentation: StatsBinding) = Stats(
         baseStat = presentation.baseStat,
         name = presentation.name

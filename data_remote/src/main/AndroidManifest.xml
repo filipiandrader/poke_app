@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pokeapp.data_remote">
+<manifest package="com.pokeapp.data_remote">
 
     /
 </manifest>

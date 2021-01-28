@@ -15,6 +15,7 @@ import com.pokeapp.data_remote.service.type.TypeService
 import com.pokeapp.data_remote.utils.RequestWrapper
 import com.pokeapp.data_remote.utils.RequestWrapperImpl
 import com.pokeapp.data_remote.utils.WebServiceFactory
+import okhttp3.OkHttpClient
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -23,6 +24,8 @@ import org.koin.dsl.module
  */
 
 val dataRemoteModule = module {
+
+    single { RequestWrapperImpl() } bind RequestWrapper::class
 
     single { WebServiceFactory.provideOkHttpClient() }
 
@@ -33,8 +36,6 @@ val dataRemoteModule = module {
     single<RegionService> { WebServiceFactory.createWebService(get()) }
 
     single<TypeService> { WebServiceFactory.createWebService(get()) }
-
-    single { RequestWrapperImpl() } bind RequestWrapper::class
 
     single<PokemonRemoteDataSource> { PokemonRemoteDataSourceImpl(get()) }
 

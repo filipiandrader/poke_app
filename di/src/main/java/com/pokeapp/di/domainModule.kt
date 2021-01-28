@@ -5,6 +5,7 @@ import com.pokeapp.domain.usecase.generation.GetGeneration
 import com.pokeapp.domain.usecase.generation.GetGenerationLocal
 import com.pokeapp.domain.usecase.generation.GetPokemonByGeneration
 import com.pokeapp.domain.usecase.generation.SaveGenerationLocal
+import com.pokeapp.domain.usecase.pokedex.GetFavoridex
 import com.pokeapp.domain.usecase.pokedex.GetPokedex
 import com.pokeapp.domain.usecase.pokemon.GetPokemonInfo
 import com.pokeapp.domain.usecase.region.GetRegion
@@ -34,6 +35,10 @@ val domainModule = module {
 
     factory { (scope: CoroutineScope) ->
         GetPokedex(get(), scope)
+    }
+
+    factory { (scope: CoroutineScope) ->
+        GetFavoridex(get(), scope)
     }
 
     factory { (scope: CoroutineScope) ->

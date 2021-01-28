@@ -2,7 +2,6 @@ package com.pokeapp.data_remote.service.pokemon
 
 import com.pokeapp.data_remote.model.pokedex.PokedexResponse
 import com.pokeapp.data_remote.model.pokemon.PokemonInfoResponse
-import com.pokeapp.data_remote.model.pokemon.PokemonResponse
 import com.pokeapp.data_remote.utils.GenericResponse
 import retrofit2.http.GET
 import retrofit2.http.Path

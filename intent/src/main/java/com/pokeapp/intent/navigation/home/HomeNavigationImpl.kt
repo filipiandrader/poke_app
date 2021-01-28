@@ -15,7 +15,7 @@ class HomeNavigationImpl(private val fragment: Fragment) : HomeNavigation {
         HomeFragmentDirections.actionHomeFragmentToPokedexNavigation()
     )
 
-    override fun navigateToFavoriDex() = fragment.navigate(
+    override fun navigateToFavoridex() = fragment.navigate(
         HomeFragmentDirections.actionHomeFragmentToFavoridexNavigation()
     )
 

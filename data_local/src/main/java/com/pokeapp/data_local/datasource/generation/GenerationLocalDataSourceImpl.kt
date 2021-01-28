@@ -18,6 +18,6 @@ class GenerationLocalDataSourceImpl(private val dao: GenerationDAO) : Generation
     }
 
     override fun getAllGenerationsLocal() = flow {
-        emit(GenerationLocalMapper.fromLocal(dao.getGenerations()))
+        emit(GenerationLocalMapper.fromLocal(dao.getGenerations() ?: listOf()))
     }
 }

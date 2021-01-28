@@ -25,11 +25,11 @@ object PokemonInfoMapper : PresentationMapper<PokemonInfoBinding, PokemonInfo> {
         height = presentation.height,
         baseExperience = presentation.baseExperience,
         weight = presentation.weight,
-        types = TypeMapper.listToDomain(presentation.types),
-        abilities = AbilityMapper.listToDomain(presentation.abilities),
-        moves = MoveMapper.listToDomain(presentation.moves),
-        stats = StatsMapper.listToDomain(presentation.stats),
-        evolution = EvolutionMapper.listToDomain(presentation.evolution)
+        types = TypeMapper.toDomain(presentation.types),
+        abilities = AbilityMapper.toDomain(presentation.abilities),
+        moves = MoveMapper.toDomain(presentation.moves),
+        stats = StatsMapper.toDomain(presentation.stats),
+        evolution = EvolutionMapper.toDomain(presentation.evolution)
     )
 
     override fun fromDomain(domain: PokemonInfo) = PokemonInfoBinding(
@@ -42,10 +42,10 @@ object PokemonInfoMapper : PresentationMapper<PokemonInfoBinding, PokemonInfo> {
         height = domain.height,
         baseExperience = domain.baseExperience,
         weight = domain.weight,
-        types = TypeMapper.listFromDomain(domain.types),
-        abilities = AbilityMapper.listFromDomain(domain.abilities),
-        moves = MoveMapper.listFromDomain(domain.moves),
-        stats = StatsMapper.listFromDomain(domain.stats),
-        evolution = EvolutionMapper.listFromDomain(domain.evolution)
+        types = TypeMapper.fromDomain(domain.types),
+        abilities = AbilityMapper.fromDomain(domain.abilities),
+        moves = MoveMapper.fromDomain(domain.moves),
+        stats = StatsMapper.fromDomain(domain.stats),
+        evolution = EvolutionMapper.fromDomain(domain.evolution)
     )
 }

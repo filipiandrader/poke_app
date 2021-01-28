@@ -14,14 +14,14 @@ import com.pokeapp.domain.model.pokedex.Pokedex
 object PokedexMapper : PresentationMapper<PokedexBinding, Pokedex> {
 
     override fun toDomain(presentation: PokedexBinding) = Pokedex(
-        pokedex = PokemonMapper.lisToDomain(presentation.pokedex),
-        generation = GenerationMapper.listToDomain(presentation.generation),
-        type = TypeMapper.listToDomain(presentation.type)
+        pokedex = PokemonMapper.toDomain(presentation.pokedex),
+        generation = GenerationMapper.toDomain(presentation.generation),
+        type = TypeMapper.toDomain(presentation.type)
     )
 
     override fun fromDomain(domain: Pokedex) = PokedexBinding(
-        pokedex = PokemonMapper.listFromDomain(domain.pokedex),
-        generation = GenerationMapper.listFromDomain(domain.generation),
-        type = TypeMapper.listFromDomain(domain.type)
+        pokedex = PokemonMapper.fromDomain(domain.pokedex),
+        generation = GenerationMapper.fromDomain(domain.generation),
+        type = TypeMapper.fromDomain(domain.type)
     )
 }

@@ -1,191 +1,101 @@
 package com.pokeapp.feature_favoridex.fragment.main
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.OvershootInterpolator
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.LifecycleOwner
 import com.pokeapp.base_feature.core.BaseFragment
-import com.pokeapp.base_feature.util.extensions.convertColor
+import com.pokeapp.base_feature.customview.bottomsheet.generation.GenerationBottomSheet
+import com.pokeapp.base_feature.customview.bottomsheet.type.TypeBottomSheet
+import com.pokeapp.base_feature.util.delegateproperties.navDirections
+import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.generation.GenerationBinding
-import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
+import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.base_presentation.model.type.TypeBinding
 import com.pokeapp.feature_favoridex.R
+import com.pokeapp.feature_favoridex.databinding.FragmentFavoridexBinding
+import com.pokeapp.feature_favoridex.navigation.main.FavoridexNavigation
 import com.pokeapp.presentation_favoridex.FavoridexViewModel
-import kotlinx.android.synthetic.main.fragment_favoridex.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoridexFragment : BaseFragment() {
 
     private val viewModel: FavoridexViewModel by viewModel()
+    private val navigation: FavoridexNavigation by navDirections()
 
-    private lateinit var generation: List<GenerationBinding>
-    private lateinit var type: List<TypeBinding>
+    private lateinit var binding: FragmentFavoridexBinding
+
+    private var generation = mutableListOf<GenerationBinding>()
+    private var type = mutableListOf<TypeBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_favoridex, container, false)
-
-    override fun onStart() {
-        super.onStart()
-
-        // BACK BUTTON
-        navigationIconImageView.setOnClickListener { findNavController().navigateUp() }
-
-        viewModel.getFavouritePokemon()
-        viewModel.getTypes()
-
-        createCustomAnimation()
-
-        favouriteAllFAB.setOnClickListener {
-            favouriteMenuFAM.close(true)
-            viewModel.getFavouritePokemon()
-        }
-
-        favouriteByGenFAB.setOnClickListener { showBottomSheetGeneration() }
-
-        favouriteByTypeFAB.setOnClickListener { showBottomSheetType() }
+    ): View {
+        changeStatusBarColor(getColor())
+        binding = FragmentFavoridexBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        activity?.window?.statusBarColor = requireContext().convertColor(R.color.background)
-    }
+    private fun getColor() = requireContext().convertColor(R.color.background)
 
-    private fun createCustomAnimation() {
-        val set = AnimatorSet()
-        val scaleOutX = ObjectAnimator.ofFloat(favouriteMenuFAM.menuIconView, "scaleX", 1.0f, 0.2f)
-        val scaleOutY = ObjectAnimator.ofFloat(favouriteMenuFAM.menuIconView, "scaleY", 1.0f, 0.2f)
-        val scaleInX = ObjectAnimator.ofFloat(favouriteMenuFAM.menuIconView, "scaleX", 0.2f, 1.0f)
-        val scaleInY = ObjectAnimator.ofFloat(favouriteMenuFAM.menuIconView, "scaleY", 0.2f, 1.0f)
+    override fun setupView() {
+        viewModel.getFavoridex()
 
-        scaleOutX.duration = 50
-        scaleOutY.duration = 50
-        scaleInX.duration = 150
-        scaleInY.duration = 150
+        binding.apply {
+            navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
 
-        scaleInX.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator) {
-                val img =
-                    if (favouriteMenuFAM.isOpened) ContextCompat.getDrawable(
-                        requireContext(), R.drawable.ic_pokeball
-                    ) else ContextCompat.getDrawable(requireContext(), R.drawable.ic_close)
-                favouriteMenuFAM.menuIconView.setImageDrawable(img)
+            val pokeballDrawable = getDrawableRes(R.drawable.ic_pokeball)
+            val closeDrawable = getDrawableRes(R.drawable.ic_close)
+            favouriteMenuFAM.createCustomAnimation(pokeballDrawable, closeDrawable)
+            favouriteAllFAB.setOnClickListener {
+                favouriteMenuFAM.close(true)
+                viewModel.getFavoridex()
             }
-        })
 
-        set.play(scaleOutX).with(scaleOutY)
-        set.play(scaleInX).with(scaleInY).after(scaleOutX)
-        set.interpolator = OvershootInterpolator(2f)
+            favouriteByGenFAB.setOnClickListener { showBottomSheetGeneration() }
 
-        favouriteMenuFAM.iconToggleAnimatorSet = set
+            favouriteByTypeFAB.setOnClickListener { showBottomSheetType() }
+        }
+    }
+
+    override fun addObservers(owner: LifecycleOwner) {
+        viewModel.fetchFavoridexViewState.onPostValue(owner) {
+            if (it.favoridex.isEmpty()) {
+                emptyList()
+            } else {
+                type = it.type.toMutableList()
+                generation = it.generation.toMutableList()
+                binding.favouriteMenuFAM.setVisible()
+                binding.favouriteRecyclerView.setVisible()
+            }
+        }
+    }
+
+    private fun emptyList() {
+        binding.favouriteMenuFAM.setGone()
+        binding.favouriteRecyclerView.setGone()
     }
 
     private fun showBottomSheetGeneration() {
-        /*favouriteMenuFAM.close(true)
-        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = wm.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        val peekHeight = size.y * 0.70
-
-        val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-            setPeekHeight(literal = peekHeight.toInt())
-            customView(
-                viewRes = R.layout.bottom_sheet_layout,
-                scrollable = false,
-                noVerticalPadding = true,
-                horizontalPadding = false,
-                dialogWrapContent = true
-            )
-        }
-
-        val itemFilterNameTextView =
-            dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
-        itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_generation_label))
-
-        val bottomSheetRecyclerView =
-            dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
-        val generations = mutableListOf<GenerationBinding>()
-        generations.add(GenerationBinding(id = 1, name = "1° Geração"))
-        generations.add(GenerationBinding(id = 2, name = "2° Geração"))
-        generations.add(GenerationBinding(id = 3, name = "3° Geração"))
-        generations.add(GenerationBinding(id = 4, name = "4° Geração"))
-        generations.add(GenerationBinding(id = 5, name = "5° Geração"))
-        generations.add(GenerationBinding(id = 6, name = "6° Geração"))
-        generations.add(GenerationBinding(id = 7, name = "7° Geração"))
-
-        bottomSheetRecyclerView.setup {
-            withLayoutManager(GridLayoutManager(requireContext(), 2))
-            withDataSource(dataSourceOf(generations))
-            withItem<GenerationBinding, BottomSheetGenerationViewHolder>(R.layout.item_generation) {
-                onBind(::BottomSheetGenerationViewHolder) { _, item ->
-                    this.itemGenerationNameTextView.putText(item.name)
-//                    this.itemGenerationPhotoImageView.setImageResource(item.img)
-                }
-
-                onClick { index ->
-                    dialog.dismiss()
-                    viewModel.getPokemonByGenenration(generations[index].id.getGenerationName())
-                }
+        binding.apply {
+            favouriteMenuFAM.close(true)
+            GenerationBottomSheet(requireParentFragment(), generation).show {
+                viewModel.getPokemonByGenenration(it.region)
             }
-        }*/
+        }
     }
 
     private fun showBottomSheetType() {
-        /*   favouriteMenuFAM.close(true)
-           val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
-           val display = wm.defaultDisplay
-           val size = Point()
-           display.getSize(size)
-           val peekHeight = size.y * 0.70
-
-           val dialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-               setPeekHeight(literal = peekHeight.toInt())
-               customView(
-                   viewRes = R.layout.bottom_sheet_layout,
-                   scrollable = false,
-                   noVerticalPadding = true,
-                   horizontalPadding = false,
-                   dialogWrapContent = true
-               )
-           }
-
-           val itemFilterNameTextView =
-               dialog.getCustomView().findViewById<TextView>(R.id.itemFilterNameTextView)
-           itemFilterNameTextView.putText(resources.getString(R.string.bottom_sheet_type_label))
-
-           val bottomSheetRecyclerView =
-               dialog.getCustomView().findViewById<RecyclerView>(R.id.bottomSheetRecyclerView)
-
-           bottomSheetRecyclerView.setup {
-               withLayoutManager(GridLayoutManager(requireContext(), 2))
-               withDataSource(dataSourceOf(type))
-               withItem<TypeBinding, BottomSheetTypeViewHolder>(R.layout.item_type) {
-                   onBind(::BottomSheetTypeViewHolder) { _, item ->
-                       this.itemTypeNameTextView.putText(item.name)
-
-                       val color = itemView.context.getPokemonColor(item.name)
-                       this.itemTypeCardView.background.colorFilter =
-                           PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-                   }
-
-                   onClick { index ->
-                       dialog.dismiss()
-                       viewModel.getPokemonByType(type[index].name)
-                   }
-               }
-           }*/
+        binding.apply {
+            favouriteMenuFAM.close(true)
+            TypeBottomSheet(requireParentFragment(), type).show {
+                viewModel.getPokemonByType(it.name)
+            }
+        }
     }
 
-    private fun setupRecyclerView(pokemon: MutableList<PokemonBinding>) {
+    private fun setupRecyclerView(pokemon: List<PokemonInfoBinding>) {
         /*if (pokemon.isNotEmpty()) {
             val layoutManager = if (pokemon.size == 1) {
                 LinearLayoutManager(context)
@@ -273,5 +183,12 @@ class FavoridexFragment : BaseFragment() {
         favouriteProgressBar.setVisible(false)
         favouriteRecyclerView.setVisible(pokemon.isNotEmpty())
         favouriteMenuFAM.setVisible(true)*/
+    }
+
+    override fun onStop() {
+        super.onStop()
+        type.clear()
+        generation.clear()
+        viewModel.cleanValeus()
     }
 }

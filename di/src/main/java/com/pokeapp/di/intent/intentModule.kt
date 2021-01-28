@@ -6,5 +6,6 @@ package com.pokeapp.di.intent
  
 val intentModule = listOf(
     intentMainModule,
-    intentRegionModule
+    intentRegionModule,
+    intentFavoridexModule
 )

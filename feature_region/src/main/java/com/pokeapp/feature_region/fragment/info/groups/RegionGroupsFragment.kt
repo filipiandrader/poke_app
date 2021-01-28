@@ -10,7 +10,6 @@ import com.pokeapp.base_presentation.model.region.RegionInfoBinding
 import com.pokeapp.feature_region.adapter.GroupAdapter
 import com.pokeapp.feature_region.databinding.FragmentRegionGroupsBinding
 
-
 class RegionGroupsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentRegionGroupsBinding

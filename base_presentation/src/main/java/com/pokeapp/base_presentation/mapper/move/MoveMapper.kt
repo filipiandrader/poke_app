@@ -10,15 +10,7 @@ import com.pokeapp.domain.model.move.Move
 
 object MoveMapper : PresentationMapper<MoveBinding, Move> {
 
-    fun listToDomain(presentation: List<MoveBinding>) = presentation.map { toDomain(it) }
+    override fun toDomain(presentation: MoveBinding) = Move(name = presentation.name)
 
-    fun listFromDomain(domain: List<Move>) = domain.map { fromDomain(it) }
-
-    override fun toDomain(presentation: MoveBinding) = Move(
-        name = presentation.name
-    )
-
-    override fun fromDomain(domain: Move) = MoveBinding(
-        name = domain.name
-    )
+    override fun fromDomain(domain: Move) = MoveBinding(name = domain.name)
 }

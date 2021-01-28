@@ -10,10 +10,6 @@ import com.pokeapp.domain.model.generation.Generation
 
 object GenerationMapper : PresentationMapper<GenerationBinding, Generation> {
 
-    fun listToDomain(presentation: List<GenerationBinding>) = presentation.map { toDomain(it) }
-
-    fun listFromDomain(domain: List<Generation>) = domain.map { fromDomain(it) }
-
     override fun toDomain(presentation: GenerationBinding) = Generation(
         id = presentation.id,
         name = presentation.name,

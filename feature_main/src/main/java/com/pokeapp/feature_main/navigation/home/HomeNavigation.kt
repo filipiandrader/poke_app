@@ -8,7 +8,7 @@ interface HomeNavigation {
 
     fun navigateToPokedex()
 
-    fun navigateToFavoriDex()
+    fun navigateToFavoridex()
 
     fun navigateToRegion()
 }

@@ -35,10 +35,6 @@ abstract class BaseAdapter<T, V : BaseViewHolder<T>> : RecyclerView.Adapter<V>()
         holder.bind(item)
     }
 
-    fun setOnItemClickListener(listener: OnAdapterItemClickListener<T>) {
-        itemClickListener = listener
-    }
-
 }
 
 abstract class BaseViewHolder<T>(v: View) : RecyclerView.ViewHolder(v) {

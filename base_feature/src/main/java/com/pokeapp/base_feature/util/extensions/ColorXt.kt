@@ -13,22 +13,6 @@ import java.util.*
  */
 
 @ColorInt
-fun Context.getPokemonColor(typeOfPokemon: List<TypeBinding>): Int {
-    val type = typeOfPokemon.getOrNull(typeOfPokemon.size - 1)
-    val color = when (type?.name?.toLowerCase(Locale("pt", "BR"))) {
-        "grass", "bug", "pokedex" -> R.color.lightTeal
-        "fire" -> R.color.lightRed
-        "water", "fighting", "normal", "favoridex" -> R.color.lightBlue
-        "electric", "psychic" -> R.color.lightYellow
-        "poison", "ghost" -> R.color.lightPurple
-        "ground", "rock" -> R.color.lightBrown
-        "dark" -> R.color.black
-        else -> R.color.lightBlue
-    }
-    return convertColor(color)
-}
-
-@ColorInt
 fun Context.getPokemonColor(typeOfPokemon: String): Int {
     val color = when (typeOfPokemon.toLowerCase(Locale("pt", "BR"))) {
         "grass", "bug" -> R.color.lightTeal

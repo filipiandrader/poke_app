@@ -10,15 +10,7 @@ import com.pokeapp.domain.model.ability.Ability
 
 object AbilityMapper : PresentationMapper<AbilityBinding, Ability> {
 
-    fun listToDomain(presentation: List<AbilityBinding>) = presentation.map { toDomain(it) }
+    override fun toDomain(presentation: AbilityBinding) = Ability(name = presentation.name)
 
-    fun listFromDomain(domain: List<Ability>) = domain.map { fromDomain(it) }
-
-    override fun toDomain(presentation: AbilityBinding) = Ability(
-        name = presentation.name
-    )
-
-    override fun fromDomain(domain: Ability) = AbilityBinding(
-        name = domain.name
-    )
+    override fun fromDomain(domain: Ability) = AbilityBinding(name = domain.name)
 }

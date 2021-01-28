@@ -10,15 +10,7 @@ import com.pokeapp.domain.model.type.Type
 
 object TypeMapper : PresentationMapper<TypeBinding, Type> {
 
-    fun listFromDomain(types: List<Type>) = types.map { fromDomain(it) }
+    override fun toDomain(presentation: TypeBinding) = Type(name = presentation.name)
 
-    fun listToDomain(types: List<TypeBinding>) = types.map { toDomain(it) }
-
-    override fun toDomain(presentation: TypeBinding) = Type(
-            name = presentation.name
-    )
-
-    override fun fromDomain(domain: Type) = TypeBinding(
-            name = domain.name
-    )
+    override fun fromDomain(domain: Type) = TypeBinding(name = domain.name)
 }

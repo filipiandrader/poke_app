@@ -17,6 +17,7 @@ dependencies {
     implementation project(':presentation_main')
     appDependencies.each { add(it.configuration, it.dependency, it.options) }
 }
+
 repositories {
     mavenCentral()
 }

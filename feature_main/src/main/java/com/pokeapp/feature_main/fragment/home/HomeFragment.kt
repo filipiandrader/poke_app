@@ -38,7 +38,7 @@ class HomeFragment : BaseFragment() {
             val colorFavoridex = requireContext().getCardViewColor("favoridex")
             homeFavouriteConstraintLayout.setColorFilter(colorFavoridex)
             homeFavouriteConstraintLayout.setOnClickListener {
-                navigation.navigateToFavoriDex()
+                navigation.navigateToFavoridex()
             }
 
             val colorRegion = requireContext().getCardViewColor("region")

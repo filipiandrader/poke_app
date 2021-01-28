@@ -20,7 +20,6 @@ import com.pokeapp.feature_pokedex.adapter.PokedexAdapter
 import com.pokeapp.feature_pokedex.databinding.FragmentPokemonBinding
 import com.pokeapp.feature_pokedex.navigation.PokedexNavigation
 import com.pokeapp.presentation_pokedex.pokemon.PokemonViewModel
-import kotlinx.android.synthetic.main.fragment_pokemon.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PokemonFragment : BaseFragment() {
@@ -58,7 +57,7 @@ class PokemonFragment : BaseFragment() {
     override fun setupView() {
         viewModel.getAllPokemon(mOffset, mPrevious)
 
-        binding.run {
+        binding.apply {
             val pokeballDrawable = getDrawableRes(R.drawable.ic_pokeball)
             val closeDrawable = getDrawableRes(R.drawable.ic_close)
             pokemonMenuFAM.createCustomAnimation(pokeballDrawable, closeDrawable)
@@ -89,7 +88,7 @@ class PokemonFragment : BaseFragment() {
 
     private fun getAllPokedex() {
         hasPagination = true
-        pokemonMenuFAM.close(true)
+        binding.pokemonMenuFAM.close(true)
         pokemon.clear()
         mOffset = 20
         mPrevious = 0
@@ -119,12 +118,12 @@ class PokemonFragment : BaseFragment() {
     }
 
     private fun setupEmptyList() {
-        pokemonPaginationProgressBar.setGone()
+        binding.pokemonPaginationProgressBar.setGone()
     }
 
     private fun setupPokedex(pokedex: List<PokemonBinding>) {
         pokemon.addAll(pokemon.size, pokedex)
-        binding.run {
+        binding.apply {
             pokedexAdapter = PokedexAdapter { navigation.navigateToPokemonInfo(it) }
             pokedexAdapter.items = pokemon.toMutableList()
             pokemonRecyclerView.apply {
@@ -138,13 +137,12 @@ class PokemonFragment : BaseFragment() {
                 pokemonRecyclerView.scrollToPosition(mPrevious - 1)
                 pokemonPaginationProgressBar.setGone()
             }
-            pokemonProgressBar.setGone()
             pokemonMenuFAM.setVisible()
         }
     }
 
     private fun showBottomSheetGeneration() {
-        binding.run {
+        binding.apply {
             pokemonMenuFAM.close(true)
             GenerationBottomSheet(requireParentFragment(), generation).show {
                 pokemon.clear()
@@ -155,7 +153,7 @@ class PokemonFragment : BaseFragment() {
     }
 
     private fun showBottomSheetType() {
-        binding.run {
+        binding.apply {
             pokemonMenuFAM.close(true)
             TypeBottomSheet(requireParentFragment(), type).show {
                 pokemon.clear()

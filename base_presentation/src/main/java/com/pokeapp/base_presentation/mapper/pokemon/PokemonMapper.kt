@@ -11,17 +11,13 @@ import com.pokeapp.domain.model.pokemon.Pokemon
 
 object PokemonMapper : PresentationMapper<PokemonBinding, Pokemon> {
 
-    fun lisToDomain(presentation: List<PokemonBinding>) = presentation.map { toDomain(it) }
-
-    fun listFromDomain(domain: List<Pokemon>) = domain.map { fromDomain(it) }
-
     override fun toDomain(presentation: PokemonBinding) = Pokemon(
         id = presentation.id,
         name = presentation.name,
         photo = presentation.photo,
         photoShiny = presentation.photoShiny,
         generationName = presentation.generationName,
-        types = TypeMapper.listToDomain(presentation.types),
+        types = TypeMapper.toDomain(presentation.types),
         liked = presentation.liked
     )
 
@@ -31,7 +27,7 @@ object PokemonMapper : PresentationMapper<PokemonBinding, Pokemon> {
         photo = domain.photo,
         photoShiny = domain.photoShiny,
         generationName = domain.generationName,
-        types = TypeMapper.listFromDomain(domain.types),
+        types = TypeMapper.fromDomain(domain.types),
         liked = domain.liked
     )
 }

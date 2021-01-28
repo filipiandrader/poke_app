@@ -5,7 +5,6 @@ import com.pokeapp.data.datasource.local.pokemon.PokemonLocalDataSource
 import com.pokeapp.data.datasource.remote.generation.GenerationRemoteDataSource
 import com.pokeapp.domain.model.generation.Generation
 import com.pokeapp.domain.repository.GenerationRepository
-import kotlinx.coroutines.flow.Flow
 
 /*
  * Created by Filipi Andrade Rocha on 18/01/2021.

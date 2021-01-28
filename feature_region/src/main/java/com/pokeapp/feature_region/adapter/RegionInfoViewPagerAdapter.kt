@@ -32,7 +32,7 @@ class RegionInfoViewPagerAdapter(supportFragmentManager: FragmentManager, contex
         return pages.size
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return pages[position].title
     }
 

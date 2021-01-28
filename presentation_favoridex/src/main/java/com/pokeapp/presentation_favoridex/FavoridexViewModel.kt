@@ -1,75 +1,76 @@
 package com.pokeapp.presentation_favoridex
 
 import androidx.lifecycle.ViewModel
+import com.pokeapp.base_presentation.mapper.generation.GenerationMapper
+import com.pokeapp.base_presentation.mapper.pokemon.PokemonInfoMapper
+import com.pokeapp.base_presentation.mapper.type.TypeMapper
+import com.pokeapp.base_presentation.model.favoridex.FavoridexBinding
+import com.pokeapp.base_presentation.utils.extensions.*
+import com.pokeapp.domain.usecase.generation.GetGenerationLocal
+import com.pokeapp.domain.usecase.pokedex.GetFavoridex
+import com.pokeapp.domain.usecase.type.GetTypeLocal
+import org.koin.core.KoinComponent
 
 /**
  * Created by Filipi Andrade on 31/03/2020
  */
-class FavoridexViewModel : ViewModel() {
 
-/*    private var mState = MutableLiveData<ViewState<MutableList<PokemonBinding>>>()
-    private var mStateByGeneration = MutableLiveData<ViewState<MutableList<PokemonBinding>>>()
-    private var mStateTypes = MutableLiveData<ViewState<MutableList<TypeBinding>>>()
-    private var mStateByType = MutableLiveData<ViewState<MutableList<PokemonBinding>>>()
+class FavoridexViewModel : ViewModel(), KoinComponent {
 
-    init {
-        mState.value = ViewState(data = null, state = State.LOADING)
-        mStateByGeneration.value = ViewState(data = null, state = State.LOADING)
-        mStateTypes.value = ViewState(data = null, state = State.LOADING)
-        mStateByType.value = ViewState(data = null, state = State.LOADING)
-    }*/
+    private val getTypeLocal: GetTypeLocal by useCase()
+    private val getGenerationLocal: GetGenerationLocal by useCase()
+    private val getFavoridex: GetFavoridex by useCase()
 
-    fun getFavouritePokemon() {
-       /* mState.postValue(ViewState.loading())
-        dataSource.getFavouritePokemon(
-                onSuccess = {
-                    mState.postValue(ViewState.success(it))
-                },
-                onFailure = {
-                    mState.postValue(ViewState.failure())
-                }
-        )*/
+    private val _fetchFavoridexViewState by viewState<FavoridexBinding>()
+
+    val fetchFavoridexViewState = _fetchFavoridexViewState.asLiveData()
+
+    fun getFavoridex() {
+        _fetchFavoridexViewState.postLoading()
+        getFavoridex(
+            onSuccess = {
+                val favoridex = FavoridexBinding(
+                    favoridex = PokemonInfoMapper.fromDomain(it ?: listOf())
+                )
+                getGenerations(favoridex)
+            },
+            onError = {
+                _fetchFavoridexViewState.postError(it)
+            }
+        )
     }
+
+    private fun getGenerations(favoridex: FavoridexBinding) {
+        getGenerationLocal(
+            onSuccess = {
+                favoridex.generation = GenerationMapper.fromDomain(it ?: listOf())
+                getTypes(favoridex)
+            },
+            onError = {
+                _fetchFavoridexViewState.postError(it)
+            }
+        )
+    }
+
+    private fun getTypes(favoridex: FavoridexBinding) {
+        getTypeLocal(
+            onSuccess = {
+                favoridex.type = TypeMapper.fromDomain(it ?: listOf())
+                _fetchFavoridexViewState.postSuccess(favoridex)
+            },
+            onError = {
+                _fetchFavoridexViewState.postError(it)
+            }
+        )
+    }
+
     fun getPokemonByGenenration(region: String) {
-        /*mStateByGeneration.postValue(ViewState.loading())
-        dataSource.getPokemonByGeneration(region,
-                onSuccess = {
-                    mStateByGeneration.postValue(ViewState.success(it))
-                },
-                onFailure = {
-                    mStateByGeneration.postValue(ViewState.failure())
-                }
-        )*/
-    }
-
-    fun getTypes() {
-        /*dataSource.getAllTypes(
-                onSuccess = {
-                    mStateTypes.postValue(ViewState.success(it))
-                },
-                onFailure = {
-                    mStateTypes.postValue(ViewState.failure())
-                }
-        )*/
     }
 
     fun getPokemonByType(type: String) {
-        /*mStateByType.postValue(ViewState.loading())
-        dataSource.getPokemonByType(type,
-                onSuccess = {
-                    mStateByType.postValue(ViewState.success(it))
-                },
-                onFailure = {
-                    mStateByType.postValue(ViewState.failure())
-                }
-        )*/
     }
 
-/*    fun getState(): LiveData<ViewState<MutableList<PokemonBinding>>> = mState
-
-    fun getStateByGeneration(): LiveData<ViewState<MutableList<PokemonBinding>>> = mStateByGeneration
-
-    fun getStateTypes(): LiveData<ViewState<MutableList<TypeBinding>>> = mStateTypes
-
-    fun getStateByType(): LiveData<ViewState<MutableList<PokemonBinding>>> = mStateByType*/
+    fun cleanValeus() {
+        _fetchFavoridexViewState.postNeutral()
+    }
 }

@@ -6,9 +6,12 @@ import com.pokeapp.base_presentation.mapper.pokemon.PokemonMapper
 import com.pokeapp.base_presentation.model.pokedex.PokedexBinding
 import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
 import com.pokeapp.base_presentation.utils.extensions.*
+import com.pokeapp.domain.model.pokedex.Pokedex
 import com.pokeapp.domain.usecase.generation.GetPokemonByGeneration
+import com.pokeapp.domain.usecase.generation.SaveGenerationLocal
 import com.pokeapp.domain.usecase.pokedex.GetPokedex
 import com.pokeapp.domain.usecase.type.GetPokemonByType
+import com.pokeapp.domain.usecase.type.SaveTypeLocal
 import org.koin.core.KoinComponent
 
 /**
@@ -20,6 +23,8 @@ class PokemonViewModel : ViewModel(), KoinComponent {
     private val getPokedex: GetPokedex by useCase()
     private val getPokemonByType: GetPokemonByType by useCase()
     private val getPokemonByGeneration: GetPokemonByGeneration by useCase()
+    private val saveTypeLocal: SaveTypeLocal by useCase()
+    private val saveGenerationLocal: SaveGenerationLocal by useCase()
 
     private val _fetchPokedexViewState by viewState<PokedexBinding>()
     private val _fetchPokedexByTypeTypeViewState by viewState<List<PokemonBinding>>()
@@ -33,8 +38,24 @@ class PokemonViewModel : ViewModel(), KoinComponent {
         if (previous == 0) _fetchPokedexViewState.postLoading()
         getPokedex(
             params = GetPokedex.Params(offset, previous),
-            onSuccess = { _fetchPokedexViewState.postSuccess(PokedexMapper.fromDomain(it)) },
+            onSuccess = { saveTypeLocal(it) },
             onError = { _fetchPokedexViewState.postError(it) }
+        )
+    }
+
+    private fun saveTypeLocal(pokedex: Pokedex) {
+        saveTypeLocal(
+            params = SaveTypeLocal.Params(pokedex.type),
+            onSuccess = { saveGenerationLocal(pokedex) },
+            onError = { _fetchPokedexViewState.postSuccess(PokedexMapper.fromDomain(pokedex)) }
+        )
+    }
+
+    private fun saveGenerationLocal(pokedex: Pokedex) {
+        saveGenerationLocal(
+            params = SaveGenerationLocal.Params(pokedex.generation),
+            onSuccess = { _fetchPokedexViewState.postSuccess(PokedexMapper.fromDomain(pokedex)) },
+            onError = { _fetchPokedexViewState.postSuccess(PokedexMapper.fromDomain(pokedex)) }
         )
     }
 
@@ -44,7 +65,7 @@ class PokemonViewModel : ViewModel(), KoinComponent {
             params = GetPokemonByGeneration.Params(id),
             onSuccess = {
                 _fetchPokedexByGenerationTypeViewState.postSuccess(
-                    PokemonMapper.listFromDomain(it)
+                    PokemonMapper.fromDomain(it)
                 )
             },
             onError = { _fetchPokedexByGenerationTypeViewState.postError(it) }
@@ -57,7 +78,7 @@ class PokemonViewModel : ViewModel(), KoinComponent {
             params = GetPokemonByType.Params(name),
             onSuccess = {
                 _fetchPokedexByTypeTypeViewState.postSuccess(
-                    PokemonMapper.listFromDomain(it)
+                    PokemonMapper.fromDomain(it)
                 )
             },
             onError = { _fetchPokedexByTypeTypeViewState.postError(it) }

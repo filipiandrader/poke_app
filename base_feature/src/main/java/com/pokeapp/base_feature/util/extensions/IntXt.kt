@@ -10,19 +10,6 @@ fun Int.formatPokemonNumber() = when (this) {
     else -> "#$this"
 }
 
-fun Int.getGenerationName(): String {
-    return when (this) {
-        1 -> "kanto"
-        2 -> "johto"
-        3 -> "hoenn"
-        4 -> "sinnoh"
-        5 -> "unova"
-        6 -> "kalos"
-        7 -> "alola"
-        else -> ""
-    }
-}
-
 fun Int.convertToMeter(): String {
     val meter = this / 10.0
     return "$meter m"

@@ -10,10 +10,6 @@ import com.pokeapp.domain.model.evolution.Evolution
 
 object EvolutionMapper : PresentationMapper<EvolutionBinding, Evolution> {
 
-    fun listToDomain(presentation: List<EvolutionBinding>) = presentation.map { toDomain(it) }
-
-    fun listFromDomain(domain: List<Evolution>) = domain.map { fromDomain(it) }
-
     override fun toDomain(presentation: EvolutionBinding) = Evolution(
         name = presentation.name,
         photo = presentation.photo
