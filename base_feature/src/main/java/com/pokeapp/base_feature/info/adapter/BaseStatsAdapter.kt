@@ -1,18 +1,18 @@
-package com.pokeapp.feature_favoridex.adapter
+package com.pokeapp.base_feature.info.adapter
 
 import android.view.View
+import com.pokeapp.base_feature.R
 import com.pokeapp.base_feature.core.BaseAdapter
 import com.pokeapp.base_feature.core.BaseViewHolder
 import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.stats.StatsBinding
-import com.pokeapp.feature_favoridex.R
 import kotlinx.android.synthetic.main.item_base_stats.view.*
 
 /*
  * Created by Filipi Andrade Rocha on 29/01/2021.
  */
 
-class BaseStatsAdapter(private val type: String) : BaseAdapter<StatsBinding, BaseStatsAdapter.BaseStatsViewHolder>() {
+class BaseStatsAdapter : BaseAdapter<StatsBinding, BaseStatsAdapter.BaseStatsViewHolder>() {
 
     override fun createViewHolderInstance(view: View) = BaseStatsViewHolder(view)
 
@@ -31,7 +31,7 @@ class BaseStatsAdapter(private val type: String) : BaseAdapter<StatsBinding, Bas
                     baseStatsTotalProgressBar.setVisible()
                     baseStatsProgressBar.setGone()
 
-                    val color = context.getPokemonColor(type)
+                    val color = context.convertColor(R.color.colorPrimaryText)
                     baseStatsTotalProgressBar.setColor(color)
                 } else {
                     baseStatsProgressBar.putProgress(item.baseStat)

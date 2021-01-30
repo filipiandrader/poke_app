@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/backgroundLight"
-    tools:context=".fragment.info.evolution.EvolutionFragment"
+    tools:context=".info.evolution.EvolutionFragment"
     tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout

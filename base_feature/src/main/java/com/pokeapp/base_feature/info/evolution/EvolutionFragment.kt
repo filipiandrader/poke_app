@@ -1,13 +1,13 @@
-package com.pokeapp.feature_favoridex.fragment.info.evolution
+package com.pokeapp.base_feature.info.evolution
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pokeapp.base_feature.core.BaseFragment
+import com.pokeapp.base_feature.databinding.FragmentEvolutionBinding
 import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
-import com.pokeapp.feature_favoridex.databinding.FragmentEvolutionBinding
 
 class EvolutionFragment : BaseFragment() {
 

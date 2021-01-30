@@ -1,25 +1,21 @@
-package com.pokeapp.feature_pokedex.fragment.info.abilities
+package com.pokeapp.base_feature.info.abilities
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.afollestad.recyclical.datasource.dataSourceOf
-import com.afollestad.recyclical.setup
-import com.afollestad.recyclical.withItem
 import com.pokeapp.base_feature.core.BaseFragment
-import com.pokeapp.base_feature.util.extensions.formatNameAbility
-import com.pokeapp.base_feature.util.extensions.putText
-import com.pokeapp.base_presentation.model.ability.AbilityBinding
+import com.pokeapp.base_feature.databinding.FragmentAbilitiesBinding
+import com.pokeapp.base_feature.info.adapter.AbilitiesAdapter
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
-import com.pokeapp.feature_pokedex.R
-import com.pokeapp.feature_pokedex.databinding.FragmentAbilitiesBinding
 
 class AbilitiesFragment : BaseFragment() {
 
     private lateinit var pokemon: PokemonInfoBinding
     private lateinit var binding: FragmentAbilitiesBinding
+
+    private val abilityAdapter = AbilitiesAdapter()
 
     companion object {
         @JvmStatic
@@ -39,16 +35,11 @@ class AbilitiesFragment : BaseFragment() {
 
     override fun setupView() {
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
-
         binding.apply {
-            abilitiesRecyclerView.setup {
-                withLayoutManager(GridLayoutManager(requireContext(), 2))
-                withDataSource(dataSourceOf(pokemon.abilities))
-                withItem<AbilityBinding, AbilityViewHolder>(R.layout.item_ability) {
-                    onBind(::AbilityViewHolder) { _, item ->
-                        this.itemAbilityTextView.putText(item.name.formatNameAbility())
-                    }
-                }
+            abilityAdapter.items = pokemon.abilities.toMutableList()
+            abilitiesRecyclerView.apply {
+                layoutManager = GridLayoutManager(requireContext(), 2)
+                adapter = abilityAdapter
             }
         }
     }

@@ -1,12 +1,12 @@
-package com.pokeapp.feature_favoridex.adapter
+package com.pokeapp.base_feature.info.adapter
 
 import android.view.View
+import com.pokeapp.base_feature.R
 import com.pokeapp.base_feature.core.BaseAdapter
 import com.pokeapp.base_feature.core.BaseViewHolder
 import com.pokeapp.base_feature.util.extensions.formatNameAbility
 import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_presentation.model.ability.AbilityBinding
-import com.pokeapp.feature_favoridex.R
 import kotlinx.android.synthetic.main.item_ability.view.*
 
 /*

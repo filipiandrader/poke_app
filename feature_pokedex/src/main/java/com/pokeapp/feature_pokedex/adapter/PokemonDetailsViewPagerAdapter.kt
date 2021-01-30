@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.pokeapp.base_feature.info.abilities.AbilitiesFragment
+import com.pokeapp.base_feature.info.about.AboutFragment
+import com.pokeapp.base_feature.info.basestats.BaseStatsFragment
+import com.pokeapp.base_feature.info.evolution.EvolutionFragment
+import com.pokeapp.base_feature.info.moves.MovesFragment
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.R
-import com.pokeapp.feature_pokedex.fragment.info.abilities.AbilitiesFragment
-import com.pokeapp.feature_pokedex.fragment.info.about.AboutFragment
-import com.pokeapp.feature_pokedex.fragment.info.basestats.BaseStatsFragment
-import com.pokeapp.feature_pokedex.fragment.info.evolution.EvolutionFragment
-import com.pokeapp.feature_pokedex.fragment.info.moves.MovesFragment
 
 /**
  * Created by Filipi Andrade on 30/03/2020

@@ -1,15 +1,15 @@
-package com.pokeapp.feature_pokedex.fragment.info.about
+package com.pokeapp.base_feature.info.about
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pokeapp.base_feature.core.BaseFragment
+import com.pokeapp.base_feature.databinding.FragmentAboutBinding
 import com.pokeapp.base_feature.util.extensions.convertToKilos
 import com.pokeapp.base_feature.util.extensions.convertToMeter
 import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
-import com.pokeapp.feature_pokedex.databinding.FragmentAboutBinding
 
 class AboutFragment : BaseFragment() {
 
