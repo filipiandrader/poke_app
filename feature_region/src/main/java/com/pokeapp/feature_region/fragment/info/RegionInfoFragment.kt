@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
+import com.pokeapp.base_feature.util.enums.GenerationEnum
 import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.region.RegionInfoBinding
 import com.pokeapp.feature_region.adapter.RegionInfoViewPagerAdapter
@@ -52,7 +53,7 @@ class RegionInfoFragment : BaseFragment() {
     private fun setupInfo(regionInfo: RegionInfoBinding) {
         binding.run {
             regionInfoNameTextView.putText(navigation.region.name.uppercase())
-            regionInfoGenerationTextView.putText(regionInfo.mainGeneration.formatGenerationName())
+            regionInfoGenerationTextView.putText(GenerationEnum.getName(requireContext(), regionInfo.mainGeneration))
             regionInfoGenerationTextView.setVisible()
 
             regionInfoViewPager.adapter = RegionInfoViewPagerAdapter(

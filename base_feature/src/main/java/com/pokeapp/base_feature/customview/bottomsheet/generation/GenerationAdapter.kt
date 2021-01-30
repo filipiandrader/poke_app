@@ -25,12 +25,8 @@ class GenerationAdapter(val clickListener: (generation: GenerationBinding) -> Un
 
         override fun bind(item: GenerationBinding) {
             view.apply {
-                val name = context.getString(GenerationEnum.getName(item.name))
-                itemGenerationNameTextView.putText(name)
-
-                val icon = GenerationEnum.getIcon(item.name)
-                itemGenerationPhotoImageView.setImageResource(icon)
-
+                itemGenerationNameTextView.putText(GenerationEnum.getName(context, item.name))
+                itemGenerationPhotoImageView.setImageResource(GenerationEnum.getIcon(item.name))
                 setOnClickListener { clickListener(item) }
             }
         }

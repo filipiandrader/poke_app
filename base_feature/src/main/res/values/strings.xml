@@ -47,5 +47,6 @@
     <string name="sixth_generation_name">6° Geração</string>
     <string name="seventh_generation_name">7° Geração</string>
     <string name="eighth_generation_name">8° Geração</string>
+    <string name="default_generation_name">Geração</string>
     <string name="empty_list_message">Não foi encontrado nenhum pokemon</string>
 </resources>

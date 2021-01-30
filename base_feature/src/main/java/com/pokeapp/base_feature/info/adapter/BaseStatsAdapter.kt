@@ -4,6 +4,8 @@ import android.view.View
 import com.pokeapp.base_feature.R
 import com.pokeapp.base_feature.core.BaseAdapter
 import com.pokeapp.base_feature.core.BaseViewHolder
+import com.pokeapp.base_feature.util.enums.BaseStatsEnum
+import com.pokeapp.base_feature.util.enums.BaseStatsEnum.TOTAL
 import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.stats.StatsBinding
 import kotlinx.android.synthetic.main.item_base_stats.view.*
@@ -22,11 +24,9 @@ class BaseStatsAdapter : BaseAdapter<StatsBinding, BaseStatsAdapter.BaseStatsVie
 
         override fun bind(item: StatsBinding) {
             view.apply {
-                baseStatsLabelTextView.putText(
-                    item.name.formatNameStats(context)
-                )
+                baseStatsLabelTextView.putText(BaseStatsEnum.getStats(context, item.name))
                 baseStatsTextView.putText("${item.baseStat}")
-                if (item.name == "total") {
+                if (item.name == TOTAL.stats) {
                     baseStatsTotalProgressBar.putProgress(item.baseStat)
                     baseStatsTotalProgressBar.setVisible()
                     baseStatsProgressBar.setGone()

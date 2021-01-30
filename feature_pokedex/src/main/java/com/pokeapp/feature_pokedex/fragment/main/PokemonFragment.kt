@@ -160,6 +160,12 @@ class PokemonFragment : BaseFragment() {
 
     override fun onStop() {
         super.onStop()
+        hasPagination = true
+        pokemon.clear()
+        type.clear()
+        generation.clear()
+        mOffset = 20
+        mPrevious = 0
         viewModel.cleanValues()
     }
 }
