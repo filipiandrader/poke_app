@@ -40,7 +40,7 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
-    <style name="PokeApp.Details.TextAppearance.Label" parent="TextAppearance.AppCompat">
+    <style name="PokeApp.Info.TextAppearance.Label" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">28sp</item>
@@ -49,7 +49,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="PokeApp.Details.TextAppearance.Label.ID" parent="TextAppearance.AppCompat">
+    <style name="PokeApp.Info.TextAppearance.Label.ID" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
@@ -60,7 +60,7 @@
         <item name="android:alpha">0.5</item>
     </style>
 
-    <style name="PokeApp.Details.TextAppearance.Label.Type" parent="TextAppearance.AppCompat">
+    <style name="PokeApp.Info.TextAppearance.Label.Type" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>

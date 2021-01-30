@@ -16,7 +16,7 @@ import com.pokeapp.feature_pokedex.R
  * Created by Filipi Andrade on 30/03/2020
  */
 
-class PokemonDetailsViewPagerAdapter(
+class PokemonInfoViewPagerAdapter(
     supportFragmentManager: FragmentManager,
     context: Context,
     private val pokemon: PokemonInfoBinding

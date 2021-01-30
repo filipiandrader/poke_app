@@ -8,11 +8,10 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundLight">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/pokemonDetailsAppBarLayout"
+            android:id="@+id/regionInfoAppBarLayout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/lightTeal"
@@ -21,17 +20,17 @@
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/pokemonDetailsCollapsingToolbarLayout"
+                android:id="@+id/regionInfoCollapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="@color/lightTeal"
                 app:layout_scrollFlags="noScroll"
                 app:titleEnabled="false"
-                app:toolbarId="@+id/pokemonDetailsToolbar">
+                app:toolbarId="@+id/regionInfoToolbar">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/pokemonDetailsToolbar"
+                    android:id="@+id/regionInfoToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="0dp"
@@ -58,19 +57,19 @@
                             tools:ignore="UnusedAttribute" />
 
                         <TextView
-                            android:id="@+id/regionDetailsNameTextView"
-                            style="@style/PokeApp.Details.TextAppearance.Label"
+                            android:id="@+id/regionInfoNameTextView"
+                            style="@style/PokeApp.Info.TextAppearance.Label"
                             android:layout_marginTop="4dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/navigationIconImageView"
                             tools:text="Titulo" />
 
                         <TextView
-                            android:id="@+id/regionDetailsGenerationTextView"
-                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            android:id="@+id/regionInfoGenerationTextView"
+                            style="@style/PokeApp.Info.TextAppearance.Label.Type"
                             android:visibility="gone"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/regionDetailsNameTextView"
+                            app:layout_constraintTop_toBottomOf="@+id/regionInfoNameTextView"
                             tools:text="1° Geração" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.appcompat.widget.Toolbar>
@@ -81,7 +80,7 @@
                     android:layout_gravity="bottom">
 
                     <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/regionDetailsTabLayout"
+                        android:id="@+id/regionInfoTabLayout"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:background="@drawable/rounded_top_border"
@@ -107,7 +106,6 @@
                             android:text="@string/region_details_tab_2" />
                     </com.google.android.material.tabs.TabLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -118,10 +116,9 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/regionDetailsViewPager"
+                android:id="@+id/regionInfoViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/backgroundLight" />
+                android:layout_height="wrap_content" />
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>

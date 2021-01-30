@@ -14,8 +14,7 @@ enum class GenerationEnum(val info: String) {
     GENERATION_V("generation-v"),
     GENERATION_VI("generation-vi"),
     GENERATION_VII("generation-vii"),
-    GENERATION_VIII("generation-viii"),
-    NONE("");
+    GENERATION_VIII("generation-viii");
 
     companion object {
 

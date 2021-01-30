@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:layout_margin="8dp"
-    android:background="@color/backgroundLight"
     app:cardCornerRadius="8dp"
     app:cardElevation="0dp"
     tools:ignore="Overdraw">

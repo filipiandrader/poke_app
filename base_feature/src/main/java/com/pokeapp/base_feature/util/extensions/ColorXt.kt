@@ -5,7 +5,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.pokeapp.base_feature.R
-import com.pokeapp.base_presentation.model.type.TypeBinding
 import java.util.*
 
 /**

@@ -11,7 +11,7 @@ import com.pokeapp.base_feature.util.enums.PokemonTypeEnum
 import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_pokedex.R
-import com.pokeapp.feature_pokedex.adapter.PokemonDetailsViewPagerAdapter
+import com.pokeapp.feature_pokedex.adapter.PokemonInfoViewPagerAdapter
 import com.pokeapp.feature_pokedex.databinding.FragmentPokemonInfoBinding
 import com.pokeapp.feature_pokedex.navigation.PokemonInfoNavigation
 import com.pokeapp.presentation_pokedex.info.PokemonInfoViewModel
@@ -87,7 +87,7 @@ class PokemonInfoFragment : BaseFragment() {
         pokemonInfo = pokemon
         binding.apply {
             pokemonInfoViewPager.adapter =
-                PokemonDetailsViewPagerAdapter(
+                PokemonInfoViewPagerAdapter(
                     requireActivity().supportFragmentManager,
                     requireContext(),
                     pokemon

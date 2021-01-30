@@ -59,7 +59,7 @@
 
                         <TextView
                             android:id="@+id/pokemonInfoNameTextView"
-                            style="@style/PokeApp.Details.TextAppearance.Label"
+                            style="@style/PokeApp.Info.TextAppearance.Label"
                             android:layout_marginTop="4dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/navigationIconImageView"
@@ -78,7 +78,7 @@
 
                         <TextView
                             android:id="@+id/pokemonInfoIDTextView"
-                            style="@style/PokeApp.Details.TextAppearance.Label.ID"
+                            style="@style/PokeApp.Info.TextAppearance.Label.ID"
                             app:layout_constraintBottom_toBottomOf="@+id/pokemonInfoType3TextView"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/pokemonInfoLikedImageView"
@@ -86,7 +86,7 @@
 
                         <TextView
                             android:id="@+id/pokemonInfoType1TextView"
-                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            style="@style/PokeApp.Info.TextAppearance.Label.Type"
                             android:layout_marginTop="2dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/pokemonInfoNameTextView"
@@ -94,7 +94,7 @@
 
                         <TextView
                             android:id="@+id/pokemonInfoType2TextView"
-                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            style="@style/PokeApp.Info.TextAppearance.Label.Type"
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="2dp"
                             app:layout_constraintStart_toEndOf="@+id/pokemonInfoType1TextView"
@@ -103,7 +103,7 @@
 
                         <TextView
                             android:id="@+id/pokemonInfoType3TextView"
-                            style="@style/PokeApp.Details.TextAppearance.Label.Type"
+                            style="@style/PokeApp.Info.TextAppearance.Label.Type"
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="2dp"
                             app:layout_constraintStart_toEndOf="@+id/pokemonInfoType2TextView"
@@ -219,7 +219,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundLight"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -231,7 +230,6 @@
                 android:id="@+id/pokemonInfoViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/backgroundLight"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

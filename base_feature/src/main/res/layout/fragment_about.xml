@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundLight"
     tools:context=".info.about.AboutFragment"
     tools:ignore="Overdraw">
 
@@ -124,7 +123,5 @@
             app:layout_constraintStart_toEndOf="@+id/aboutBaseExpLabelTextView"
             app:layout_constraintTop_toTopOf="@+id/aboutBaseExpLabelTextView"
             tools:text="65" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

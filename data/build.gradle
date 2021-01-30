@@ -9,6 +9,3 @@ compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
     kotlinOptions.freeCompilerArgs = ["-Xallow-result-return-type"]
 }
-
-sourceCompatibility = "8"
-targetCompatibility = "8"

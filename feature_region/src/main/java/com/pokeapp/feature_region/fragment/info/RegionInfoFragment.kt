@@ -33,8 +33,8 @@ class RegionInfoFragment : BaseFragment() {
 
     override fun setupView() {
         binding.run {
-            pokemonDetailsAppBarLayout.setBackgroundColor(getColor())
-            pokemonDetailsCollapsingToolbarLayout.setColorFilter(getColor())
+            regionInfoAppBarLayout.setBackgroundColor(getColor())
+            regionInfoCollapsingToolbarLayout.setColorFilter(getColor())
             navigationIconImageView.setOnClickListener { navigation.navigateToRegion() }
         }
 
@@ -51,16 +51,16 @@ class RegionInfoFragment : BaseFragment() {
 
     private fun setupInfo(regionInfo: RegionInfoBinding) {
         binding.run {
-            regionDetailsNameTextView.putText(navigation.region.name.uppercase())
-            regionDetailsGenerationTextView.putText(regionInfo.mainGeneration.formatGenerationName())
-            regionDetailsGenerationTextView.setVisible()
+            regionInfoNameTextView.putText(navigation.region.name.uppercase())
+            regionInfoGenerationTextView.putText(regionInfo.mainGeneration.formatGenerationName())
+            regionInfoGenerationTextView.setVisible()
 
-            regionDetailsViewPager.adapter = RegionInfoViewPagerAdapter(
+            regionInfoViewPager.adapter = RegionInfoViewPagerAdapter(
                 requireActivity().supportFragmentManager,
                 requireContext(),
                 regionInfo
             )
-            regionDetailsTabLayout.setupWithViewPager(regionDetailsViewPager)
+            regionInfoTabLayout.setupWithViewPager(regionInfoViewPager)
         }
     }
 

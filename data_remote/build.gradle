@@ -13,6 +13,3 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
-
-sourceCompatibility = "8"
-targetCompatibility = "8"

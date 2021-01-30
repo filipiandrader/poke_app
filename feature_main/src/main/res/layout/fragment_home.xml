@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundLight"
     android:fitsSystemWindows="true"
     tools:context=".fragment.home.HomeFragment"
     tools:ignore="Overdraw">
@@ -34,8 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:background="@color/backgroundLight" />
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
     <com.google.android.material.appbar.AppBarLayout

@@ -11,8 +11,8 @@
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_region">
         <action
-            android:id="@+id/action_regionFragment_to_regionDetailsFragment"
-            app:destination="@id/regionDetailsFragment"
+            android:id="@+id/action_regionFragment_to_regionInfoFragment"
+            app:destination="@id/regionInfoFragment"
             app:enterAnim="@anim/nav_slide_enter_anim"
             app:exitAnim="@anim/nav_slide_exit_anim"
             app:launchSingleTop="true"
@@ -21,7 +21,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/regionDetailsFragment"
+        android:id="@+id/regionInfoFragment"
         android:name="com.pokeapp.feature_region.fragment.info.RegionInfoFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_region_info" >

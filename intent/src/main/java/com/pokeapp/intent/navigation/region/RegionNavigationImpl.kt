@@ -14,7 +14,7 @@ import com.pokeapp.intent.util.navigate
 class RegionNavigationImpl(private val fragment: Fragment) : RegionNavigation {
 
     override fun navigateToInfo(region: RegionBinding) = fragment.navigate(
-        RegionFragmentDirections.actionRegionFragmentToRegionDetailsFragment(region)
+        RegionFragmentDirections.actionRegionFragmentToRegionInfoFragment(region)
     )
 
     override fun navigateToHome() {

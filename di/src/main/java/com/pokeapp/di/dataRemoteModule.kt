@@ -15,7 +15,6 @@ import com.pokeapp.data_remote.service.type.TypeService
 import com.pokeapp.data_remote.utils.RequestWrapper
 import com.pokeapp.data_remote.utils.RequestWrapperImpl
 import com.pokeapp.data_remote.utils.WebServiceFactory
-import okhttp3.OkHttpClient
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
