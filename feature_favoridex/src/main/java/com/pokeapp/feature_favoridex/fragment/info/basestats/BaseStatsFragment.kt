@@ -12,12 +12,14 @@ import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.base_presentation.model.stats.StatsBinding
 import com.pokeapp.feature_favoridex.R
+import com.pokeapp.feature_favoridex.adapter.BaseStatsAdapter
 import com.pokeapp.feature_favoridex.databinding.FragmentBaseStatsBinding
 
 class BaseStatsFragment : BaseFragment() {
 
     private lateinit var pokemon: PokemonInfoBinding
     private lateinit var binding: FragmentBaseStatsBinding
+    private lateinit var baseStatsAdapter: BaseStatsAdapter
 
     companion object {
         @JvmStatic
@@ -37,36 +39,10 @@ class BaseStatsFragment : BaseFragment() {
 
     override fun setupView() {
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
-        setupRecyclerView(pokemon.stats)
-    }
-
-    private fun setupRecyclerView(stats: List<StatsBinding>) {
-        if (stats.isNotEmpty()) {
-            binding.apply {
-                baseStatsRecyclerView.setup {
-                    withDataSource(dataSourceOf(stats))
-                    withItem<StatsBinding, BaseStatsViewHolder>(R.layout.item_base_stats) {
-                        onBind(::BaseStatsViewHolder) { _, item ->
-                            this.baseStatsLabelTextView.putText(
-                                item.name.formatNameStats(requireContext())
-                            )
-                            this.baseStatsTextView.putText("${item.baseStat}")
-                            if (item.name == "total") {
-                                this.baseStatsTotalProgressBar.putProgress(item.baseStat)
-                                this.baseStatsTotalProgressBar.setVisible()
-                                this.baseStatsProgressBar.setGone()
-
-                                val color = requireContext().getPokemonColor(pokemon.types[0].name)
-                                this.baseStatsTotalProgressBar.setColor(color)
-                            } else {
-                                this.baseStatsProgressBar.putProgress(item.baseStat)
-                                this.baseStatsProgressBar.setVisible()
-                                this.baseStatsTotalProgressBar.setGone()
-                            }
-                        }
-                    }
-                }
-            }
+        binding.apply {
+            baseStatsAdapter = BaseStatsAdapter(pokemon.types[0].name)
+            baseStatsAdapter.items = pokemon.stats.toMutableList()
+            baseStatsRecyclerView.adapter = baseStatsAdapter
         }
     }
 }

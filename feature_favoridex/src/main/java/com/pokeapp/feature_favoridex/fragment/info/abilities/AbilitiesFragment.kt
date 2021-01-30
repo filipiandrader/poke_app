@@ -14,12 +14,15 @@ import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_presentation.model.ability.AbilityBinding
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_favoridex.R
+import com.pokeapp.feature_favoridex.adapter.AbilitiesAdapter
 import com.pokeapp.feature_favoridex.databinding.FragmentAbilitiesBinding
 
 class AbilitiesFragment : BaseFragment() {
 
     private lateinit var pokemon: PokemonInfoBinding
     private lateinit var binding: FragmentAbilitiesBinding
+
+    private val abilityAdapter = AbilitiesAdapter()
 
     companion object {
         @JvmStatic
@@ -39,16 +42,11 @@ class AbilitiesFragment : BaseFragment() {
 
     override fun setupView() {
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
-
         binding.apply {
-            abilitiesRecyclerView.setup {
-                withLayoutManager(GridLayoutManager(requireContext(), 2))
-                withDataSource(dataSourceOf(pokemon.abilities))
-                withItem<AbilityBinding, AbilityViewHolder>(R.layout.item_ability) {
-                    onBind(::AbilityViewHolder) { _, item ->
-                        this.itemAbilityTextView.putText(item.name.formatNameAbility())
-                    }
-                }
+            abilityAdapter.items = pokemon.abilities.toMutableList()
+            abilitiesRecyclerView.apply {
+                layoutManager = GridLayoutManager(requireContext(), 2)
+                adapter = abilityAdapter
             }
         }
     }

@@ -14,12 +14,14 @@ import com.pokeapp.base_feature.util.extensions.putText
 import com.pokeapp.base_presentation.model.move.MoveBinding
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.feature_favoridex.R
+import com.pokeapp.feature_favoridex.adapter.MovesAdapter
 import com.pokeapp.feature_favoridex.databinding.FragmentMovesBinding
 
 class MovesFragment : BaseFragment() {
 
     private lateinit var pokemon: PokemonInfoBinding
     private lateinit var binding: FragmentMovesBinding
+    private val movesAdapter = MovesAdapter()
 
     companion object {
         @JvmStatic
@@ -39,16 +41,11 @@ class MovesFragment : BaseFragment() {
 
     override fun setupView() {
         pokemon = checkNotNull(arguments?.getParcelable("pokemon"))
-
         binding.apply {
-            movesRecyclerView.setup {
-                withLayoutManager(GridLayoutManager(requireContext(), 2))
-                withDataSource(dataSourceOf(pokemon.moves))
-                withItem<MoveBinding, MovesViewHolder>(R.layout.item_moves) {
-                    onBind(::MovesViewHolder) { _, item ->
-                        this.itemMoveTextView.putText(item.name.formatNameMove())
-                    }
-                }
+            movesAdapter.items = pokemon.moves.toMutableList()
+            movesRecyclerView.apply {
+                layoutManager = GridLayoutManager(requireContext(), 2)
+                adapter = movesAdapter
             }
         }
     }
