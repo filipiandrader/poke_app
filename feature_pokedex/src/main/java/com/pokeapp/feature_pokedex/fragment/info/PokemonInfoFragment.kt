@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
@@ -16,7 +15,6 @@ import com.pokeapp.feature_pokedex.adapter.PokemonDetailsViewPagerAdapter
 import com.pokeapp.feature_pokedex.databinding.FragmentPokemonInfoBinding
 import com.pokeapp.feature_pokedex.navigation.PokemonInfoNavigation
 import com.pokeapp.presentation_pokedex.info.PokemonInfoViewModel
-import kotlinx.android.synthetic.main.fragment_pokemon_info.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -44,39 +42,33 @@ class PokemonInfoFragment : BaseFragment() {
         binding.apply {
             navigationIconImageView.setOnClickListener { navigation.navigateToPokedex() }
 
-            pokemonDetailsAppBarLayout.setBackgroundColor(getColor())
-            pokemonDetailsCollapsingToolbarLayout.setColorFilter(getColor())
-            activity?.window?.statusBarColor = getColor()
+            pokemonInfoAppBarLayout.setBackgroundColor(getColor())
+            pokemonInfoCollapsingToolbarLayout.setColorFilter(getColor())
 
-            setFavouriteIconCorrectly(navigation.pokemon.liked)
+            setupLikeIcon(navigation.pokemon.liked)
 
-            pokemonDetailsNameTextView.putText(navigation.pokemon.name.formatPokemonName())
-            pokemonDetailsIDTextView.putText(navigation.pokemon.id.formatPokemonNumber())
+            pokemonInfoNameTextView.putText(navigation.pokemon.name.formatPokemonName())
+            pokemonInfoIDTextView.putText(navigation.pokemon.id.formatPokemonNumber())
 
-            pokemonDetailsNormalImageView.loadUrl(navigation.pokemon.photo)
-            pokemonDetailsShinyImageView.loadUrl(navigation.pokemon.photoShiny)
+            pokemonInfoNormalImageView.loadUrl(navigation.pokemon.photo)
+            pokemonInfoShinyImageView.loadUrl(navigation.pokemon.photoShiny)
 
             navigation.pokemon.types.getOrNull(0).let { firstType ->
-                pokemonDetailsType3TextView.putText(PokemonTypeEnum.match(firstType?.name))
-                pokemonDetailsType3TextView.setVisible(firstType != null)
+                pokemonInfoType3TextView.putText(PokemonTypeEnum.match(firstType?.name))
+                pokemonInfoType3TextView.setVisible(firstType != null)
             }
 
             navigation.pokemon.types.getOrNull(1).let { secondType ->
-                pokemonDetailsType2TextView.putText(PokemonTypeEnum.match(secondType?.name))
-                pokemonDetailsType2TextView.setVisible(secondType != null)
+                pokemonInfoType2TextView.putText(PokemonTypeEnum.match(secondType?.name))
+                pokemonInfoType2TextView.setVisible(secondType != null)
             }
 
             navigation.pokemon.types.getOrNull(2).let { thirdType ->
-                pokemonDetailsType1TextView.putText(PokemonTypeEnum.match(thirdType?.name))
-                pokemonDetailsType1TextView.setVisible(thirdType != null)
+                pokemonInfoType1TextView.putText(PokemonTypeEnum.match(thirdType?.name))
+                pokemonInfoType1TextView.setVisible(thirdType != null)
             }
 
-            pokemonDetailsFavouriteImageView.setOnClickListener { doLikePokemon() }
-
-            pokemonDetailsSwipeRefreshLayout.setOnRefreshListener {
-                pokemonDetailsSwipeRefreshLayout.setRefresh(true)
-                viewModel.getPokemonInfo(navigation.pokemon.id)
-            }
+            pokemonInfoLikedImageView.setOnClickListener { viewModel.doLikePokemon(pokemonInfo) }
         }
     }
 
@@ -87,46 +79,33 @@ class PokemonInfoFragment : BaseFragment() {
 
         viewModel.fetchLikePokemonViewState.onPostValue(owner) {
             pokemonInfo.liked = !pokemonInfo.liked
-            setFavouriteIconCorrectly(pokemonInfo.liked)
+            setupLikeIcon(pokemonInfo.liked)
         }
     }
 
     private fun setupInfo(pokemon: PokemonInfoBinding) {
         pokemonInfo = pokemon
-
         binding.apply {
-            pokemonDetailsViewPager.adapter =
+            pokemonInfoViewPager.adapter =
                 PokemonDetailsViewPagerAdapter(
                     requireActivity().supportFragmentManager,
                     requireContext(),
                     pokemon
                 )
-            pokemonDetailsTabLayout.setupWithViewPager(pokemonDetailsViewPager)
-
-            pokemonDetailsProgressBar.setGone()
-            pokemonDetailsViewPager.setVisible()
+            pokemonInfoTabLayout.setupWithViewPager(pokemonInfoViewPager)
+            pokemonInfoViewPager.setVisible()
         }
     }
 
-    private fun setFavouriteIconCorrectly(liked: Boolean) {
+    private fun setupLikeIcon(liked: Boolean) {
         if (liked) {
-            pokemonDetailsFavouriteImageView.setImageDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_favourite
-                )
+            binding.pokemonInfoLikedImageView.setImageDrawable(
+                getDrawableRes(R.drawable.ic_favourite)
             )
         } else {
-            pokemonDetailsFavouriteImageView.setImageDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_not_favourite
-                )
+            binding.pokemonInfoLikedImageView.setImageDrawable(
+                getDrawableRes(R.drawable.ic_not_favourite)
             )
         }
-    }
-
-    private fun doLikePokemon() {
-        viewModel.doLikePokemon(pokemonInfo)
     }
 }

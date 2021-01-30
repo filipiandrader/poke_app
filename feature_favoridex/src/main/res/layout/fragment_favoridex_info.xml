@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.info.PokemonInfoFragment">
+    tools:context=".fragment.info.FavoridexInfoFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/pokemonInfoAppBarLayout"
+        android:id="@+id/favoridexInfoAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/lightTeal"
@@ -15,20 +15,20 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/pokemonInfoCollapsingToolbarLayout"
+            android:id="@+id/favoridexInfoCollapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/lightTeal"
             app:layout_scrollFlags="noScroll"
             app:titleEnabled="false"
-            app:toolbarId="@+id/pokemonInfoToolbar">
+            app:toolbarId="@+id/favoridexInfoToolbar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/pokemonInfoToolbar"
+                    android:id="@+id/favoridexInfoToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="0dp"
@@ -58,7 +58,7 @@
                             tools:ignore="UnusedAttribute" />
 
                         <TextView
-                            android:id="@+id/pokemonInfoNameTextView"
+                            android:id="@+id/favoridexInfoNameTextView"
                             style="@style/PokeApp.Details.TextAppearance.Label"
                             android:layout_marginTop="4dp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -66,48 +66,48 @@
                             tools:text="Titulo" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/pokemonInfoLikedImageView"
+                            android:id="@+id/favoridexInfoLikedImageView"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:contentDescription="@string/app_name"
                             android:src="@drawable/ic_not_favourite"
                             app:layout_constraintBottom_toBottomOf="@+id/navigationIconImageView"
-                            app:layout_constraintEnd_toEndOf="@+id/pokemonInfoIDTextView"
-                            app:layout_constraintStart_toStartOf="@+id/pokemonInfoIDTextView"
+                            app:layout_constraintEnd_toEndOf="@+id/favoridexInfoIDTextView"
+                            app:layout_constraintStart_toStartOf="@+id/favoridexInfoIDTextView"
                             app:layout_constraintTop_toTopOf="@+id/navigationIconImageView" />
 
                         <TextView
-                            android:id="@+id/pokemonInfoIDTextView"
+                            android:id="@+id/favoridexInfoIDTextView"
                             style="@style/PokeApp.Details.TextAppearance.Label.ID"
-                            app:layout_constraintBottom_toBottomOf="@+id/pokemonInfoType3TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/favoridexInfoType3TextView"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/pokemonInfoLikedImageView"
+                            app:layout_constraintTop_toBottomOf="@+id/favoridexInfoLikedImageView"
                             tools:text="#001" />
 
                         <TextView
-                            android:id="@+id/pokemonInfoType1TextView"
+                            android:id="@+id/favoridexInfoType1TextView"
                             style="@style/PokeApp.Details.TextAppearance.Label.Type"
                             android:layout_marginTop="2dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/pokemonInfoNameTextView"
+                            app:layout_constraintTop_toBottomOf="@+id/favoridexInfoNameTextView"
                             tools:text="Grass" />
 
                         <TextView
-                            android:id="@+id/pokemonInfoType2TextView"
+                            android:id="@+id/favoridexInfoType2TextView"
                             style="@style/PokeApp.Details.TextAppearance.Label.Type"
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="2dp"
-                            app:layout_constraintStart_toEndOf="@+id/pokemonInfoType1TextView"
-                            app:layout_constraintTop_toBottomOf="@+id/pokemonInfoNameTextView"
+                            app:layout_constraintStart_toEndOf="@+id/favoridexInfoType1TextView"
+                            app:layout_constraintTop_toBottomOf="@+id/favoridexInfoNameTextView"
                             tools:text="Grass" />
 
                         <TextView
-                            android:id="@+id/pokemonInfoType3TextView"
+                            android:id="@+id/favoridexInfoType3TextView"
                             style="@style/PokeApp.Details.TextAppearance.Label.Type"
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="2dp"
-                            app:layout_constraintStart_toEndOf="@+id/pokemonInfoType2TextView"
-                            app:layout_constraintTop_toBottomOf="@+id/pokemonInfoNameTextView"
+                            app:layout_constraintStart_toEndOf="@+id/favoridexInfoType2TextView"
+                            app:layout_constraintTop_toBottomOf="@+id/favoridexInfoNameTextView"
                             tools:text="Grass" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.appcompat.widget.Toolbar>
@@ -124,10 +124,10 @@
                     android:tint="@color/colorDivider"
                     app:layout_constraintEnd_toStartOf="@+id/evolutionImageView2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pokemonInfoToolbar" />
+                    app:layout_constraintTop_toBottomOf="@+id/favoridexInfoToolbar" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/pokemonInfoNormalImageView"
+                    android:id="@+id/favoridexInfoNormalImageView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:adjustViewBounds="true"
@@ -153,7 +153,7 @@
                     app:layout_constraintTop_toTopOf="@+id/evolutionImageView1" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/pokemonInfoShinyImageView"
+                    android:id="@+id/favoridexInfoShinyImageView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:adjustViewBounds="true"
@@ -166,13 +166,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/pokemonInfoConstraintLayout"
+                android:id="@+id/favoridexInfoConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom">
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/pokemonInfoTabLayout"
+                    android:id="@+id/favoridexInfoTabLayout"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@drawable/rounded_top_border"
@@ -212,7 +212,6 @@
                         android:text="@string/pokemon_details_tab_5" />
                 </com.google.android.material.tabs.TabLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -228,7 +227,7 @@
             android:layout_height="match_parent">
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/pokemonInfoViewPager"
+                android:id="@+id/favoridexInfoViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@color/backgroundLight"
@@ -237,6 +236,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/favoridexInfoProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/favoridexInfoErrorTextView"
+                style="@style/PokeApp.TextAppearance.Label"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Erro!" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

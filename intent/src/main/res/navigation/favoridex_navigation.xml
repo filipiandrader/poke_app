@@ -9,5 +9,21 @@
         android:id="@+id/favoridexFragment"
         android:name="com.pokeapp.feature_favoridex.fragment.main.FavoridexFragment"
         android:label="@string/fragment_no_title"
-        tools:layout="@layout/fragment_favoridex" />
+        tools:layout="@layout/fragment_favoridex" >
+
+        <action
+            android:id="@+id/action_favoridexFragment_to_favoridexInfoFragment"
+            app:destination="@id/favoridexInfoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoridexInfoFragment"
+        android:name="com.pokeapp.feature_favoridex.fragment.info.FavoridexInfoFragment"
+        android:label="@string/fragment_no_title"
+        tools:layout="@layout/fragment_favoridex_info">
+
+        <argument
+            android:name="pokemon"
+            app:argType="com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding" />
+    </fragment>
 </navigation>

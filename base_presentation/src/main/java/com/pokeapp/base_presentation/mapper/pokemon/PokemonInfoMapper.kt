@@ -29,7 +29,8 @@ object PokemonInfoMapper : PresentationMapper<PokemonInfoBinding, PokemonInfo> {
         abilities = AbilityMapper.toDomain(presentation.abilities),
         moves = MoveMapper.toDomain(presentation.moves),
         stats = StatsMapper.toDomain(presentation.stats),
-        evolution = EvolutionMapper.toDomain(presentation.evolution)
+        evolution = EvolutionMapper.toDomain(presentation.evolution),
+        liked = presentation.liked
     )
 
     override fun fromDomain(domain: PokemonInfo) = PokemonInfoBinding(
@@ -46,6 +47,7 @@ object PokemonInfoMapper : PresentationMapper<PokemonInfoBinding, PokemonInfo> {
         abilities = AbilityMapper.fromDomain(domain.abilities),
         moves = MoveMapper.fromDomain(domain.moves),
         stats = StatsMapper.fromDomain(domain.stats),
-        evolution = EvolutionMapper.fromDomain(domain.evolution)
+        evolution = EvolutionMapper.fromDomain(domain.evolution),
+        liked = domain.liked
     )
 }

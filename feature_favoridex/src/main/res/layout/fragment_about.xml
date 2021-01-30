@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundLight"
+    tools:context=".fragment.info.about.AboutFragment"
+    tools:ignore="Overdraw">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.codesgood.views.JustifiedTextView
+            android:id="@+id/aboutDescriptionTextView"
+            style="@style/PokeApp.About.TextAppearance.Info"
+            android:layout_margin="16dp"
+            android:textColor="@color/colorSecondaryText"
+            app:barrierAllowsGoneWidgets="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_optimizationLevel="groups"
+            tools:text="Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun’s rays, the seed grows progressively larger." />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/aboutCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aboutDescriptionTextView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/aboutHeightLabelTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_height_label"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/aboutHeightTextView"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/aboutHeightTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/aboutHeightLabelTextView"
+                        tools:text="2,3.5 (0.70 cm)" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/aboutWeightLabelTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_weight_label"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/aboutWeightTextView"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/aboutWeightTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/aboutWeightLabelTextView"
+                        tools:text="15.2 lbs (6.9kg)" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/aboutTrainingLabelTextView"
+            style="@style/PokeApp.About.TextAppearance.Label"
+            android:text="@string/about_training_label"
+            app:layout_constraintStart_toStartOf="@+id/aboutCardView"
+            app:layout_constraintTop_toBottomOf="@+id/aboutCardView" />
+
+        <TextView
+            android:id="@+id/aboutBaseExpLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_base_experience_label"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/aboutCardView"
+            app:layout_constraintTop_toBottomOf="@+id/aboutTrainingLabelTextView" />
+
+        <TextView
+            android:id="@+id/aboutBaseExpTextView"
+            style="@style/PokeApp.About.TextAppearance.Info"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutBaseExpLabelTextView"
+            app:layout_constraintEnd_toEndOf="@+id/aboutCardView"
+            app:layout_constraintStart_toEndOf="@+id/aboutBaseExpLabelTextView"
+            app:layout_constraintTop_toTopOf="@+id/aboutBaseExpLabelTextView"
+            tools:text="65" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
