@@ -8,7 +8,7 @@
     tools:context=".fragment.main.FavoridexFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/favouriteImageView"
+        android:id="@+id/favoridexImageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="end"
@@ -35,7 +35,7 @@
             app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/favouriteToolbar"
+                android:id="@+id/favoridexToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom|end"
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="@string/toolbar_favourite_title"
+                        android:text="@string/toolbar_favoridex_title"
                         android:textColor="@color/black"
                         android:textSize="28sp"
                         android:textStyle="bold"
@@ -81,7 +81,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/favouriteRecyclerView"
+            android:id="@+id/favoridexRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scrollbars="vertical"
@@ -92,8 +92,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.pokeapp.base_feature.customview.emptylist.PlaceholderEmptyList
+            android:id="@+id/favoridexPlaceholderEmptyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/favouriteMenuFAM"
+            android:id="@+id/favoridexMenuFAM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -114,7 +124,7 @@
             app:menu_showShadow="true">
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/favouriteAllFAB"
+                android:id="@+id/favoridexAllFAB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_pokeball_white"
@@ -125,7 +135,7 @@
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/favouriteByGenFAB"
+                android:id="@+id/favoridexByGenFAB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_by_generation"
@@ -136,7 +146,7 @@
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/favouriteByTypeFAB"
+                android:id="@+id/favoridexByTypeFAB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_by_type"

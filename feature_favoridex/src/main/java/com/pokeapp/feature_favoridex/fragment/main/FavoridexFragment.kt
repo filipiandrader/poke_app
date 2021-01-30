@@ -7,19 +7,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afollestad.recyclical.datasource.dataSourceOf
-import com.afollestad.recyclical.setup
-import com.afollestad.recyclical.withItem
 import com.pokeapp.base_feature.core.BaseFragment
 import com.pokeapp.base_feature.customview.bottomsheet.generation.GenerationBottomSheet
 import com.pokeapp.base_feature.customview.bottomsheet.type.TypeBottomSheet
 import com.pokeapp.base_feature.util.delegateproperties.navDirections
 import com.pokeapp.base_feature.util.extensions.*
 import com.pokeapp.base_presentation.model.generation.GenerationBinding
-import com.pokeapp.base_presentation.model.pokemon.PokemonBinding
 import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 import com.pokeapp.base_presentation.model.type.TypeBinding
 import com.pokeapp.feature_favoridex.R
+import com.pokeapp.feature_favoridex.adapter.FavoridexAdapter
 import com.pokeapp.feature_favoridex.databinding.FragmentFavoridexBinding
 import com.pokeapp.feature_favoridex.navigation.main.FavoridexNavigation
 import com.pokeapp.presentation_favoridex.FavoridexViewModel
@@ -31,6 +28,7 @@ class FavoridexFragment : BaseFragment() {
     private val navigation: FavoridexNavigation by navDirections()
 
     private lateinit var binding: FragmentFavoridexBinding
+    private lateinit var favoridexAdapter: FavoridexAdapter
 
     private var generation = mutableListOf<GenerationBinding>()
     private var type = mutableListOf<TypeBinding>()
@@ -50,43 +48,59 @@ class FavoridexFragment : BaseFragment() {
 
         val pokeballDrawable = getDrawableRes(R.drawable.ic_pokeball)
         val closeDrawable = getDrawableRes(R.drawable.ic_close)
-        binding.favouriteMenuFAM.createCustomAnimation(pokeballDrawable, closeDrawable)
-        binding.favouriteAllFAB.setOnClickListener {
-            binding.favouriteMenuFAM.close(true)
+        binding.favoridexMenuFAM.createCustomAnimation(pokeballDrawable, closeDrawable)
+        binding.favoridexAllFAB.setOnClickListener {
+            binding.favoridexMenuFAM.close(true)
             viewModel.getFavoridex()
         }
-        binding.favouriteByGenFAB.setOnClickListener { showBottomSheetGeneration() }
-        binding.favouriteByTypeFAB.setOnClickListener { showBottomSheetType() }
+        binding.favoridexByGenFAB.setOnClickListener { showBottomSheetGeneration() }
+        binding.favoridexByTypeFAB.setOnClickListener { showBottomSheetType() }
         binding.navigationIconImageView.setOnClickListener { navigation.navigateToHome() }
     }
 
     override fun addObservers(owner: LifecycleOwner) {
         viewModel.fetchFavoridexViewState.onPostValue(owner) {
             if (it.favoridex.isEmpty()) {
+                binding.favoridexMenuFAM.setGone()
                 emptyList()
             } else {
                 type = it.type.toMutableList()
                 generation = it.generation.toMutableList()
-                binding.favouriteMenuFAM.setVisible()
-                binding.favouriteRecyclerView.setVisible()
+                setupRecyclerView(it.favoridex)
+            }
+        }
+
+        viewModel.fetchFavoridexByTypeViewState.onPostValue(owner) {
+            if (it.isEmpty()) {
+                emptyList()
+            } else {
+                setupRecyclerView(it)
+            }
+        }
+
+        viewModel.fetchFavoridexByGenerationViewState.onPostValue(owner) {
+            if (it.isEmpty()) {
+                emptyList()
+            } else {
+                setupRecyclerView(it)
             }
         }
     }
 
     private fun emptyList() {
-        binding.favouriteMenuFAM.setGone()
-        binding.favouriteRecyclerView.setGone()
+        binding.favoridexPlaceholderEmptyList.setVisible()
+        binding.favoridexRecyclerView.setGone()
     }
 
     private fun showBottomSheetGeneration() {
-        binding.favouriteMenuFAM.close(true)
+        binding.favoridexMenuFAM.close(true)
         GenerationBottomSheet(requireParentFragment(), generation).show {
             viewModel.getPokemonByGenenration(it.region)
         }
     }
 
     private fun showBottomSheetType() {
-        binding.favouriteMenuFAM.close(true)
+        binding.favoridexMenuFAM.close(true)
         TypeBottomSheet(requireParentFragment(), type).show {
             viewModel.getPokemonByType(it.name)
         }
@@ -98,78 +112,17 @@ class FavoridexFragment : BaseFragment() {
         } else {
             GridLayoutManager(requireContext(), 2)
         }
-        /*binding.favouriteRecyclerView.setup {
-            withLayoutManager(layoutManager)
-            withDataSource(dataSourceOf(pokemon))
-            withItem<PokemonBinding, PokemonViewHolder>(R.layout.item_pokemon) {
-                onBind(::PokemonViewHolder) { _, item ->
-                    Picasso.get().load(item.photo).placeholder(android.R.color.transparent)
-                        .into(this.itemPokemonPhotoImageView)
-                    this.itemPokemonNameTextView.putText(item.name)
-                    val id = when (item.id) {
-                        in 1..9 -> {
-                            "#00${item.id}"
-                        }
-                        in 10..99 -> {
-                            "#0${item.id}"
-                        }
-                        else -> {
-                            "#${item.id}"
-                        }
-                    }
-                    this.itemPokemonIDTextView.putText(id)
-
-                    val color = itemView.context.getPokemonColor(item.types)
-                    this.itemPokemonCardView.background.colorFilter =
-                        PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-
-                    if (item.types.size == 1) {
-                        if (item.types[0].name == "dark") {
-                            this.itemPokemonIDTextView.setTextColor(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.colorIcons
-                                )
-                            )
-                        }
-                    } else if (item.types.size == 2) {
-                        if (item.types[1].name == "dark") {
-                            this.itemPokemonIDTextView.setTextColor(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.colorIcons
-                                )
-                            )
-                        }
-                    }
-
-                    item.types.getOrNull(0).let { firstType ->
-                        this.itemPokemonType1TextView.putText(firstType?.name ?: "")
-                        this.itemPokemonType1TextView.setVisible(firstType != null)
-                    }
-
-                    item.types.getOrNull(1).let { secondType ->
-                        this.itemPokemonType2TextView.putText(secondType?.name ?: "")
-                        this.itemPokemonType2TextView.setVisible(secondType != null)
-                    }
-
-                    item.types.getOrNull(2).let { thirdType ->
-                        this.itemPokemonType3TextView.putText(thirdType?.name ?: "")
-                        this.itemPokemonType3TextView.setVisible(thirdType != null)
-                    }
-                }
-
-                onClick { index ->
-                    val bundle = bundleOf("pokemon" to pokemon[index])
-                    findNavController().navigate(
-                        R.id.action_favouriteFragment_to_pokemonDetailsFragment,
-                        bundle
-                    )
-                }
-            }
-        }*/
-
-        binding.favouriteRecyclerView.enableScroll(pokemon.size > 6)
+        favoridexAdapter = FavoridexAdapter { navigation.navigateToPokemonInfo(it) }
+        favoridexAdapter.items = pokemon.toMutableList()
+        binding.favoridexRecyclerView.apply {
+            this.layoutManager = layoutManager
+            adapter = favoridexAdapter
+            setVisible()
+        }
+        binding.favoridexMenuFAM.setVisible()
+        binding.favoridexRecyclerView.setVisible()
+        binding.favoridexPlaceholderEmptyList.setGone()
+        binding.favoridexRecyclerView.enableScroll(pokemon.size > 6)
     }
 
     override fun onDestroyView() {

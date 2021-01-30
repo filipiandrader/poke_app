@@ -16,6 +16,5 @@ class FavoridexNavigationImpl(private val fragment: Fragment) : FavoridexNavigat
     }
 
     override fun navigateToPokemonInfo(pokemonInfo: PokemonInfoBinding) {
-        TODO("Not yet implemented")
     }
 }

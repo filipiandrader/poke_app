@@ -117,10 +117,12 @@ class PokemonFragment : BaseFragment() {
     }
 
     private fun setupEmptyList() {
+        binding.pokemonPlaceholderEmptyList.setVisible()
         binding.pokemonPaginationProgressBar.setGone()
     }
 
     private fun setupPokedex(pokedex: List<PokemonBinding>) {
+        binding.pokemonPlaceholderEmptyList.setGone()
         pokemon.addAll(pokemon.size, pokedex)
         pokedexAdapter = PokedexAdapter { navigation.navigateToPokemonInfo(it) }
         pokedexAdapter.items = pokemon.toMutableList()

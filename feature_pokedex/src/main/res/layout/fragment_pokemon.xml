@@ -91,6 +91,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.pokeapp.base_feature.customview.emptylist.PlaceholderEmptyList
+            android:id="@+id/pokemonPlaceholderEmptyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:id="@+id/pokemonPaginationProgressBar"
             android:layout_width="20dp"

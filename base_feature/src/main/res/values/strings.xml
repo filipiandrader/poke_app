@@ -23,7 +23,7 @@
     <string name="base_stats_speed_label">Velocidade</string>
     <string name="base_stats_total_label">Total</string>
 
-    <string name="toolbar_favourite_title">Favoridex</string>
+    <string name="toolbar_favoridex_title">Favoridex</string>
 
     <string name="home_pokedex_title">Pokedex</string>
     <string name="home_favourite_title">Favoridex</string>
@@ -48,4 +48,5 @@
     <string name="sixth_generation_name">6° Geração</string>
     <string name="seventh_generation_name">7° Geração</string>
     <string name="eighth_generation_name">8° Geração</string>
+    <string name="empty_list_message">Não foi encontrado nenhum pokemon</string>
 </resources>

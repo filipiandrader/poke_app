@@ -9,6 +9,5 @@ import com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding
 interface FavoridexNavigation {
 
     fun navigateToPokemonInfo(pokemonInfo: PokemonInfoBinding)
-
     fun navigateToHome()
 }

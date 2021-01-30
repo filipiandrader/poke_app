@@ -1,20 +1,14 @@
 package com.pokeapp.di
 
 import com.pokeapp.domain.core.ThreadContextProvider
-import com.pokeapp.domain.usecase.generation.GetGeneration
-import com.pokeapp.domain.usecase.generation.GetGenerationLocal
-import com.pokeapp.domain.usecase.generation.GetPokemonByGeneration
-import com.pokeapp.domain.usecase.generation.SaveGenerationLocal
+import com.pokeapp.domain.usecase.generation.*
 import com.pokeapp.domain.usecase.like.LikePokemon
 import com.pokeapp.domain.usecase.pokedex.GetFavoridex
 import com.pokeapp.domain.usecase.pokedex.GetPokedex
 import com.pokeapp.domain.usecase.pokemon.GetPokemonInfo
 import com.pokeapp.domain.usecase.region.GetRegion
 import com.pokeapp.domain.usecase.region.GetRegionInfo
-import com.pokeapp.domain.usecase.type.GetPokemonByType
-import com.pokeapp.domain.usecase.type.GetType
-import com.pokeapp.domain.usecase.type.GetTypeLocal
-import com.pokeapp.domain.usecase.type.SaveTypeLocal
+import com.pokeapp.domain.usecase.type.*
 import kotlinx.coroutines.CoroutineScope
 import org.koin.dsl.module
 
@@ -63,6 +57,10 @@ val domainModule = module {
     }
 
     factory { (scope: CoroutineScope) ->
+        GetPokemonLikedByType(get(), scope)
+    }
+
+    factory { (scope: CoroutineScope) ->
         SaveTypeLocal(get(), scope)
     }
 
@@ -72,6 +70,10 @@ val domainModule = module {
 
     factory { (scope: CoroutineScope) ->
         GetPokemonByGeneration(get(), scope)
+    }
+
+    factory { (scope: CoroutineScope) ->
+        GetPokemonLikedByGeneration(get(), scope)
     }
 
     factory { (scope: CoroutineScope) ->

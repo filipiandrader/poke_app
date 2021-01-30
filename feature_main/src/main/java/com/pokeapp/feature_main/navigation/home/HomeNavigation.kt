@@ -7,8 +7,6 @@ package com.pokeapp.feature_main.navigation.home
 interface HomeNavigation {
 
     fun navigateToPokedex()
-
     fun navigateToFavoridex()
-
     fun navigateToRegion()
 }
