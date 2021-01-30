@@ -1,5 +1,6 @@
 package com.pokeapp.di
 
+import com.pokeapp.presentation_favoridex.FavoridexInfoViewModel
 import com.pokeapp.presentation_favoridex.FavoridexViewModel
 import com.pokeapp.presentation_pokedex.info.PokemonInfoViewModel
 import com.pokeapp.presentation_pokedex.pokemon.PokemonViewModel
@@ -23,4 +24,6 @@ val presentationModule = module {
     viewModel { PokemonInfoViewModel() }
 
     viewModel { FavoridexViewModel() }
+
+    viewModel { FavoridexInfoViewModel() }
 }

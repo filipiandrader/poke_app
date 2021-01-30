@@ -14,10 +14,13 @@ import com.pokeapp.feature_favoridex.R
 import com.pokeapp.feature_favoridex.adapter.FavoridexInfoViewPagerAdapter
 import com.pokeapp.feature_favoridex.databinding.FragmentFavoridexInfoBinding
 import com.pokeapp.feature_favoridex.navigation.info.FavoridexInfoNavigation
+import com.pokeapp.presentation_favoridex.FavoridexInfoViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoridexInfoFragment : BaseFragment() {
 
     private val navigation: FavoridexInfoNavigation by navDirections()
+    private val viewModel: FavoridexInfoViewModel by viewModel()
 
     private lateinit var binding: FragmentFavoridexInfoBinding
     private lateinit var pokemonInfo: PokemonInfoBinding
@@ -37,7 +40,10 @@ class FavoridexInfoFragment : BaseFragment() {
     }
 
     override fun addObservers(owner: LifecycleOwner) {
-
+        viewModel.fetchLikePokemonViewState.onPostValue(owner) {
+            pokemonInfo.liked = !pokemonInfo.liked
+            setupLikeIcon(pokemonInfo.liked)
+        }
     }
 
     private fun setupInfo(pokemon: PokemonInfoBinding) {
@@ -70,7 +76,7 @@ class FavoridexInfoFragment : BaseFragment() {
                 favoridexInfoType1TextView.setVisible(thirdType != null)
             }
 
-//            favoridexInfoLikedImageView.setOnClickListener { viewModel.doLikePokemon(pokemonInfo) }
+            favoridexInfoLikedImageView.setOnClickListener { viewModel.doLikePokemon(pokemonInfo) }
 
             favoridexInfoViewPager.adapter = FavoridexInfoViewPagerAdapter(
                 requireActivity().supportFragmentManager,
