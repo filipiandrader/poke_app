@@ -13,5 +13,5 @@ data class Pokemon(
     val photoShiny: String,
     val generationName: String,
     val types: List<Type> = listOf(),
-    val liked: Boolean = false
+    var liked: Boolean = false
 )
