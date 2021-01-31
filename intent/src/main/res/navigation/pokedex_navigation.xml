@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/pokemonFragment"
-        android:name="com.pokeapp.feature_pokedex.fragment.main.PokemonFragment"
+        android:name="com.dexapp.feature_pokedex.fragment.main.PokemonFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_pokemon">
 
@@ -23,12 +23,12 @@
 
     <fragment
         android:id="@+id/pokemonInfoFragment"
-        android:name="com.pokeapp.feature_pokedex.fragment.info.PokemonInfoFragment"
+        android:name="com.dexapp.feature_pokedex.fragment.info.PokemonInfoFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_pokemon_info">
 
         <argument
             android:name="pokemon"
-            app:argType="com.pokeapp.base_presentation.model.pokemon.PokemonBinding" />
+            app:argType="com.dexapp.base_presentation.model.pokemon.PokemonBinding" />
     </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.pokeapp.data_remote
+package com.dexapp.data_remote
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.pokeapp.data_remote.test", appContext.packageName)
+        assertEquals("com.dexapp.data_remote.test", appContext.packageName)
     }
 }

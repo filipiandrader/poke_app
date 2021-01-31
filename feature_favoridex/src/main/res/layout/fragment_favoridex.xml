@@ -91,7 +91,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.pokeapp.base_feature.customview.emptylist.PlaceholderEmptyList
+        <com.dexapp.base_feature.customview.emptylist.PlaceholderEmptyList
             android:id="@+id/favoridexPlaceholderEmptyList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

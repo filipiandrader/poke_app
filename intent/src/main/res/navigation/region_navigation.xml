@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/regionFragment"
-        android:name="com.pokeapp.feature_region.fragment.main.RegionFragment"
+        android:name="com.dexapp.feature_region.fragment.main.RegionFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_region">
         <action
@@ -22,11 +22,11 @@
 
     <fragment
         android:id="@+id/regionInfoFragment"
-        android:name="com.pokeapp.feature_region.fragment.info.RegionInfoFragment"
+        android:name="com.dexapp.feature_region.fragment.info.RegionInfoFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_region_info" >
         <argument
             android:name="region"
-            app:argType="com.pokeapp.base_presentation.model.region.RegionBinding" />
+            app:argType="com.dexapp.base_presentation.model.region.RegionBinding" />
     </fragment>
 </navigation>

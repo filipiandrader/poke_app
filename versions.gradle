@@ -1,6 +1,6 @@
 ext {
-    androidProdApplicationId   = "com.pokeapp"
-    androidDevApplicationId    = "com.pokeapp.debug"
+    androidProdApplicationId   = "com.dexapp"
+    androidDevApplicationId    = "com.dexeapp.debug"
 
     // versions
     androidCompileSdkVersion   = 30

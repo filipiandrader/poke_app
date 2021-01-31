@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/favoridexFragment"
-        android:name="com.pokeapp.feature_favoridex.fragment.main.FavoridexFragment"
+        android:name="com.dexapp.feature_favoridex.fragment.main.FavoridexFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_favoridex" >
 
@@ -18,12 +18,12 @@
 
     <fragment
         android:id="@+id/favoridexInfoFragment"
-        android:name="com.pokeapp.feature_favoridex.fragment.info.FavoridexInfoFragment"
+        android:name="com.dexapp.feature_favoridex.fragment.info.FavoridexInfoFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_favoridex_info">
 
         <argument
             android:name="pokemon"
-            app:argType="com.pokeapp.base_presentation.model.pokemon.PokemonInfoBinding" />
+            app:argType="com.dexapp.base_presentation.model.pokemon.PokemonInfoBinding" />
     </fragment>
 </navigation>

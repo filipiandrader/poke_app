@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.pokeapp.feature_main.fragment.splash.SplashFragment"
+        android:name="com.dexapp.feature_main.fragment.splash.SplashFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_splash">
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.pokeapp.feature_main.fragment.home.HomeFragment"
+        android:name="com.dexapp.feature_main.fragment.home.HomeFragment"
         android:label="@string/fragment_no_title"
         tools:layout="@layout/fragment_home">
 
