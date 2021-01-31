@@ -14,7 +14,6 @@ dependencies {
     implementation project(':base_feature')
     implementation project(':base_presentation')
 
-    implementation project(':presentation_main')
     appDependencies.each { add(it.configuration, it.dependency, it.options) }
 }
 
