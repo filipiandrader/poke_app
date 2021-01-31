@@ -1,9 +1,10 @@
-package com.dexapp.base_feature.customview.dialog
+package com.dexapp.base_feature.customview.loading
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dexapp.base_feature.customview.base.BaseFullScreenDialog
 import com.dexapp.base_feature.databinding.DialogLoadingBinding
 
 /*

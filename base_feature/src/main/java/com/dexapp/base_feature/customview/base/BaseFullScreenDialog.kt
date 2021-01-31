@@ -1,4 +1,4 @@
-package com.dexapp.base_feature.customview.dialog
+package com.dexapp.base_feature.customview.base
 
 import android.os.Bundle
 import android.view.View

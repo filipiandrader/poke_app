@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import com.dexapp.base_feature.customview.dialog.LoadingDialog
+import com.dexapp.base_feature.customview.loading.LoadingDialog
 import com.dexapp.base_feature.util.extensions.shortToast
 import com.dexapp.base_presentation.core.ViewStateListener
 import org.koin.core.KoinComponent
