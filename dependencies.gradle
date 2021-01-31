@@ -66,7 +66,8 @@ ext {
             [configuration: "implementation", dependency: "$retrofitCoroutine"],
             [configuration: "implementation", dependency: "$httpInterceptor"],
             [configuration: "implementation", dependency: "$gsonConvertFactory"],
-            [configuration: "implementation", dependency: "$okhttp"]
+            [configuration: "implementation", dependency: "$okhttp"],
+            [configuration: "implementation", dependency: "$conscrypt"]
     ]
 
     diDependencies = commonsDependencies + dataLocalDependencies + [

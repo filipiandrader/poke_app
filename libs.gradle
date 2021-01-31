@@ -9,6 +9,7 @@ ext {
     httpInterceptor            = "com.squareup.okhttp3:logging-interceptor:$httpInterceptorVersion"
     okhttp                     = "com.squareup.okhttp3:okhttp:$okhttpVersion"
     gsonConvertFactory         = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    conscrypt                  = "org.conscrypt:conscrypt-android:$conscryptVersion"
 
     //androidx
     appCompat                  = "androidx.appcompat:appcompat:$appCompatVersion"
