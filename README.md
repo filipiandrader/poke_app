@@ -26,18 +26,6 @@
 - [Jetpack - Navigation](https://developer.android.com/guide/navigation)
 - [Material Components](https://material.io/develop/android/docs/getting-started/)
 
-## Configurando ambiente
-
-Abaixo estão as versões atuais utilizadas nas ferramentas desse projeto.
-
-| Tool | Versão |
-|--|--|
-|Java  |  8|
-|Gradle |  5.6.4 |
-|Gradle Build Plugin  |  3.6.2|
-|Android API  |  29|
-|Support Library  |  androidX|
-
 ## Screenshots
 
 <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278836.png" alt="Image 01" height="480" width="270"> <img src="https://github.com/filipiandrader/poke_app/blob/master/app/screenshots/Screenshot_1586278837.png" alt="Image 02" height="480" width="270"> 
