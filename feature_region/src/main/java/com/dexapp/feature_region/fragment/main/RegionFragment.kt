@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dexapp.base_feature.core.BaseFragment
+import com.dexapp.base_feature.customview.dialog.MessageDialog
 import com.dexapp.base_feature.util.delegateproperties.navDirections
 import com.dexapp.base_feature.util.extensions.*
 import com.dexapp.base_presentation.model.region.RegionBinding
+import com.dexapp.domain.exception.ServerException
 import com.dexapp.feature_region.R
 import com.dexapp.feature_region.adapter.RegionAdapter
 import com.dexapp.feature_region.databinding.FragmentRegionBinding
@@ -41,8 +43,33 @@ class RegionFragment : BaseFragment() {
     }
 
     override fun addObservers(owner: LifecycleOwner) {
-        viewModel.fetchRegionViewState.onPostValue(owner) {
-            setupRegion(it)
+        viewModel.fetchRegionViewState.onPostValue(owner,
+            onSuccess = {
+                setupRegion(it)
+            },
+            onError = {
+                when (it) {
+                    is ServerException -> handleDialogServerException(it)
+                    else -> handleGenericDialog(it)
+                }
+            }
+        )
+    }
+
+    private fun handleDialogServerException(exception: ServerException) {
+        exception.message?.let {
+            showDialog(
+                MessageDialog.Params(
+                    message = it,
+                    action = { viewModel.getRegion() }
+                )
+            )
+        }
+    }
+
+    private fun handleGenericDialog(throwable: Throwable) {
+        throwable.message?.let {
+            showDialog(MessageDialog.Params(message = it))
         }
     }
 

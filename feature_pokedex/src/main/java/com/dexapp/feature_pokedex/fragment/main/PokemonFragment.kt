@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dexapp.base_feature.core.BaseFragment
 import com.dexapp.base_feature.customview.bottomsheet.generation.GenerationBottomSheet
 import com.dexapp.base_feature.customview.bottomsheet.type.TypeBottomSheet
+import com.dexapp.base_feature.customview.dialog.MessageDialog
 import com.dexapp.base_feature.util.delegateproperties.navDirections
 import com.dexapp.base_feature.util.extensions.*
 import com.dexapp.base_presentation.model.generation.GenerationBinding
 import com.dexapp.base_presentation.model.pokemon.PokemonBinding
 import com.dexapp.base_presentation.model.type.TypeBinding
+import com.dexapp.domain.exception.ServerException
 import com.dexapp.feature_pokedex.R
 import com.dexapp.feature_pokedex.adapter.PokedexAdapter
 import com.dexapp.feature_pokedex.databinding.FragmentPokemonBinding
@@ -95,15 +97,23 @@ class PokemonFragment : BaseFragment() {
     }
 
     override fun addObservers(owner: LifecycleOwner) {
-        viewModel.fetchPokedexViewState.onPostValue(owner) {
-            type = it.type.toMutableList()
-            generation = it.generation.toMutableList()
-            if (it.pokedex.isEmpty() && pokemon.isEmpty()) {
-                setupEmptyList()
-            } else {
-                setupPokedex(it.pokedex)
+        viewModel.fetchPokedexViewState.onPostValue(owner,
+            onSuccess = {
+                type = it.type.toMutableList()
+                generation = it.generation.toMutableList()
+                if (it.pokedex.isEmpty() && pokemon.isEmpty()) {
+                    setupEmptyList()
+                } else {
+                    setupPokedex(it.pokedex)
+                }
+            },
+            onError = {
+                when (it) {
+                    is ServerException -> handleDialogServerException(it)
+                    else -> handleGenericDialog(it)
+                }
             }
-        }
+        )
 
         viewModel.fetchPokedexByTypeTypeViewState.onPostValue(owner) {
             pokemon.clear()
@@ -113,6 +123,23 @@ class PokemonFragment : BaseFragment() {
         viewModel.fetchPokedexByGenerationTypeViewState.onPostValue(owner) {
             pokemon.clear()
             setupPokedex(it)
+        }
+    }
+
+    private fun handleDialogServerException(exception: ServerException) {
+        exception.message?.let {
+            showDialog(
+                MessageDialog.Params(
+                    message = it,
+                    action = { viewModel.getAllPokemon(mOffset, mPrevious) }
+                )
+            )
+        }
+    }
+
+    private fun handleGenericDialog(throwable: Throwable) {
+        throwable.message?.let {
+            showDialog(MessageDialog.Params(message = it))
         }
     }
 

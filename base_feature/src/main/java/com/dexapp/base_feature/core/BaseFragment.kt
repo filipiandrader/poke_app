@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import com.dexapp.base_feature.customview.dialog.MessageDialog
 import com.dexapp.base_feature.customview.loading.LoadingDialog
 import com.dexapp.base_feature.util.extensions.shortToast
 import com.dexapp.base_presentation.core.ViewStateListener
@@ -16,6 +17,7 @@ import org.koin.core.KoinComponent
 abstract class BaseFragment : Fragment(), ViewStateListener, KoinComponent {
 
     private val mLoadingDialog = LoadingDialog()
+    private var mMessageDialog: MessageDialog? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,13 +36,18 @@ abstract class BaseFragment : Fragment(), ViewStateListener, KoinComponent {
     override fun onStateError(error: Throwable) {
         hideLoading()
         error.message?.let {
-            showDialog(it)
+            showDialog(MessageDialog.Params(it))
         }
     }
 
-    fun showDialog(message: String, isAttachToActivity: Boolean = false) {
-        // TODO CUSTOM DIALOG
-        shortToast(message)
+    fun showDialog(messageDialogParams: MessageDialog.Params, isAttachToActivity: Boolean = false) {
+        mMessageDialog?.dismiss()
+        mMessageDialog = MessageDialog(messageDialogParams).apply {
+            when (isAttachToActivity) {
+                true -> show(this@BaseFragment.requireActivity())
+                false -> show(this@BaseFragment)
+            }
+        }
     }
 
     override fun onStateLoading() {
